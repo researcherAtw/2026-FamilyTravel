@@ -937,7 +937,13 @@ export const BookingsTab: React.FC = () => {
 
     return (
         <div className="h-full overflow-y-auto px-5 pb-24 space-y-6 no-scrollbar">
-            <h2 className="text-2xl font-bold font-mono text-zen-text mb-4 sticky top-0 bg-zen-bg py-2 z-10">E-Tickets</h2>
+            {/* 
+               Updated Sticky Header: 
+               Uses -mx-5 and px-5 to extend the background color to the full width of the container,
+               effectively masking any content (including shadows/tags) that slides up in the padding areas.
+               Added shadow-sm to give it slight separation.
+            */}
+            <h2 className="text-2xl font-bold font-mono text-zen-text mb-4 sticky top-0 bg-zen-bg py-2 z-20 -mx-5 px-5 shadow-sm">E-Tickets</h2>
             
             <div className="space-y-4">
                 {bookings.map(booking => (
