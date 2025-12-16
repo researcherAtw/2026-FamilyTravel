@@ -621,7 +621,7 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                     {(item.guideInfo?.story || item.guideInfo?.tip || (item.guideInfo?.highlights && item.guideInfo.highlights.length > 0)) && (
                         <div className="mt-4 pt-3 border-t border-dashed border-gray-200">
                             {item.guideInfo?.story && (
-                                <p className="text-sm text-gray-600 leading-relaxed font-serif mb-3 whitespace-pre-line">
+                                <p className="text-sm text-gray-600 leading-relaxed font-sans mb-3 whitespace-pre-line">
                                     {item.guideInfo.story}
                                 </p>
                             )}
@@ -850,7 +850,7 @@ export const ScheduleTab: React.FC = () => {
           </div>
 
           {/* Date Header Info & Weather */}
-          <div className="flex justify-between items-end px-2">
+          <div className="flex justify-between items-end px-2 relative">
              <div>
                 <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Day Plan</div>
                 <div className="flex items-center gap-2">
@@ -867,19 +867,19 @@ export const ScheduleTab: React.FC = () => {
                     <span>{locationHeader}</span>
                 </div>
              </div>
-             {/* Weather Widget */}
-             <div className="bg-white/60 backdrop-blur-md border border-white p-3 rounded-2xl shadow-sm flex flex-col items-center justify-center min-w-[80px] h-[82px] box-border transition-opacity duration-500">
+             {/* Weather Widget (Glassmorphism) */}
+             <div className="bg-white/30 backdrop-blur-xl border border-white/40 p-3 rounded-2xl shadow-lg flex flex-col items-center justify-center min-w-[80px] h-[82px] box-border z-10 relative">
                 {loadingWeather ? (
                      <i className="fa-solid fa-spinner fa-spin text-gray-300 text-2xl"></i>
                 ) : (
                     <>
-                        <div className="text-2xl mb-1 h-8 flex items-center justify-center">
+                        <div className="text-2xl mb-1 h-8 flex items-center justify-center filter drop-shadow-sm">
                             {weather.condition === 'sunny' && <i className="fa-solid fa-sun text-orange-400 animate-spin-slow"></i>}
                             {weather.condition === 'cloudy' && <i className="fa-solid fa-cloud text-gray-400"></i>}
                             {weather.condition === 'rain' && <i className="fa-solid fa-cloud-rain text-blue-400"></i>}
                             {weather.condition === 'snow' && <i className="fa-regular fa-snowflake text-blue-200"></i>}
                         </div>
-                        <div className="text-sm font-bold font-mono h-5 flex items-center">{weather.temp}°C</div>
+                        <div className="text-sm font-bold font-mono h-5 flex items-center text-gray-700">{weather.temp}°C</div>
                     </>
                 )}
              </div>
@@ -932,86 +932,134 @@ export const ScheduleTab: React.FC = () => {
 
 // --- BOOKINGS TAB ---
 
+const BARCODE_SVG = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAxMDAgMzAiPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIwIi8+PHJlY3Qgd2lkdGg9IjIiIGhlaWdodD0iMzAiIHg9IjQiLz48cmVjdCB3aWR0aD0iMyIgaGVpZ2h0PSIzMCIgeD0iOCIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSIxMyIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSIxNiIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIyMiIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSIyNiIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSIyOSIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIzNCIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSIzOCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI0NCIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSI0OCIvPjxyZWN0IHdpZHRoPSI1IiBoZWlnaHQ9IjMwIiB4PSI1MiIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI1OSIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI2NCIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSI2OCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI3MyIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSI3NyIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI4MyIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSI4NyIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI5MCIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSI5NCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI5OCIvPjwvc3ZnPg==";
+
+// Mapping City Codes to Names for clearer display
+const CITY_NAMES: Record<string, string> = {
+    'TPE': 'Taipei',
+    'DXB': 'Dubai',
+    'PRG': 'Prague',
+    'VIE': 'Vienna'
+};
+
 export const BookingsTab: React.FC = () => {
     const [bookings] = useState<Booking[]>(MOCK_BOOKINGS);
 
     return (
-        <div className="h-full overflow-y-auto px-5 pb-24 space-y-6 no-scrollbar">
-            {/* 
-               Updated Sticky Header: 
-               Uses -mx-5 and px-5 to extend the background color to the full width of the container,
-               effectively masking any content (including shadows/tags) that slides up in the padding areas.
-               Added shadow-sm to give it slight separation.
-            */}
-            <h2 className="text-2xl font-bold font-mono text-zen-text mb-4 sticky top-0 bg-zen-bg py-2 z-20 -mx-5 px-5 shadow-sm">E-Tickets</h2>
+        <div className="h-full overflow-y-auto px-5 pb-24 space-y-6 no-scrollbar pt-2">
+            <h2 className="text-lg font-bold text-zen-text/50 uppercase tracking-widest sticky top-0 bg-zen-bg py-2 z-10 backdrop-blur-sm">Boarding Passes</h2>
             
-            <div className="space-y-4">
-                {bookings.map(booking => (
-                    <div key={booking.id} className="relative group">
-                        {/* Always Flight Ticket Style since we only have flights now */}
-                        <div className="bg-white rounded-2xl shadow-zen overflow-hidden relative border border-stone-50">
-                            {/* Header Strip - Different color for Layover */}
-                            <div className={`${booking.details['備註'] === '轉機航班' ? 'bg-orange-400' : 'bg-[#4A90E2]'} h-2`}></div>
-                            <div className="p-5">
-                                <div className="flex justify-between items-start mb-4">
-                                    <div className="flex items-center gap-2">
-                                        <i className="fa-solid fa-plane-up text-[#4A90E2]"></i>
-                                        <div className="flex flex-col">
-                                            <span className="font-bold text-sm tracking-wide">{booking.subTitle.split(' - ')[0]}</span>
-                                            {booking.details['備註'] === '轉機航班' && (
-                                                <span className="text-[10px] font-bold text-orange-500 uppercase tracking-widest">LAYOVER / 轉機</span>
-                                            )}
-                                        </div>
-                                    </div>
-                                    <div className="text-right">
-                                        {/* Adjusted to prevent cropping: -mt-1 and leading-tight */}
-                                        <div className="font-mono text-lg font-bold text-gray-800 leading-tight -mt-1">{booking.time}</div>
-                                        <div className="text-xs text-gray-500 font-mono mt-1">{booking.date}</div>
-                                    </div>
-                                </div>
-                                
-                                <div className="flex justify-between items-center mb-6 mt-10">
-                                    <div className="text-center w-1/3">
-                                        <div className="text-3xl font-mono font-bold text-zen-text">{booking.title.split(' - ')[0]}</div>
-                                    </div>
-                                    <div className="flex-1 border-b-2 border-dashed border-gray-300 mx-2 relative top-1">
-                                        {booking.referenceNo && (
-                                            <span className="absolute -top-7 left-1/2 -translate-x-1/2 text-[10px] font-bold text-gray-400 bg-white px-2 py-0.5 whitespace-nowrap z-10 font-mono">
-                                                {booking.referenceNo}
-                                            </span>
-                                        )}
-                                        <i className="fa-solid fa-plane absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-300 bg-white px-1 text-xs z-10"></i>
-                                    </div>
-                                    <div className="text-center w-1/3">
-                                        <div className="text-3xl font-mono font-bold text-zen-text">{booking.title.split(' - ')[1]}</div>
-                                    </div>
-                                </div>
+            <div className="space-y-6">
+                {bookings.map((booking, index) => {
+                    const isTransfer = booking.details['備註'] === '轉機航班';
+                    // Determine accent color based on flight type/direction
+                    const accentColor = isTransfer ? 'bg-orange-400' : (index % 2 === 0 ? 'bg-zen-primary' : 'bg-zen-secondary');
+                    const accentText = isTransfer ? 'text-orange-400' : (index % 2 === 0 ? 'text-zen-primary' : 'text-zen-secondary');
+                    
+                    const originCode = booking.title.split(' - ')[0];
+                    const destCode = booking.title.split(' - ')[1];
 
-                                <div className="grid grid-cols-2 gap-2 border-t border-dashed border-gray-200 pt-4">
-                                    {Object.entries(booking.details)
-                                        .filter(([key]) => key !== '飛行時間' && key !== '備註')
-                                        .map(([key, val]) => (
-                                        <div key={key}>
-                                            <div className="text-[10px] text-gray-400 uppercase font-bold">{key}</div>
-                                            <div className="font-bold text-zen-text text-sm truncate">{val}</div>
+                    return (
+                        <div key={booking.id} className="bg-white rounded-2xl shadow-zen relative overflow-hidden flex flex-col transition-transform active:scale-[0.99] group">
+                            
+                            {/* 1. Color Strip Top */}
+                            <div className={`h-1.5 w-full ${accentColor}`}></div>
+
+                            {/* 2. Header: Airline & Status */}
+                            <div className="px-5 py-3 flex justify-between items-center border-b border-stone-100">
+                                <div className="flex items-center gap-2">
+                                    <div className={`w-6 h-6 rounded-full ${accentColor} bg-opacity-10 flex items-center justify-center`}>
+                                        <i className={`fa-solid fa-plane text-xs ${accentText}`}></i>
+                                    </div>
+                                    <span className="text-xs font-bold text-zen-text tracking-wide">{booking.subTitle.split(' - ')[0]}</span>
+                                </div>
+                                {isTransfer && (
+                                    <span className="bg-orange-50 text-orange-500 text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Layover</span>
+                                )}
+                            </div>
+
+                            {/* 3. Main Flight Body */}
+                            <div className="p-5 pb-2">
+                                <div className="flex justify-between items-center">
+                                    {/* Departure */}
+                                    <div className="flex flex-col">
+                                        <div className="text-xs font-bold text-zen-primary mb-1 uppercase tracking-wider">{CITY_NAMES[originCode] || originCode}</div>
+                                        <div className="text-4xl font-mono font-bold text-zen-text leading-none tracking-tighter">
+                                            {booking.time}
                                         </div>
-                                    ))}
-                                     {booking.details['飛行時間'] && (
-                                        <div className="col-span-2 mt-1">
-                                            <div className="text-[10px] text-gray-400 uppercase font-bold">Duration</div>
-                                            <div className="font-bold text-zen-text text-sm"><i className="fa-regular fa-clock mr-1 text-xs"></i>{booking.details['飛行時間']}</div>
+                                        <div className="text-xs font-bold text-stone-300 mt-1">{booking.date}</div>
+                                        {/* Code moved to background/secondary position */}
+                                        <div className="text-lg font-bold text-stone-200 mt-1">{originCode}</div>
+                                    </div>
+
+                                    {/* Center Graphic */}
+                                    <div className="flex flex-col items-center justify-center -mt-4">
+                                        <div className={`px-3 py-1 rounded-full ${isTransfer ? 'bg-orange-50 text-orange-400' : 'bg-stone-50 text-stone-400'} flex items-center gap-1.5 mb-1`}>
+                                             <i className="fa-regular fa-clock text-[10px]"></i>
+                                             <span className="text-[10px] font-mono font-bold">{booking.details['飛行時間']}</span>
                                         </div>
-                                     )}
+                                        <div className="w-16 h-[2px] bg-stone-100 relative">
+                                            <div className={`absolute right-0 -top-1 w-2 h-2 rounded-full ${accentColor}`}></div>
+                                            <div className={`absolute left-0 -top-1 w-2 h-2 rounded-full ${isTransfer ? 'bg-orange-200' : 'bg-stone-200'}`}></div>
+                                        </div>
+                                    </div>
+
+                                    {/* Arrival */}
+                                    <div className="flex flex-col text-right">
+                                        <div className="text-xs font-bold text-zen-primary mb-1 uppercase tracking-wider">{CITY_NAMES[destCode] || destCode}</div>
+                                        {/* Approximate arrival time logic for display only since we don't have it in main prop clearly separated sometimes */}
+                                        <div className="text-4xl font-mono font-bold text-zen-text leading-none tracking-tighter">
+                                            {booking.details['抵達']?.split(' ')[0] || '--:--'}
+                                        </div>
+                                         <div className="text-xs font-bold text-stone-300 mt-1">
+                                            {booking.details['抵達']?.includes('+1') ? 'Next Day' : booking.date}
+                                        </div>
+                                        <div className="text-lg font-bold text-stone-200 mt-1">{destCode}</div>
+                                    </div>
                                 </div>
                             </div>
-                            {/* Perforation Circles */}
-                            <div className="absolute top-[65%] -left-2 w-4 h-4 bg-zen-bg rounded-full shadow-inner"></div>
-                            <div className="absolute top-[65%] -right-2 w-4 h-4 bg-zen-bg rounded-full shadow-inner"></div>
+
+                            {/* 4. Details Grid (Added Icons for color) */}
+                            <div className="px-5 pb-6">
+                                 <div className="bg-stone-50 rounded-xl p-3 grid grid-cols-3 gap-2 border border-stone-100">
+                                     <div className="flex flex-col items-center justify-center p-2 bg-white rounded-lg shadow-sm">
+                                         <i className={`fa-solid fa-plane-circle-check mb-1 ${accentText}`}></i>
+                                         <span className="text-[9px] text-stone-400 uppercase">Flight</span>
+                                         <span className="text-xs font-mono font-bold text-zen-text">{booking.referenceNo}</span>
+                                     </div>
+                                     <div className="flex flex-col items-center justify-center p-2 bg-white rounded-lg shadow-sm">
+                                         <i className={`fa-solid fa-chair mb-1 ${accentText}`}></i>
+                                         <span className="text-[9px] text-stone-400 uppercase">Seat</span>
+                                         <span className="text-xs font-mono font-bold text-zen-text">--</span>
+                                     </div>
+                                     <div className="flex flex-col items-center justify-center p-2 bg-white rounded-lg shadow-sm">
+                                         <i className={`fa-solid fa-door-open mb-1 ${accentText}`}></i>
+                                         <span className="text-[9px] text-stone-400 uppercase">Gate</span>
+                                         <span className="text-xs font-mono font-bold text-zen-text">--</span>
+                                     </div>
+                                 </div>
+                            </div>
+
+                            {/* Cutout */}
+                            <div className="relative h-4 w-full flex items-center justify-center overflow-hidden">
+                                 <div className="absolute left-0 -ml-2 w-4 h-4 bg-zen-bg rounded-full shadow-[inset_-1px_0_2px_rgba(0,0,0,0.05)]"></div>
+                                 <div className="w-full mx-3 border-b-2 border-dashed border-stone-300"></div>
+                                 <div className="absolute right-0 -mr-2 w-4 h-4 bg-zen-bg rounded-full shadow-[inset_1px_0_2px_rgba(0,0,0,0.05)]"></div>
+                            </div>
+
+                            {/* Footer Barcode */}
+                            <div className="px-6 py-4 flex justify-between items-center opacity-70">
+                                 <div className="flex flex-col">
+                                     <span className="text-[9px] text-stone-400 font-mono tracking-widest uppercase">Passenger</span>
+                                     <span className="text-xs font-bold text-stone-600">FAMILY MEMBER</span>
+                                 </div>
+                                 <img src={BARCODE_SVG} className="h-5 w-20 object-fill opacity-30 grayscale mix-blend-multiply" alt="barcode" />
+                            </div>
+
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
-            
         </div>
     );
 };
