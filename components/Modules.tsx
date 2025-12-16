@@ -329,7 +329,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '熊布朗宮 (美泉宮)', enTitle: 'Schönbrunn Palace', location: '維也納第13區 (Hietzing)', category: '入場卷', categoryColor: 'red',
       description: 'Schönbrunn Palace',
       guideInfo: {
-          story: "1996年列為世界文化遺產。瑪麗亞·特蕾莎女皇被戲稱為歐洲丈母娘😂。末代皇帝卡爾一世也在此簽署了放棄帝國權力的文件。6歲的神童莫札特曾在此為女皇演奏。",
+          story: "1996年列為世界文化遺產。此處原為皇家狩獵小屋，後經瑪麗亞·特蕾莎女皇（歐洲丈母娘）改建為巴洛克式宮殿。\n\n這裡曾是6歲神童莫札特演奏之地，也是末代皇帝卡爾一世簽署放棄權力文件、終結帝國統治的歷史現場。",
           tip: "購票：參觀宮殿內部必須購票（如 Imperial Tour 或 Grand Tour），強烈建議「提早上網預訂」。\n花園：宮殿後方的法式花園是免費開放的。\n凱旋門：務必爬上花園對面的山丘，抵達「凱旋門」，那是俯瞰全景的「最佳地點」。\n動物園：世界上現存最古老的動物園也位於此。",
           highlights: [
               { id: 'h0', text: '夏宮', color: 'blue' },
