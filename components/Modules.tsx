@@ -546,6 +546,10 @@ export const ScheduleTab: React.FC = () => {
   const [items, setItems] = useState(MOCK_SCHEDULE);
   const [weather, setWeather] = useState<WeatherInfo>({ condition: 'cloudy', temp: 5, locationName: '布拉格' });
   const [loadingWeather, setLoadingWeather] = useState(false);
+  
+  // Swipe State
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   // Determine Location Name based on date range
   const getLocationInfo = (date: string) => {
@@ -606,6 +610,33 @@ export const ScheduleTab: React.FC = () => {
 
   const dates = Array.from(new Set(items.map(i => i.date))).sort() as string[];
   const filteredItems = items.filter(i => i.date === selectedDate);
+  
+  // Swipe Handlers
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    
+    if (isLeftSwipe || isRightSwipe) {
+       const currentIndex = dates.indexOf(selectedDate);
+       if (isLeftSwipe && currentIndex < dates.length - 1) {
+           setSelectedDate(dates[currentIndex + 1]);
+       }
+       if (isRightSwipe && currentIndex > 0) {
+           setSelectedDate(dates[currentIndex - 1]);
+       }
+    }
+  };
 
   return (
     <div className="pb-20 space-y-6">
@@ -673,8 +704,13 @@ export const ScheduleTab: React.FC = () => {
          </div>
       </div>
 
-      {/* Timeline */}
-      <div className="relative pr-2">
+      {/* Timeline with Swipe Handlers */}
+      <div 
+        className="relative pr-2 min-h-[50vh] touch-pan-y"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         {filteredItems.map((item, index) => {
             // Logic to determine if we show the time
             const isTransport = item.category === 'transport';
@@ -685,16 +721,16 @@ export const ScheduleTab: React.FC = () => {
 
             return (
               <div key={item.id} className="relative mb-0 flex gap-0">
-                {/* 1. Time Column - Show only for Transport */}
-                <div className="w-[4.5rem] py-5 flex flex-col items-end justify-start flex-shrink-0 pr-3">
+                {/* 1. Time Column - Reduced width from w-14 to w-9 (2.25rem) and reduced text size */}
+                <div className="w-9 py-5 flex flex-col items-end justify-start flex-shrink-0 pr-0.5">
                     {isTransport ? (
                         <>
                             <div className="flex items-baseline leading-none text-zen-text">
-                                <span className="text-2xl font-mono font-bold tracking-tighter">{hour}</span>
-                                <span className="text-xs font-mono font-bold text-gray-400 ml-[1px] relative -top-0.5">:{minute}</span>
+                                <span className="text-lg font-mono font-bold tracking-tighter">{hour}</span>
+                                <span className="text-[10px] font-mono font-bold text-gray-400 ml-[1px] relative -top-0.5">:{minute}</span>
                             </div>
                             {subTime && (
-                                <span className="text-[10px] text-gray-300 font-mono mt-1 text-right">{subTime}</span>
+                                <span className="text-[9px] text-gray-300 font-mono mt-1 text-right">{subTime}</span>
                             )}
                         </>
                     ) : (
@@ -704,7 +740,7 @@ export const ScheduleTab: React.FC = () => {
                 </div>
 
                 {/* 2. Timeline Line & Node */}
-                <div className="relative flex flex-col items-center px-0 flex-shrink-0 w-6">
+                <div className="relative flex flex-col items-center px-0 flex-shrink-0 w-4">
                     {/* Continuous Line (Thinner, subtle) */}
                     <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-stone-300/60"></div>
                     
@@ -724,7 +760,7 @@ export const ScheduleTab: React.FC = () => {
                 </div>
 
                 {/* 3. Content Card Column */}
-                <div className="flex-grow min-w-0 py-2 pb-6 pl-2">
+                <div className="flex-grow min-w-0 py-2 pb-6 pl-1.5">
                     <div 
                         className={`bg-white rounded-2xl p-4 shadow-zen border border-stone-50 transition-all duration-300 hover:translate-y-[-2px]`}
                     >
