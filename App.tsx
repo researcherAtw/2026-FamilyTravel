@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { NAV_ITEMS } from './constants';
 import { TabType } from './types';
@@ -48,32 +47,34 @@ const App: React.FC = () => {
         {renderContent()}
       </main>
 
-      {/* Bottom Navigation - Fixed at bottom */}
-      <nav className="flex-shrink-0 bg-white/95 backdrop-blur-md border-t border-stone-100 pb-safe pt-2 z-50 shadow-[0_-5px_20px_rgba(0,0,0,0.03)]">
-        <div className="flex justify-around items-end px-2">
+      {/* Bottom Navigation - Fixed at bottom, compact redesign */}
+      <nav className="flex-shrink-0 bg-white/95 backdrop-blur-md border-t border-stone-100 z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.02)] pb-[env(safe-area-inset-bottom)]">
+        <div className="flex justify-around items-center h-14 w-full">
           {NAV_ITEMS.map((item) => {
             const isActive = activeTab === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`flex flex-col items-center justify-center w-14 py-2 transition-all duration-300 ${isActive ? 'text-zen-text -translate-y-2' : 'text-gray-300 hover:text-gray-400'}`}
+                className={`
+                  flex-1 h-full flex flex-col items-center justify-center gap-0.5 transition-all duration-200
+                  ${isActive ? 'text-zen-text' : 'text-stone-300 hover:text-stone-400'}
+                `}
               >
-                <div className={`text-xl mb-1 transition-transform duration-300 ${isActive ? 'scale-110' : ''}`}>
+                <div className={`text-lg transition-transform duration-200 ${isActive ? 'scale-105' : 'scale-100'}`}>
                     <i className={`fa-solid ${item.icon}`}></i>
                 </div>
-                <span className={`text-[10px] font-bold ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                <span className={`text-[10px] font-bold tracking-wider ${isActive ? 'font-bold' : 'font-medium'}`}>
                   {item.label}
                 </span>
-                {isActive && <div className="w-1 h-1 bg-zen-primary rounded-full mt-1"></div>}
+                {/* Removed Minimal Active Indicator Dot */}
               </button>
             );
           })}
         </div>
       </nav>
       
-      {/* Safe area padding filler if needed, but flex layout usually handles this better */}
-      <div className="h-6 w-full bg-white flex-shrink-0"></div>
+      {/* Removed the extra filler div to reduce bottom space */}
     </div>
   );
 };

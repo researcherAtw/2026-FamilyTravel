@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { Card, Button, CategoryBadge } from './UI';
 import { ScheduleItem, Booking, HighlightTag, HighlightColor, WeatherInfo } from '../types';
 
@@ -554,8 +554,8 @@ export const ScheduleTab: React.FC = () => {
   // Scroll Container Ref
   const timelineRef = useRef<HTMLDivElement>(null);
 
-  // Reset scroll on date change
-  useEffect(() => {
+  // Reset scroll on date change using useLayoutEffect to prevent flicker
+  useLayoutEffect(() => {
     if (timelineRef.current) {
         timelineRef.current.scrollTo(0, 0);
     }
@@ -704,19 +704,19 @@ export const ScheduleTab: React.FC = () => {
                     <span>{locationHeader}</span>
                 </div>
              </div>
-             {/* Weather Widget */}
-             <div className="bg-white/60 backdrop-blur-md border border-white p-3 rounded-2xl shadow-sm flex flex-col items-center min-w-[80px] transition-opacity duration-500">
+             {/* Weather Widget - Fixed height to prevent layout shift */}
+             <div className="bg-white/60 backdrop-blur-md border border-white p-3 rounded-2xl shadow-sm flex flex-col items-center justify-center min-w-[80px] h-[82px] box-border transition-opacity duration-500">
                 {loadingWeather ? (
-                     <div className="py-2"><i className="fa-solid fa-spinner fa-spin text-gray-300"></i></div>
+                     <i className="fa-solid fa-spinner fa-spin text-gray-300 text-2xl"></i>
                 ) : (
                     <>
-                        <div className="text-2xl mb-1">
+                        <div className="text-2xl mb-1 h-8 flex items-center justify-center">
                             {weather.condition === 'sunny' && <i className="fa-solid fa-sun text-orange-400 animate-spin-slow"></i>}
                             {weather.condition === 'cloudy' && <i className="fa-solid fa-cloud text-gray-400"></i>}
                             {weather.condition === 'rain' && <i className="fa-solid fa-cloud-rain text-blue-400"></i>}
                             {weather.condition === 'snow' && <i className="fa-regular fa-snowflake text-blue-200"></i>}
                         </div>
-                        <div className="text-sm font-bold font-mono">{weather.temp}°C</div>
+                        <div className="text-sm font-bold font-mono h-5 flex items-center">{weather.temp}°C</div>
                     </>
                 )}
              </div>
