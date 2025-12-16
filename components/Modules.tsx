@@ -546,14 +546,14 @@ export const ScheduleTab: React.FC = () => {
   const [items, setItems] = useState(MOCK_SCHEDULE);
   const [weather, setWeather] = useState<WeatherInfo>({ condition: 'cloudy', temp: 5, locationName: '布拉格' });
   const [loadingWeather, setLoadingWeather] = useState(false);
-  
-  // Swipe State
+  // Swipe & Animation State
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [direction, setDirection] = useState<'left' | 'right' | null>(null);
 
   // Scroll to top when date changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [selectedDate]);
 
   // Determine Location Name based on date range
@@ -635,9 +635,11 @@ export const ScheduleTab: React.FC = () => {
     if (isLeftSwipe || isRightSwipe) {
        const currentIndex = dates.indexOf(selectedDate);
        if (isLeftSwipe && currentIndex < dates.length - 1) {
+           setDirection('right');
            setSelectedDate(dates[currentIndex + 1]);
        }
        if (isRightSwipe && currentIndex > 0) {
+           setDirection('left');
            setSelectedDate(dates[currentIndex - 1]);
        }
     }
@@ -660,7 +662,14 @@ export const ScheduleTab: React.FC = () => {
                 return (
                     <button
                         key={date}
-                        onClick={() => setSelectedDate(date)}
+                        onClick={() => {
+                            const newIndex = dates.indexOf(date);
+                            const currentIndex = dates.indexOf(selectedDate);
+                            if (newIndex > currentIndex) setDirection('right');
+                            else if (newIndex < currentIndex) setDirection('left');
+                            else setDirection(null);
+                            setSelectedDate(date);
+                        }}
                         className={`snap-center flex-shrink-0 flex flex-col items-center justify-center w-[52px] h-[72px] rounded-[16px] transition-all duration-300 relative ${
                             isSelected 
                             ? 'bg-[#464646] text-white translate-y-0 z-10' 
@@ -713,12 +722,15 @@ export const ScheduleTab: React.FC = () => {
 
       {/* Timeline with Swipe Handlers */}
       <div 
-        className="relative pr-2 min-h-[50vh] touch-pan-y"
+        className="min-h-[50vh] touch-pan-y"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        <div key={selectedDate} className="relative">
+        <div 
+            key={selectedDate} 
+            className={`relative pr-2 overflow-x-hidden ${direction === 'right' ? 'animate-slide-right' : direction === 'left' ? 'animate-slide-left' : ''}`}
+        >
             {filteredItems.map((item, index) => {
                 // Logic to determine if we show the time
                 const isTransport = item.category === 'transport';
@@ -875,14 +887,14 @@ export const ScheduleTab: React.FC = () => {
                 </div>
                 );
             })}
-        </div>
 
-        {filteredItems.length === 0 && (
-            <div className="text-center py-10 text-gray-400 opacity-60">
-                <i className="fa-regular fa-calendar-plus text-4xl mb-2"></i>
-                <p className="text-sm">No plans for this day yet.</p>
-            </div>
-        )}
+            {filteredItems.length === 0 && (
+                <div className="text-center py-10 text-gray-400 opacity-60">
+                    <i className="fa-regular fa-calendar-plus text-4xl mb-2"></i>
+                    <p className="text-sm">No plans for this day yet.</p>
+                </div>
+            )}
+        </div>
       </div>
     </div>
   );
