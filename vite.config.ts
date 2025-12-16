@@ -9,7 +9,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['src/globeicon.svg'],
+      includeAssets: ['globeicon.svg'],
       manifest: {
         name: 'Family Trip 2026',
         short_name: 'Family Trip 2026',
@@ -22,7 +22,7 @@ export default defineConfig({
         orientation: 'portrait',
         icons: [
           {
-            src: 'src/globeicon.svg',
+            src: 'globeicon.svg',
             sizes: 'any',
             type: 'image/svg+xml',
             purpose: 'any maskable'
