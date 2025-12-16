@@ -65,19 +65,21 @@
       }
 
       /* Animation for Page Slide */
+      /* Increased translation distance to 30% for a more dynamic "Page Flip" feel */
       @keyframes slideInRight {
-        from { transform: translateX(20px); opacity: 0; }
+        from { transform: translateX(30%); opacity: 0; }
         to { transform: translateX(0); opacity: 1; }
       }
       @keyframes slideInLeft {
-        from { transform: translateX(-20px); opacity: 0; }
+        from { transform: translateX(-30%); opacity: 0; }
         to { transform: translateX(0); opacity: 1; }
       }
+      
       .animate-slide-right {
-        animation: slideInRight 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        animation: slideInRight 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
       }
       .animate-slide-left {
-        animation: slideInLeft 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        animation: slideInLeft 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
       }
     </style>
 <script type="importmap">

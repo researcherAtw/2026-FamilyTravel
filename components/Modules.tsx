@@ -551,6 +551,11 @@ export const ScheduleTab: React.FC = () => {
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [direction, setDirection] = useState<'left' | 'right' | null>(null);
 
+  // Scroll to top when date changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [selectedDate]);
+
   // Determine Location Name based on date range
   const getLocationInfo = (date: string) => {
       if (date >= '2026-02-15' && date <= '2026-02-19') return '捷克 Czech Republic';
@@ -724,7 +729,7 @@ export const ScheduleTab: React.FC = () => {
       >
         <div 
             key={selectedDate} 
-            className={`relative pr-2 ${direction === 'right' ? 'animate-slide-right' : direction === 'left' ? 'animate-slide-left' : ''}`}
+            className={`relative pr-2 overflow-x-hidden ${direction === 'right' ? 'animate-slide-right' : direction === 'left' ? 'animate-slide-left' : ''}`}
         >
             {filteredItems.map((item, index) => {
                 // Logic to determine if we show the time
