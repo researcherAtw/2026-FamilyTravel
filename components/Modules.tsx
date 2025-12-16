@@ -642,7 +642,7 @@ export const ScheduleTab: React.FC = () => {
          <div>
             <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Day Plan</div>
             <div className="flex items-center gap-2">
-                <h2 className="text-3xl font-mono font-bold text-zen-text leading-none">{selectedDate}</h2>
+                <h2 className="text-2xl font-mono font-bold text-zen-text leading-none">{selectedDate}</h2>
                 {lunarText && (
                     <div className="bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm tracking-widest flex items-center gap-1">
                         <i className="fa-solid fa-star text-[8px]"></i>
