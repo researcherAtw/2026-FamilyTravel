@@ -26,30 +26,30 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen text-zen-text font-sans pb-24 max-w-md mx-auto relative shadow-2xl bg-zen-bg overflow-hidden">
+    // Changed: Uses fixed height (100dvh) and flex-col to create a fixed header + scrollable content layout
+    <div className="h-[100dvh] text-zen-text font-sans max-w-md mx-auto relative shadow-2xl bg-zen-bg overflow-hidden flex flex-col">
       
-      {/* Top Bar */}
-      <header className="px-6 pt-12 pb-4 flex justify-between items-center bg-gradient-to-b from-zen-bg to-transparent sticky top-0 z-10">
+      {/* Top Bar - Now static, not sticky, because it stays at top of flex container */}
+      <header className="flex-shrink-0 px-6 pt-12 pb-4 flex justify-between items-center bg-zen-bg z-30">
         <div className="flex flex-col">
             <h2 className="text-sm font-bold text-zen-primary tracking-widest mb-0.5">金色夢幻</h2>
             <h1 className="text-2xl font-bold text-zen-text leading-tight">奧地利．捷克11天</h1>
         </div>
         <div>
-            {/* Brand Logo - Designed as a "Zen Stamp" */}
-            {/* Increased size from w-14 to w-16, reduced padding to p-2 for clearer icon */}
+            {/* Brand Logo */}
             <div className="w-16 h-16 p-2 bg-white/40 backdrop-blur-md rounded-2xl border border-white/50 shadow-sm text-zen-text hover:text-zen-primary transition-colors duration-300 flex items-center justify-center">
                 <BrandLogo />
             </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="px-5 min-h-screen">
+      {/* Main Content Area - Occupies remaining space, handles its own scrolling if needed */}
+      <main className="flex-1 overflow-hidden relative w-full">
         {renderContent()}
       </main>
 
-      {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-stone-100 pb-safe pt-2 z-50 max-w-md mx-auto shadow-[0_-5px_20px_rgba(0,0,0,0.03)]">
+      {/* Bottom Navigation - Fixed at bottom */}
+      <nav className="flex-shrink-0 bg-white/95 backdrop-blur-md border-t border-stone-100 pb-safe pt-2 z-50 shadow-[0_-5px_20px_rgba(0,0,0,0.03)]">
         <div className="flex justify-around items-end px-2">
           {NAV_ITEMS.map((item) => {
             const isActive = activeTab === item.id;
@@ -72,8 +72,8 @@ const App: React.FC = () => {
         </div>
       </nav>
       
-      {/* Safe area padding for bottom nav on mobile */}
-      <div className="h-6 w-full fixed bottom-0 bg-white max-w-md mx-auto z-50 pointer-events-none"></div>
+      {/* Safe area padding filler if needed, but flex layout usually handles this better */}
+      <div className="h-6 w-full bg-white flex-shrink-0"></div>
     </div>
   );
 };

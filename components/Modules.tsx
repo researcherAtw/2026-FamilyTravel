@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, Button, CategoryBadge } from './UI';
 import { ScheduleItem, Booking, HighlightTag, HighlightColor, WeatherInfo } from '../types';
 
@@ -546,14 +546,19 @@ export const ScheduleTab: React.FC = () => {
   const [items, setItems] = useState(MOCK_SCHEDULE);
   const [weather, setWeather] = useState<WeatherInfo>({ condition: 'cloudy', temp: 5, locationName: '布拉格' });
   const [loadingWeather, setLoadingWeather] = useState(false);
-  // Swipe & Animation State
+  
+  // Swipe State
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
-  const [direction, setDirection] = useState<'left' | 'right' | null>(null);
 
-  // Scroll to top when date changes
+  // Scroll Container Ref
+  const timelineRef = useRef<HTMLDivElement>(null);
+
+  // Reset scroll on date change
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (timelineRef.current) {
+        timelineRef.current.scrollTo(0, 0);
+    }
   }, [selectedDate]);
 
   // Determine Location Name based on date range
@@ -635,11 +640,9 @@ export const ScheduleTab: React.FC = () => {
     if (isLeftSwipe || isRightSwipe) {
        const currentIndex = dates.indexOf(selectedDate);
        if (isLeftSwipe && currentIndex < dates.length - 1) {
-           setDirection('right');
            setSelectedDate(dates[currentIndex + 1]);
        }
        if (isRightSwipe && currentIndex > 0) {
-           setDirection('left');
            setSelectedDate(dates[currentIndex - 1]);
        }
     }
@@ -648,89 +651,90 @@ export const ScheduleTab: React.FC = () => {
   };
 
   return (
-    <div className="pb-20 space-y-6">
+    <div className="h-full flex flex-col">
       
-      {/* Date Navigation - Sticky & Smooth */}
-      <div className="sticky top-20 z-20 -mx-5 bg-gradient-to-b from-zen-bg via-zen-bg to-transparent">
-          <div className="flex gap-2 overflow-x-auto no-scrollbar px-5 py-4 snap-x items-center">
-            {dates.map((date) => {
-                const d = new Date(date);
-                // Display English short weekday (e.g., THU)
-                const dayName = d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
-                const dayNum = d.getDate();
-                const isSelected = date === selectedDate;
-                return (
-                    <button
-                        key={date}
-                        onClick={() => {
-                            const newIndex = dates.indexOf(date);
-                            const currentIndex = dates.indexOf(selectedDate);
-                            if (newIndex > currentIndex) setDirection('right');
-                            else if (newIndex < currentIndex) setDirection('left');
-                            else setDirection(null);
-                            setSelectedDate(date);
-                        }}
-                        className={`snap-center flex-shrink-0 flex flex-col items-center justify-center w-[52px] h-[72px] rounded-[16px] transition-all duration-300 relative ${
-                            isSelected 
-                            ? 'bg-[#464646] text-white translate-y-0 z-10' 
-                            : 'bg-white text-gray-400 shadow-sm hover:bg-gray-50'
-                        }`}
-                    >
-                        <span className={`text-[9px] font-black tracking-widest mb-1 font-sans ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayName}</span>
-                        <span className={`text-[20px] font-bold font-sans leading-none ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayNum}</span>
-                    </button>
-                )
-            })}
+      {/* 
+        FIXED HEADER SECTION 
+        This part contains the Date Selector and the Daily Info (Weather/Location).
+        It will NOT scroll. 
+      */}
+      <div className="flex-shrink-0 bg-zen-bg z-20 px-5 pb-4 shadow-sm">
+          {/* Date Navigation */}
+          <div className="-mx-5 mb-6">
+              <div className="flex gap-2 overflow-x-auto no-scrollbar px-5 py-2 snap-x items-center">
+                {dates.map((date) => {
+                    const d = new Date(date);
+                    // Display English short weekday (e.g., THU)
+                    const dayName = d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
+                    const dayNum = d.getDate();
+                    const isSelected = date === selectedDate;
+                    return (
+                        <button
+                            key={date}
+                            onClick={() => setSelectedDate(date)}
+                            className={`snap-center flex-shrink-0 flex flex-col items-center justify-center w-[52px] h-[72px] rounded-[16px] transition-all duration-300 relative ${
+                                isSelected 
+                                ? 'bg-[#464646] text-white translate-y-0 z-10' 
+                                : 'bg-white text-gray-400 shadow-sm hover:bg-gray-50'
+                            }`}
+                        >
+                            <span className={`text-[9px] font-black tracking-widest mb-1 font-sans ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayName}</span>
+                            <span className={`text-[20px] font-bold font-sans leading-none ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayNum}</span>
+                        </button>
+                    )
+                })}
+              </div>
+          </div>
+
+          {/* Date Header Info & Weather */}
+          <div className="flex justify-between items-end px-2">
+             <div>
+                <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Day Plan</div>
+                <div className="flex items-center gap-2">
+                    <h2 className="text-2xl font-mono font-bold text-zen-text leading-none">{selectedDate}</h2>
+                    {lunarText && (
+                        <div className="bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm tracking-widest flex items-center gap-1">
+                            <i className="fa-solid fa-star text-[8px]"></i>
+                            <span>{lunarText}</span>
+                        </div>
+                    )}
+                </div>
+                <div className="flex items-center gap-2 mt-1 text-gray-500 text-sm">
+                    <i className="fa-solid fa-location-dot text-zen-primary"></i> 
+                    <span>{locationHeader}</span>
+                </div>
+             </div>
+             {/* Weather Widget */}
+             <div className="bg-white/60 backdrop-blur-md border border-white p-3 rounded-2xl shadow-sm flex flex-col items-center min-w-[80px] transition-opacity duration-500">
+                {loadingWeather ? (
+                     <div className="py-2"><i className="fa-solid fa-spinner fa-spin text-gray-300"></i></div>
+                ) : (
+                    <>
+                        <div className="text-2xl mb-1">
+                            {weather.condition === 'sunny' && <i className="fa-solid fa-sun text-orange-400 animate-spin-slow"></i>}
+                            {weather.condition === 'cloudy' && <i className="fa-solid fa-cloud text-gray-400"></i>}
+                            {weather.condition === 'rain' && <i className="fa-solid fa-cloud-rain text-blue-400"></i>}
+                            {weather.condition === 'snow' && <i className="fa-regular fa-snowflake text-blue-200"></i>}
+                        </div>
+                        <div className="text-sm font-bold font-mono">{weather.temp}°C</div>
+                    </>
+                )}
+             </div>
           </div>
       </div>
 
-      {/* Date Header Info */}
-      <div className="flex justify-between items-end px-2">
-         <div>
-            <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Day Plan</div>
-            <div className="flex items-center gap-2">
-                <h2 className="text-2xl font-mono font-bold text-zen-text leading-none">{selectedDate}</h2>
-                {lunarText && (
-                    <div className="bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm tracking-widest flex items-center gap-1">
-                        <i className="fa-solid fa-star text-[8px]"></i>
-                        <span>{lunarText}</span>
-                    </div>
-                )}
-            </div>
-            <div className="flex items-center gap-2 mt-1 text-gray-500 text-sm">
-                <i className="fa-solid fa-location-dot text-zen-primary"></i> 
-                <span>{locationHeader}</span>
-            </div>
-         </div>
-         {/* Weather Widget */}
-         <div className="bg-white/60 backdrop-blur-md border border-white p-3 rounded-2xl shadow-sm flex flex-col items-center min-w-[80px] transition-opacity duration-500">
-            {loadingWeather ? (
-                 <div className="py-2"><i className="fa-solid fa-spinner fa-spin text-gray-300"></i></div>
-            ) : (
-                <>
-                    <div className="text-2xl mb-1">
-                        {weather.condition === 'sunny' && <i className="fa-solid fa-sun text-orange-400 animate-spin-slow"></i>}
-                        {weather.condition === 'cloudy' && <i className="fa-solid fa-cloud text-gray-400"></i>}
-                        {weather.condition === 'rain' && <i className="fa-solid fa-cloud-rain text-blue-400"></i>}
-                        {weather.condition === 'snow' && <i className="fa-regular fa-snowflake text-blue-200"></i>}
-                    </div>
-                    <div className="text-sm font-bold font-mono">{weather.temp}°C</div>
-                </>
-            )}
-         </div>
-      </div>
-
-      {/* Timeline with Swipe Handlers */}
+      {/* 
+        SCROLLABLE TIMELINE SECTION 
+        This part contains the timeline items and will scroll independently.
+      */}
       <div 
-        className="min-h-[50vh] touch-pan-y"
+        ref={timelineRef}
+        className="flex-1 overflow-y-auto no-scrollbar px-5 pb-24 touch-pan-y"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        <div 
-            key={selectedDate} 
-            className={`relative pr-2 overflow-x-hidden ${direction === 'right' ? 'animate-slide-right' : direction === 'left' ? 'animate-slide-left' : ''}`}
-        >
+        <div key={selectedDate} className="relative pt-4">
             {filteredItems.map((item, index) => {
                 // Logic to determine if we show the time
                 const isTransport = item.category === 'transport';
@@ -906,8 +910,8 @@ export const BookingsTab: React.FC = () => {
     const [bookings] = useState<Booking[]>(MOCK_BOOKINGS);
 
     return (
-        <div className="pb-20 space-y-6">
-            <h2 className="text-2xl font-bold font-mono text-zen-text mb-4">E-Tickets</h2>
+        <div className="h-full overflow-y-auto px-5 pb-24 space-y-6 no-scrollbar">
+            <h2 className="text-2xl font-bold font-mono text-zen-text mb-4 sticky top-0 bg-zen-bg py-2 z-10">E-Tickets</h2>
             
             <div className="space-y-4">
                 {bookings.map(booking => (
