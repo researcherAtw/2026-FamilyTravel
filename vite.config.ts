@@ -11,8 +11,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['src/globeicon.svg'],
       manifest: {
-        name: 'ZenTravel - 旅の禪',
-        short_name: 'ZenTravel',
+        name: '2026-FamilyTravel',
+        short_name: '2026-FamilyTravel',
         description: 'A Japanese Zen minimalist style personal travel planning application.',
         theme_color: '#F7F4EB',
         background_color: '#F7F4EB',
