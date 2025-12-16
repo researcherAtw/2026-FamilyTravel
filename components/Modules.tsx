@@ -8,26 +8,26 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/15 (Sun) Day 1: TPE -> DXB -> PRG ---
   { 
       id: 'd1-1', date: '2026-02-15', time: '00:20', displayTime: '00:20',
-      title: '起飛', location: 'TPE 桃園機場', category: 'transport', categoryColor: 'red',
+      title: '起飛', enTitle: 'Departure', location: 'TPE 桃園機場', category: 'transport', categoryColor: 'red',
       description: '往 DXB 杜拜機場'
   },
   { 
       id: 'd1-2', date: '2026-02-15', time: '06:15', displayTime: '06:15',
-      title: '降落', location: 'DXB 杜拜機場', category: 'transport', categoryColor: 'red'
+      title: '降落', enTitle: 'Arrival', location: 'DXB 杜拜機場', category: 'transport', categoryColor: 'red'
   },
   { 
       id: 'd1-3', date: '2026-02-15', time: '08:40', displayTime: '08:40',
-      title: '起飛 (轉機)', location: 'DXB 杜拜機場', category: 'transport', categoryColor: 'red',
+      title: '起飛 (轉機)', enTitle: 'Transfer Departure', location: 'DXB 杜拜機場', category: 'transport', categoryColor: 'red',
       description: '往 PRG 布拉格'
   },
   { 
       id: 'd1-4', date: '2026-02-15', time: '12:30', displayTime: '12:30',
-      title: '降落', location: 'PRG 布拉格機場', category: 'transport', categoryColor: 'red',
+      title: '降落', enTitle: 'Arrival', location: 'PRG 布拉格機場', category: 'transport', categoryColor: 'red',
       description: '瓦茨拉夫·哈維爾國際機場'
   },
   { 
       id: 'd1-5', date: '2026-02-15', time: '14:00', 
-      title: '老城廣場', location: '布拉格舊城區 (Staré Město)', category: '下車參觀', categoryColor: 'green',
+      title: '老城廣場', enTitle: 'Old Town Square', location: '布拉格舊城區 (Staré Město)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/uP6g3nF8J8j6J8j6',
       guideInfo: {
           story: "自12世紀以來，這裡就是中歐最重要的市集廣場，是商貿路線的十字路口。",
@@ -41,7 +41,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd1-6', date: '2026-02-15', time: '15:00', 
-      title: '火藥塔', location: '共和國廣場 (Náměstí Republiky)', category: '下車參觀', categoryColor: 'green',
+      title: '火藥塔', enTitle: 'Powder Tower', location: '共和國廣場 (Náměstí Republiky)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/uP6g3nF8J8j6J8j6',
       guideInfo: {
           story: "這座晚期哥德式塔樓始建於1475年，是布拉格舊城區的13座城門之一。",
@@ -54,7 +54,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd1-7', date: '2026-02-15', time: '16:00', 
-      title: '布拉格天文鐘', location: '舊市政廳南牆', category: '入場卷', categoryColor: 'red',
+      title: '布拉格天文鐘', enTitle: 'Prague Astronomical Clock', location: '舊市政廳南牆', category: '入場卷', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/uP6g3nF8J8j6J8j6',
       guideInfo: {
           story: "位於舊市政廳的南面牆上，是廣場的靈魂。",
@@ -70,7 +70,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/16 (Mon) Day 2: Prague ---
   { 
       id: 'd2-1', date: '2026-02-16', time: '09:00', 
-      title: '查理士大橋', location: '伏爾塔瓦河 (Vltava)', category: '下車參觀', categoryColor: 'green',
+      title: '查理士大橋', enTitle: 'Charles Bridge', location: '伏爾塔瓦河 (Vltava)', category: '下車參觀', categoryColor: 'green',
       guideInfo: {
           story: "這座橋是捷克最著名的地標，始建於一三五七年，由查理四世皇帝奠基（傳說他當時諮詢了天文學家，選擇了一三五七年九月七日五點三十一分這個「迴文」吉時）。",
           tip: "找到雕像底座的兩塊青銅浮雕（一塊描繪聖約翰被丟下河，另一塊是騎士與狗），據說觸摸它們會帶來好運，並確保您能再次回到布拉格。",
@@ -82,7 +82,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd2-2', date: '2026-02-16', time: '10:30', 
-      title: '布拉格古堡', location: '城堡區 (Hradčany)', category: '入場卷', categoryColor: 'red',
+      title: '布拉格古堡', enTitle: 'Prague Castle', location: '城堡區 (Hradčany)', category: '入場卷', categoryColor: 'red',
       guideInfo: {
           story: "這不是一座單一城堡，而是金氏世界紀錄認證的「世界上最大的古堡建築群」。",
           tip: "參觀主要景點需購買套票(Circuit B)。務必入內欣賞聖維特大教堂中慕夏(Alfons Mucha)設計的彩繪玻璃窗。每天中午12點在正門有衛兵交接。",
@@ -95,7 +95,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd2-3', date: '2026-02-16', time: '13:00', 
-      title: '黃金小徑', location: '城堡區 (Hradčany)', category: '入場卷', categoryColor: 'red',
+      title: '黃金小徑', enTitle: 'Golden Lane', location: '城堡區 (Hradčany)', category: '入場卷', categoryColor: 'red',
       guideInfo: {
           story: "這條位於城堡圍牆內的小徑，最初建於16世紀末，是城堡守衛和僕人的居所。",
           tip: "現在小房子內部被改造成各種主題展覽。通常在下午5點（冬季4點）城堡展館關閉後，黃金小徑會開放免費進入。",
@@ -107,7 +107,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd2-4', date: '2026-02-16', time: '15:00', 
-      title: '伏爾他瓦河遊船', location: '什切廷碼頭', category: '入場卷', categoryColor: 'red',
+      title: '伏爾他瓦河遊船', enTitle: 'Vltava River Cruise', location: '什切廷碼頭', category: '入場卷', categoryColor: 'red',
       guideInfo: {
           story: "伏爾他瓦河是捷克的「母親河」，也是捷克民族精神的象徵。",
           tip: "靠近卡夫卡博物館的地方是著名的「天鵝餵食點」。在新城區一側的河岸 (Náplavka) 則是當地人週末喜愛的農夫市集與酒吧聚集地。",
@@ -122,7 +122,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/17 (Tue) Day 3: Prague ---
   { 
       id: 'd3-1', date: '2026-02-17', time: '09:00', 
-      title: '捷克郵政總局', location: '布拉格新城 (Nové Město)', category: '下車參觀', categoryColor: 'green',
+      title: '捷克郵政總局', enTitle: 'Czech Post Office', location: '布拉格新城 (Nové Město)', category: '下車參觀', categoryColor: 'green',
       guideInfo: {
           story: "建於1871-1874年，採用宏偉的新文藝復興風格。內部有表現通訊歷史的壁畫。",
           tip: "至今仍是正常運作的郵局，可免費進入大廳參觀。不妨在此購買郵票並寄出您的明信片體驗歷史。",
@@ -134,7 +134,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd3-2', date: '2026-02-17', time: '10:30', 
-      title: '國家博物館', location: '瓦茨拉夫廣場 (Wenceslas Square)', category: '入場卷', categoryColor: 'red',
+      title: '國家博物館', enTitle: 'National Museum', location: '瓦茨拉夫廣場 (Wenceslas Square)', category: '入場卷', categoryColor: 'red',
       guideInfo: {
           story: "捷克國家認同的象徵。2011-2018年間進行了大規模翻修，內部展覽現代且宏偉。",
           tip: "從博物館頂樓的圓頂可以俯瞰整個瓦茨拉夫廣場。主館與新館（原國會大廈）有地下通道相連。",
@@ -147,7 +147,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/18 (Wed) Day 4: Cesky Krumlov ---
   { 
       id: 'd4-1', date: '2026-02-18', time: '10:00', 
-      title: '庫倫洛夫城堡', location: '彩繪塔周邊 (Zámek Český Krumlov)', category: '下車參觀', categoryColor: 'green',
+      title: '庫倫洛夫城堡', enTitle: 'Český Krumlov Castle', location: '彩繪塔周邊 (Zámek Český Krumlov)', category: '下車參觀', categoryColor: 'green',
       description: 'CK小鎮',
       guideInfo: {
           story: "規模僅次於布拉格城堡，輝煌的文藝復興與巴洛克面貌歸功於羅森堡家族 (Rosenberg)。",
@@ -161,7 +161,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd4-2', date: '2026-02-18', time: '13:00', 
-      title: '布拉格舊城區', location: '庫倫洛夫舊城 (Vnitřní Město)', category: '下車參觀', categoryColor: 'green',
+      title: '布拉格舊城區', enTitle: 'Old Town (Vnitřní Město)', location: '庫倫洛夫舊城 (Vnitřní Město)', category: '下車參觀', categoryColor: 'green',
       guideInfo: {
           story: "1992年列為世界文化遺產，被譽為「中世紀的完美縮影」。",
           tip: "舊城區內幾乎禁止車輛通行，步行是最佳方式。除了城堡，拉特蘭街 (Latrán) 也有許多絕佳拍照點。",
@@ -175,7 +175,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/19 (Thu) Day 5: Salzburg ---
   { 
       id: 'd5-1', date: '2026-02-19', time: '09:00', 
-      title: '莫札特故居', location: '格特萊德街 (Getreidegasse)', category: '下車參觀', categoryColor: 'green',
+      title: '莫札特故居', enTitle: 'Mozart Residence', location: '格特萊德街 (Getreidegasse)', category: '下車參觀', categoryColor: 'green',
       guideInfo: {
           story: "莫札特一家在1773年搬入的住所 (Wohnhaus)，而非出生地。",
           tip: "「出生地」在舊城區（黃色建築），而此處位於新城區馬卡特廣場，展品側重於家族生活和樂器。",
@@ -187,7 +187,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd5-2', date: '2026-02-19', time: '10:30', 
-      title: '米拉貝爾花園', location: '薩爾斯堡新城 (Schloss Mirabell)', category: '下車參觀', categoryColor: 'green',
+      title: '米拉貝爾花園', enTitle: 'Mirabell Palace & Gardens', location: '薩爾斯堡新城 (Schloss Mirabell)', category: '下車參觀', categoryColor: 'green',
       guideInfo: {
           story: "精美的巴洛克式花園，電影《真善美》瑪麗亞和孩子們歡唱〈Do-Re-Mi〉的場景。",
           tip: "花園免費開放。從這裡可以完美地「框」住遠處山丘上的莎姿堡城堡，是經典拍照角度。",
@@ -199,7 +199,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd5-3', date: '2026-02-19', time: '13:00', 
-      title: '莎姿堡城堡', location: '僧侶山 (Mönchsberg)', category: '入場卷', categoryColor: 'red',
+      title: '莎姿堡城堡', enTitle: 'Hohensalzburg Fortress', location: '僧侶山 (Mönchsberg)', category: '入場卷', categoryColor: 'red',
       description: '(含上下纜車)',
       guideInfo: {
           story: "歐洲現存規模最大的中世紀城堡之一，矗立在舊城區上方。",
@@ -215,7 +215,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/20 (Fri) Day 6: Austria -> Germany -> Austria ---
   { 
       id: 'd6-1', date: '2026-02-20', time: '09:30', 
-      title: '國王湖遊船', location: '德國貝希特斯加登 (Berchtesgaden)', category: '入場卷', categoryColor: 'red',
+      title: '國王湖遊船', enTitle: 'Lake Königssee Boat Tour', location: '德國貝希特斯加登 (Berchtesgaden)', category: '入場卷', categoryColor: 'red',
       description: 'Königssee',
       guideInfo: {
           story: "德國最深、最乾淨的湖泊，冰川侵蝕形成的峽灣型湖泊。",
@@ -229,7 +229,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd6-2', date: '2026-02-20', time: '13:00', 
-      title: '鹽礦探秘之旅', location: '哈萊因 (Hallein) /貝希特斯加登', category: '入場卷', categoryColor: 'red',
+      title: '鹽礦探秘之旅', enTitle: 'Salt Mine Tour', location: '哈萊因 (Hallein) /貝希特斯加登', category: '入場卷', categoryColor: 'red',
       guideInfo: {
           story: "「鹽」是中世紀的白金。此區財富均來自鹽礦。",
           tip: "需換上傳統礦工服。體驗亮點是兩段刺激的木製溜滑梯，以及搭乘木筏渡過地底鹽水湖。",
@@ -244,7 +244,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/21 (Sat) Day 7: Germany/Austria Border ---
   { 
       id: 'd7-1', date: '2026-02-21', time: '09:00', 
-      title: '哈斯達特小鎮', location: '哈修塔特湖區 (Hallstatt)', category: '下車參觀', categoryColor: 'green',
+      title: '哈斯達特小鎮', enTitle: 'Hallstatt Old Town', location: '哈修塔特湖區 (Hallstatt)', category: '下車參觀', categoryColor: 'green',
       description: 'Hallstatt',
       guideInfo: {
           story: "1997年列為世界文化遺產，被譽為世界上最美的小鎮之一，歷史與鹽礦密不可分。",
@@ -257,7 +257,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd7-2', date: '2026-02-21', time: '13:00', 
-      title: '百水公寓', location: '維也納第3區 (Landstraße)', category: '下車參觀', categoryColor: 'green',
+      title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '下車參觀', categoryColor: 'green',
       guideInfo: {
           story: "由藝術家「百水先生」設計，於1985年完工的公共住宅，是維也納建築的異類。",
           tip: "內部有居民無法參觀。建議去對面的「百水藝術村」商場體驗其風格，或步行至附近的百水藝術館。",
@@ -269,7 +269,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd7-3', date: '2026-02-21', time: '15:00', 
-      title: '卡爾教堂', location: '卡爾廣場 (Karlsplatz)', category: '下車參觀', categoryColor: 'green',
+      title: '卡爾教堂', enTitle: 'Karlskirche', location: '卡爾廣場 (Karlsplatz)', category: '下車參觀', categoryColor: 'green',
       guideInfo: {
           story: "巴洛克建築巔峰，1713年皇帝卡爾六世為感謝黑死病結束而建。",
           tip: "前方水池可拍出完美倒影。教堂內部有全景電梯可直達穹頂近距離欣賞濕壁畫（需購票）。",
@@ -283,7 +283,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/22 (Sun) Day 8: Hallstatt/Vienna ---
   { 
       id: 'd8-1', date: '2026-02-22', time: '09:00', 
-      title: '瑪麗亞特蕾莎廣場', location: '博物館區 (Museumsquartier)', category: '下車參觀', categoryColor: 'green',
+      title: '瑪麗亞特蕾莎廣場', enTitle: 'Maria-Theresien-Platz', location: '博物館區 (Museumsquartier)', category: '下車參觀', categoryColor: 'green',
       guideInfo: {
           story: "紀念哈布斯堡王朝國母瑪麗亞·特蕾莎女皇的廣場。",
           tip: "兩側矗立著「雙胞胎」建築：藝術史博物館與自然史博物館。後方即是現代化的維也納博物館區 (MQ)。",
@@ -295,7 +295,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd8-2', date: '2026-02-22', time: '10:00', 
-      title: '霍夫堡宮', location: '維也納第1區 (Innere Stadt)', category: '下車參觀', categoryColor: 'green',
+      title: '霍夫堡宮', enTitle: 'The Hofburg', location: '維也納第1區 (Innere Stadt)', category: '下車參觀', categoryColor: 'green',
       guideInfo: {
           story: "哈布斯堡王朝的冬宮。西西 (Sisi) 是伊莉莎白皇后的真實暱稱，茜茜則是電影譯名。",
           tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館。西班牙馬術學校也位於此區。",
@@ -309,7 +309,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd8-3', date: '2026-02-22', time: '11:00', 
-      title: '黑死病紀念柱', location: '格拉本大街 (Graben)', category: '下車參觀', categoryColor: 'green',
+      title: '黑死病紀念柱', enTitle: 'Plague Column (Pestsäule)', location: '格拉本大街 (Graben)', category: '下車參觀', categoryColor: 'green',
       guideInfo: {
           story: "紀念1679年奪走維也納三分之一人口的瘟疫。",
           tip: "位於步行街中央的露天雕塑。頂端是聖三一，底座象徵瘟疫女巫，中間是皇帝利奧波德一世。\n\n可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
@@ -326,7 +326,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd8-4', date: '2026-02-22', time: '14:00', 
-      title: '熊布朗宮 (美泉宮)', location: '維也納第13區 (Hietzing)', category: '入場卷', categoryColor: 'red',
+      title: '熊布朗宮 (美泉宮)', enTitle: 'Schönbrunn Palace', location: '維也納第13區 (Hietzing)', category: '入場卷', categoryColor: 'red',
       description: 'Schönbrunn Palace',
       guideInfo: {
           story: "1996年列為世界文化遺產。瑪麗亞·特蕾莎女皇被戲稱為歐洲丈母娘😂。末代皇帝卡爾一世也在此簽署了放棄帝國權力的文件。6歲的神童莫札特曾在此為女皇演奏。",
@@ -344,7 +344,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/23 (Mon) Day 9: Vienna ---
   { 
       id: 'd9-1', date: '2026-02-23', time: '09:00', 
-      title: '百水公寓', location: '維也納第3區 (Landstraße)', category: '下車參觀', categoryColor: 'green',
+      title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '下車參觀', categoryColor: 'green',
       guideInfo: {
           story: "再次造訪這座充滿生命力的綠建築，感受其與自然共生的理念。",
           tip: "若上次未參觀百水藝術館，今日可安排前往，欣賞更多百水先生的畫作與建築模型。",
@@ -356,7 +356,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd9-2', date: '2026-02-23', time: '10:00', 
-      title: '聖史帝芬教堂', location: '史蒂芬廣場 (Stephansplatz)', category: '入場卷', categoryColor: 'red',
+      title: '聖史帝芬教堂', enTitle: "St. Stephen's Cathedral", location: '史蒂芬廣場 (Stephansplatz)', category: '入場卷', categoryColor: 'red',
       description: '(南塔、北塔二擇一登頂)',
       guideInfo: {
           story: "維也納的靈魂象徵，始建於12世紀。",
@@ -375,7 +375,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd9-3', date: '2026-02-23', time: '14:00', 
-      title: '潘朵夫購物村', location: '潘朵夫 (Parndorf)', category: '入場卷', categoryColor: 'red',
+      title: '潘朵夫購物村', enTitle: 'Designer Outlet Parndorf', location: '潘朵夫 (Parndorf)', category: '入場卷', categoryColor: 'red',
       description: 'Parndorf Outlet',
       guideInfo: {
           story: "中歐最大的設計師暢貨中心之一，擁有充滿布爾根蘭州傳統風格的建築設計。",
@@ -388,23 +388,23 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd9-4', date: '2026-02-23', time: '21:45', displayTime: '21:45',
-      title: '起飛', location: 'VIE 維也納國際機場', category: 'transport', categoryColor: 'red',
+      title: '起飛', enTitle: 'Departure', location: 'VIE 維也納國際機場', category: 'transport', categoryColor: 'red',
       description: '往 DXB 杜拜機場'
   },
 
   // --- 2/24 (Tue) Day 10/11: DXB -> TPE ---
   { 
       id: 'd10-1', date: '2026-02-24', time: '06:25', displayTime: '06:25',
-      title: '降落', location: 'DXB 杜拜機場', category: 'transport', categoryColor: 'red'
+      title: '降落', enTitle: 'Arrival', location: 'DXB 杜拜機場', category: 'transport', categoryColor: 'red'
   },
   { 
       id: 'd10-2', date: '2026-02-24', time: '08:45', displayTime: '08:45',
-      title: '起飛 (轉機)', location: 'DXB 杜拜機場', category: 'transport', categoryColor: 'red',
+      title: '起飛 (轉機)', enTitle: 'Transfer Departure', location: 'DXB 杜拜機場', category: 'transport', categoryColor: 'red',
       description: '往 TPE 桃園機場'
   },
   { 
       id: 'd10-3', date: '2026-02-24', time: '20:40', displayTime: '20:40',
-      title: '降落', location: 'TPE 桃園機場', category: 'transport', categoryColor: 'red',
+      title: '降落', enTitle: 'Arrival', location: 'TPE 桃園機場', category: 'transport', categoryColor: 'red',
       description: '抵達溫暖的家'
   },
 ];
@@ -730,15 +730,21 @@ export const ScheduleTab: React.FC = () => {
                     >
                         {/* Header: Title & Category Badge (Right) */}
                         <div className="flex justify-between items-start gap-2 mb-1">
-                             <h3 className="font-bold text-lg leading-tight text-zen-text">{item.title}</h3>
-                             <div className="flex-shrink-0">
+                             <div className="flex flex-col">
+                                 <h3 className="font-bold text-lg leading-tight text-zen-text">{item.title}</h3>
+                                 {/* English Subtitle */}
+                                 {item.enTitle && (
+                                     <span className="text-[10px] font-mono text-gray-400 font-medium tracking-wide mt-0.5">{item.enTitle}</span>
+                                 )}
+                             </div>
+                             <div className="flex-shrink-0 mt-0.5">
                                 <CategoryBadge type={item.category} color={item.categoryColor} />
                              </div>
                         </div>
 
                         {/* Description (Details like 1F SUQQU...) */}
                         {item.description && (
-                            <div className="text-xs text-gray-400 font-medium whitespace-pre-line leading-relaxed mb-2">
+                            <div className="text-xs text-gray-400 font-medium whitespace-pre-line leading-relaxed mb-2 mt-1">
                                 {item.description}
                             </div>
                         )}

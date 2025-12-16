@@ -42,6 +42,7 @@ export interface ScheduleItem {
   time: string; // HH:mm (Internal use or fallback)
   displayTime?: string; // Visual display (e.g. "11:00\n20:00")
   title: string;
+  enTitle?: string; // English Title for subtitle
   location: string;
   mapQuery?: string; // Custom query for Google Maps
   mapUrl?: string; // Direct URL for navigation
