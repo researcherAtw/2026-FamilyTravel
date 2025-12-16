@@ -553,7 +553,7 @@ export const ScheduleTab: React.FC = () => {
 
   // Scroll to top when date changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [selectedDate]);
 
   // Determine Location Name based on date range
