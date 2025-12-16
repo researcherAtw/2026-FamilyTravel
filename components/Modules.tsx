@@ -488,8 +488,6 @@ const TAG_COLORS: Record<HighlightColor, string> = {
     gray: 'bg-gray-50 text-gray-600 border-gray-200'
 };
 
-// Updated styles for the new Node design (Background colors instead of borders)
-// NOTE: We will handle solid/hollow logic in the component
 const NODE_BG_COLORS: Record<HighlightColor, string> = {
     red: 'bg-red-400',
     orange: 'bg-orange-400',
@@ -539,6 +537,151 @@ const mapWmoToCondition = (code: number): WeatherInfo['condition'] => {
     return 'rain';
 };
 
+// Helper Component for Rendering a single Schedule Row
+const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
+    const isTransport = item.category === 'transport';
+    const timeStr = item.displayTime || item.time;
+    const [mainTime, subTime] = timeStr.includes('\n') ? timeStr.split('\n') : [timeStr, null];
+    const [hour, minute] = mainTime.split(':');
+
+    return (
+        <div className="relative mb-0 flex gap-0">
+            {/* 1. Time Column */}
+            <div className="w-9 py-5 flex flex-col items-end justify-start flex-shrink-0 pr-0.5">
+                {isTransport ? (
+                    <>
+                        <div className="flex items-baseline leading-none text-zen-text">
+                            <span className="text-lg font-mono font-bold tracking-tighter">{hour}</span>
+                            <span className="text-[10px] font-mono font-bold text-gray-400 ml-[1px] relative -top-0.5">:{minute}</span>
+                        </div>
+                        {subTime && (
+                            <span className="text-[9px] text-gray-300 font-mono mt-1 text-right">{subTime}</span>
+                        )}
+                    </>
+                ) : (
+                    <div className="h-6 w-full"></div>
+                )}
+            </div>
+
+            {/* 2. Timeline Line & Node */}
+            <div className="relative flex flex-col items-center px-0 flex-shrink-0 w-4">
+                {/* Continuous Line */}
+                <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-stone-300/60"></div>
+                
+                {/* Zen Node */}
+                <div 
+                    className={`
+                        relative z-10 box-content transition-all duration-300
+                        ${isTransport 
+                            ? `w-3 h-3 rounded-full border-2 border-[#F7F4EB] shadow-sm mt-[1.6rem] ${NODE_BG_COLORS[item.categoryColor || 'gray']}` 
+                            : `w-2.5 h-2.5 rounded-full border-[2.5px] bg-[#F7F4EB] mt-[1.8rem] ${NODE_BORDER_COLORS[item.categoryColor || 'gray']}`
+                        }
+                    `}
+                ></div>
+            </div>
+
+            {/* 3. Content Card Column */}
+            <div className="flex-grow min-w-0 py-2 pb-6 pl-1.5">
+                <div 
+                    className={`bg-white rounded-2xl p-4 shadow-zen border border-stone-50 transition-all duration-300 hover:translate-y-[-2px]`}
+                >
+                    {/* Header: Title & Category Badge */}
+                    <div className="flex justify-between items-start gap-2 mb-1">
+                        <div className="flex flex-col">
+                            <h3 className="font-bold text-lg leading-tight text-zen-text">{item.title}</h3>
+                            {item.enTitle && (
+                                <span className="text-[10px] font-mono text-gray-400 font-medium tracking-wide mt-0.5">{item.enTitle}</span>
+                            )}
+                        </div>
+                        <div className="flex-shrink-0 mt-0.5">
+                            <CategoryBadge type={item.category} color={item.categoryColor} />
+                        </div>
+                    </div>
+
+                    {/* Description */}
+                    {item.description && (
+                        <div className="text-xs text-gray-400 font-medium whitespace-pre-line leading-relaxed mb-2 mt-1">
+                            {item.description}
+                        </div>
+                    )}
+
+                    {/* Location */}
+                    <div className="text-xs text-gray-500 flex items-center gap-1 mb-2">
+                        <i className="fa-solid fa-map-pin text-[10px]"></i> <span className="truncate">{item.location}</span>
+                    </div>
+                    
+                    {/* Business Hours */}
+                    {item.businessHours && (
+                        <div className="text-[10px] font-bold text-orange-400 bg-orange-50 px-2 py-0.5 rounded inline-block mb-1">
+                            <i className="fa-regular fa-clock mr-1"></i>營業時間: {item.businessHours}
+                        </div>
+                    )}
+
+                    {/* Details */}
+                    {(item.guideInfo?.story || item.guideInfo?.tip || (item.guideInfo?.highlights && item.guideInfo.highlights.length > 0)) && (
+                        <div className="mt-4 pt-3 border-t border-dashed border-gray-200">
+                            {item.guideInfo?.story && (
+                                <p className="text-sm text-gray-600 leading-relaxed font-serif mb-3 whitespace-pre-line">
+                                    {item.guideInfo.story}
+                                </p>
+                            )}
+                            
+                            {item.guideInfo?.tip && (
+                                <div className="bg-orange-50 border-l-4 border-orange-300 p-3 mb-3 rounded-r-lg">
+                                    <div className="flex gap-2">
+                                        <i className="fa-solid fa-lightbulb text-orange-400 mt-0.5"></i>
+                                        <p className="text-xs text-orange-800 font-medium leading-relaxed whitespace-pre-line">{item.guideInfo.tip}</p>
+                                    </div>
+                                </div>
+                            )}
+
+                            {item.guideInfo?.highlights && item.guideInfo.highlights.length > 0 && (
+                                <div className="flex flex-wrap gap-1.5 mt-3">
+                                    {item.guideInfo.highlights.map(h => (
+                                        <span key={h.id} className={`text-[10px] px-2 py-1 rounded border font-bold ${TAG_COLORS[h.color]}`}>{h.text}</span>
+                                    ))}
+                                </div>
+                            )}
+
+                            {item.guideInfo?.relatedLink && (
+                                <div className="flex justify-end mt-4">
+                                    <a 
+                                        href={item.guideInfo.relatedLink.url}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="
+                                            group relative overflow-hidden
+                                            flex items-center gap-2 
+                                            pl-1 pr-3 py-1 
+                                            bg-[#F9F8F4] 
+                                            border border-[#E0E5D5] 
+                                            rounded-full 
+                                            shadow-[0_2px_0_#E0E5D5]
+                                            active:shadow-none active:translate-y-[2px]
+                                            transition-all duration-150
+                                            text-xs font-bold text-stone-600
+                                            hover:bg-white hover:border-zen-primary hover:text-zen-primary
+                                        "
+                                    >
+                                        <span className="w-6 h-6 rounded-full bg-white border border-[#E0E5D5] flex items-center justify-center text-zen-primary group-hover:bg-zen-primary group-hover:text-white group-hover:border-zen-primary transition-colors duration-200">
+                                            <i className="fa-solid fa-location-dot text-[10px]"></i>
+                                        </span>
+                                        <span className="transition-colors duration-200">
+                                            {item.guideInfo.relatedLink.text}
+                                        </span>
+                                        <i className="fa-solid fa-chevron-right text-[9px] text-gray-300 group-hover:text-zen-primary group-hover:translate-x-0.5 transition-all duration-200"></i>
+                                    </a>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+};
+
 // --- SCHEDULE TAB ---
 
 export const ScheduleTab: React.FC = () => {
@@ -548,23 +691,27 @@ export const ScheduleTab: React.FC = () => {
   const [loadingWeather, setLoadingWeather] = useState(false);
   
   // Swipe State
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [touchStart, setTouchStart] = useState<{x: number, y: number} | null>(null);
+  const [touchEnd, setTouchEnd] = useState<{x: number, y: number} | null>(null);
 
-  // Scroll Container Ref
-  const timelineRef = useRef<HTMLDivElement>(null);
+  // Scroll Container Refs
+  const scrollRefs = useRef<(HTMLDivElement | null)[]>([]);
   const dateScrollRef = useRef<HTMLDivElement>(null);
 
-  // Memoize dates to prevent unnecessary re-renders of the effect
+  // Memoize dates
   const dates = useMemo(() => Array.from(new Set(items.map(i => i.date))).sort() as string[], [items]);
-  const filteredItems = items.filter(i => i.date === selectedDate);
+  const currentIndex = dates.indexOf(selectedDate);
 
-  // Reset timeline scroll on date change using useLayoutEffect to prevent flicker
+  // Reset scroll on date change logic if needed, but since we use a slider, 
+  // we might want to ensure the target slide is at top or preserve.
+  // The user likely expects it to be at the top when switching days.
   useLayoutEffect(() => {
-    if (timelineRef.current) {
-        timelineRef.current.scrollTo(0, 0);
+    const el = scrollRefs.current[currentIndex];
+    if (el) {
+        // Reset scroll position to top when switching to this date
+        el.scrollTo(0, 0);
     }
-  }, [selectedDate]);
+  }, [currentIndex]);
 
   // Auto-scroll date selector to keep selected date in view
   useEffect(() => {
@@ -575,9 +722,6 @@ export const ScheduleTab: React.FC = () => {
             const buttonWidth = 52; 
             const gap = 8; 
             const paddingLeft = 20; 
-            
-            // Calculate center position of the target item
-            // paddingLeft + (index * (button + gap)) + button/2
             const itemCenter = paddingLeft + index * (buttonWidth + gap) + buttonWidth / 2;
             const containerCenter = container.clientWidth / 2;
             const scrollLeft = itemCenter - containerCenter;
@@ -609,19 +753,15 @@ export const ScheduleTab: React.FC = () => {
         let locationName = '';
 
         if (selectedDate >= '2026-02-15' && selectedDate <= '2026-02-19') {
-            // Czech Republic (Prague)
             url = 'https://api.open-meteo.com/v1/forecast?latitude=50.08&longitude=14.43&current_weather=true&timezone=auto';
             locationName = '布拉格';
         } else if (selectedDate === '2026-02-20') {
-            // Germany (Berchtesgaden approx)
             url = 'https://api.open-meteo.com/v1/forecast?latitude=47.59&longitude=12.99&current_weather=true&timezone=auto';
             locationName = '貝希特斯加登';
         } else if (selectedDate >= '2026-02-21' && selectedDate <= '2026-02-24') {
-            // Austria (Vienna)
             url = 'https://api.open-meteo.com/v1/forecast?latitude=48.21&longitude=16.37&current_weather=true&timezone=auto';
             locationName = '維也納';
         } else {
-            // Fallback
              url = 'https://api.open-meteo.com/v1/forecast?latitude=50.08&longitude=14.43&current_weather=true&timezone=auto';
              locationName = '歐洲';
         }
@@ -638,7 +778,6 @@ export const ScheduleTab: React.FC = () => {
             }
         } catch (error) {
             console.error("Failed to fetch weather", error);
-            // Keep default/previous state on error
         } finally {
             setLoadingWeather(false);
         }
@@ -650,25 +789,25 @@ export const ScheduleTab: React.FC = () => {
   // Swipe Handlers
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
+    setTouchStart({ x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY });
   };
 
   const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+    setTouchEnd({ x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY });
   };
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50; // Swipe Left -> Go Next (Enter from Right)
-    const isRightSwipe = distance < -50; // Swipe Right -> Go Prev (Enter from Left)
+    const distanceX = touchStart.x - touchEnd.x;
+    const distanceY = touchStart.y - touchEnd.y;
     
-    if (isLeftSwipe || isRightSwipe) {
-       const currentIndex = dates.indexOf(selectedDate);
-       if (isLeftSwipe && currentIndex < dates.length - 1) {
+    // Ensure it's a horizontal swipe and long enough
+    if (Math.abs(distanceX) > Math.abs(distanceY) && Math.abs(distanceX) > 50) {
+       if (distanceX > 0 && currentIndex < dates.length - 1) {
+           // Swipe Left -> Next
            setSelectedDate(dates[currentIndex + 1]);
-       }
-       if (isRightSwipe && currentIndex > 0) {
+       } else if (distanceX < 0 && currentIndex > 0) {
+           // Swipe Right -> Prev
            setSelectedDate(dates[currentIndex - 1]);
        }
     }
@@ -679,11 +818,7 @@ export const ScheduleTab: React.FC = () => {
   return (
     <div className="h-full flex flex-col">
       
-      {/* 
-        FIXED HEADER SECTION 
-        This part contains the Date Selector and the Daily Info (Weather/Location).
-        It will NOT scroll. 
-      */}
+      {/* FIXED HEADER SECTION */}
       <div className="flex-shrink-0 bg-zen-bg z-20 px-5 pb-4 shadow-sm">
           {/* Date Navigation */}
           <div className="-mx-5 mb-2">
@@ -693,7 +828,6 @@ export const ScheduleTab: React.FC = () => {
               >
                 {dates.map((date) => {
                     const d = new Date(date);
-                    // Display English short weekday (e.g., THU)
                     const dayName = d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
                     const dayNum = d.getDate();
                     const isSelected = date === selectedDate;
@@ -733,7 +867,7 @@ export const ScheduleTab: React.FC = () => {
                     <span>{locationHeader}</span>
                 </div>
              </div>
-             {/* Weather Widget - Fixed height to prevent layout shift */}
+             {/* Weather Widget */}
              <div className="bg-white/60 backdrop-blur-md border border-white p-3 rounded-2xl shadow-sm flex flex-col items-center justify-center min-w-[80px] h-[82px] box-border transition-opacity duration-500">
                 {loadingWeather ? (
                      <i className="fa-solid fa-spinner fa-spin text-gray-300 text-2xl"></i>
@@ -753,181 +887,44 @@ export const ScheduleTab: React.FC = () => {
       </div>
 
       {/* 
-        SCROLLABLE TIMELINE SECTION 
-        This part contains the timeline items and will scroll independently.
+        SLIDER TIMELINE SECTION 
+        Uses a full-width container with flex layout and translateX to slide between days.
       */}
       <div 
-        ref={timelineRef}
-        className="flex-1 overflow-y-auto no-scrollbar px-5 pb-24 touch-pan-y"
+        className="flex-1 overflow-hidden relative w-full touch-pan-y"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        <div key={selectedDate} className="relative pt-4">
-            {filteredItems.map((item, index) => {
-                // Logic to determine if we show the time
-                const isTransport = item.category === 'transport';
-                
-                const timeStr = item.displayTime || item.time; // "00:20" or "09:00"
-                const [mainTime, subTime] = timeStr.includes('\n') ? timeStr.split('\n') : [timeStr, null];
-                const [hour, minute] = mainTime.split(':');
-
+         <div 
+            className="flex h-full transition-transform duration-300 ease-out will-change-transform"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+         >
+            {dates.map((date, idx) => {
+                const dayItems = items.filter(i => i.date === date);
                 return (
-                <div key={item.id} className="relative mb-0 flex gap-0">
-                    {/* 1. Time Column - Reduced width from w-14 to w-9 (2.25rem) and reduced text size */}
-                    <div className="w-9 py-5 flex flex-col items-end justify-start flex-shrink-0 pr-0.5">
-                        {isTransport ? (
-                            <>
-                                <div className="flex items-baseline leading-none text-zen-text">
-                                    <span className="text-lg font-mono font-bold tracking-tighter">{hour}</span>
-                                    <span className="text-[10px] font-mono font-bold text-gray-400 ml-[1px] relative -top-0.5">:{minute}</span>
+                    <div 
+                        key={date}
+                        // Assign ref to array for scrolling control
+                        ref={el => { scrollRefs.current[idx] = el; }}
+                        className="w-full h-full flex-shrink-0 overflow-y-auto no-scrollbar px-5 pb-24"
+                    >
+                        <div className="relative pt-4">
+                             {dayItems.map((item) => (
+                                <ScheduleItemRow key={item.id} item={item} />
+                             ))}
+                             
+                             {dayItems.length === 0 && (
+                                <div className="text-center py-10 text-gray-400 opacity-60">
+                                    <i className="fa-regular fa-calendar-plus text-4xl mb-2"></i>
+                                    <p className="text-sm">No plans for this day yet.</p>
                                 </div>
-                                {subTime && (
-                                    <span className="text-[9px] text-gray-300 font-mono mt-1 text-right">{subTime}</span>
-                                )}
-                            </>
-                        ) : (
-                            /* Empty space for non-transport items to create flow */
-                            <div className="h-6 w-full"></div>
-                        )}
-                    </div>
-
-                    {/* 2. Timeline Line & Node */}
-                    <div className="relative flex flex-col items-center px-0 flex-shrink-0 w-4">
-                        {/* Continuous Line (Thinner, subtle) */}
-                        <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-stone-300/60"></div>
-                        
-                        {/* Zen Node: 
-                            - Transport: Solid colored dot (Anchor)
-                            - Activity: Hollow colored ring (Flow)
-                        */}
-                        <div 
-                            className={`
-                                relative z-10 box-content transition-all duration-300
-                                ${isTransport 
-                                    ? `w-3 h-3 rounded-full border-2 border-[#F7F4EB] shadow-sm mt-[1.6rem] ${NODE_BG_COLORS[item.categoryColor || 'gray']}` 
-                                    : `w-2.5 h-2.5 rounded-full border-[2.5px] bg-[#F7F4EB] mt-[1.8rem] ${NODE_BORDER_COLORS[item.categoryColor || 'gray']}`
-                                }
-                            `}
-                        ></div>
-                    </div>
-
-                    {/* 3. Content Card Column */}
-                    <div className="flex-grow min-w-0 py-2 pb-6 pl-1.5">
-                        <div 
-                            className={`bg-white rounded-2xl p-4 shadow-zen border border-stone-50 transition-all duration-300 hover:translate-y-[-2px]`}
-                        >
-                            {/* Header: Title & Category Badge (Right) */}
-                            <div className="flex justify-between items-start gap-2 mb-1">
-                                <div className="flex flex-col">
-                                    <h3 className="font-bold text-lg leading-tight text-zen-text">{item.title}</h3>
-                                    {/* English Subtitle */}
-                                    {item.enTitle && (
-                                        <span className="text-[10px] font-mono text-gray-400 font-medium tracking-wide mt-0.5">{item.enTitle}</span>
-                                    )}
-                                </div>
-                                <div className="flex-shrink-0 mt-0.5">
-                                    <CategoryBadge type={item.category} color={item.categoryColor} />
-                                </div>
-                            </div>
-
-                            {/* Description (Details like 1F SUQQU...) */}
-                            {item.description && (
-                                <div className="text-xs text-gray-400 font-medium whitespace-pre-line leading-relaxed mb-2 mt-1">
-                                    {item.description}
-                                </div>
-                            )}
-
-                            {/* Location */}
-                            <div className="text-xs text-gray-500 flex items-center gap-1 mb-2">
-                                <i className="fa-solid fa-map-pin text-[10px]"></i> <span className="truncate">{item.location}</span>
-                            </div>
-                            
-                            {/* Business Hours Display inside Card */}
-                            {item.businessHours && (
-                                <div className="text-[10px] font-bold text-orange-400 bg-orange-50 px-2 py-0.5 rounded inline-block mb-1">
-                                    <i className="fa-regular fa-clock mr-1"></i>營業時間: {item.businessHours}
-                                </div>
-                            )}
-
-                            {/* Details always visible */}
-                            {(item.guideInfo?.story || item.guideInfo?.tip || (item.guideInfo?.highlights && item.guideInfo.highlights.length > 0)) && (
-                                <div className="mt-4 pt-3 border-t border-dashed border-gray-200">
-                                    {item.guideInfo?.story && (
-                                        <p className="text-sm text-gray-600 leading-relaxed font-serif mb-3 whitespace-pre-line">
-                                            {item.guideInfo.story}
-                                        </p>
-                                    )}
-                                    
-                                    {item.guideInfo?.tip && (
-                                        <div className="bg-orange-50 border-l-4 border-orange-300 p-3 mb-3 rounded-r-lg">
-                                            <div className="flex gap-2">
-                                                <i className="fa-solid fa-lightbulb text-orange-400 mt-0.5"></i>
-                                                <p className="text-xs text-orange-800 font-medium leading-relaxed whitespace-pre-line">{item.guideInfo.tip}</p>
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {item.guideInfo?.highlights && item.guideInfo.highlights.length > 0 && (
-                                        <div className="flex flex-wrap gap-1.5 mt-3">
-                                            {item.guideInfo.highlights.map(h => (
-                                                <span key={h.id} className={`text-[10px] px-2 py-1 rounded border font-bold ${TAG_COLORS[h.color]}`}>{h.text}</span>
-                                            ))}
-                                        </div>
-                                    )}
-
-                                    {/* Redesigned Navigation Button (Zen Pill Style - CLEAR ACTION) */}
-                                    {item.guideInfo?.relatedLink && (
-                                        <div className="flex justify-end mt-4">
-                                            <a 
-                                                href={item.guideInfo.relatedLink.url}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                onClick={(e) => e.stopPropagation()}
-                                                className="
-                                                    group relative overflow-hidden
-                                                    flex items-center gap-2 
-                                                    pl-1 pr-3 py-1 
-                                                    bg-[#F9F8F4] 
-                                                    border border-[#E0E5D5] 
-                                                    rounded-full 
-                                                    shadow-[0_2px_0_#E0E5D5]
-                                                    active:shadow-none active:translate-y-[2px]
-                                                    transition-all duration-150
-                                                    text-xs font-bold text-stone-600
-                                                    hover:bg-white hover:border-zen-primary hover:text-zen-primary
-                                                "
-                                            >
-                                                {/* Circle Icon */}
-                                                <span className="w-6 h-6 rounded-full bg-white border border-[#E0E5D5] flex items-center justify-center text-zen-primary group-hover:bg-zen-primary group-hover:text-white group-hover:border-zen-primary transition-colors duration-200">
-                                                    <i className="fa-solid fa-location-dot text-[10px]"></i>
-                                                </span>
-                                                
-                                                {/* Text */}
-                                                <span className="transition-colors duration-200">
-                                                    {item.guideInfo.relatedLink.text}
-                                                </span>
-                                                
-                                                {/* Arrow */}
-                                                <i className="fa-solid fa-chevron-right text-[9px] text-gray-300 group-hover:text-zen-primary group-hover:translate-x-0.5 transition-all duration-200"></i>
-                                            </a>
-                                        </div>
-                                    )}
-                                </div>
-                            )}
+                             )}
                         </div>
                     </div>
-                </div>
                 );
             })}
-
-            {filteredItems.length === 0 && (
-                <div className="text-center py-10 text-gray-400 opacity-60">
-                    <i className="fa-regular fa-calendar-plus text-4xl mb-2"></i>
-                    <p className="text-sm">No plans for this day yet.</p>
-                </div>
-            )}
-        </div>
+         </div>
       </div>
     </div>
   );
