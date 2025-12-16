@@ -29,7 +29,7 @@ const App: React.FC = () => {
     <div className="h-[100dvh] text-zen-text font-sans max-w-md mx-auto relative shadow-2xl bg-zen-bg overflow-hidden flex flex-col">
       
       {/* Top Bar - Now static, not sticky, because it stays at top of flex container */}
-      <header className="flex-shrink-0 px-6 pt-12 pb-4 flex justify-between items-center bg-zen-bg z-30">
+      <header className="flex-shrink-0 px-6 pt-6 pb-4 flex justify-between items-center bg-zen-bg z-30">
         <div className="flex flex-col">
             <h2 className="text-sm font-bold text-zen-primary tracking-widest mb-0.5">金色夢幻</h2>
             <h1 className="text-2xl font-bold text-zen-text leading-tight">奧地利．捷克11天</h1>

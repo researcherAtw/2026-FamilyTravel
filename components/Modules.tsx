@@ -97,7 +97,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       id: 'd2-3', date: '2026-02-16', time: '13:00', 
       title: '黃金小徑', enTitle: 'Golden Lane', location: '城堡區 (Hradčany)', category: '入場卷', categoryColor: 'red',
       guideInfo: {
-          story: "這條位於城堡圍牆內的小徑，最初建於16世紀末，是城堡守衛和僕人的居所。",
+          story: "這條位於城堡圍牆內的小徑，最初建於16世紀末，是城堡守衛和僕人的居所。\n\n著名作家卡夫卡 (Franz Kafka) 曾在1916至1917年間，於水藍色的「22號」房舍短暫居住並進行創作。",
           tip: "現在小房子內部被改造成各種主題展覽。通常在下午5點（冬季4點）城堡展館關閉後，黃金小徑會開放免費進入。",
           highlights: [
               { id: 'h1', text: 'No.22 卡夫卡', color: 'blue' },
