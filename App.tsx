@@ -48,7 +48,7 @@ const App: React.FC = () => {
       </main>
 
       {/* Bottom Navigation - Fixed at bottom, compact redesign */}
-      <nav className="flex-shrink-0 bg-white/95 backdrop-blur-md border-t border-stone-100 z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.02)] pb-[env(safe-area-inset-bottom)]">
+      <nav className="flex-shrink-0 bg-white/95 backdrop-blur-md border-t border-stone-100 z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.02)] pb-[calc(env(safe-area-inset-bottom)+0.75rem)]">
         <div className="flex justify-around items-center h-14 w-full">
           {NAV_ITEMS.map((item) => {
             const isActive = activeTab === item.id;
