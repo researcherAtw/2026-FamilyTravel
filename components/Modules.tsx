@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef, useMemo } from 'react';
 import { Card, Button, CategoryBadge } from './UI';
 import { ScheduleItem, Booking, HighlightTag, HighlightColor, WeatherInfo } from '../types';
 
@@ -553,13 +553,42 @@ export const ScheduleTab: React.FC = () => {
 
   // Scroll Container Ref
   const timelineRef = useRef<HTMLDivElement>(null);
+  const dateScrollRef = useRef<HTMLDivElement>(null);
 
-  // Reset scroll on date change using useLayoutEffect to prevent flicker
+  // Memoize dates to prevent unnecessary re-renders of the effect
+  const dates = useMemo(() => Array.from(new Set(items.map(i => i.date))).sort() as string[], [items]);
+  const filteredItems = items.filter(i => i.date === selectedDate);
+
+  // Reset timeline scroll on date change using useLayoutEffect to prevent flicker
   useLayoutEffect(() => {
     if (timelineRef.current) {
         timelineRef.current.scrollTo(0, 0);
     }
   }, [selectedDate]);
+
+  // Auto-scroll date selector to keep selected date in view
+  useEffect(() => {
+    if (dateScrollRef.current) {
+        const index = dates.indexOf(selectedDate);
+        if (index >= 0) {
+            const container = dateScrollRef.current;
+            const buttonWidth = 52; 
+            const gap = 8; 
+            const paddingLeft = 20; 
+            
+            // Calculate center position of the target item
+            // paddingLeft + (index * (button + gap)) + button/2
+            const itemCenter = paddingLeft + index * (buttonWidth + gap) + buttonWidth / 2;
+            const containerCenter = container.clientWidth / 2;
+            const scrollLeft = itemCenter - containerCenter;
+            
+            container.scrollTo({
+                left: scrollLeft,
+                behavior: 'smooth'
+            });
+        }
+    }
+  }, [selectedDate, dates]);
 
   // Determine Location Name based on date range
   const getLocationInfo = (date: string) => {
@@ -617,9 +646,6 @@ export const ScheduleTab: React.FC = () => {
 
     fetchWeather();
   }, [selectedDate]);
-
-  const dates = Array.from(new Set(items.map(i => i.date))).sort() as string[];
-  const filteredItems = items.filter(i => i.date === selectedDate);
   
   // Swipe Handlers
   const onTouchStart = (e: React.TouchEvent) => {
@@ -660,8 +686,11 @@ export const ScheduleTab: React.FC = () => {
       */}
       <div className="flex-shrink-0 bg-zen-bg z-20 px-5 pb-4 shadow-sm">
           {/* Date Navigation */}
-          <div className="-mx-5 mb-6">
-              <div className="flex gap-2 overflow-x-auto no-scrollbar px-5 py-2 snap-x items-center">
+          <div className="-mx-5 mb-2">
+              <div 
+                ref={dateScrollRef}
+                className="flex gap-2 overflow-x-auto no-scrollbar px-5 py-1 snap-x items-center"
+              >
                 {dates.map((date) => {
                     const d = new Date(date);
                     // Display English short weekday (e.g., THU)
