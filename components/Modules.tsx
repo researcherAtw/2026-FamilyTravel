@@ -551,6 +551,11 @@ export const ScheduleTab: React.FC = () => {
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
+  // Scroll to top when date changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [selectedDate]);
+
   // Determine Location Name based on date range
   const getLocationInfo = (date: string) => {
       if (date >= '2026-02-15' && date <= '2026-02-19') return '捷克 Czech Republic';
@@ -624,8 +629,8 @@ export const ScheduleTab: React.FC = () => {
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
     const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
+    const isLeftSwipe = distance > 50; // Swipe Left -> Go Next (Enter from Right)
+    const isRightSwipe = distance < -50; // Swipe Right -> Go Prev (Enter from Left)
     
     if (isLeftSwipe || isRightSwipe) {
        const currentIndex = dates.indexOf(selectedDate);
@@ -636,6 +641,8 @@ export const ScheduleTab: React.FC = () => {
            setSelectedDate(dates[currentIndex - 1]);
        }
     }
+    setTouchStart(null);
+    setTouchEnd(null);
   };
 
   return (
@@ -711,162 +718,164 @@ export const ScheduleTab: React.FC = () => {
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        {filteredItems.map((item, index) => {
-            // Logic to determine if we show the time
-            const isTransport = item.category === 'transport';
-            
-            const timeStr = item.displayTime || item.time; // "00:20" or "09:00"
-            const [mainTime, subTime] = timeStr.includes('\n') ? timeStr.split('\n') : [timeStr, null];
-            const [hour, minute] = mainTime.split(':');
+        <div key={selectedDate} className="relative">
+            {filteredItems.map((item, index) => {
+                // Logic to determine if we show the time
+                const isTransport = item.category === 'transport';
+                
+                const timeStr = item.displayTime || item.time; // "00:20" or "09:00"
+                const [mainTime, subTime] = timeStr.includes('\n') ? timeStr.split('\n') : [timeStr, null];
+                const [hour, minute] = mainTime.split(':');
 
-            return (
-              <div key={item.id} className="relative mb-0 flex gap-0">
-                {/* 1. Time Column - Reduced width from w-14 to w-9 (2.25rem) and reduced text size */}
-                <div className="w-9 py-5 flex flex-col items-end justify-start flex-shrink-0 pr-0.5">
-                    {isTransport ? (
-                        <>
-                            <div className="flex items-baseline leading-none text-zen-text">
-                                <span className="text-lg font-mono font-bold tracking-tighter">{hour}</span>
-                                <span className="text-[10px] font-mono font-bold text-gray-400 ml-[1px] relative -top-0.5">:{minute}</span>
-                            </div>
-                            {subTime && (
-                                <span className="text-[9px] text-gray-300 font-mono mt-1 text-right">{subTime}</span>
-                            )}
-                        </>
-                    ) : (
-                         /* Empty space for non-transport items to create flow */
-                         <div className="h-6 w-full"></div>
-                    )}
-                </div>
-
-                {/* 2. Timeline Line & Node */}
-                <div className="relative flex flex-col items-center px-0 flex-shrink-0 w-4">
-                    {/* Continuous Line (Thinner, subtle) */}
-                    <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-stone-300/60"></div>
-                    
-                    {/* Zen Node: 
-                        - Transport: Solid colored dot (Anchor)
-                        - Activity: Hollow colored ring (Flow)
-                    */}
-                    <div 
-                        className={`
-                            relative z-10 box-content transition-all duration-300
-                            ${isTransport 
-                                ? `w-3 h-3 rounded-full border-2 border-[#F7F4EB] shadow-sm mt-[1.6rem] ${NODE_BG_COLORS[item.categoryColor || 'gray']}` 
-                                : `w-2.5 h-2.5 rounded-full border-[2.5px] bg-[#F7F4EB] mt-[1.8rem] ${NODE_BORDER_COLORS[item.categoryColor || 'gray']}`
-                            }
-                        `}
-                    ></div>
-                </div>
-
-                {/* 3. Content Card Column */}
-                <div className="flex-grow min-w-0 py-2 pb-6 pl-1.5">
-                    <div 
-                        className={`bg-white rounded-2xl p-4 shadow-zen border border-stone-50 transition-all duration-300 hover:translate-y-[-2px]`}
-                    >
-                        {/* Header: Title & Category Badge (Right) */}
-                        <div className="flex justify-between items-start gap-2 mb-1">
-                             <div className="flex flex-col">
-                                 <h3 className="font-bold text-lg leading-tight text-zen-text">{item.title}</h3>
-                                 {/* English Subtitle */}
-                                 {item.enTitle && (
-                                     <span className="text-[10px] font-mono text-gray-400 font-medium tracking-wide mt-0.5">{item.enTitle}</span>
-                                 )}
-                             </div>
-                             <div className="flex-shrink-0 mt-0.5">
-                                <CategoryBadge type={item.category} color={item.categoryColor} />
-                             </div>
-                        </div>
-
-                        {/* Description (Details like 1F SUQQU...) */}
-                        {item.description && (
-                            <div className="text-xs text-gray-400 font-medium whitespace-pre-line leading-relaxed mb-2 mt-1">
-                                {item.description}
-                            </div>
-                        )}
-
-                        {/* Location */}
-                        <div className="text-xs text-gray-500 flex items-center gap-1 mb-2">
-                            <i className="fa-solid fa-map-pin text-[10px]"></i> <span className="truncate">{item.location}</span>
-                        </div>
-                        
-                        {/* Business Hours Display inside Card */}
-                        {item.businessHours && (
-                            <div className="text-[10px] font-bold text-orange-400 bg-orange-50 px-2 py-0.5 rounded inline-block mb-1">
-                                <i className="fa-regular fa-clock mr-1"></i>營業時間: {item.businessHours}
-                            </div>
-                        )}
-
-                        {/* Details always visible */}
-                        {(item.guideInfo?.story || item.guideInfo?.tip || (item.guideInfo?.highlights && item.guideInfo.highlights.length > 0)) && (
-                            <div className="mt-4 pt-3 border-t border-dashed border-gray-200">
-                                {item.guideInfo?.story && (
-                                    <p className="text-sm text-gray-600 leading-relaxed font-serif mb-3 whitespace-pre-line">
-                                        {item.guideInfo.story}
-                                    </p>
+                return (
+                <div key={item.id} className="relative mb-0 flex gap-0">
+                    {/* 1. Time Column - Reduced width from w-14 to w-9 (2.25rem) and reduced text size */}
+                    <div className="w-9 py-5 flex flex-col items-end justify-start flex-shrink-0 pr-0.5">
+                        {isTransport ? (
+                            <>
+                                <div className="flex items-baseline leading-none text-zen-text">
+                                    <span className="text-lg font-mono font-bold tracking-tighter">{hour}</span>
+                                    <span className="text-[10px] font-mono font-bold text-gray-400 ml-[1px] relative -top-0.5">:{minute}</span>
+                                </div>
+                                {subTime && (
+                                    <span className="text-[9px] text-gray-300 font-mono mt-1 text-right">{subTime}</span>
                                 )}
-                                
-                                {item.guideInfo?.tip && (
-                                    <div className="bg-orange-50 border-l-4 border-orange-300 p-3 mb-3 rounded-r-lg">
-                                        <div className="flex gap-2">
-                                            <i className="fa-solid fa-lightbulb text-orange-400 mt-0.5"></i>
-                                            <p className="text-xs text-orange-800 font-medium leading-relaxed whitespace-pre-line">{item.guideInfo.tip}</p>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {item.guideInfo?.highlights && item.guideInfo.highlights.length > 0 && (
-                                    <div className="flex flex-wrap gap-1.5 mt-3">
-                                        {item.guideInfo.highlights.map(h => (
-                                            <span key={h.id} className={`text-[10px] px-2 py-1 rounded border font-bold ${TAG_COLORS[h.color]}`}>{h.text}</span>
-                                        ))}
-                                    </div>
-                                )}
-
-                                {/* Redesigned Navigation Button (Zen Pill Style - CLEAR ACTION) */}
-                                {item.guideInfo?.relatedLink && (
-                                    <div className="flex justify-end mt-4">
-                                        <a 
-                                            href={item.guideInfo.relatedLink.url}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            onClick={(e) => e.stopPropagation()}
-                                            className="
-                                                group relative overflow-hidden
-                                                flex items-center gap-2 
-                                                pl-1 pr-3 py-1 
-                                                bg-[#F9F8F4] 
-                                                border border-[#E0E5D5] 
-                                                rounded-full 
-                                                shadow-[0_2px_0_#E0E5D5]
-                                                active:shadow-none active:translate-y-[2px]
-                                                transition-all duration-150
-                                                text-xs font-bold text-stone-600
-                                                hover:bg-white hover:border-zen-primary hover:text-zen-primary
-                                            "
-                                        >
-                                            {/* Circle Icon */}
-                                            <span className="w-6 h-6 rounded-full bg-white border border-[#E0E5D5] flex items-center justify-center text-zen-primary group-hover:bg-zen-primary group-hover:text-white group-hover:border-zen-primary transition-colors duration-200">
-                                                <i className="fa-solid fa-location-dot text-[10px]"></i>
-                                            </span>
-                                            
-                                            {/* Text */}
-                                            <span className="transition-colors duration-200">
-                                                {item.guideInfo.relatedLink.text}
-                                            </span>
-                                            
-                                            {/* Arrow */}
-                                            <i className="fa-solid fa-chevron-right text-[9px] text-gray-300 group-hover:text-zen-primary group-hover:translate-x-0.5 transition-all duration-200"></i>
-                                        </a>
-                                    </div>
-                                )}
-                            </div>
+                            </>
+                        ) : (
+                            /* Empty space for non-transport items to create flow */
+                            <div className="h-6 w-full"></div>
                         )}
                     </div>
+
+                    {/* 2. Timeline Line & Node */}
+                    <div className="relative flex flex-col items-center px-0 flex-shrink-0 w-4">
+                        {/* Continuous Line (Thinner, subtle) */}
+                        <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-stone-300/60"></div>
+                        
+                        {/* Zen Node: 
+                            - Transport: Solid colored dot (Anchor)
+                            - Activity: Hollow colored ring (Flow)
+                        */}
+                        <div 
+                            className={`
+                                relative z-10 box-content transition-all duration-300
+                                ${isTransport 
+                                    ? `w-3 h-3 rounded-full border-2 border-[#F7F4EB] shadow-sm mt-[1.6rem] ${NODE_BG_COLORS[item.categoryColor || 'gray']}` 
+                                    : `w-2.5 h-2.5 rounded-full border-[2.5px] bg-[#F7F4EB] mt-[1.8rem] ${NODE_BORDER_COLORS[item.categoryColor || 'gray']}`
+                                }
+                            `}
+                        ></div>
+                    </div>
+
+                    {/* 3. Content Card Column */}
+                    <div className="flex-grow min-w-0 py-2 pb-6 pl-1.5">
+                        <div 
+                            className={`bg-white rounded-2xl p-4 shadow-zen border border-stone-50 transition-all duration-300 hover:translate-y-[-2px]`}
+                        >
+                            {/* Header: Title & Category Badge (Right) */}
+                            <div className="flex justify-between items-start gap-2 mb-1">
+                                <div className="flex flex-col">
+                                    <h3 className="font-bold text-lg leading-tight text-zen-text">{item.title}</h3>
+                                    {/* English Subtitle */}
+                                    {item.enTitle && (
+                                        <span className="text-[10px] font-mono text-gray-400 font-medium tracking-wide mt-0.5">{item.enTitle}</span>
+                                    )}
+                                </div>
+                                <div className="flex-shrink-0 mt-0.5">
+                                    <CategoryBadge type={item.category} color={item.categoryColor} />
+                                </div>
+                            </div>
+
+                            {/* Description (Details like 1F SUQQU...) */}
+                            {item.description && (
+                                <div className="text-xs text-gray-400 font-medium whitespace-pre-line leading-relaxed mb-2 mt-1">
+                                    {item.description}
+                                </div>
+                            )}
+
+                            {/* Location */}
+                            <div className="text-xs text-gray-500 flex items-center gap-1 mb-2">
+                                <i className="fa-solid fa-map-pin text-[10px]"></i> <span className="truncate">{item.location}</span>
+                            </div>
+                            
+                            {/* Business Hours Display inside Card */}
+                            {item.businessHours && (
+                                <div className="text-[10px] font-bold text-orange-400 bg-orange-50 px-2 py-0.5 rounded inline-block mb-1">
+                                    <i className="fa-regular fa-clock mr-1"></i>營業時間: {item.businessHours}
+                                </div>
+                            )}
+
+                            {/* Details always visible */}
+                            {(item.guideInfo?.story || item.guideInfo?.tip || (item.guideInfo?.highlights && item.guideInfo.highlights.length > 0)) && (
+                                <div className="mt-4 pt-3 border-t border-dashed border-gray-200">
+                                    {item.guideInfo?.story && (
+                                        <p className="text-sm text-gray-600 leading-relaxed font-serif mb-3 whitespace-pre-line">
+                                            {item.guideInfo.story}
+                                        </p>
+                                    )}
+                                    
+                                    {item.guideInfo?.tip && (
+                                        <div className="bg-orange-50 border-l-4 border-orange-300 p-3 mb-3 rounded-r-lg">
+                                            <div className="flex gap-2">
+                                                <i className="fa-solid fa-lightbulb text-orange-400 mt-0.5"></i>
+                                                <p className="text-xs text-orange-800 font-medium leading-relaxed whitespace-pre-line">{item.guideInfo.tip}</p>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {item.guideInfo?.highlights && item.guideInfo.highlights.length > 0 && (
+                                        <div className="flex flex-wrap gap-1.5 mt-3">
+                                            {item.guideInfo.highlights.map(h => (
+                                                <span key={h.id} className={`text-[10px] px-2 py-1 rounded border font-bold ${TAG_COLORS[h.color]}`}>{h.text}</span>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Redesigned Navigation Button (Zen Pill Style - CLEAR ACTION) */}
+                                    {item.guideInfo?.relatedLink && (
+                                        <div className="flex justify-end mt-4">
+                                            <a 
+                                                href={item.guideInfo.relatedLink.url}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                onClick={(e) => e.stopPropagation()}
+                                                className="
+                                                    group relative overflow-hidden
+                                                    flex items-center gap-2 
+                                                    pl-1 pr-3 py-1 
+                                                    bg-[#F9F8F4] 
+                                                    border border-[#E0E5D5] 
+                                                    rounded-full 
+                                                    shadow-[0_2px_0_#E0E5D5]
+                                                    active:shadow-none active:translate-y-[2px]
+                                                    transition-all duration-150
+                                                    text-xs font-bold text-stone-600
+                                                    hover:bg-white hover:border-zen-primary hover:text-zen-primary
+                                                "
+                                            >
+                                                {/* Circle Icon */}
+                                                <span className="w-6 h-6 rounded-full bg-white border border-[#E0E5D5] flex items-center justify-center text-zen-primary group-hover:bg-zen-primary group-hover:text-white group-hover:border-zen-primary transition-colors duration-200">
+                                                    <i className="fa-solid fa-location-dot text-[10px]"></i>
+                                                </span>
+                                                
+                                                {/* Text */}
+                                                <span className="transition-colors duration-200">
+                                                    {item.guideInfo.relatedLink.text}
+                                                </span>
+                                                
+                                                {/* Arrow */}
+                                                <i className="fa-solid fa-chevron-right text-[9px] text-gray-300 group-hover:text-zen-primary group-hover:translate-x-0.5 transition-all duration-200"></i>
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
-              </div>
-            );
-        })}
+                );
+            })}
+        </div>
 
         {filteredItems.length === 0 && (
             <div className="text-center py-10 text-gray-400 opacity-60">
