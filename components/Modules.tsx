@@ -285,7 +285,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       id: 'd8-1', date: '2026-02-22', time: '09:00', 
       title: '瑪麗亞特蕾莎廣場', enTitle: 'Maria-Theresien-Platz', location: '博物館區 (Museumsquartier)', category: '下車參觀', categoryColor: 'green',
       guideInfo: {
-          story: "紀念哈布斯堡王朝國母瑪麗亞·特蕾莎女皇的廣場。",
+          story: "紀念哈布斯堡王朝國母 瑪麗亞·特蕾莎女皇 (歐洲丈母娘) 的廣場。",
           tip: "兩側矗立著「雙胞胎」建築：藝術史博物館與自然史博物館。後方即是現代化的維也納博物館區 (MQ)。",
           highlights: [
               { id: 'h1', text: '藝術史博物館', color: 'red' },
