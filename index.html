@@ -63,6 +63,22 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
       }
+
+      /* Animation for Page Slide */
+      @keyframes slideInRight {
+        from { transform: translateX(20px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideInLeft {
+        from { transform: translateX(-20px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      .animate-slide-right {
+        animation: slideInRight 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      }
+      .animate-slide-left {
+        animation: slideInLeft 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      }
     </style>
 <script type="importmap">
 {
