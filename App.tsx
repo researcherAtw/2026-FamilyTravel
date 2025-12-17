@@ -50,7 +50,17 @@ const App: React.FC = () => {
 
       {/* Bottom Navigation - Compact Floating Capsule Style */}
       <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex justify-center pointer-events-none w-full max-w-md">
-        <div className="bg-white rounded-full p-1.5 shadow-zen border border-stone-100 flex items-center gap-1 pointer-events-auto">
+        <div className="bg-white rounded-full p-1.5 shadow-zen border border-stone-100 grid grid-cols-2 gap-1 relative pointer-events-auto min-w-[200px]">
+          
+          {/* Sliding Background Pill */}
+          <div 
+            className="absolute top-1.5 bottom-1.5 rounded-full bg-zen-primary shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)]"
+            style={{
+              width: 'calc(50% - 0.5rem)',
+              left: activeTab === 'schedule' ? '0.375rem' : 'calc(50% + 0.125rem)'
+            }}
+          />
+
           {NAV_ITEMS.map((item) => {
             const isActive = activeTab === item.id;
             return (
@@ -58,10 +68,10 @@ const App: React.FC = () => {
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
                 className={`
-                  px-6 py-2.5 rounded-full flex items-center gap-2 transition-all duration-300
+                  px-6 py-2.5 rounded-full flex items-center justify-center gap-2 transition-colors duration-300 relative z-10 w-full
                   ${isActive 
-                    ? 'bg-zen-primary text-white shadow-sm' 
-                    : 'bg-transparent text-stone-400 hover:text-stone-600 hover:bg-stone-50'
+                    ? 'text-white' 
+                    : 'text-stone-400 hover:text-stone-600 hover:bg-stone-50/50'
                   }
                 `}
               >

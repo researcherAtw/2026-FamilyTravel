@@ -703,6 +703,11 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
 
 // --- SCHEDULE TAB ---
 
+// Dimensions Constants for Date Picker (Ensure precise pixel alignment)
+const DATE_ITEM_WIDTH = 52;
+const DATE_ITEM_GAP = 8;
+const DATE_CONTAINER_PADDING = 16;
+
 export const ScheduleTab: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState('2026-02-15');
   const [items, setItems] = useState(MOCK_SCHEDULE);
@@ -725,10 +730,12 @@ export const ScheduleTab: React.FC = () => {
   // we might want to ensure the target slide is at top or preserve.
   // The user likely expects it to be at the top when switching days.
   useLayoutEffect(() => {
-    const el = scrollRefs.current[currentIndex];
-    if (el) {
-        // Reset scroll position to top when switching to this date
-        el.scrollTo(0, 0);
+    if (currentIndex >= 0 && scrollRefs.current[currentIndex]) {
+        const el = scrollRefs.current[currentIndex];
+        if (el) {
+             // Reset scroll position to top when switching to this date
+             el.scrollTo(0, 0);
+        }
     }
   }, [currentIndex]);
 
@@ -738,10 +745,8 @@ export const ScheduleTab: React.FC = () => {
         const index = dates.indexOf(selectedDate);
         if (index >= 0) {
             const container = dateScrollRef.current;
-            const buttonWidth = 52; 
-            const gap = 8; 
-            const paddingLeft = 20; 
-            const itemCenter = paddingLeft + index * (buttonWidth + gap) + buttonWidth / 2;
+            // Calculations using same constants as CSS
+            const itemCenter = DATE_CONTAINER_PADDING + index * (DATE_ITEM_WIDTH + DATE_ITEM_GAP) + DATE_ITEM_WIDTH / 2;
             const containerCenter = container.clientWidth / 2;
             const scrollLeft = itemCenter - containerCenter;
             
@@ -843,8 +848,22 @@ export const ScheduleTab: React.FC = () => {
           <div className="-mx-4 mb-2">
               <div 
                 ref={dateScrollRef}
-                className="flex gap-2 overflow-x-auto no-scrollbar px-4 py-1 snap-x items-center"
+                /* 
+                   CRITICAL FIX: 
+                   Use arbitrary values [16px], [8px], [4px] to force pixels instead of rem.
+                   This ensures exact alignment with JS calculation regardless of root font size.
+                */
+                className="flex gap-[8px] overflow-x-auto no-scrollbar px-[16px] py-[4px] snap-x items-center relative"
               >
+                {/* Sliding Pill Background - Fixed Positioning Logic */}
+                <div 
+                    className={`absolute top-[4px] bottom-[4px] w-[52px] bg-[#464646] rounded-[16px] shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0 ${currentIndex === -1 ? 'opacity-0' : 'opacity-100'}`}
+                    style={{
+                        // Calculation: Padding (16) + index * (ItemWidth (52) + Gap (8))
+                        left: `${DATE_CONTAINER_PADDING + (currentIndex === -1 ? 0 : currentIndex) * (DATE_ITEM_WIDTH + DATE_ITEM_GAP)}px`
+                    }}
+                />
+
                 {dates.map((date) => {
                     const d = new Date(date);
                     const dayName = d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
@@ -854,14 +873,15 @@ export const ScheduleTab: React.FC = () => {
                         <button
                             key={date}
                             onClick={() => setSelectedDate(date)}
-                            className={`snap-center flex-shrink-0 flex flex-col items-center justify-center w-[52px] h-[72px] rounded-[16px] transition-all duration-300 relative ${
-                                isSelected 
-                                ? 'bg-[#464646] text-white translate-y-0 z-10' 
-                                : 'bg-white text-gray-400 shadow-sm hover:bg-gray-50'
-                            }`}
+                            className="snap-center flex-shrink-0 flex flex-col items-center justify-center w-[52px] h-[72px] rounded-[16px] transition-all duration-300 relative z-10 group"
                         >
-                            <span className={`text-[9px] font-black tracking-widest mb-1 font-sans ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayName}</span>
-                            <span className={`text-[20px] font-bold font-sans leading-none ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayNum}</span>
+                            {/* White Background Card (fades out when selected) */}
+                            <div 
+                                className={`absolute inset-0 bg-white rounded-[16px] shadow-sm transition-all duration-300 -z-10 group-hover:bg-gray-50 ${isSelected ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}
+                            ></div>
+
+                            <span className={`text-[9px] font-black tracking-widest mb-1 font-sans z-10 transition-colors duration-300 ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayName}</span>
+                            <span className={`text-[20px] font-bold font-sans leading-none z-10 transition-colors duration-300 ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayNum}</span>
                         </button>
                     )
                 })}
@@ -966,7 +986,8 @@ export const BookingsTab: React.FC = () => {
 
     return (
         <div className="h-full overflow-y-auto px-5 pb-24 space-y-6 no-scrollbar">
-            <h2 className="text-lg font-bold text-zen-text/50 uppercase tracking-widest sticky top-0 bg-zen-bg py-3 pt-5 z-10 -mx-5 px-5 backdrop-blur-md shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+            {/* Removed sticky header for better flow */}
+            <h2 className="text-lg font-bold text-zen-text/50 uppercase tracking-widest mt-5 mb-2">
                 Boarding Passes
             </h2>
             
@@ -1040,23 +1061,13 @@ export const BookingsTab: React.FC = () => {
                                 </div>
                             </div>
 
-                            {/* 4. Details Grid (Added Icons for color) */}
+                            {/* 4. Details Grid (Simplified) */}
                             <div className="px-5 pb-6">
-                                 <div className="bg-stone-50 rounded-xl p-3 grid grid-cols-3 gap-2 border border-stone-100">
-                                     <div className="flex flex-col items-center justify-center p-2 bg-white rounded-lg shadow-sm">
-                                         <i className={`fa-solid fa-plane-circle-check mb-1 ${accentText}`}></i>
-                                         <span className="text-[9px] text-stone-400 uppercase">Flight</span>
-                                         <span className="text-xs font-mono font-bold text-zen-text">{booking.referenceNo}</span>
-                                     </div>
-                                     <div className="flex flex-col items-center justify-center p-2 bg-white rounded-lg shadow-sm">
-                                         <i className={`fa-solid fa-chair mb-1 ${accentText}`}></i>
-                                         <span className="text-[9px] text-stone-400 uppercase">Seat</span>
-                                         <span className="text-xs font-mono font-bold text-zen-text">--</span>
-                                     </div>
-                                     <div className="flex flex-col items-center justify-center p-2 bg-white rounded-lg shadow-sm">
-                                         <i className={`fa-solid fa-door-open mb-1 ${accentText}`}></i>
-                                         <span className="text-[9px] text-stone-400 uppercase">Gate</span>
-                                         <span className="text-xs font-mono font-bold text-zen-text">--</span>
+                                 <div className="flex justify-center">
+                                     <div className="flex items-center gap-2 bg-stone-50 px-4 py-2 rounded-xl border border-stone-100">
+                                         <i className={`fa-solid fa-plane-circle-check ${accentText}`}></i>
+                                         <span className="text-[10px] text-stone-400 uppercase font-bold tracking-wider">Flight</span>
+                                         <span className="text-sm font-mono font-bold text-zen-text ml-1">{booking.referenceNo}</span>
                                      </div>
                                  </div>
                             </div>
