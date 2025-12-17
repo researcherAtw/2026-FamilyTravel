@@ -37,7 +37,7 @@ const App: React.FC = () => {
         </div>
         <div>
             {/* Brand Logo */}
-            <div className="w-16 h-16 p-2 bg-white/40 backdrop-blur-md rounded-2xl border border-white/50 shadow-sm text-zen-text hover:text-zen-primary transition-colors duration-300 flex items-center justify-center">
+            <div className="w-16 h-16 p-2 bg-white/40 backdrop-blur-md rounded-2xl border border-white/50 shadow-sm text-zen-text flex items-center justify-center">
                 <BrandLogo />
             </div>
         </div>

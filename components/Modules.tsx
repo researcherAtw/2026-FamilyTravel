@@ -676,8 +676,9 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                                                 pl-1 pr-3 py-1 
                                                 mt-2
                                                 bg-white hover:bg-stone-50 
+                                                active:scale-95 active:bg-stone-100 active:border-stone-300
                                                 border border-stone-200 rounded-full 
-                                                transition-colors duration-200
+                                                transition-all duration-200
                                                 shadow-sm
                                                 group/link
                                             "
