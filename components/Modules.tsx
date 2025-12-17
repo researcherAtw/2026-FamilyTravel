@@ -177,7 +177,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       id: 'd5-1', date: '2026-02-19', time: '09:00', 
       title: '莫札特故居', enTitle: 'Mozart Residence', location: '格特萊德街 (Getreidegasse)', category: '下車參觀', categoryColor: 'green',
       guideInfo: {
-          story: "莫札特一家在1773年搬入的住所 (Wohnhaus)，而非出生地。",
+          story: "莫札特一家在1773年時搬入的住所 (Wohnhaus)，而非出生地。",
           tip: "「出生地」在舊城區（黃色建築），而此處位於新城區馬卡特廣場，展品側重於家族生活和樂器。",
           highlights: [
               { id: 'h1', text: '故居 Wohnhaus', color: 'red' },
@@ -360,7 +360,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(南塔、北塔二擇一登頂)',
       guideInfo: {
           story: "維也納的靈魂象徵，始建於12世紀。",
-          tip: "南塔需爬343級樓梯但景色最佳；北塔有電梯可看普默林大鐘。亦可參加導覽參觀存放皇室內臟的地下墓穴。\n\n可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭Candied Violets」。",
+          tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘。亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭Candied Violets」。",
           highlights: [
               { id: 'h1', text: '南塔(樓梯)', color: 'red' },
               { id: 'h2', text: '北塔(電梯)', color: 'blue' },
@@ -488,22 +488,13 @@ const TAG_COLORS: Record<HighlightColor, string> = {
     gray: 'bg-gray-50 text-gray-600 border-gray-200'
 };
 
-const NODE_BG_COLORS: Record<HighlightColor, string> = {
-    red: 'bg-red-400',
-    orange: 'bg-orange-400',
-    green: 'bg-green-500',
-    blue: 'bg-blue-400',
-    purple: 'bg-purple-400',
-    gray: 'bg-gray-400'
-};
-
-const NODE_BORDER_COLORS: Record<HighlightColor, string> = {
-    red: 'border-red-400',
-    orange: 'border-orange-400',
-    green: 'border-green-500',
-    blue: 'border-blue-400',
-    purple: 'border-purple-400',
-    gray: 'border-gray-400'
+const NODE_TEXT_COLORS: Record<HighlightColor, string> = {
+    red: 'text-red-500',
+    orange: 'text-orange-500',
+    green: 'text-green-600',
+    blue: 'text-blue-500',
+    purple: 'text-purple-500',
+    gray: 'text-gray-500'
 };
 
 const LUNAR_DATES: Record<string, string> = {
@@ -519,22 +510,30 @@ const LUNAR_DATES: Record<string, string> = {
 
 // Map WMO weather code to our simple types
 const mapWmoToCondition = (code: number): WeatherInfo['condition'] => {
-    // 0: Clear sky
     if (code === 0) return 'sunny';
-    // 1, 2, 3: Mainly clear, partly cloudy, and overcast
     if (code <= 3) return 'cloudy';
-    // 45, 48: Fog
     if (code <= 48) return 'cloudy';
-    // 51-55: Drizzle, 56-57: Freezing Drizzle, 61-65: Rain, 66-67: Freezing Rain
     if (code <= 67) return 'rain';
-    // 71-77: Snow
     if (code <= 77) return 'snow';
-    // 80-82: Rain showers
     if (code <= 82) return 'rain';
-    // 85-86: Snow showers
     if (code <= 86) return 'snow';
-    // 95-99: Thunderstorm
     return 'rain';
+};
+
+// Helper to get icon for category/activity
+const getCategoryIcon = (item: ScheduleItem): string => {
+    if (item.category === 'transport') {
+        if (item.title.includes('起飛') || item.title.includes('降落')) return 'fa-plane-up';
+        return 'fa-train-subway';
+    }
+    if (item.title.includes('廣場') || item.title.includes('小鎮')) return 'fa-archway';
+    if (item.title.includes('城堡') || item.title.includes('宮')) return 'fa-chess-rook';
+    if (item.title.includes('教堂')) return 'fa-church';
+    if (item.title.includes('博物館') || item.title.includes('故居')) return 'fa-building-columns';
+    if (item.title.includes('花園') || item.title.includes('湖')) return 'fa-tree';
+    if (item.title.includes('購物')) return 'fa-bag-shopping';
+    if (item.category === '下車參觀') return 'fa-camera-retro';
+    return 'fa-location-dot';
 };
 
 // Helper Component for Rendering a single Schedule Row
@@ -543,139 +542,177 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
     const timeStr = item.displayTime || item.time;
     const [mainTime, subTime] = timeStr.includes('\n') ? timeStr.split('\n') : [timeStr, null];
     const [hour, minute] = mainTime.split(':');
+    
+    // Get contextual icon
+    const iconClass = getCategoryIcon(item);
 
     return (
-        <div className="relative mb-0 flex gap-0">
-            {/* 1. Time Column */}
-            <div className="w-9 py-5 flex flex-col items-end justify-start flex-shrink-0 pr-0.5">
+        <div className="relative mb-2 flex gap-0 group">
+            {/* 1. Time Column - Optimised for space & layout */}
+            {/* COMPACTED: w-12, pr-3 (Increased padding to push text left further) */}
+            <div className="w-12 py-4 flex flex-col items-end justify-start flex-shrink-0 pr-3">
                 {isTransport ? (
                     <>
-                        <div className="flex items-baseline leading-none text-zen-text">
-                            <span className="text-lg font-mono font-bold tracking-tighter">{hour}</span>
-                            <span className="text-[10px] font-mono font-bold text-gray-400 ml-[1px] relative -top-0.5">:{minute}</span>
+                        <div className="flex items-baseline justify-end gap-[1px] leading-none text-zen-text">
+                            <span className="text-xl font-mono font-bold tracking-tighter text-stone-700">{hour}</span>
+                            <span className="text-sm font-mono font-bold text-stone-400">:{minute}</span>
                         </div>
                         {subTime && (
-                            <span className="text-[9px] text-gray-300 font-mono mt-1 text-right">{subTime}</span>
+                            <span className="text-[9px] text-gray-300 font-mono mt-1 text-right leading-tight">{subTime}</span>
                         )}
                     </>
                 ) : (
-                    <div className="h-6 w-full"></div>
+                    <div className="h-full w-full"></div>
                 )}
             </div>
 
             {/* 2. Timeline Line & Node */}
-            <div className="relative flex flex-col items-center px-0 flex-shrink-0 w-4">
-                {/* Continuous Line */}
-                <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-stone-300/60"></div>
+            {/* COMPACTED: w-8 -> w-6 */}
+            <div className="relative flex flex-col items-center px-0 flex-shrink-0 w-6">
+                {/* Dashed Line for a "Journey" feel */}
+                <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] border-l-2 border-dashed border-stone-300/60"></div>
                 
-                {/* Zen Node */}
+                {/* Icon Node */}
                 <div 
                     className={`
-                        relative z-10 box-content transition-all duration-300
+                        relative z-10 flex items-center justify-center transition-all duration-300 mt-[1.4rem]
+                        bg-zen-bg rounded-full border-2 
                         ${isTransport 
-                            ? `w-3 h-3 rounded-full border-2 border-[#F7F4EB] shadow-sm mt-[1.6rem] ${NODE_BG_COLORS[item.categoryColor || 'gray']}` 
-                            : `w-2.5 h-2.5 rounded-full border-[2.5px] bg-[#F7F4EB] mt-[1.8rem] ${NODE_BORDER_COLORS[item.categoryColor || 'gray']}`
+                            ? `w-8 h-8 ${NODE_TEXT_COLORS[item.categoryColor || 'gray']} border-current shadow-sm` 
+                            : `w-7 h-7 text-stone-400 border-stone-300 bg-white`
                         }
                     `}
-                ></div>
+                >
+                    <i className={`fa-solid ${iconClass} text-[10px]`}></i>
+                </div>
             </div>
 
             {/* 3. Content Card Column */}
-            <div className="flex-grow min-w-0 py-2 pb-6 pl-1.5">
+            {/* ADJUSTED: pl-2 -> pl-3 to give a tiny bit of separation after compacting left side */}
+            <div className="flex-grow min-w-0 py-2 pb-6 pl-3">
                 <div 
-                    className={`bg-white rounded-2xl p-4 shadow-zen border border-stone-50 transition-all duration-300 hover:translate-y-[-2px]`}
+                    className={`
+                        bg-white rounded-2xl p-4 shadow-zen border border-stone-50 
+                        transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-zen-hover
+                        relative overflow-hidden
+                    `}
                 >
-                    {/* Header: Title & Category Badge */}
-                    <div className="flex justify-between items-start gap-2 mb-1">
-                        <div className="flex flex-col">
-                            <h3 className="font-bold text-lg leading-tight text-zen-text">{item.title}</h3>
-                            {item.enTitle && (
-                                <span className="text-[10px] font-mono text-gray-400 font-medium tracking-wide mt-0.5">{item.enTitle}</span>
-                            )}
-                        </div>
-                        <div className="flex-shrink-0 mt-0.5">
-                            <CategoryBadge type={item.category} color={item.categoryColor} />
-                        </div>
+                    {/* Decorative Watermark Icon (Absolute Positioned) */}
+                    <div className="absolute -bottom-4 -right-4 text-8xl text-stone-800 opacity-[0.03] transform -rotate-12 pointer-events-none select-none z-0">
+                        <i className={`fa-solid ${iconClass}`}></i>
                     </div>
 
-                    {/* Description */}
-                    {item.description && (
-                        <div className="text-xs text-gray-400 font-medium whitespace-pre-line leading-relaxed mb-2 mt-1">
-                            {item.description}
+                    {/* Content Container (z-10 to sit above watermark) */}
+                    <div className="relative z-10">
+                        {/* Header: Title & Category Badge */}
+                        <div className="flex justify-between items-start gap-2 mb-1">
+                            <div className="flex flex-col">
+                                <h3 className="font-bold text-lg leading-tight text-zen-text">{item.title}</h3>
+                                {item.enTitle && (
+                                    <span className="text-[10px] font-mono text-gray-400 font-medium tracking-wide mt-0.5">{item.enTitle}</span>
+                                )}
+                            </div>
+                            <div className="flex-shrink-0 mt-0.5 opacity-80 scale-90 origin-top-right">
+                                <CategoryBadge type={item.category} color={item.categoryColor} />
+                            </div>
                         </div>
-                    )}
 
-                    {/* Location */}
-                    <div className="text-xs text-gray-500 flex items-center gap-1 mb-2">
-                        <i className="fa-solid fa-map-pin text-[10px]"></i> <span className="truncate">{item.location}</span>
-                    </div>
-                    
-                    {/* Business Hours */}
-                    {item.businessHours && (
-                        <div className="text-[10px] font-bold text-orange-400 bg-orange-50 px-2 py-0.5 rounded inline-block mb-1">
-                            <i className="fa-regular fa-clock mr-1"></i>營業時間: {item.businessHours}
+                        {/* Location with Icon */}
+                        <div className="text-xs text-gray-500 flex items-center gap-1.5 mb-2 mt-1">
+                            <i className="fa-solid fa-location-dot text-[10px] text-zen-primary"></i> 
+                            <span className="truncate font-medium">{item.location}</span>
                         </div>
-                    )}
 
-                    {/* Details */}
-                    {(item.guideInfo?.story || item.guideInfo?.tip || (item.guideInfo?.highlights && item.guideInfo.highlights.length > 0)) && (
-                        <div className="mt-4 pt-3 border-t border-dashed border-gray-200">
-                            {item.guideInfo?.story && (
-                                <p className="text-sm text-gray-600 leading-relaxed font-sans mb-3 whitespace-pre-line">
-                                    {item.guideInfo.story}
-                                </p>
-                            )}
-                            
-                            {item.guideInfo?.tip && (
-                                <div className="bg-orange-50 border-l-4 border-orange-300 p-3 mb-3 rounded-r-lg">
-                                    <div className="flex gap-2">
-                                        <i className="fa-solid fa-lightbulb text-orange-400 mt-0.5"></i>
-                                        <p className="text-xs text-orange-800 font-medium leading-relaxed whitespace-pre-line">{item.guideInfo.tip}</p>
+                        {/* Description */}
+                        {item.description && (
+                            <div className="text-xs text-gray-400 font-medium whitespace-pre-line leading-relaxed mb-2 pl-4 border-l-2 border-stone-100">
+                                {item.description}
+                            </div>
+                        )}
+                        
+                        {/* Business Hours */}
+                        {item.businessHours && (
+                            <div className="text-[10px] font-bold text-orange-400 bg-orange-50 px-2 py-0.5 rounded inline-block mb-1">
+                                <i className="fa-regular fa-clock mr-1"></i>營業時間: {item.businessHours}
+                            </div>
+                        )}
+
+                        {/* Details Section */}
+                        {(item.guideInfo?.story || item.guideInfo?.tip || (item.guideInfo?.highlights && item.guideInfo.highlights.length > 0)) && (
+                            <div className="mt-4 pt-3 border-t border-dashed border-gray-100">
+                                {item.guideInfo?.story && (
+                                    <p className="text-sm text-gray-600 leading-relaxed font-sans mb-3 whitespace-pre-line text-left">
+                                        {item.guideInfo.story}
+                                    </p>
+                                )}
+                                
+                                {item.guideInfo?.tip && (
+                                    <div className="bg-orange-50/50 border border-orange-100 p-3 mb-3 rounded-lg relative overflow-hidden">
+                                        <div className="absolute top-0 left-0 w-1 h-full bg-orange-300"></div>
+                                        <div className="flex gap-2 relative z-10">
+                                            <i className="fa-solid fa-lightbulb text-orange-400 mt-0.5 text-xs"></i>
+                                            <p className="text-xs text-orange-800 font-medium leading-relaxed whitespace-pre-line">{item.guideInfo.tip}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            )}
+                                )}
 
-                            {item.guideInfo?.highlights && item.guideInfo.highlights.length > 0 && (
-                                <div className="flex flex-wrap gap-1.5 mt-3">
-                                    {item.guideInfo.highlights.map(h => (
-                                        <span key={h.id} className={`text-[10px] px-2 py-1 rounded border font-bold ${TAG_COLORS[h.color]}`}>{h.text}</span>
-                                    ))}
-                                </div>
-                            )}
+                                {item.guideInfo?.highlights && item.guideInfo.highlights.length > 0 && (
+                                    <div className="flex flex-wrap gap-2 mt-3">
+                                        {item.guideInfo.highlights.map(h => (
+                                            <span key={h.id} className={`text-[10px] px-2.5 py-1 rounded-full border font-bold shadow-sm ${TAG_COLORS[h.color]}`}>{h.text}</span>
+                                        ))}
+                                    </div>
+                                )}
 
-                            {item.guideInfo?.relatedLink && (
-                                <div className="flex justify-end mt-4">
-                                    <a 
-                                        href={item.guideInfo.relatedLink.url}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        onClick={(e) => e.stopPropagation()}
-                                        className="
-                                            group relative overflow-hidden
-                                            flex items-center gap-2 
-                                            pl-1 pr-3 py-1 
-                                            bg-[#F9F8F4] 
-                                            border border-[#E0E5D5] 
-                                            rounded-full 
-                                            shadow-[0_2px_0_#E0E5D5]
-                                            active:shadow-none active:translate-y-[2px]
-                                            transition-all duration-150
-                                            text-xs font-bold text-stone-600
-                                            hover:bg-white hover:border-zen-primary hover:text-zen-primary
-                                        "
-                                    >
-                                        <span className="w-6 h-6 rounded-full bg-white border border-[#E0E5D5] flex items-center justify-center text-zen-primary group-hover:bg-zen-primary group-hover:text-white group-hover:border-zen-primary transition-colors duration-200">
-                                            <i className="fa-solid fa-location-dot text-[10px]"></i>
-                                        </span>
-                                        <span className="transition-colors duration-200">
-                                            {item.guideInfo.relatedLink.text}
-                                        </span>
-                                        <i className="fa-solid fa-chevron-right text-[9px] text-gray-300 group-hover:text-zen-primary group-hover:translate-x-0.5 transition-all duration-200"></i>
-                                    </a>
-                                </div>
-                            )}
-                        </div>
-                    )}
+                                {item.guideInfo?.relatedLink && (
+                                    <div className="flex justify-end mt-4">
+                                        <a 
+                                            href={item.guideInfo.relatedLink.url}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            onClick={(e) => e.stopPropagation()}
+                                            className="
+                                                group/link
+                                                relative
+                                                flex items-center justify-between
+                                                w-fit ml-auto
+                                                pl-1.5 pr-4 py-1.5
+                                                bg-white
+                                                border-2 border-zen-primary
+                                                rounded-full
+                                                shadow-[3px_3px_0px_#D4A373]
+                                                transition-all duration-150 ease-out
+                                                cursor-pointer
+                                                hover:shadow-[1px_1px_0px_#D4A373] hover:translate-x-[2px] hover:translate-y-[2px]
+                                                active:shadow-none active:translate-x-[3px] active:translate-y-[3px]
+                                            "
+                                        >
+                                            <div className="flex items-center gap-3">
+                                                {/* Icon Circle */}
+                                                <div className="
+                                                    w-8 h-8 rounded-full 
+                                                    bg-zen-primary 
+                                                    flex items-center justify-center 
+                                                    text-white
+                                                    shrink-0
+                                                ">
+                                                    <i className="fa-solid fa-location-dot text-xs"></i>
+                                                </div>
+
+                                                {/* Text */}
+                                                <span className="text-sm font-bold text-stone-600 tracking-wide">
+                                                    {item.guideInfo.relatedLink.text}
+                                                </span>
+                                            </div>
+                                            
+                                            {/* Arrow Hint */}
+                                            <i className="fa-solid fa-chevron-right text-zen-primary text-xs ml-3 stroke-[2px]"></i>
+                                        </a>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
@@ -819,12 +856,12 @@ export const ScheduleTab: React.FC = () => {
     <div className="h-full flex flex-col">
       
       {/* FIXED HEADER SECTION */}
-      <div className="flex-shrink-0 bg-zen-bg z-20 px-5 pb-4 shadow-sm">
+      <div className="flex-shrink-0 bg-zen-bg z-20 px-4 pb-4 shadow-sm">
           {/* Date Navigation */}
-          <div className="-mx-5 mb-2">
+          <div className="-mx-4 mb-2">
               <div 
                 ref={dateScrollRef}
-                className="flex gap-2 overflow-x-auto no-scrollbar px-5 py-1 snap-x items-center"
+                className="flex gap-2 overflow-x-auto no-scrollbar px-4 py-1 snap-x items-center"
               >
                 {dates.map((date) => {
                     const d = new Date(date);
@@ -907,7 +944,7 @@ export const ScheduleTab: React.FC = () => {
                         key={date}
                         // Assign ref to array for scrolling control
                         ref={el => { scrollRefs.current[idx] = el; }}
-                        className="w-full h-full flex-shrink-0 overflow-y-auto no-scrollbar px-5 pb-24"
+                        className="w-full h-full flex-shrink-0 overflow-y-auto no-scrollbar px-4 pb-24"
                     >
                         <div className="relative pt-4">
                              {dayItems.map((item) => (
@@ -932,7 +969,7 @@ export const ScheduleTab: React.FC = () => {
 
 // --- BOOKINGS TAB ---
 
-const BARCODE_SVG = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAxMDAgMzAiPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIwIi8+PHJlY3Qgd2lkdGg9IjIiIGhlaWdodD0iMzAiIHg9IjQiLz48cmVjdCB3aWR0aD0iMyIgaGVpZ2h0PSIzMCIgeD0iOCIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSIxMyIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSIxNiIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIyMiIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSIyNiIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSIyOSIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIzNCIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSIzOCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI0NCIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSI0OCIvPjxyZWN0IHdpZHRoPSI1IiBoZWlnaHQ9IjMwIiB4PSI1MiIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI1OSIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI2NCIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSI2OCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI3MyIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSI3NyIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI4MyIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSI4NyIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI5MCIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSI5NCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI5OCIvPjwvc3ZnPg==";
+const BARCODE_SVG = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAxMDAgMzAiPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIwIi8+PHJlY3Qgd2lkdGg9IjIiIGhlaWdodD0iMzAiIHg9IjQiLz48cmVjdCB3aWR0aD0iMyIgaGVpZ2h0PSIzMCIgeD0iOCIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSIxMyIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSIxNiIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIyMiIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSIyNiIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSIyOSIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIzNCIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSIzOCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI0NCIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSI0OCIvPjxyZWN0IHdpZHRoPSI1IiBoZWlnaHQ9IjMwIiB4PSI1MiIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI1OSIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI2NCIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSI2OCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI3MyIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSI3NyIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI8MyIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSI4NyIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI5MCIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSI5NCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI5OCIvPjwvc3ZnPg==";
 
 // Mapping City Codes to Names for clearer display
 const CITY_NAMES: Record<string, string> = {

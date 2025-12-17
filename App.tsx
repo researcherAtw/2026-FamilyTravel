@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { NAV_ITEMS } from './constants';
 import { TabType } from './types';
@@ -25,10 +26,10 @@ const App: React.FC = () => {
   };
 
   return (
-    // Changed: Uses fixed height (100dvh) and flex-col to create a fixed header + scrollable content layout
+    // Uses fixed height (100dvh) and flex-col to create a fixed header + scrollable content layout
     <div className="h-[100dvh] text-zen-text font-sans max-w-md mx-auto relative shadow-2xl bg-zen-bg overflow-hidden flex flex-col">
       
-      {/* Top Bar - Now static, not sticky, because it stays at top of flex container */}
+      {/* Top Bar - Static */}
       <header className="flex-shrink-0 px-6 pt-6 pb-4 flex justify-between items-center bg-zen-bg z-30">
         <div className="flex flex-col">
             <h2 className="text-sm font-bold text-zen-primary tracking-widest mb-0.5">金色夢幻</h2>
@@ -42,14 +43,14 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      {/* Main Content Area - Occupies remaining space, handles its own scrolling if needed */}
+      {/* Main Content Area */}
       <main className="flex-1 overflow-hidden relative w-full">
         {renderContent()}
       </main>
 
-      {/* Bottom Navigation - Fixed at bottom, compact redesign */}
-      <nav className="flex-shrink-0 bg-white/95 backdrop-blur-md border-t border-stone-100 z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.02)] pb-[calc(env(safe-area-inset-bottom)+0.75rem)]">
-        <div className="flex justify-around items-center h-14 w-full">
+      {/* Bottom Navigation - Compact Floating Capsule Style */}
+      <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex justify-center pointer-events-none w-full max-w-md">
+        <div className="bg-white rounded-full p-1.5 shadow-zen border border-stone-100 flex items-center gap-1 pointer-events-auto">
           {NAV_ITEMS.map((item) => {
             const isActive = activeTab === item.id;
             return (
@@ -57,24 +58,25 @@ const App: React.FC = () => {
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
                 className={`
-                  flex-1 h-full flex flex-col items-center justify-center gap-0.5 transition-all duration-200
-                  ${isActive ? 'text-zen-text' : 'text-stone-300 hover:text-stone-400'}
+                  px-6 py-2.5 rounded-full flex items-center gap-2 transition-all duration-300
+                  ${isActive 
+                    ? 'bg-zen-primary text-white shadow-sm' 
+                    : 'bg-transparent text-stone-400 hover:text-stone-600 hover:bg-stone-50'
+                  }
                 `}
               >
-                <div className={`text-lg transition-transform duration-200 ${isActive ? 'scale-105' : 'scale-100'}`}>
+                <div className={`text-base ${isActive ? 'animate-bounce-subtle' : ''}`}>
                     <i className={`fa-solid ${item.icon}`}></i>
                 </div>
-                <span className={`text-[10px] font-bold tracking-wider ${isActive ? 'font-bold' : 'font-medium'}`}>
+                <span className="text-xs font-bold tracking-widest">
                   {item.label}
                 </span>
-                {/* Removed Minimal Active Indicator Dot */}
               </button>
             );
           })}
         </div>
       </nav>
       
-      {/* Removed the extra filler div to reduce bottom space */}
     </div>
   );
 };
