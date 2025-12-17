@@ -946,8 +946,10 @@ export const BookingsTab: React.FC = () => {
     const [bookings] = useState<Booking[]>(MOCK_BOOKINGS);
 
     return (
-        <div className="h-full overflow-y-auto px-5 pb-24 space-y-6 no-scrollbar pt-2">
-            <h2 className="text-lg font-bold text-zen-text/50 uppercase tracking-widest sticky top-0 bg-zen-bg py-2 z-10 backdrop-blur-sm">Boarding Passes</h2>
+        <div className="h-full overflow-y-auto px-5 pb-24 space-y-6 no-scrollbar">
+            <h2 className="text-lg font-bold text-zen-text/50 uppercase tracking-widest sticky top-0 bg-zen-bg py-3 pt-5 z-10 -mx-5 px-5 backdrop-blur-md shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+                Boarding Passes
+            </h2>
             
             <div className="space-y-6">
                 {bookings.map((booking, index) => {
