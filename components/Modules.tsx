@@ -549,8 +549,8 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
     return (
         <div className="relative mb-2 flex gap-0 group">
             {/* 1. Time Column - Optimised for space & layout */}
-            {/* COMPACTED: w-12, pr-3 (Increased padding to push text left further) */}
-            <div className="w-12 py-4 flex flex-col items-end justify-start flex-shrink-0 pr-3">
+            {/* COMPACTED: w-12, pr-2 (Reduced padding to push text right slightly without changing width) */}
+            <div className="w-12 py-4 flex flex-col items-end justify-start flex-shrink-0 pr-2">
                 {isTransport ? (
                     <>
                         <div className="flex items-baseline justify-end gap-[1px] leading-none text-zen-text">
