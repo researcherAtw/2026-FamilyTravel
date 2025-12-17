@@ -665,48 +665,29 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                                 )}
 
                                 {item.guideInfo?.relatedLink && (
-                                    <div className="flex justify-end mt-4">
+                                    <div className="flex justify-end mt-3">
                                         <a 
                                             href={item.guideInfo.relatedLink.url}
                                             target="_blank"
                                             rel="noreferrer"
                                             onClick={(e) => e.stopPropagation()}
                                             className="
+                                                inline-flex items-center gap-2 
+                                                pl-1 pr-3 py-1 
+                                                mt-2
+                                                bg-white hover:bg-stone-50 
+                                                border border-stone-200 rounded-full 
+                                                transition-colors duration-200
+                                                shadow-sm
                                                 group/link
-                                                relative
-                                                flex items-center justify-between
-                                                w-fit ml-auto
-                                                pl-1.5 pr-4 py-1.5
-                                                bg-white
-                                                border-2 border-zen-primary
-                                                rounded-full
-                                                shadow-[3px_3px_0px_#D4A373]
-                                                transition-all duration-150 ease-out
-                                                cursor-pointer
-                                                hover:shadow-[1px_1px_0px_#D4A373] hover:translate-x-[2px] hover:translate-y-[2px]
-                                                active:shadow-none active:translate-x-[3px] active:translate-y-[3px]
                                             "
                                         >
-                                            <div className="flex items-center gap-3">
-                                                {/* Icon Circle */}
-                                                <div className="
-                                                    w-8 h-8 rounded-full 
-                                                    bg-zen-primary 
-                                                    flex items-center justify-center 
-                                                    text-white
-                                                    shrink-0
-                                                ">
-                                                    <i className="fa-solid fa-location-dot text-xs"></i>
-                                                </div>
-
-                                                {/* Text */}
-                                                <span className="text-sm font-bold text-stone-600 tracking-wide">
-                                                    {item.guideInfo.relatedLink.text}
-                                                </span>
+                                            <div className="w-6 h-6 rounded-full bg-stone-100 flex items-center justify-center text-stone-400 group-hover/link:text-stone-500 group-hover/link:bg-stone-200 transition-colors">
+                                                 <i className="fa-solid fa-location-dot text-[10px]"></i>
                                             </div>
-                                            
-                                            {/* Arrow Hint */}
-                                            <i className="fa-solid fa-chevron-right text-zen-primary text-xs ml-3 stroke-[2px]"></i>
+                                            <span className="text-xs font-bold text-stone-500 group-hover/link:text-stone-600">
+                                                {item.guideInfo.relatedLink.text}
+                                            </span>
                                         </a>
                                     </div>
                                 )}
