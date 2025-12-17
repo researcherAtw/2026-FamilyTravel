@@ -330,7 +330,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/doX4N77JodZMSQ1r8',
       guideInfo: {
           story: "紀念1679年奪走維也納三分之一人口的瘟疫。",
-          tip: "位於步行街中央的露天雕塑。頂端是聖三一，底座象徵瘟疫女巫，中間是皇帝利奧波德一世。\n\n可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
+          tip: "位於步行街中央的露天雕塑。頂端是聖三一，底座象蹟瘟疫女巫，中間是皇帝利奧波德一世。\n\n可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
           highlights: [
               { id: 'h1', text: '聖三一', color: 'orange' },
               { id: 'h2', text: '巴洛克雕塑', color: 'gray' },
@@ -635,17 +635,16 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                         <div className="text-xs text-gray-500 flex items-center gap-1.5 mb-2 mt-1 min-w-0">
                             <i className="fa-solid fa-location-dot text-[10px] text-zen-primary flex-shrink-0"></i> 
                             <span className="truncate font-medium flex-1 min-w-0 leading-none">{item.location}</span>
-                            {/* Navigation Button - SUPER COMPACT VERSION */}
+                            {/* Navigation Button - Circular Icon-only design for layout stability */}
                             {item.mapUrl && (
                                 <a 
                                     href={item.mapUrl}
                                     target="_blank"
                                     rel="noreferrer"
                                     onClick={(e) => e.stopPropagation()}
-                                    className="inline-flex items-center justify-center gap-1 h-[18px] px-1.5 rounded-full bg-stone-100/70 hover:bg-stone-200 text-stone-400 active:bg-stone-300 transition-all flex-shrink-0 whitespace-nowrap border border-stone-200/40"
+                                    className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-500 active:bg-stone-300 transition-all flex-shrink-0 border border-stone-200/60 shadow-sm"
                                 >
-                                    <i className="fa-solid fa-diamond-turn-right text-[7px] flex-shrink-0"></i>
-                                    <span className="text-[7.5px] font-black tracking-tighter leading-none select-none">導航</span>
+                                    <i className="fa-solid fa-diamond-turn-right text-xs"></i>
                                 </a>
                             )}
                         </div>
