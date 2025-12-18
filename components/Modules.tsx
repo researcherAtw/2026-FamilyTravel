@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useLayoutEffect, useRef, useMemo } from 'react';
 import { Card, Button, CategoryBadge } from './UI';
 import { ScheduleItem, Booking, HighlightTag, HighlightColor, WeatherInfo } from '../types';
@@ -230,7 +231,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(含上下纜車)',
       mapUrl: 'https://maps.app.goo.gl/25TfrB8To8oUhBHLA',
       guideInfo: {
-          story: "歐洲現存規模最大的中世紀城堡之一，矗立在舊城區上方。它的主要功能是「防禦」和「彰顯權力」，用來保護大主教們免受外敵（和城內叛亂市民）的威脅，並控制富可敵國的「鹽」貿易。這座城堡在長達900多年的歷史中，從未被敵人攻陷過。",
+          story: "歐洲現存規模最大的中世紀城堡之一，矗立在舊城區上方。它的主要功能是「防禦」和「彰顯權力」，用來保護大主教們免受外敵（和城內叛亂市民）的威脅，並控制富可敵國的「鹽」貿易。這座城堡在長達900多年的歷史中，從微被敵人攻陷過。",
           tip: "搭乘城堡纜車僅需1分鐘. 觀景台是俯瞰薩爾斯堡的最佳地點。內部有木偶博物館與酷刑室。",
           highlights: [
               { id: 'h1', text: '城堡纜車', color: 'red' },
@@ -316,7 +317,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/22 (Sun) Day 8: Hallstatt/Vienna ---
   { 
       id: 'd8-1', date: '2026-02-22', time: '09:00', 
-      title: '瑪麗亞特蕾莎廣場', enTitle: 'Maria-Theresien-Platz', location: '博物館區 (Museumsquartier)', category: '下車參觀', categoryColor: 'green',
+      title: '瑪麗亞特蕾莎廣場', enTitle: 'Maria-Theresien-Platz', location: '博物館區 (Museumquartier)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/ZZbtf4VG7tezXwBz6',
       guideInfo: {
           story: "哈布斯堡王朝的唯一女性統治者—瑪麗亞·特蕾莎 (Maria Theresa) 被戲稱為「歐洲丈母娘」aka 歐洲岳母，主要原因是她將「聯姻外交」發揮到了極致。\n\n她一生生育了 16 個孩子（其中 10 個活到成年），並將絕大多數的女兒都嫁給了歐洲各國的君主 or 王儲，以此來鞏固奧地利與各國的盟友關係，達成政治目的。",
@@ -333,7 +334,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/bPPsM1JA2y2oMD8U6',
       guideInfo: {
           story: "哈布斯堡王朝的冬宮，也是西西 (Sisi，伊莉莎白皇后) 的黃金牢籠。\n\n西西 (Sisi) 是伊莉莎白皇后的真實暱稱，茜茜則是電影譯名。\n霍夫堡宮是西西皇后權力的象徵，也是她痛苦的根源。在這裡看到的不是一個幸福皇后的家，而是一位女性試圖在壓抑體制中，衝撞並尋找自我的掙扎痕跡。",
-          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館. 西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇后的關鍵展品\n私人物品： 西西皇后的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
+          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館. 西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇后的關鍵展品\n私個人物品： 西西皇后的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
           highlights: [
               { id: 'h0', text: '冬宮', color: 'blue' },
               { id: 'h1', text: '西西博物館', color: 'purple' },
@@ -444,12 +445,18 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd10-3', date: '2026-02-24', time: '20:40', displayTime: '20:40',
-      title: '抵達新地圖', enTitle: 'Arrival', location: 'TPE 桃園機場', category: 'UNLOCKED', categoryColor: 'red',
-      description: '抵達溫暖的家'
+      title: '任務完成', enTitle: 'Arrival', location: 'TPE 桃園機場', category: 'MISSION CLEAR', categoryColor: 'green',
+      description: '抵達溫暖的家',
+      // Fix: Add missing required properties 'highlights' and 'tip' to guideInfo to satisfy GuideInfo interface.
+      guideInfo: {
+        story: "英雄凱旋！",
+        highlights: [],
+        tip: ""
+      }
   },
 ];
 
-// Added missing MOCK_BOOKINGS data
+// MOCK_BOOKINGS with fixed data
 const MOCK_BOOKINGS: Booking[] = [
     {
       id: 'b1',
@@ -546,7 +553,6 @@ const LUNAR_DATES: Record<string, string> = {
     '2026-02-22': '初六'
 };
 
-// Map WMO weather code to our simple types
 const mapWmoToCondition = (code: number): WeatherInfo['condition'] => {
     if (code === 0) return 'sunny';
     if (code <= 3) return 'cloudy';
@@ -558,8 +564,8 @@ const mapWmoToCondition = (code: number): WeatherInfo['condition'] => {
     return 'rain';
 };
 
-// Helper to get icon for category/activity
 const getCategoryIcon = (item: ScheduleItem): string => {
+    if (item.title.includes('任務完成')) return 'fa-trophy';
     if (item.title.includes('召喚')) return 'fa-hat-wizard';
     if (item.category === 'ASSEMBLE') return 'fa-dragon';
     if (item.category === 'TELEPORT') return 'fa-wand-magic-sparkles';
@@ -580,19 +586,15 @@ const getCategoryIcon = (item: ScheduleItem): string => {
     return 'fa-location-dot';
 };
 
-// Helper Component for Rendering a single Schedule Row
 const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
-    const isMajor = ['transport', 'ASSEMBLE', 'GATHERING', 'TELEPORT', 'UNLOCKED', 'CHECKPOINT'].includes(item.category);
+    const isMajor = ['transport', 'ASSEMBLE', 'GATHERING', 'TELEPORT', 'UNLOCKED', 'CHECKPOINT', 'MISSION CLEAR'].includes(item.category);
     const timeStr = item.displayTime || item.time;
     const [mainTime, subTime] = timeStr.includes('\n') ? timeStr.split('\n') : [timeStr, null];
     const [hour, minute] = mainTime.split(':');
-    
-    // Get contextual icon
     const iconClass = getCategoryIcon(item);
 
     return (
         <div className="relative mb-2 flex gap-0 group">
-            {/* 1. Time Column - Optimised for space & layout */}
             <div className="w-12 py-4 flex flex-col items-end justify-start flex-shrink-0 pr-2">
                 {isMajor ? (
                     <>
@@ -608,11 +610,8 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                     <div className="h-full w-full"></div>
                 )}
             </div>
-
-            {/* 2. Timeline Line & Node */}
             <div className="relative flex flex-col items-center px-0 flex-shrink-0 w-6">
                 <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] border-l-2 border-dashed border-stone-300/60"></div>
-                
                 <div 
                     className={`
                         relative z-10 flex items-center justify-center transition-all duration-300 mt-[1.4rem]
@@ -626,20 +625,11 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                     <i className={`fa-solid ${iconClass} text-[10px]`}></i>
                 </div>
             </div>
-
-            {/* 3. Content Card Column */}
             <div className="flex-grow min-w-0 py-2 pb-6 pl-3">
-                <div 
-                    className={`
-                        bg-white rounded-2xl p-4 shadow-zen border border-stone-50 
-                        transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-zen-hover
-                        relative overflow-hidden
-                    `}
-                >
+                <div className="bg-white rounded-2xl p-4 shadow-zen border border-stone-50 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-zen-hover relative overflow-hidden">
                     <div className="absolute -bottom-4 -right-4 text-8xl text-stone-800 opacity-[0.03] transform -rotate-12 pointer-events-none select-none z-0">
                         <i className={`fa-solid ${iconClass}`}></i>
                     </div>
-
                     <div className="relative z-10">
                         <div className="flex justify-between items-start gap-2 mb-1">
                             <div className="flex flex-col">
@@ -652,12 +642,9 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                                 <CategoryBadge type={item.category} color={item.categoryColor} />
                             </div>
                         </div>
-
-                        {/* Location with Icon and Navigation Button */}
                         <div className="text-xs text-gray-500 flex items-center gap-1.5 mb-2 mt-1 min-w-0">
                             <i className="fa-solid fa-location-dot text-[10px] text-zen-primary flex-shrink-0"></i> 
                             <span className="truncate font-medium flex-1 min-w-0 leading-none">{item.location}</span>
-                            {/* Navigation Button - Circular Icon-only design for layout stability */}
                             {item.mapUrl && (
                                 <a 
                                     href={item.mapUrl}
@@ -670,19 +657,16 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                                 </a>
                             )}
                         </div>
-
                         {item.description && (
                             <div className="text-xs text-gray-400 font-medium whitespace-pre-line leading-relaxed mb-2 pl-4 border-l-2 border-stone-100">
                                 {item.description}
                             </div>
                         )}
-                        
                         {item.businessHours && (
                             <div className="text-[10px] font-bold text-orange-400 bg-orange-50 px-2 py-0.5 rounded inline-block mb-1">
                                 <i className="fa-regular fa-clock mr-1"></i>營業時間: {item.businessHours}
                             </div>
                         )}
-
                         {(item.guideInfo?.story || item.guideInfo?.tip || (item.guideInfo?.highlights && item.guideInfo.highlights.length > 0)) && (
                             <div className="mt-4 pt-3 border-t border-dashed border-gray-100">
                                 {item.guideInfo?.story && (
@@ -690,7 +674,6 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                                         {item.guideInfo.story}
                                     </div>
                                 )}
-                                
                                 {item.guideInfo?.tip && (
                                     <div className="bg-orange-50/50 border border-orange-100 p-3 mb-3 rounded-lg relative overflow-hidden">
                                         <div className="absolute top-0 left-0 w-1 h-full bg-orange-300"></div>
@@ -700,7 +683,6 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                                         </div>
                                     </div>
                                 )}
-
                                 {item.guideInfo?.highlights && item.guideInfo.highlights.length > 0 && (
                                     <div className="flex flex-wrap gap-2 mt-3">
                                         {item.guideInfo.highlights.map(h => (
@@ -708,7 +690,6 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                                         ))}
                                     </div>
                                 )}
-
                                 {item.guideInfo?.relatedLink && (
                                     <div className="flex justify-end mt-3">
                                         <a 
@@ -716,17 +697,7 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                                             target="_blank"
                                             rel="noreferrer"
                                             onClick={(e) => e.stopPropagation()}
-                                            className="
-                                                inline-flex items-center gap-2 
-                                                pl-1 pr-3 py-1 
-                                                mt-2
-                                                bg-white hover:bg-stone-50 
-                                                active:scale-95 active:bg-stone-100 active:border-stone-300
-                                                border border-stone-200 rounded-full 
-                                                transition-all duration-200
-                                                shadow-sm
-                                                group/link
-                                            "
+                                            className="inline-flex items-center gap-2 pl-1 pr-3 py-1 mt-2 bg-white hover:bg-stone-50 active:scale-95 active:bg-stone-100 active:border-stone-300 border border-stone-200 rounded-full transition-all duration-200 shadow-sm group/link"
                                         >
                                             <div className="w-6 h-6 rounded-full bg-stone-100 flex items-center justify-center text-stone-400 group-hover/link:text-stone-500 group-hover/link:bg-stone-200 transition-colors">
                                                  <i className="fa-solid fa-location-dot text-[10px]"></i>
@@ -746,33 +717,25 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
     );
 };
 
-// --- SCHEDULE TAB ---
-
 const DATE_ITEM_WIDTH = 52;
 const DATE_ITEM_GAP = 8;
 const DATE_CONTAINER_PADDING = 16;
 
 export const ScheduleTab: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState('2026-02-14');
-  const [items, setItems] = useState(MOCK_SCHEDULE);
+  const [items] = useState(MOCK_SCHEDULE);
   const [weather, setWeather] = useState<WeatherInfo>({ condition: 'cloudy', temp: 5, locationName: '布拉格' });
   const [loadingWeather, setLoadingWeather] = useState(false);
-  
   const [touchStart, setTouchStart] = useState<{x: number, y: number} | null>(null);
   const [touchEnd, setTouchEnd] = useState<{x: number, y: number} | null>(null);
-
   const scrollRefs = useRef<(HTMLDivElement | null)[]>([]);
   const dateScrollRef = useRef<HTMLDivElement>(null);
-
   const dates = useMemo(() => Array.from(new Set(items.map(i => i.date))).sort() as string[], [items]);
   const currentIndex = dates.indexOf(selectedDate);
 
   useLayoutEffect(() => {
     if (currentIndex >= 0 && scrollRefs.current[currentIndex]) {
-        const el = scrollRefs.current[currentIndex];
-        if (el) {
-             el.scrollTo(0, 0);
-        }
+        scrollRefs.current[currentIndex]!.scrollTo(0, 0);
     }
   }, [currentIndex]);
 
@@ -784,11 +747,7 @@ export const ScheduleTab: React.FC = () => {
             const itemCenter = DATE_CONTAINER_PADDING + index * (DATE_ITEM_WIDTH + DATE_ITEM_GAP) + DATE_ITEM_WIDTH / 2;
             const containerCenter = container.clientWidth / 2;
             const scrollLeft = itemCenter - containerCenter;
-            
-            container.scrollTo({
-                left: scrollLeft,
-                behavior: 'smooth'
-            });
+            container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
         }
     }
   }, [selectedDate, dates]);
@@ -809,7 +768,6 @@ export const ScheduleTab: React.FC = () => {
         setLoadingWeather(true);
         let url = '';
         let locationName = '';
-
         if (selectedDate === '2026-02-14') {
             url = 'https://api.open-meteo.com/v1/forecast?latitude=25.03&longitude=121.56&current_weather=true&timezone=auto';
             locationName = '桃園';
@@ -826,7 +784,6 @@ export const ScheduleTab: React.FC = () => {
              url = 'https://api.open-meteo.com/v1/forecast?latitude=50.08&longitude=14.43&current_weather=true&timezone=auto';
              locationName = '歐洲';
         }
-
         try {
             const res = await fetch(url);
             const data = await res.json();
@@ -843,7 +800,6 @@ export const ScheduleTab: React.FC = () => {
             setLoadingWeather(false);
         }
     };
-
     fetchWeather();
   }, [selectedDate]);
   
@@ -851,16 +807,13 @@ export const ScheduleTab: React.FC = () => {
     setTouchEnd(null);
     setTouchStart({ x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY });
   };
-
   const onTouchMove = (e: React.TouchEvent) => {
     setTouchEnd({ x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY });
   };
-
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
     const distanceX = touchStart.x - touchEnd.x;
     const distanceY = touchStart.y - touchEnd.y;
-    
     if (Math.abs(distanceX) > Math.abs(distanceY) && Math.abs(distanceX) > 50) {
        if (distanceX > 0 && currentIndex < dates.length - 1) {
            setSelectedDate(dates[currentIndex + 1]);
@@ -882,11 +835,8 @@ export const ScheduleTab: React.FC = () => {
               >
                 <div 
                     className={`absolute top-[4px] bottom-[4px] w-[52px] bg-[#464646] rounded-[16px] shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0 ${currentIndex === -1 ? 'opacity-0' : 'opacity-100'}`}
-                    style={{
-                        left: `${DATE_CONTAINER_PADDING + (currentIndex === -1 ? 0 : currentIndex) * (DATE_ITEM_WIDTH + DATE_ITEM_GAP)}px`
-                    }}
+                    style={{ left: `${DATE_CONTAINER_PADDING + (currentIndex === -1 ? 0 : currentIndex) * (DATE_ITEM_WIDTH + DATE_ITEM_GAP)}px` }}
                 />
-
                 {dates.map((date) => {
                     const d = new Date(date);
                     const dayName = d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
@@ -898,211 +848,6 @@ export const ScheduleTab: React.FC = () => {
                             onClick={() => setSelectedDate(date)}
                             className="snap-center flex-shrink-0 flex flex-col items-center justify-center w-[52px] h-[72px] rounded-[16px] transition-all duration-300 relative z-10 group"
                         >
-                            <div 
-                                className={`absolute inset-0 bg-white rounded-[16px] shadow-sm transition-all duration-300 -z-10 group-hover:bg-gray-50 ${isSelected ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}
-                            ></div>
-
+                            <div className={`absolute inset-0 bg-white rounded-[16px] shadow-sm transition-all duration-300 -z-10 group-hover:bg-gray-50 ${isSelected ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}></div>
                             <span className={`text-[9px] font-black tracking-widest mb-1 font-sans z-10 transition-colors duration-300 ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayName}</span>
-                            <span className={`text-[20px] font-bold font-sans leading-none z-10 transition-colors duration-300 ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayNum}</span>
-                        </button>
-                    )
-                })}
-              </div>
-          </div>
-
-          <div className="flex justify-between items-end px-2 relative">
-             <div>
-                <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Day Plan</div>
-                <div className="flex items-center gap-2">
-                    <h2 className="text-2xl font-mono font-bold text-zen-text leading-none">{selectedDate}</h2>
-                    {lunarText && (
-                        <div className="bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm tracking-widest flex items-center gap-1">
-                            <i className="fa-solid fa-star text-[8px]"></i>
-                            <span>{lunarText}</span>
-                        </div>
-                    )}
-                </div>
-                <div className="flex items-center gap-2 mt-1 text-gray-500 text-sm">
-                    <i className="fa-solid fa-location-dot text-zen-primary"></i> 
-                    <span>{locationHeader}</span>
-                </div>
-             </div>
-             <div className="bg-white/30 backdrop-blur-xl border border-white/40 p-3 rounded-2xl shadow-lg flex flex-col items-center justify-center min-w-[80px] h-[82px] box-border z-10 relative">
-                {loadingWeather ? (
-                     <i className="fa-solid fa-spinner fa-spin text-gray-300 text-2xl"></i>
-                ) : (
-                    <>
-                        <div className="text-2xl mb-1 h-8 flex items-center justify-center filter drop-shadow-sm">
-                            {weather.condition === 'sunny' && <i className="fa-solid fa-sun text-orange-400 animate-spin-slow"></i>}
-                            {weather.condition === 'cloudy' && <i className="fa-solid fa-cloud text-gray-400"></i>}
-                            {weather.condition === 'rain' && <i className="fa-solid fa-cloud-rain text-blue-400"></i>}
-                            {weather.condition === 'snow' && <i className="fa-regular fa-snowflake text-blue-200"></i>}
-                        </div>
-                        <div className="text-sm font-bold font-mono h-5 flex items-center text-gray-700">{weather.temp}°C</div>
-                    </>
-                )}
-             </div>
-          </div>
-      </div>
-
-      <div 
-        className="flex-1 overflow-hidden relative w-full touch-pan-y"
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
-      >
-         <div 
-            className="flex h-full transition-transform duration-300 ease-out will-change-transform"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-         >
-            {dates.map((date, idx) => {
-                const dayItems = items.filter(i => i.date === date);
-                return (
-                    <div 
-                        key={date}
-                        ref={el => { scrollRefs.current[idx] = el; }}
-                        className="w-full h-full flex-shrink-0 overflow-y-auto no-scrollbar px-4 pb-24"
-                    >
-                        <div className="relative pt-4">
-                             {dayItems.map((item) => (
-                                <ScheduleItemRow key={item.id} item={item} />
-                             ))}
-                             
-                             {dayItems.length === 0 && (
-                                <div className="text-center py-10 text-gray-400 opacity-60">
-                                    <i className="fa-regular fa-calendar-plus text-4xl mb-2"></i>
-                                    <p className="text-sm">No plans for this day yet.</p>
-                                </div>
-                             )}
-                        </div>
-                    </div>
-                );
-            })}
-         </div>
-      </div>
-    </div>
-  );
-};
-
-// --- BOOKINGS TAB ---
-
-const BARCODE_SVG = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAxMDAgMzAiPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIwIi8+PHJlY3Qgd2lkdGg9IjIiIGhlaWdodD0iMzAiIHg9IjQiLz48cmVjdCB3aWR0aD0iMyIgaGVpZ2h0PSIzMCIgeD0iOCIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSIxMyIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSIxNiIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIyMiIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSIyNiIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSIyOSIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIyNCIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSIzOCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI0NCIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSI0OCIvPjxyZWN0IHdpZHRoPSI1IiBoZWlnaHQ9IjMwIiB4PSI1MiIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI1OSIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI2NCIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSI2OCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI3MyIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSI3NyIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI4MyIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSI4NyIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI5MCIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSI5NCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI5OCIvPjwvc3ZnPg==";
-
-const CITY_NAMES: Record<string, string> = {
-    'TPE': 'Taipei',
-    'DXB': 'Dubai',
-    'PRG': 'Prague',
-    'VIE': 'Vienna'
-};
-
-export const BookingsTab: React.FC = () => {
-    // Initialized from the constant MOCK_BOOKINGS defined above
-    const [bookings] = useState<Booking[]>(MOCK_BOOKINGS);
-
-    return (
-        <div className="h-full overflow-y-auto px-5 pb-24 space-y-6 no-scrollbar">
-            <h2 className="text-lg font-bold text-zen-text/50 uppercase tracking-widest mt-5 mb-2">
-                Boarding Passes
-            </h2>
-            
-            <div className="space-y-6">
-                {bookings.map((booking, index) => {
-                    const isTransfer = booking.details['備註'] === '轉機航班';
-                    const accentColor = isTransfer ? 'bg-orange-400' : (index % 2 === 0 ? 'bg-zen-primary' : 'bg-zen-secondary');
-                    const accentText = isTransfer ? 'text-orange-400' : (index % 2 === 0 ? 'text-zen-primary' : 'text-zen-secondary');
-                    
-                    const originCode = booking.title.split(' - ')[0];
-                    const destCode = booking.title.split(' - ')[1];
-
-                    // Logic to show actual arrival date
-                    const arrivalDateText = booking.details['抵達']?.includes('+1') 
-                        ? (() => {
-                            const d = new Date(booking.date);
-                            d.setDate(d.getDate() + 1);
-                            return d.toISOString().split('T')[0];
-                        })()
-                        : booking.date;
-
-                    return (
-                        <div key={booking.id} className="bg-white rounded-2xl shadow-zen relative overflow-hidden flex flex-col transition-transform active:scale-[0.99] group">
-                            
-                            <div className={`h-1.5 w-full ${accentColor}`}></div>
-
-                            <div className="px-5 py-3 flex justify-between items-center border-b border-stone-100">
-                                <div className="flex items-center gap-2">
-                                    <div className={`w-6 h-6 rounded-full ${accentColor} bg-opacity-10 flex items-center justify-center`}>
-                                        <i className={`fa-solid fa-plane text-xs ${accentText}`}></i>
-                                    </div>
-                                    <span className="text-xs font-bold text-zen-text tracking-wide">{booking.subTitle.split(' - ')[0]}</span>
-                                </div>
-                                {isTransfer && (
-                                    <span className="bg-orange-50 text-orange-500 text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Layover</span>
-                                )}
-                            </div>
-
-                            <div className="p-5 pb-2">
-                                <div className="flex justify-between items-center">
-                                    <div className="flex flex-col">
-                                        <div className="text-xs font-bold text-zen-primary mb-1 uppercase tracking-wider">{CITY_NAMES[originCode] || originCode}</div>
-                                        <div className="text-4xl font-mono font-bold text-zen-text leading-none tracking-tighter">
-                                            {booking.time}
-                                        </div>
-                                        <div className="text-xs font-bold text-stone-300 mt-1">{booking.date}</div>
-                                        <div className="text-lg font-bold text-stone-200 mt-1">{originCode}</div>
-                                    </div>
-
-                                    <div className="flex flex-col items-center justify-center -mt-4">
-                                        <div className={`px-3 py-1 rounded-full ${isTransfer ? 'bg-orange-50 text-orange-400' : 'bg-stone-50 text-stone-400'} flex items-center gap-1.5 mb-1`}>
-                                             <i className="fa-regular fa-clock text-[10px]"></i>
-                                             <span className="text-[10px] font-mono font-bold">{booking.details['飛行時間']}</span>
-                                        </div>
-                                        <div className="w-16 h-[2px] bg-stone-100 relative">
-                                            <div className={`absolute right-0 -top-1 w-2 h-2 rounded-full ${accentColor}`}></div>
-                                            <div className={`absolute left-0 -top-1 w-2 h-2 rounded-full ${isTransfer ? 'bg-orange-200' : 'bg-stone-200'}`}></div>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex flex-col text-right">
-                                        <div className="text-xs font-bold text-zen-primary mb-1 uppercase tracking-wider">{CITY_NAMES[destCode] || destCode}</div>
-                                        <div className="text-4xl font-mono font-bold text-zen-text leading-none tracking-tighter">
-                                            {booking.details['抵達']?.split(' ')[0] || '--:--'}
-                                        </div>
-                                         <div className="text-xs font-bold text-stone-300 mt-1">
-                                            {arrivalDateText}
-                                        </div>
-                                        <div className="text-lg font-bold text-stone-200 mt-1">{destCode}</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="px-5 pb-6">
-                                 <div className="flex justify-center">
-                                     <div className="flex items-center gap-2 bg-stone-50 px-4 py-2 rounded-xl border border-stone-100">
-                                         <i className={`fa-solid fa-plane-circle-check ${accentText}`}></i>
-                                         <span className="text-[10px] text-stone-400 uppercase font-bold tracking-wider">Flight</span>
-                                         <span className="text-sm font-mono font-bold text-zen-text ml-1">{booking.referenceNo}</span>
-                                     </div>
-                                 </div>
-                            </div>
-
-                            <div className="relative h-4 w-full flex items-center justify-center overflow-hidden">
-                                 <div className="absolute left-0 -ml-2 w-4 h-4 bg-zen-bg rounded-full shadow-[inset_-1px_0_2px_rgba(0,0,0,0.05)]"></div>
-                                 <div className="w-full mx-3 border-b-2 border-dashed border-stone-300"></div>
-                                 <div className="absolute right-0 -mr-2 w-4 h-4 bg-zen-bg rounded-full shadow-[inset_1px_0_2px_rgba(0,0,0,0.05)]"></div>
-                            </div>
-
-                            <div className="px-6 py-4 flex justify-between items-center opacity-70">
-                                 <div className="flex flex-col">
-                                     <span className="text-[9px] text-stone-400 font-mono tracking-widest uppercase">Passenger</span>
-                                     <span className="text-xs font-bold text-stone-600">FAMILY MEMBER</span>
-                                 </div>
-                                 <img src={BARCODE_SVG} className="h-5 w-20 object-fill opacity-30 grayscale mix-blend-multiply" alt="barcode" />
-                            </div>
-
-                        </div>
-                    );
-                })}
-            </div>
-        </div>
-    );
-};
+                            <span className={`text-[20px] font-bold font-sans leading-none z-10 transition-colors duration-300 ${isSelected ? 'text-white' :

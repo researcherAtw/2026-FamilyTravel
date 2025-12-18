@@ -60,7 +60,8 @@ export const CategoryBadge: React.FC<{ type: string; color?: HighlightColor }> =
     TELEPORT: "bg-indigo-500 text-white shadow-sm",
     UNLOCKED: "bg-emerald-500 text-white shadow-sm",
     CHECKPOINT: "bg-orange-500 text-white shadow-sm",
-    ASSEMBLE: "bg-teal-500 text-white shadow-sm"
+    ASSEMBLE: "bg-teal-500 text-white shadow-sm",
+    "MISSION CLEAR": "bg-green-500 text-white shadow-sm"
   };
 
   const colorStyles: Record<HighlightColor, string> = {
