@@ -188,7 +188,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/18 (Wed) Day 4: Cesky Krumlov ---
   { 
       id: 'd4-1', date: '2026-02-18', time: '10:00', 
-      title: '庫倫洛夫城堡', enTitle: 'Český Krumlov Castle', location: '彩繪塔周邊 (Zámek Český Krumlov)', category: '下車參觀', categoryColor: 'green',
+      title: '庫倫洛夫城堡', enTitle: 'Český Krumlov Castle', location: '彩繪塔周邊 (Zámek庫倫洛夫城堡)', category: '下車參觀', categoryColor: 'green',
       description: 'CK小鎮',
       mapUrl: 'https://maps.app.goo.gl/grD5vxzNSLBpn7889',
       guideInfo: {
@@ -957,9 +957,20 @@ export const SupportTab: React.FC = () => {
                     <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
                         <div className="p-6 pt-8 space-y-5">
                             <div className="flex flex-col">
-                                <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                    <i className="fa-solid fa-map-pin text-[8px]"></i> 公會座標 Coordinates
-                                </span>
+                                <div className="flex justify-between items-center mb-1.5">
+                                    <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest flex items-center gap-1.5">
+                                        <i className="fa-solid fa-map-pin text-[8px]"></i> 公會座標 Coordinates
+                                    </span>
+                                    <a 
+                                        href="https://maps.app.goo.gl/RUG3WXz5bVJoGWHo8"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-stone-100 text-[10px] font-bold text-stone-500 hover:bg-zen-primary/10 hover:text-zen-primary transition-colors border border-stone-200/60 shadow-sm"
+                                    >
+                                        <i className="fa-solid fa-diamond-turn-right"></i>
+                                        <span>導航</span>
+                                    </a>
+                                </div>
                                 <p className="text-xs text-zen-text font-bold leading-relaxed pl-3 border-l-2 border-zen-primary/20">
                                     Evropska 2590/33c, 160 00 Praha 6, Czech Republic
                                 </p>
@@ -986,7 +997,7 @@ export const SupportTab: React.FC = () => {
                             <div className="pt-4 border-t border-dashed border-stone-100">
                                 <div className="flex items-center gap-2 mb-3">
                                     <i className="fa-solid fa-hourglass-start text-[10px] text-stone-400"></i>
-                                    <span className="text-[10px] font-bold text-stone-500">領務時間：週一 ~ 週五 09:30-16:30</span>
+                                    <span className="text-[10px] font-bold text-stone-500">領務時間：週一～週五 09:30–11:30、13:30–16:30</span>
                                 </div>
                                 <div className="bg-stone-50 rounded-xl p-3 border border-stone-100/50">
                                     <div className="flex gap-2">
@@ -1010,9 +1021,20 @@ export const SupportTab: React.FC = () => {
                     <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
                         <div className="p-6 pt-8 space-y-5">
                             <div className="flex flex-col">
-                                <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                    <i className="fa-solid fa-location-arrow text-[8px]"></i> 座標 Coordinates
-                                </span>
+                                <div className="flex justify-between items-center mb-1.5">
+                                    <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest flex items-center gap-1.5">
+                                        <i className="fa-solid fa-location-arrow text-[8px]"></i> 座標 Coordinates
+                                    </span>
+                                    <a 
+                                        href="https://maps.app.goo.gl/7XJr4SGCjofJBKmY6"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-stone-100 text-[10px] font-bold text-stone-500 hover:bg-zen-primary/10 hover:text-zen-primary transition-colors border border-stone-200/60 shadow-sm"
+                                    >
+                                        <i className="fa-solid fa-diamond-turn-right"></i>
+                                        <span>導航</span>
+                                    </a>
+                                </div>
                                 <p className="text-xs text-zen-text font-bold leading-relaxed pl-3 border-l-2 border-zen-primary/20">
                                     Markgrafenstrasse 35, 10117 Berlin, Germany
                                 </p>
@@ -1062,9 +1084,20 @@ export const SupportTab: React.FC = () => {
                     <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
                         <div className="p-6 pt-8 space-y-5">
                             <div className="flex flex-col">
-                                <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                    <i className="fa-solid fa-anchor text-[8px]"></i> 座標 Coordinates
-                                </span>
+                                <div className="flex justify-between items-center mb-1.5">
+                                    <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest flex items-center gap-1.5">
+                                        <i className="fa-solid fa-anchor text-[8px]"></i> 座標 Coordinates
+                                    </span>
+                                    <a 
+                                        href="https://maps.app.goo.gl/6WjwL37Gt4DqphaN9"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-stone-100 text-[10px] font-bold text-stone-500 hover:bg-zen-primary/10 hover:text-zen-primary transition-colors border border-stone-200/60 shadow-sm"
+                                    >
+                                        <i className="fa-solid fa-diamond-turn-right"></i>
+                                        <span>導航</span>
+                                    </a>
+                                </div>
                                 <p className="text-xs text-zen-text font-bold leading-relaxed pl-3 border-l-2 border-zen-primary/20">
                                     Wagramer Strasse 19/11. OG, A-1220 Vienna, Austria
                                 </p>
