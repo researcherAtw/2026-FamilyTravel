@@ -231,7 +231,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(含上下纜車)',
       mapUrl: 'https://maps.app.goo.gl/25TfrB8To8oUhBHLA',
       guideInfo: {
-          story: "歐洲現存規模最大的中世紀城堡之一，矗立在舊城區上方。它的主要功能是「防禦」和「彰顯權力」，用來保護大主教們免受外敵（和城內叛亂市民）的威脅，並控制富可敵國的「鹽」貿易。這座城堡在長達900多年的歷史中，從微被敵人攻陷過。",
+          story: "歐洲現存規模最大的中世紀城堡之一，矗立在舊城區上方。它的主要功能是「防禦」和「彰顯權力」，用來保護大主教們免受外敵（和城內叛亂市民）的威脅，並控制富可敵國的「鹽」貿易。這座城堡在長達900多年的歷史中，從未被敵人攻陷過。",
           tip: "搭乘城堡纜車僅需1分鐘. 觀景台是俯瞰薩爾斯堡的最佳地點。內部有木偶博物館與酷刑室。",
           highlights: [
               { id: 'h1', text: '城堡纜車', color: 'red' },
@@ -447,7 +447,6 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       id: 'd10-3', date: '2026-02-24', time: '20:40', displayTime: '20:40',
       title: '任務完成', enTitle: 'Arrival', location: 'TPE 桃園機場', category: 'MISSION CLEAR', categoryColor: 'green',
       description: '抵達溫暖的家',
-      // Fix: Add missing required properties 'highlights' and 'tip' to guideInfo to satisfy GuideInfo interface.
       guideInfo: {
         story: "英雄凱旋！",
         highlights: [],
@@ -850,4 +849,181 @@ export const ScheduleTab: React.FC = () => {
                         >
                             <div className={`absolute inset-0 bg-white rounded-[16px] shadow-sm transition-all duration-300 -z-10 group-hover:bg-gray-50 ${isSelected ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}></div>
                             <span className={`text-[9px] font-black tracking-widest mb-1 font-sans z-10 transition-colors duration-300 ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayName}</span>
-                            <span className={`text-[20px] font-bold font-sans leading-none z-10 transition-colors duration-300 ${isSelected ? 'text-white' :
+                            <span className={`text-[20px] font-bold font-sans leading-none z-10 transition-colors duration-300 ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayNum}</span>
+                        </button>
+                    )
+                })}
+              </div>
+          </div>
+          <div className="flex justify-between items-end px-2 relative">
+             <div>
+                <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Day Plan</div>
+                <div className="flex items-center gap-2">
+                    <h2 className="text-2xl font-mono font-bold text-zen-text leading-none">{selectedDate}</h2>
+                    {lunarText && (
+                        <div className="bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm tracking-widest flex items-center gap-1">
+                            <i className="fa-solid fa-star text-[8px]"></i>
+                            <span>{lunarText}</span>
+                        </div>
+                    )}
+                </div>
+                <div className="flex items-center gap-2 mt-1 text-gray-500 text-sm">
+                    <i className="fa-solid fa-location-dot text-zen-primary"></i> 
+                    <span>{locationHeader}</span>
+                </div>
+             </div>
+             <div className="bg-white/30 backdrop-blur-xl border border-white/40 p-3 rounded-2xl shadow-lg flex flex-col items-center justify-center min-w-[80px] h-[82px] box-border z-10 relative">
+                {loadingWeather ? (
+                     <i className="fa-solid fa-spinner fa-spin text-gray-300 text-2xl"></i>
+                ) : (
+                    <>
+                        <div className="text-2xl mb-1 h-8 flex items-center justify-center filter drop-shadow-sm">
+                            {weather.condition === 'sunny' && <i className="fa-solid fa-sun text-orange-400 animate-spin-slow"></i>}
+                            {weather.condition === 'cloudy' && <i className="fa-solid fa-cloud text-gray-400"></i>}
+                            {weather.condition === 'rain' && <i className="fa-solid fa-cloud-rain text-blue-400"></i>}
+                            {weather.condition === 'snow' && <i className="fa-regular fa-snowflake text-blue-200"></i>}
+                        </div>
+                        <div className="text-sm font-bold font-mono h-5 flex items-center text-gray-700">{weather.temp}°C</div>
+                    </>
+                )}
+             </div>
+          </div>
+      </div>
+      <div 
+        className="flex-1 overflow-hidden relative w-full touch-pan-y"
+        onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}
+      >
+         <div className="flex h-full transition-transform duration-300 ease-out will-change-transform" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+            {dates.map((date, idx) => {
+                const dayItems = items.filter(i => i.date === date);
+                return (
+                    <div key={date} ref={el => { scrollRefs.current[idx] = el; }} className="w-full h-full flex-shrink-0 overflow-y-auto no-scrollbar px-4 pb-24">
+                        <div className="relative pt-4">
+                             {dayItems.map((item) => <ScheduleItemRow key={item.id} item={item} />)}
+                             {dayItems.length === 0 && (
+                                <div className="text-center py-10 text-gray-400 opacity-60">
+                                    <i className="fa-regular fa-calendar-plus text-4xl mb-2"></i>
+                                    <p className="text-sm">No plans for this day yet.</p>
+                                </div>
+                             )}
+                        </div>
+                    </div>
+                );
+            })}
+         </div>
+      </div>
+    </div>
+  );
+};
+
+// --- BOOKINGS TAB (Teleportation Log) ---
+
+const CITY_NAMES: Record<string, string> = {
+    'TPE': 'Taipei',
+    'DXB': 'Dubai',
+    'PRG': 'Prague',
+    'VIE': 'Vienna'
+};
+
+const getArrivalDate = (baseDate: string, arrivalStr: string | undefined) => {
+    if (!arrivalStr) return baseDate;
+    if (arrivalStr.includes('+1')) {
+        const d = new Date(baseDate);
+        d.setDate(d.getDate() + 1);
+        return d.toISOString().split('T')[0];
+    }
+    return baseDate;
+};
+
+export const BookingsTab: React.FC = () => {
+    const [bookings] = useState<Booking[]>(MOCK_BOOKINGS);
+
+    return (
+        <div className="h-full overflow-y-auto px-5 pb-24 space-y-6 no-scrollbar bg-zen-bg pt-4">
+            <div className="flex items-center gap-3 mb-2 px-1">
+                <div className="w-10 h-10 rounded-full bg-zen-primary/10 border border-zen-primary/30 flex items-center justify-center shadow-zen-sm">
+                    <i className="fa-solid fa-scroll text-zen-primary"></i>
+                </div>
+                <div>
+                    <h2 className="text-xl font-black text-zen-text leading-tight tracking-tight">冒險者傳送日誌</h2>
+                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em]">Teleportation Archive</p>
+                </div>
+            </div>
+            
+            <div className="space-y-8">
+                {bookings.map((booking) => {
+                    const isTransfer = booking.details['備註'] === '轉機航班';
+                    const accentColor = isTransfer ? 'bg-indigo-500' : 'bg-zen-primary';
+                    const originCode = booking.title.split(' - ')[0];
+                    const destCode = booking.title.split(' - ')[1];
+
+                    return (
+                        <div key={booking.id} className="relative group">
+                            <i className="fa-solid fa-dharmachakra absolute -top-1 -left-1 text-[10px] text-zen-primary/30 z-20 group-hover:rotate-180 transition-transform duration-1000"></i>
+                            <i className="fa-solid fa-dharmachakra absolute -top-1 -right-1 text-[10px] text-zen-primary/30 z-20 group-hover:rotate-180 transition-transform duration-1000"></i>
+                            
+                            <div className={`bg-white rounded-3xl shadow-zen border-2 border-stone-100 relative overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-zen-hover`}>
+                                <div className={`h-2 w-full ${accentColor} opacity-80`}></div>
+                                <div className="px-5 py-4 flex justify-between items-center bg-stone-50/50 border-b border-stone-100">
+                                    <div className="flex items-center gap-2.5">
+                                        <div className={`w-8 h-8 rounded-lg ${accentColor} flex items-center justify-center shadow-lg transform -rotate-3`}>
+                                            <i className="fa-solid fa-wand-magic-sparkles text-white text-xs"></i>
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">傳送陣 ID</span>
+                                            <span className="text-sm font-black text-zen-text font-mono">{booking.subTitle?.split(' - ')[0]}</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col items-end">
+                                        <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border-2 ${isTransfer ? 'bg-indigo-50 border-indigo-100 text-indigo-500' : 'bg-green-50 border-green-100 text-green-600'}`}>
+                                            {isTransfer ? 'PORTAL RECHARGING' : 'ENTERING PORTAL'}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="p-6">
+                                    <div className="flex justify-between items-center relative">
+                                        <div className="flex flex-col z-10">
+                                            <div className="text-[9px] font-black text-zen-primary mb-1 uppercase tracking-[0.15em] opacity-80">召喚座標</div>
+                                            <div className="text-3xl font-mono font-black text-stone-800 leading-none tracking-tighter mb-1">
+                                                {booking.time}
+                                            </div>
+                                            <div className="text-[10px] font-bold text-stone-400 font-mono">{booking.date}</div>
+                                            <div className="text-xl font-black text-stone-300 mt-2 tracking-widest">{originCode}</div>
+                                        </div>
+                                        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none">
+                                            <div className="mb-2 flex items-center gap-1.5 px-3 py-1 bg-stone-50 rounded-full border border-stone-100 shadow-sm">
+                                                 <i className="fa-regular fa-hourglass-half text-[9px] text-zen-primary animate-pulse"></i>
+                                                 <span className="text-[9px] font-mono font-black text-stone-500">{booking.details['飛行時間']}</span>
+                                            </div>
+                                            <div className="relative w-24 h-8 flex items-center justify-center">
+                                                <div className="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-stone-200 to-transparent"></div>
+                                                <div className="w-10 h-10 rounded-full bg-white border border-stone-100 shadow-inner flex items-center justify-center z-10 animate-spin-slow">
+                                                    <i className="fa-solid fa-dharmachakra text-zen-primary/20 text-xl"></i>
+                                                </div>
+                                                <i className="fa-solid fa-bolt-lightning absolute text-[10px] text-zen-primary animate-bounce"></i>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col text-right z-10">
+                                            <div className="text-[9px] font-black text-zen-primary mb-1 uppercase tracking-[0.15em] opacity-80">降落座標</div>
+                                            <div className="text-3xl font-mono font-black text-stone-800 leading-none tracking-tighter mb-1">
+                                                {booking.details['抵達']?.split(' ')[0] || '--:--'}
+                                            </div>
+                                            <div className="text-[10px] font-bold text-stone-400 font-mono uppercase tracking-wider">
+                                                {getArrivalDate(booking.date, booking.details['抵達'])}
+                                            </div>
+                                            <div className="text-xl font-black text-stone-300 mt-2 tracking-widest">{destCode}</div>
+                                        </div>
+                                    </div>
+                                    <div className="flex justify-between mt-4 px-1 opacity-50">
+                                        <span className="text-[10px] font-bold text-stone-400">{CITY_NAMES[originCode] || 'Realm'}</span>
+                                        <span className="text-[10px] font-bold text-stone-400">{CITY_NAMES[destCode] || 'Realm'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    );
+};
