@@ -3,6 +3,24 @@ import React, { useState, useEffect, useLayoutEffect, useRef, useMemo } from 're
 import { Card, Button, CategoryBadge } from './UI';
 import { ScheduleItem, Booking, HighlightTag, HighlightColor, WeatherInfo } from '../types';
 
+// --- HELPER COMPONENT FOR SEARCH HIGHLIGHTING ---
+const HighlightedText: React.FC<{ text: string | React.ReactNode; highlight: string }> = ({ text, highlight }) => {
+    if (!highlight.trim() || typeof text !== 'string') return <>{text}</>;
+    
+    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+    return (
+        <>
+            {parts.map((part, i) => 
+                part.toLowerCase() === highlight.toLowerCase() ? (
+                    <mark key={i} className="bg-yellow-200 text-stone-900 rounded-sm px-0.5 font-bold">{part}</mark>
+                ) : (
+                    part
+                )
+            )}
+        </>
+    );
+};
+
 // --- MOCK DATA ---
 const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/14 (Sat) Day 0: Pre-departure ---
@@ -231,7 +249,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(含上下纜車)',
       mapUrl: 'https://maps.app.goo.gl/25TfrB8To8oUhBHLA',
       guideInfo: {
-          story: "歐洲現存規模最大的中世紀城堡之一，矗立在舊城區上方。它的主要功能是「防禦」和「彰顯權力」，用來保護大主教們免受外敵（和城內叛亂市民）的威脅，並控制富可敵國的「鹽」貿易。這座城堡在長達900多年的歷史中，從外敵（和城內叛亂市民）的威脅，並控制富可敵國的「鹽」貿易。這座城堡在長達900多年的歷史中，從未被敵人攻陷過。",
+          story: "歐洲現存規模最大的中世紀城堡之一，矗立在舊城區上方。它的主要功能是「防禦」和「彰顯權力」，用來保護大主教們免受外敵（和城內叛亂市民）的威脅，並控制富可敵國的「鹽」貿易。這座城堡在長達900多年的歷史中，從未被敵人攻陷過。",
           tip: "搭乘城堡纜車僅需1分鐘。觀景台是俯瞰薩爾斯堡的最佳地點。內部有木偶博物館與酷刑室。",
           highlights: [
               { id: 'h1', text: '城堡纜車', color: 'red' },
@@ -292,7 +310,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/dcfSuaNqNjkhTEJp6',
       guideInfo: {
-          story: <>這座公寓於 1985 年完工，是由奧地利身兼藝術家與建築師雙重身分的 <strong>「百水先生」(Friedensreich Hundertwasser)</strong> 所設計，堪稱維也納建築界獨樹一幟的異數。<br /><br />百水先生極度痛恨「直線」，甚至稱其為「邪惡的產物」；相反地，他推崇回歸自然與有機的形態。這座公寓，正是他將這些反骨理念付諸實踐的集大成之作。</>,
+          story: "這座公寓於 1985 年完工，是由奧地利身兼藝術家與建築師雙重身分的「百水先生」(Friedensreich Hundertwasser) 所設計，堪稱維也納建築界獨樹一幟的異數。\n\n百水先生極度痛恨「直線」，甚至稱其為「邪惡的產物」；相反地，他推崇回歸自然與有機的形態。這座公寓，正是他將這些反骨理念付諸實踐的集大成之作。",
           tip: "內部有居民無法參觀。建議去對面的「百水藝術村」商場體驗其風格，或步行至附近的百水藝術館。",
           highlights: [
               { id: 'h1', text: '奇特建築', color: 'orange' },
@@ -385,7 +403,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/dcfSuaNqNjkhTEJp6',
       guideInfo: {
-          story: <>這座公寓於 1985 年完工，是由奧地利身兼藝術家與建築師雙重身分的 <strong>「百水先生」(Friedensreich Hundertwasser)</strong> 所設計，堪稱維也納建築界獨樹一幟的異數。<br /><br />百水先生極度痛恨「直線」，甚至稱其為「邪惡的產物」；相反地，他推崇回歸自然與有機的形態。這座公寓，正是他將這些反骨理念付諸實踐的集大成之作。</>,
+          story: "這座公寓於 1985 年完工，是由奧地利身兼藝術家與建築師雙重身分的「百水先生」(Friedensreich Hundertwasser) 所設計，堪稱維也納建築界獨樹一幟的異數。\n\n百水先生極度痛恨「直線」，甚至稱其為「邪惡的產物」；相反地，他推崇回歸自然與有機的形態。這座公寓，正是他將這些反骨理念付諸實踐的集大成之作。",
           tip: "若上次未參觀百水藝術館，今日可安排前往，欣賞更多百水先生的畫作與建築模型。",
           highlights: [
               { id: 'h1', text: '自然共生', color: 'green' },
@@ -399,7 +417,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(南塔、北塔二擇一登頂)',
       mapUrl: 'https://maps.app.goo.gl/d6ob7ph5DwFvTL949',
       guideInfo: {
-          story: "維也納的靈魂象徵，始建於12世紀。曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n哈布斯堡家族是極度虔誠的天主教徒。這個分開埋葬最初出於實務的防腐程序，然而隨著時間演變，被昇華為一種隆重的宗教儀式。\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
+          story: "維也納的靈魂象徵，始建於12世紀。曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
           tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘。亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
           highlights: [
               { id: 'h1', text: '南塔(樓梯)', color: 'red' },
@@ -455,70 +473,6 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
         ]
       }
   },
-];
-
-// MOCK_BOOKINGS with fixed data
-const MOCK_BOOKINGS: Booking[] = [
-    {
-      id: 'b1',
-      type: 'flight',
-      title: 'TPE - DXB',
-      subTitle: 'EK367 - Emirates',
-      referenceNo: 'EK367-TPE-DXB',
-      date: '2026-02-15',
-      time: '00:20',
-      details: {
-        '飛行時間': '9h 55m',
-        '抵達': '06:15',
-        '備註': '去程第一段'
-      },
-      status: 'confirmed'
-    },
-    {
-      id: 'b2',
-      type: 'flight',
-      title: 'DXB - PRG',
-      subTitle: 'EK139 - Emirates',
-      referenceNo: 'EK139-DXB-PRG',
-      date: '2026-02-15',
-      time: '08:40',
-      details: {
-        '飛行時間': '6h 50m',
-        '抵達': '12:30',
-        '備註': '轉機航班'
-      },
-      status: 'confirmed'
-    },
-    {
-      id: 'b3',
-      type: 'flight',
-      title: 'VIE - DXB',
-      subTitle: 'EK126 - Emirates',
-      referenceNo: 'EK126-VIE-DXB',
-      date: '2026-02-23',
-      time: '21:45',
-      details: {
-        '飛行時間': '5h 40m',
-        '抵達': '06:25 +1',
-        '備註': '回程第一段'
-      },
-      status: 'confirmed'
-    },
-    {
-      id: 'b4',
-      type: 'flight',
-      title: 'DXB - TPE',
-      subTitle: 'EK366 - Emirates',
-      referenceNo: 'EK366-DXB-TPE',
-      date: '2026-02-24',
-      time: '08:45',
-      details: {
-        '飛行時間': '8h 55m',
-        '抵達': '20:40',
-        '備註': '轉機航班'
-      },
-      status: 'confirmed'
-    }
 ];
 
 // --- SHARED UTILS ---
@@ -587,7 +541,7 @@ const getCategoryIcon = (item: ScheduleItem): string => {
     return 'fa-location-dot';
 };
 
-const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean }> = ({ item, showDate }) => {
+const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; searchTerm?: string }> = ({ item, showDate, searchTerm = '' }) => {
     const isMajor = ['transport', 'ASSEMBLE', 'GATHERING', 'TELEPORT', 'UNLOCKED', 'CHECKPOINT', 'MISSION CLEAR'].includes(item.category);
     const timeStr = item.displayTime || item.time;
     const [mainTime, subTime] = timeStr.includes('\n') ? timeStr.split('\n') : [timeStr, null];
@@ -639,9 +593,13 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean }> = ({
                     <div className="relative z-10">
                         <div className="flex justify-between items-start gap-2 mb-1">
                             <div className="flex flex-col">
-                                <h3 className="font-bold text-lg leading-tight text-zen-text">{item.title}</h3>
+                                <h3 className="font-bold text-lg leading-tight text-zen-text">
+                                    <HighlightedText text={item.title} highlight={searchTerm} />
+                                </h3>
                                 {item.enTitle && (
-                                    <span className="text-[10px] font-mono text-gray-400 font-medium tracking-wide mt-0.5">{item.enTitle}</span>
+                                    <span className="text-[10px] font-mono text-gray-400 font-medium tracking-wide mt-0.5 uppercase">
+                                        <HighlightedText text={item.enTitle} highlight={searchTerm} />
+                                    </span>
                                 )}
                             </div>
                             <div className="flex-shrink-0 mt-0.5 opacity-80 scale-90 origin-top-right">
@@ -650,7 +608,9 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean }> = ({
                         </div>
                         <div className="text-xs text-gray-500 flex items-center gap-1.5 mb-2 mt-1 min-w-0">
                             <i className="fa-solid fa-location-dot text-[10px] text-zen-primary flex-shrink-0"></i> 
-                            <span className="truncate font-medium flex-1 min-w-0 leading-none">{item.location}</span>
+                            <span className="truncate font-medium flex-1 min-w-0 leading-none">
+                                <HighlightedText text={item.location} highlight={searchTerm} />
+                            </span>
                             {item.mapUrl && (
                                 <a 
                                     href={item.mapUrl}
@@ -665,7 +625,7 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean }> = ({
                         </div>
                         {item.description && (
                             <div className="text-xs text-gray-400 font-medium whitespace-pre-line leading-relaxed mb-2 pl-4 border-l-2 border-stone-100">
-                                {item.description}
+                                <HighlightedText text={item.description} highlight={searchTerm} />
                             </div>
                         )}
                         {item.businessHours && (
@@ -677,7 +637,7 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean }> = ({
                             <div className="mt-4 pt-3 border-t border-dashed border-gray-100">
                                 {item.guideInfo?.story && (
                                     <div className="text-sm text-gray-600 leading-relaxed font-sans mb-3 whitespace-pre-line text-left">
-                                        {item.guideInfo.story}
+                                        <HighlightedText text={item.guideInfo.story} highlight={searchTerm} />
                                     </div>
                                 )}
                                 {item.guideInfo?.tip && (
@@ -685,14 +645,18 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean }> = ({
                                         <div className="absolute top-0 left-0 w-1 h-full bg-orange-300"></div>
                                         <div className="flex gap-2 relative z-10">
                                             <i className="fa-solid fa-lightbulb text-orange-400 mt-0.5 text-xs"></i>
-                                            <p className="text-xs text-orange-800 font-medium leading-relaxed whitespace-pre-line">{item.guideInfo.tip}</p>
+                                            <p className="text-xs text-orange-800 font-medium leading-relaxed whitespace-pre-line">
+                                                <HighlightedText text={item.guideInfo.tip} highlight={searchTerm} />
+                                            </p>
                                         </div>
                                     </div>
                                 )}
                                 {item.guideInfo?.highlights && item.guideInfo.highlights.length > 0 && (
                                     <div className="flex flex-wrap gap-2 mt-3">
                                         {item.guideInfo.highlights.map(h => (
-                                            <span key={h.id} className={`text-[10px] px-2.5 py-1 rounded-full border font-bold shadow-sm ${TAG_COLORS[h.color]}`}>{h.text}</span>
+                                            <span key={h.id} className={`text-[10px] px-2.5 py-1 rounded-full border font-bold shadow-sm ${TAG_COLORS[h.color]}`}>
+                                                <HighlightedText text={h.text} highlight={searchTerm} />
+                                            </span>
                                         ))}
                                     </div>
                                 )}
@@ -721,15 +685,38 @@ export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = ''
   const dates = useMemo(() => Array.from(new Set(items.map(i => i.date))).sort() as string[], [items]);
   const currentIndex = dates.indexOf(selectedDate);
 
+  // 強化搜尋邏輯：檢查所有可見文字欄位，並將 JSX 故事預處理為純文字以便搜尋
   const filteredResults = useMemo(() => {
     if (!searchTerm.trim()) return [];
     const query = searchTerm.toLowerCase();
-    return items.filter(item => 
-        item.title.toLowerCase().includes(query) ||
-        item.enTitle?.toLowerCase().includes(query) ||
-        item.location.toLowerCase().includes(query) ||
-        item.description?.toLowerCase().includes(query)
-    );
+    
+    return items.filter(item => {
+        // 核心欄位搜尋
+        const basicMatch = 
+            item.title.toLowerCase().includes(query) ||
+            item.enTitle?.toLowerCase().includes(query) ||
+            item.location.toLowerCase().includes(query) ||
+            item.description?.toLowerCase().includes(query);
+
+        if (basicMatch) return true;
+
+        // 攻略詳情搜尋
+        if (item.guideInfo) {
+            // 故事內容 (JSX 自動轉換為純文字搜尋)
+            const storyMatch = typeof item.guideInfo.story === 'string' && 
+                               item.guideInfo.story.toLowerCase().includes(query);
+            
+            // 小撇步
+            const tipMatch = item.guideInfo.tip?.toLowerCase().includes(query);
+            
+            // 標籤亮點
+            const highlightMatch = item.guideInfo.highlights?.some(h => h.text.toLowerCase().includes(query));
+
+            return storyMatch || tipMatch || highlightMatch;
+        }
+
+        return false;
+    });
   }, [searchTerm, items]);
 
   useLayoutEffect(() => {
@@ -803,7 +790,7 @@ export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = ''
   }, [selectedDate]);
   
   const onTouchStart = (e: React.TouchEvent) => {
-    if (searchTerm) return; // Disable swiping when searching
+    if (searchTerm) return; 
     setTouchEnd(null);
     setTouchStart({ x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY });
   };
@@ -915,7 +902,7 @@ export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = ''
                                 {dayItems.length === 0 && (
                                     <div className="text-center py-10 text-gray-400 opacity-60">
                                         <i className="fa-regular fa-calendar-plus text-4xl mb-2"></i>
-                                        <p className="text-sm">No plans for this day yet.</p>
+                                        <p className="text-sm">No plans for this day yet。</p>
                                     </div>
                                 )}
                             </div>
@@ -928,7 +915,7 @@ export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = ''
                 <div className="relative pt-4">
                     {filteredResults.length > 0 ? (
                         filteredResults.map((item) => (
-                            <ScheduleItemRow key={item.id} item={item} showDate={true} />
+                            <ScheduleItemRow key={item.id} item={item} showDate={true} searchTerm={searchTerm} />
                         ))
                     ) : (
                         <div className="text-center py-20 text-stone-400 opacity-60">
@@ -946,6 +933,67 @@ export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = ''
 };
 
 // --- BOOKINGS TAB (Teleportation Log) ---
+
+const MOCK_BOOKINGS: Booking[] = [
+  {
+    id: 'b1',
+    type: 'flight',
+    title: 'TPE - DXB',
+    subTitle: 'EK367 - 阿聯酋航空',
+    referenceNo: 'QUEST-EK367',
+    date: '2026-02-15',
+    time: '00:20',
+    details: {
+      '飛行時間': '9小時 25分',
+      '抵達': '06:15'
+    },
+    status: 'confirmed'
+  },
+  {
+    id: 'b2',
+    type: 'flight',
+    title: 'DXB - PRG',
+    subTitle: 'EK139 - 阿聯酋航空',
+    referenceNo: 'QUEST-EK139',
+    date: '2026-02-15',
+    time: '08:40',
+    details: {
+      '飛行時間': '6小時 50分',
+      '抵達': '12:30',
+      '備註': '轉機航班'
+    },
+    status: 'confirmed'
+  },
+  {
+    id: 'b3',
+    type: 'flight',
+    title: 'VIE - DXB',
+    subTitle: 'EK126 - 阿聯酋航空',
+    referenceNo: 'QUEST-EK126',
+    date: '2026-02-23',
+    time: '21:45',
+    details: {
+      '飛行時間': '5小時 40分',
+      '抵達': '06:25 (+1)'
+    },
+    status: 'confirmed'
+  },
+  {
+    id: 'b4',
+    type: 'flight',
+    title: 'DXB - TPE',
+    subTitle: 'EK366 - 阿聯酋航空',
+    referenceNo: 'QUEST-EK366',
+    date: '2026-02-24',
+    time: '08:45',
+    details: {
+      '飛行時間': '8小時 55分',
+      '抵達': '20:40',
+      '備註': '轉機航班'
+    },
+    status: 'confirmed'
+  }
+];
 
 const CITY_NAMES: Record<string, string> = {
     'TPE': 'Taipei',
