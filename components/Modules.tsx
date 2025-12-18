@@ -997,8 +997,10 @@ export const BookingsTab: React.FC = () => {
                                                 {booking.time}
                                             </div>
                                             <div className="text-[10px] font-bold text-stone-400 font-mono tracking-tight">{booking.date}</div>
-                                            <div className="text-xl font-black text-stone-600 mt-2 tracking-widest leading-none">{originCode}</div>
-                                            <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-1.5 leading-none opacity-80 uppercase">{CITY_NAMES[originCode] || 'Realm'}</div>
+                                            {/* Airport Code - Slightly reduced top margin */}
+                                            <div className="text-xl font-black text-stone-600 mt-1.5 tracking-widest leading-none">{originCode}</div>
+                                            {/* City Name - Tightly following with mt-0.5 */}
+                                            <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-0.5 leading-none opacity-80 uppercase">{CITY_NAMES[originCode] || 'Realm'}</div>
                                         </div>
 
                                         {/* Teleport Gate Animation - BALANCED VISIBILITY */}
@@ -1033,8 +1035,10 @@ export const BookingsTab: React.FC = () => {
                                             <div className="text-[10px] font-bold text-stone-400 font-mono uppercase tracking-wider tracking-tight">
                                                 {getArrivalDate(booking.date, booking.details['抵達'])}
                                             </div>
-                                            <div className="text-xl font-black text-stone-600 mt-2 tracking-widest leading-none">{destCode}</div>
-                                            <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-1.5 leading-none opacity-80 uppercase">{CITY_NAMES[destCode] || 'Realm'}</div>
+                                            {/* Airport Code - Slightly reduced top margin */}
+                                            <div className="text-xl font-black text-stone-600 mt-1.5 tracking-widest leading-none">{destCode}</div>
+                                            {/* City Name - Tightly following with mt-0.5 */}
+                                            <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-0.5 leading-none opacity-80 uppercase">{CITY_NAMES[destCode] || 'Realm'}</div>
                                         </div>
                                     </div>
                                 </div>
