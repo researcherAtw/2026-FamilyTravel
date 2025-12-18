@@ -103,7 +103,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/XK51NPV4JhyTtMTh8',
       guideInfo: {
           story: "這不只是一座城堡，而是金氏世界紀錄認證的「世界上最大的古堡建築群」。\n\n這裡曾是波希米亞國王與神聖羅馬帝國皇帝的居所，集結了羅馬式、哥德式、文藝復興至巴洛克等千年的建築精華。\n\n城堡的心臟是「聖維特大教堂」(St. Vitus Cathedral)，這座耗時近 600 年才完工的哥德式傑作，不僅是歷代國王加冕之處，更是捷克精神的英恆象徵。",
-          tip: "參觀主要景點需購買套票(Circuit B)。務必入內欣賞聖維特大教堂中慕夏(Alfons Mucha)設計的彩繪玻璃窗. 每天中午12點在正門有衛兵交接。",
+          tip: "參觀主要景點需購買套票(Circuit B)。務必入內欣賞聖維特大教堂中慕夏(Alfons Mucha)設計的彩繪玻璃窗。每天中午12點在正門有衛兵交接。",
           highlights: [
               { id: 'h4', text: '金氏世界紀錄認證', color: 'orange' },
               { id: 'h1', text: '聖維特大教堂', color: 'purple' },
@@ -145,7 +145,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '捷克郵政總局', enTitle: 'Czech Post Office', location: '布拉格新城 (Nové Město)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/hCSgxbBEBKxW1FXr8',
       guideInfo: {
-          story: "建於1871-1874年，採用宏偉的新文藝復興風格. 內部有表現通訊歷史的壁畫。",
+          story: "建於1871-1874年，採用宏偉的新文藝復興風格。內部有表現通訊歷史的壁畫。",
           tip: "至今仍是正常運作的郵局，可免費進入大廳參觀。不妨在此購買郵票並寄出您的明信片體驗歷史。",
           highlights: [
               { id: 'h1', text: '新文藝復興', color: 'red' },
@@ -159,7 +159,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/RQpVaL8PULVdoEgEA',
       guideInfo: {
           story: "這座雄偉的新文藝復興建築本身就是捷克國家認同的象徵。它成立於1818年，但現在的主建築於1891年完工。\n\n在19世紀「捷克民族復興」運動中，建立一個收藏捷克自然與歷史的博物館，是向當時統治的奧地利（哈布斯堡王朝）宣示捷克文化獨立性的重要舉動。\n\n「捷克民族復興」：針對奧地利哈布斯堡王朝統治下「德國化」政策的反動，目的是「搶救瀕臨滅絕的捷克語言與文化」。",
-          tip: "從博物館頂樓的圓頂可以俯瞰整個瓦茨拉夫廣場. 主館與新館（原國會大廈）有地下通道相連。",
+          tip: "從博物館頂樓的圓頂可以俯瞰整個瓦茨拉夫廣場。主館與新館（原國會大廈）有地下通道相連。",
           highlights: [
               { id: 'h1', text: '圓頂景觀', color: 'blue' },
               { id: 'h2', text: '國家認同', color: 'red' }
@@ -216,8 +216,8 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '米拉貝爾花園', enTitle: 'Mirabell Palace & Gardens', location: '薩爾斯堡新城 (Schloss Mirabell)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/UFJmcNbFmcCPXJ6J6',
       guideInfo: {
-          story: "這座精美的巴洛克式花園，背後藏著一段驚世駭俗的愛情故事。它由 17 世紀導大主教 沃爾夫·迪特里希 (Wolf Dietrich) 為情婦 莎樂美·阿爾特 (Salome Alt) 和他們的 15 個孩子所建，名副其實的「愛之宮」。\n\n＊天主教的神職人員不可婚配及生子。",
-          tip: "此地因電影《真善美》而聞名全球，瑪麗亞正是圍繞著園內的飛馬噴泉教孩子們唱〈Do-Re-Mi〉。\n\n花園免費開放. 從這裡可以完美地「框」住遠處山丘上的莎姿堡城堡，是經典拍照角度。",
+          story: "這座精美的巴洛克式花園，背後藏著一段驚世駭俗的愛情故事。它由 17 世紀的大主教 沃爾夫·迪特里希 (Wolf Dietrich) 為情婦 莎樂美·阿爾特 (Salome Alt) 和他們的 15 個孩子所建，名副其實的「愛之宮」。\n\n＊天主教的神職人員不可婚配及生子。",
+          tip: "此地因電影《真善美》而聞名全球，瑪麗亞正是圍繞著園內的飛馬噴泉教孩子們唱〈Do-Re-Mi〉。\n\n花園免費開放。從這裡可以完美地「框」住遠處山丘上的莎姿堡城堡，是經典拍照角度。",
           highlights: [
               { id: 'h1', text: '真善美', color: 'purple' },
               { id: 'h2', text: '飛馬噴泉', color: 'orange' },
@@ -231,8 +231,8 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(含上下纜車)',
       mapUrl: 'https://maps.app.goo.gl/25TfrB8To8oUhBHLA',
       guideInfo: {
-          story: "歐洲現存規模最大的中世紀城堡之一，矗立在舊城區上方。它的主要功能是「防禦」和「彰顯權力」，用來保護大主教們免受外敵（和城內叛亂市民）的威脅，並控制富可敵國的「鹽」貿易。這座城堡在長達900多年的歷史中，從未被敵人攻陷過。",
-          tip: "搭乘城堡纜車僅需1分鐘. 觀景台是俯瞰薩爾斯堡的最佳地點。內部有木偶博物館與酷刑室。",
+          story: "歐洲現存規模最大的中世紀城堡之一，矗立在舊城區上方。它的主要功能是「防禦」和「彰顯權力」，用來保護大主教們免受外敵（和城內叛亂市民）的威脅，並控制富可敵國的「鹽」貿易。這座城堡在長達900多年的歷史中，從外敵（和城內叛亂市民）的威脅，並控制富可敵國的「鹽」貿易。這座城堡在長達900多年的歷史中，從未被敵人攻陷過。",
+          tip: "搭乘城堡纜車僅需1分鐘。觀景台是俯瞰薩爾斯堡的最佳地點。內部有木偶博物館與酷刑室。",
           highlights: [
               { id: 'h1', text: '城堡纜車', color: 'red' },
               { id: 'h2', text: '全景觀景台', color: 'blue' },
@@ -262,8 +262,8 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '鹽礦探秘之旅', enTitle: 'Salt Mine Tour', location: '哈萊認 (Hallein) /貝希特斯加登', category: '入場卷', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/khDxgJfHDWY6TwhU6',
       guideInfo: {
-          story: "「鹽」是中世紀的白金. 此區財富均來自鹽礦。",
-          tip: "需換上傳統礦工服. 體驗亮點是兩段刺激的木製溜滑梯，以及搭乘木筏渡過地底鹽水湖。",
+          story: "「鹽」是中世紀的白金。此區財富均來自鹽礦。",
+          tip: "需換上傳統礦工服。體驗亮點是兩段刺激的木製溜滑梯，以及搭乘木筏渡過地底鹽水湖。",
           highlights: [
               { id: 'h1', text: '木製溜滑梯', color: 'orange' },
               { id: 'h2', text: '礦工服', color: 'gray' },
@@ -280,7 +280,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/MnHJtGZ3FC9mLT2SA',
       guideInfo: {
           story: "1997年列為世界文化遺產，被譽為世界上最美的小鎮之一，歷史與鹽礦密不可分。",
-          tip: "經典明信片角度位於小鎮北側公路旁. 因墓地專用空間有限，教堂旁有獨特的「人骨室」。",
+          tip: "經典明信片角度位於小鎮北側公路旁。因墓地專用空間有限，教堂旁有獨特的「人骨室」。",
           highlights: [
               { id: 'h1', text: '世界遺產', color: 'blue' },
               { id: 'h2', text: '人骨室', color: 'gray' }
@@ -305,7 +305,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '卡爾教堂', enTitle: 'Karlskirche', location: '卡爾廣場 (Karlsplatz)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/FMdKhrTT6ye6FD388',
       guideInfo: {
-          story: "巴洛克建築巔峰，1713年皇帝卡爾六世為感謝黑死病結束而建. 融合了古希臘的神殿門廊、古羅馬的兩根「圖拉真柱」（上面雕刻著聖人的生平）以及拜占庭式的巨大橢圓形穹頂。",
+          story: "巴洛克建築巔峰，1713年皇帝卡爾六世為感謝黑死病結束而建。融合了古希臘的神殿門廊、古羅馬的兩根「圖拉真柱」（上面雕刻著聖人的生平）以及拜占庭式的巨大橢圓形穹頂。",
           tip: "前方水池可拍出完美倒影。教堂內部有全景電梯可直達穹頂近距離欣賞濕壁畫（需購票）。",
           highlights: [
               { id: 'h1', text: '巴洛克', color: 'orange' },
@@ -321,7 +321,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/ZZbtf4VG7tezXwBz6',
       guideInfo: {
           story: "哈布斯堡王朝的唯一女性統治者—瑪麗亞·特蕾莎 (Maria Theresa) 被戲稱為「歐洲丈母娘」aka 歐洲岳母，主要原因是她將「聯姻外交」發揮到了極致。\n\n她一生生育了 16 個孩子（其中 10 個活到成年），並將絕大多數的女兒都嫁給了歐洲各國的君主 or 王儲，以此來鞏固奧地利與各國的盟友關係，達成政治目的。",
-          tip: "兩側矗立著「雙胞胎」建築：藝術史博物館與自然史博物館. 後方即是現代化的維也納博物館區 (MQ)。",
+          tip: "兩側矗立著「雙胞胎」建築：藝術史博物館與自然史博物館。後方即是現代化的維也納博物館區 (MQ)。",
           highlights: [
               { id: 'h1', text: '藝術史博物館', color: 'red' },
               { id: 'h2', text: '自然史博物館', color: 'green' }
@@ -334,7 +334,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/bPPsM1JA2y2oMD8U6',
       guideInfo: {
           story: "哈布斯堡王朝的冬宮，也是西西 (Sisi，伊莉莎白皇后) 的黃金牢籠。\n\n西西 (Sisi) 是伊莉莎白皇后的真實暱稱，茜茜則是電影譯名。\n霍夫堡宮是西西皇后權力的象徵，也是她痛苦的根源。在這裡看到的不是一個幸福皇后的家，而是一位女性試圖在壓抑體制中，衝撞並尋找自我的掙扎痕跡。",
-          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館. 西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇后的關鍵展品\n私個人物品： 西西皇后的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
+          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館。西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇后的關鍵展品\n私個人物品： 西西皇后的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
           highlights: [
               { id: 'h0', text: '冬宮', color: 'blue' },
               { id: 'h1', text: '西西博物館', color: 'purple' },
@@ -399,8 +399,8 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(南塔、北塔二擇一登頂)',
       mapUrl: 'https://maps.app.goo.gl/d6ob7ph5DwFvTL949',
       guideInfo: {
-          story: "維也納的靈魂象徵，始建於12世紀. 曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n哈布斯堡家族是極度虔誠的天主教徒. 這個分開埋葬最初出於實務的防腐程序，然而隨著時間演變，被昇華為一種隆重的宗教儀式。\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
-          tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘. 亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
+          story: "維也納的靈魂象徵，始建於12世紀。曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n哈布斯堡家族是極度虔誠的天主教徒。這個分開埋葬最初出於實務的防腐程序，然而隨著時間演變，被昇華為一種隆重的宗教儀式。\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
+          tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘。亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
           highlights: [
               { id: 'h1', text: '南塔(樓梯)', color: 'red' },
               { id: 'h2', text: '北塔(電梯)', color: 'blue' },
@@ -420,7 +420,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/kSB8ToNAZydoHitT7',
       guideInfo: {
           story: "中歐最大的設計師暢貨中心之一，擁有充滿布爾根蘭州傳統風格的建築設計。",
-          tip: "建議先至遊客中心領取地圖與額外折扣券. 退稅手續可在現場辦理（需信用卡擔保），或是留到機場處理。",
+          tip: "建議先至遊客中心領取地圖與額外折扣券。退稅手續可在現場辦理（需信用卡擔保），或是留到機場處理。",
           highlights: [
               { id: 'h1', text: '購物天堂', color: 'red' },
               { id: 'h2', text: '退稅服務', color: 'blue' }
@@ -448,12 +448,11 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '任務完成', enTitle: 'Arrival', location: 'TPE 桃園機場', category: 'MISSION CLEAR', categoryColor: 'green',
       description: '抵達溫暖的家',
       guideInfo: {
-        story: "英雄凱旋！感謝各位勇者的參與，這次長達11天的金色奧捷冒險圓滿落幕。",
+        story: "勇者凱旋！",
         highlights: [
             { id: 'm1', text: '成就達成', color: 'green' },
             { id: 'm2', text: '冒險終章', color: 'teal' }
-        ],
-        tip: "回家後請先好好休息，並記得整理這次冒險留下的回憶（照片）喔！"
+        ]
       }
   },
 ];
@@ -933,9 +932,9 @@ export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = ''
                         ))
                     ) : (
                         <div className="text-center py-20 text-stone-400 opacity-60">
-                            <i className="fa-solid fa-map-marked-alt text-5xl mb-4"></i>
-                            <p className="text-sm font-bold">地圖上找不到符合關鍵字的標記</p>
-                            <p className="text-xs mt-1">請嘗試輸入其他關鍵字⋯</p>
+                            <i className="fa-solid fa-ghost text-6xl mb-4 animate-bounce"></i>
+                            <p className="text-sm font-bold px-8">冒險者公會的情報網裡沒聽說過這地方耶？</p>
+                            <p className="text-xs mt-1">請嘗試輸入其他線索⋯⋯</p>
                         </div>
                     )}
                 </div>
