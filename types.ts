@@ -33,8 +33,8 @@ export interface RelatedLink {
 
 export interface GuideInfo {
   story: string | React.ReactNode;
-  highlights: HighlightTag[];
-  tip: string;
+  highlights?: HighlightTag[];
+  tip?: string;
   relatedLink?: RelatedLink;
 }
 

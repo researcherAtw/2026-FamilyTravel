@@ -216,7 +216,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '米拉貝爾花園', enTitle: 'Mirabell Palace & Gardens', location: '薩爾斯堡新城 (Schloss Mirabell)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/UFJmcNbFmcCPXJ6J6',
       guideInfo: {
-          story: "這座精美的巴洛克式花園，背後藏著一段驚世駭俗的愛情故事。它由 17 世紀的大主教 沃爾夫·迪特里希 (Wolf Dietrich) 為情婦 莎樂美·阿爾特 (Salome Alt) 和他們的 15 個孩子所建，名副其實的「愛之宮」。\n\n＊天主教的神職人員不可婚配及生子。",
+          story: "這座精美的巴洛克式花園，背後藏著一段驚世駭俗的愛情故事。它由 17 世紀導大主教 沃爾夫·迪特里希 (Wolf Dietrich) 為情婦 莎樂美·阿爾特 (Salome Alt) 和他們的 15 個孩子所建，名副其實的「愛之宮」。\n\n＊天主教的神職人員不可婚配及生子。",
           tip: "此地因電影《真善美》而聞名全球，瑪麗亞正是圍繞著園內的飛馬噴泉教孩子們唱〈Do-Re-Mi〉。\n\n花園免費開放. 從這裡可以完美地「框」住遠處山丘上的莎姿堡城堡，是經典拍照角度。",
           highlights: [
               { id: 'h1', text: '真善美', color: 'purple' },
@@ -448,9 +448,12 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '任務完成', enTitle: 'Arrival', location: 'TPE 桃園機場', category: 'MISSION CLEAR', categoryColor: 'green',
       description: '抵達溫暖的家',
       guideInfo: {
-        story: "英雄凱旋！",
-        highlights: [],
-        tip: ""
+        story: "英雄凱旋！感謝各位勇者的參與，這次長達11天的金色奧捷冒險圓滿落幕。",
+        highlights: [
+            { id: 'm1', text: '成就達成', color: 'green' },
+            { id: 'm2', text: '冒險終章', color: 'teal' }
+        ],
+        tip: "回家後請先好好休息，並記得整理這次冒險留下的回憶（照片）喔！"
       }
   },
 ];
@@ -959,64 +962,125 @@ export const BookingsTab: React.FC = () => {
 
                     return (
                         <div key={booking.id} className="relative group">
+                            {/* Decorative Runes */}
                             <i className="fa-solid fa-dharmachakra absolute -top-1 -left-1 text-[10px] text-zen-primary/30 z-20 group-hover:rotate-180 transition-transform duration-1000"></i>
                             <i className="fa-solid fa-dharmachakra absolute -top-1 -right-1 text-[10px] text-zen-primary/30 z-20 group-hover:rotate-180 transition-transform duration-1000"></i>
                             
-                            <div className={`bg-white rounded-3xl shadow-zen border-2 border-stone-100 relative overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-zen-hover`}>
-                                <div className={`h-2 w-full ${accentColor} opacity-80`}></div>
-                                <div className="px-5 py-4 flex justify-between items-center bg-stone-50/50 border-b border-stone-100">
+                            <div className={`bg-white rounded-3xl shadow-zen border border-stone-100 relative overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-zen-hover`}>
+                                {/* Top Decoration */}
+                                <div className={`h-2 w-full ${accentColor} opacity-70`}></div>
+                                
+                                <div className="px-5 py-4 flex justify-between items-center bg-stone-50/40 border-b border-stone-100">
                                     <div className="flex items-center gap-2.5">
-                                        <div className={`w-8 h-8 rounded-lg ${accentColor} flex items-center justify-center shadow-lg transform -rotate-3`}>
-                                            <i className="fa-solid fa-wand-magic-sparkles text-white text-xs"></i>
+                                        <div className={`w-8 h-8 rounded-lg ${accentColor} flex items-center justify-center shadow-md transform -rotate-3`}>
+                                            <i className="fa-solid fa-wand-magic-sparkles text-white text-[10px]"></i>
                                         </div>
                                         <div className="flex flex-col">
-                                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">傳送陣 ID</span>
-                                            <span className="text-sm font-black text-zen-text font-mono">{booking.subTitle?.split(' - ')[0]}</span>
+                                            <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest">傳送陣 ID</span>
+                                            <span className="text-xs font-black text-zen-text font-mono tracking-tight leading-none">{booking.subTitle?.split(' - ')[0]}</span>
                                         </div>
                                     </div>
                                     <div className="flex flex-col items-end">
-                                        <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border-2 ${isTransfer ? 'bg-indigo-50 border-indigo-100 text-indigo-500' : 'bg-green-50 border-green-100 text-green-600'}`}>
+                                        <span className={`px-2.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest border ${isTransfer ? 'bg-indigo-50 border-indigo-100 text-indigo-400' : 'bg-green-50 border-green-100 text-green-500'}`}>
                                             {isTransfer ? 'PORTAL RECHARGING' : 'ENTERING PORTAL'}
                                         </span>
                                     </div>
                                 </div>
+
+                                {/* Main Content Area */}
                                 <div className="p-6">
                                     <div className="flex justify-between items-center relative">
-                                        <div className="flex flex-col z-10">
-                                            <div className="text-[9px] font-black text-zen-primary mb-1 uppercase tracking-[0.15em] opacity-80">召喚座標</div>
-                                            <div className="text-3xl font-mono font-black text-stone-800 leading-none tracking-tighter mb-1">
+                                        {/* Origin */}
+                                        <div className="flex flex-col z-10 w-24">
+                                            <div className="text-[8px] font-black text-zen-primary mb-1 uppercase tracking-[0.15em] opacity-80">召喚座標</div>
+                                            <div className="text-3xl font-mono font-black text-stone-700 leading-none tracking-tighter mb-1">
                                                 {booking.time}
                                             </div>
-                                            <div className="text-[10px] font-bold text-stone-400 font-mono">{booking.date}</div>
-                                            <div className="text-xl font-black text-stone-300 mt-2 tracking-widest">{originCode}</div>
+                                            <div className="text-[10px] font-bold text-stone-400 font-mono tracking-tight">{booking.date}</div>
+                                            <div className="text-xl font-black text-stone-600 mt-2 tracking-widest leading-none">{originCode}</div>
                                         </div>
-                                        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none">
-                                            <div className="mb-2 flex items-center gap-1.5 px-3 py-1 bg-stone-50 rounded-full border border-stone-100 shadow-sm">
-                                                 <i className="fa-regular fa-hourglass-half text-[9px] text-zen-primary animate-pulse"></i>
+
+                                        {/* Teleport Gate Animation - BALANCED VISIBILITY */}
+                                        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none z-0">
+                                            <div className="mb-2 flex items-center gap-1.5 px-3 py-0.5 bg-stone-50 rounded-full border border-stone-100 shadow-sm">
+                                                 <i className="fa-regular fa-hourglass-half text-[8px] text-zen-primary/70 animate-pulse"></i>
                                                  <span className="text-[9px] font-mono font-black text-stone-500">{booking.details['飛行時間']}</span>
                                             </div>
-                                            <div className="relative w-24 h-8 flex items-center justify-center">
-                                                <div className="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-stone-200 to-transparent"></div>
-                                                <div className="w-10 h-10 rounded-full bg-white border border-stone-100 shadow-inner flex items-center justify-center z-10 animate-spin-slow">
-                                                    <i className="fa-solid fa-dharmachakra text-zen-primary/20 text-xl"></i>
+                                            
+                                            <div className="relative w-32 h-10 flex items-center justify-center">
+                                                {/* Connecting Magical Energy Line - Softened */}
+                                                <div className="absolute w-full h-[1px] bg-gradient-to-r from-stone-50 via-stone-200 to-stone-50"></div>
+                                                
+                                                {/* Central Portal Circle - Refined */}
+                                                <div className="relative w-10 h-10 rounded-full bg-white border border-stone-100 shadow-zen-sm flex items-center justify-center z-10 animate-spin-slow">
+                                                    {/* Background Glow - More subtle */}
+                                                    <div className="absolute inset-0 rounded-full bg-zen-primary/5"></div>
+                                                    {/* Dharmachakra Icon - Zen Primary color for harmony */}
+                                                    <i className="fa-solid fa-dharmachakra text-stone-400 text-lg"></i>
                                                 </div>
-                                                <i className="fa-solid fa-bolt-lightning absolute text-[10px] text-zen-primary animate-bounce"></i>
+                                                
+                                                <i className="fa-solid fa-bolt-lightning absolute text-[9px] text-zen-primary/60 animate-bounce top-[-12px]"></i>
                                             </div>
                                         </div>
-                                        <div className="flex flex-col text-right z-10">
-                                            <div className="text-[9px] font-black text-zen-primary mb-1 uppercase tracking-[0.15em] opacity-80">降落座標</div>
-                                            <div className="text-3xl font-mono font-black text-stone-800 leading-none tracking-tighter mb-1">
+
+                                        {/* Destination */}
+                                        <div className="flex flex-col text-right z-10 w-24">
+                                            <div className="text-[8px] font-black text-zen-primary mb-1 uppercase tracking-[0.15em] opacity-80">降落座標</div>
+                                            <div className="text-3xl font-mono font-black text-stone-700 leading-none tracking-tighter mb-1">
                                                 {booking.details['抵達']?.split(' ')[0] || '--:--'}
                                             </div>
-                                            <div className="text-[10px] font-bold text-stone-400 font-mono uppercase tracking-wider">
+                                            <div className="text-[10px] font-bold text-stone-400 font-mono uppercase tracking-wider tracking-tight">
                                                 {getArrivalDate(booking.date, booking.details['抵達'])}
                                             </div>
-                                            <div className="text-xl font-black text-stone-300 mt-2 tracking-widest">{destCode}</div>
+                                            <div className="text-xl font-black text-stone-600 mt-2 tracking-widest leading-none">{destCode}</div>
                                         </div>
                                     </div>
-                                    <div className="flex justify-between mt-4 px-1 opacity-50">
-                                        <span className="text-[10px] font-bold text-stone-400">{CITY_NAMES[originCode] || 'Realm'}</span>
-                                        <span className="text-[10px] font-bold text-stone-400">{CITY_NAMES[destCode] || 'Realm'}</span>
+                                    
+                                    <div className="flex justify-between mt-5 px-1 opacity-70">
+                                        <span className="text-[10px] font-bold text-stone-400 tracking-wide">{CITY_NAMES[originCode] || 'Realm'}</span>
+                                        <span className="text-[10px] font-bold text-stone-400 tracking-wide">{CITY_NAMES[destCode] || 'Realm'}</span>
+                                    </div>
+                                </div>
+
+                                {/* Bottom Info / Seal Area */}
+                                <div className="bg-stone-50/50 px-6 py-3.5 border-t border-dashed border-stone-100 flex justify-between items-center relative">
+                                    <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white border border-stone-100 flex items-center justify-center shadow-sm">
+                                        <i className="fa-solid fa-key text-[7px] text-stone-300"></i>
+                                    </div>
+                                    
+                                    <div className="flex flex-col">
+                                        <span className="text-[8px] text-gray-400 font-black tracking-widest uppercase mb-0.5">Hero Party</span>
+                                        <span className="text-[11px] font-black text-stone-500 flex items-center gap-1.5">
+                                            FAMILY ADVENTURERS
+                                            <i className="fa-solid fa-crown text-[8px] text-zen-primary/40"></i>
+                                        </span>
+                                    </div>
+
+                                    {/* Mission Stamp Area */}
+                                    <div className="relative flex items-center gap-3">
+                                        <div className="flex flex-col items-end">
+                                            <span className="text-[8px] text-gray-400 font-black tracking-widest uppercase mb-0.5">Teleport Code</span>
+                                            <span className="text-[10px] font-mono font-black text-stone-600 bg-white px-1.5 py-0.5 rounded border border-stone-200 shadow-sm leading-none">
+                                                {booking.referenceNo}
+                                            </span>
+                                        </div>
+                                        
+                                        {/* Visual Barcode - More subtle */}
+                                        <div className="flex gap-[1.5px] opacity-20 group-hover:opacity-60 transition-opacity">
+                                            {[1, 0, 1, 1, 0, 1, 0, 1].map((v, i) => (
+                                                <div key={i} className={`w-[1px] rounded-full bg-stone-700`} style={{ height: v ? '14px' : '8px' }}></div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Floating Red Stamp of Quest Approval - Very subtle */}
+                                    <div className="absolute -right-1 -bottom-1 w-14 h-14 pointer-events-none opacity-[0.05] transform -rotate-12 group-hover:scale-105 transition-transform duration-500">
+                                        <div className="w-full h-full rounded-full border-2 border-red-800 flex items-center justify-center p-0.5">
+                                            <div className="w-full h-full rounded-full border border-red-800 flex flex-col items-center justify-center leading-none">
+                                                <span className="text-[7px] font-black text-red-800 uppercase">Quest</span>
+                                                <span className="text-[9px] font-black text-red-800 uppercase">Passed</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
