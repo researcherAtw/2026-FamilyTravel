@@ -4,6 +4,13 @@ import { ScheduleItem, Booking, HighlightTag, HighlightColor, WeatherInfo } from
 
 // --- MOCK DATA ---
 const MOCK_SCHEDULE: ScheduleItem[] = [
+  // --- 2/14 (Sat) Day 0: Pre-departure ---
+  {
+      id: 'd0-1', date: '2026-02-14', time: '21:30', displayTime: '??:??',
+      title: '召喚小隊', enTitle: 'Quest Starts', location: 'TPE 桃園機場', category: 'ASSEMBLE', categoryColor: 'purple',
+      description: '冒險者大廳 (桃園機場｜第O航廈｜OO櫃檯旁)'
+  },
+
   // --- 2/15 (Sun) Day 1: TPE -> DXB -> PRG ---
   { 
       id: 'd1-1', date: '2026-02-15', time: '00:20', displayTime: '00:20',
@@ -85,7 +92,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '布拉格古堡', enTitle: 'Prague Castle', location: '城堡區 (Hradčany)', category: '入場卷', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/XK51NPV4JhyTtMTh8',
       guideInfo: {
-          story: "這不只是一座城堡，而是金氏世界紀錄認證的「世界上最大的古堡建築群」。\n\n這裡曾是波希米亞國王與神聖羅馬帝國皇帝的居所，集結了羅馬式、哥德式、文藝復興至巴洛克等千年的建築精華。\n\n城堡的心臟是「聖維特大教堂」(St. Vitus Cathedral)，這座耗時近 600 年才完工的哥德式傑作，不僅是歷代國王加冕之處，更是捷克精神的永恆象徵。",
+          story: "這不只是一座城堡，而是金氏世界紀錄認證的「世界上最大的古堡建築群」。\n\n這裡曾是波希米亞國王與神聖羅馬帝國皇帝的居所，集結了羅馬式、哥德式、文藝復興至巴洛克等千年的建築精華。\n\n城堡的心臟是「聖維特大教堂」(St. Vitus Cathedral)，這座耗時近 600 年才完工的哥德式傑作，不僅是歷代國王加冕之處，更是捷克精神的英恆象徵。",
           tip: "參觀主要景點需購買套票(Circuit B)。務必入內欣賞聖維特大教堂中慕夏(Alfons Mucha)設計的彩繪玻璃窗. 每天中午12點在正門有衛兵交接。",
           highlights: [
               { id: 'h4', text: '金氏世界紀錄認證', color: 'orange' },
@@ -100,7 +107,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '黃金小徑', enTitle: 'Golden Lane', location: '城堡區 (Hradčany)', category: '入場卷', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/myHMM35Cz5zSB9HG7',
       guideInfo: {
-          story: "這條位於城堡圍牆內色彩繽紛的小徑，最初建於 16 世紀末，原是城堡守衛的住所。\n\n傳說這裡曾是魯道夫二世的煉金術士試圖「煉製黃金」的實驗室，但這多半是後世杜撰的故事；實際上，小徑得名於後來遷居此地的金匠。\n\n著名作家卡夫卡 (Franz Kafka) 曾在1916至1917年間，於水藍色的「22號」房舍短暫居住並進行創作。在其居住期間內主要完成的作品為短篇小說集《鄉村醫生》(Ein Landarzt) 中的大部分故事。這段時間被認為是他創作生涯中非常平靜且多產的時期。",
+          story: "這條位於城堡圍牆內色彩繽紛的小徑，最初建於 16 世紀末，原是城堡守衛的住所。\n\n傳說這裡曾是魯道夫二世的煉金術士試圖「煉製黃金」的實驗室，但這多半是後世杜撰的故事；實際上，小徑得名於後來遷居此地的金匠。\n\n著名作家卡夫卡 (Franz Kafka) 曾在1916至1917年間，於水藍色的「22號」房舍短暫居住並進行創作。\n在其居住期間內主要完成的作品為短篇小說集《鄉村醫生》(Ein Landarzt) 中的大部分故事。這段時間被認為是他創作生涯中非常平靜且多產的時期。",
           tip: "現在小房子內部被改造成各種主題展覽。",
           highlights: [
               { id: 'h1', text: 'No.22 卡夫卡', color: 'blue' },
@@ -113,7 +120,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '伏爾他瓦河遊船', enTitle: 'Vltava River Cruise', location: '什切廷碼頭', category: '入場卷', categoryColor: 'red',
       guideInfo: {
           story: "伏爾他瓦河是捷克的「母親河」，也是捷克民族精神的象徵。",
-          tip: "靠近卡夫卡博物館的地方是著名的「天鵝餵食點」。在新城區一側的河岸 (Náplavka) 則是當地人週末喜愛的農夫市集與酒吧聚集地。",
+          tip: "靠近卡夫卡博物館的地方是著名的「天鵝餵食點」。在新城區一側的河岸 (Náplavka)則是當地人週末喜愛的農夫市集與酒吧聚集地。",
           highlights: [
               { id: 'h1', text: '遊船體驗', color: 'blue' },
               { id: 'h2', text: '天鵝餵食點', color: 'gray' },
@@ -288,7 +295,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '卡爾教堂', enTitle: 'Karlskirche', location: '卡爾廣場 (Karlsplatz)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/FMdKhrTT6ye6FD388',
       guideInfo: {
-          story: "巴洛克建築巔峰，1713年皇帝卡爾六世為感謝黑死病結束而建。融合了古希臘的神殿門廊、古羅馬的兩根「圖拉真柱」（上面雕刻著聖人的生平）以及拜占庭式的巨大橢圓形穹頂。",
+          story: "巴洛克建築巔峰，1713年皇帝卡爾六世為感謝黑死病結束而建. 融合了古希臘的神殿門廊、古羅馬的兩根「圖拉真柱」（上面雕刻著聖人的生平）以及拜占庭式的巨大橢圓形穹頂。",
           tip: "前方水池可拍出完美倒影。教堂內部有全景電梯可直達穹頂近距離欣賞濕壁畫（需購票）。",
           highlights: [
               { id: 'h1', text: '巴洛克', color: 'orange' },
@@ -382,8 +389,8 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(南塔、北塔二擇一登頂)',
       mapUrl: 'https://maps.app.goo.gl/d6ob7ph5DwFvTL949',
       guideInfo: {
-          story: "維也納的靈魂象徵，始建於12世紀。曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n哈布斯堡家族是極度虔誠的天主教徒。這個分開埋葬最初出於實務的防腐程序，然而隨著時間演變，被昇華為一種隆重的宗教儀式。\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
-          tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘。亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭Candied Violets」。",
+          story: "維也納的靈魂象徵，始建於12世紀. 曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n哈布斯堡家族是極度虔誠的天主教徒. 這個分開埋葬最初出於實務的防腐程序，然而隨著時間演變，被昇華為一種隆重的宗教儀式。\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
+          tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘. 亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭Candied Violets」。",
           highlights: [
               { id: 'h1', text: '南塔(樓梯)', color: 'red' },
               { id: 'h2', text: '北塔(電梯)', color: 'blue' },
@@ -403,7 +410,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/kSB8ToNAZydoHitT7',
       guideInfo: {
           story: "中歐最大的設計師暢貨中心之一，擁有充滿布爾根蘭州傳統風格的建築設計。",
-          tip: "建議先至遊客中心領取地圖與額外折扣券。退稅手續可在現場辦理（需信用卡擔保），或是留到機場處理。",
+          tip: "建議先至遊客中心領取地圖與額外折扣券. 退稅手續可在現場辦理（需信用卡擔保），或是留到機場處理。",
           highlights: [
               { id: 'h1', text: '購物天堂', color: 'red' },
               { id: 'h2', text: '退稅服務', color: 'blue' }
@@ -522,6 +529,7 @@ const NODE_TEXT_COLORS: Record<HighlightColor, string> = {
 };
 
 const LUNAR_DATES: Record<string, string> = {
+    '2026-02-14': '西洋情人節',
     '2026-02-15': '小年夜',
     '2026-02-16': '除夕',
     '2026-02-17': '初一',
@@ -546,6 +554,10 @@ const mapWmoToCondition = (code: number): WeatherInfo['condition'] => {
 
 // Helper to get icon for category/activity
 const getCategoryIcon = (item: ScheduleItem): string => {
+    // Specifically check for "召喚小隊" (Summon Squad) for a more "character" based RPG feel
+    if (item.title.includes('召喚')) return 'fa-hat-wizard';
+    if (item.category === 'ASSEMBLE') return 'fa-dragon';
+    
     if (item.category === 'transport') {
         if (item.title.includes('起飛') || item.title.includes('降落')) return 'fa-plane-up';
         return 'fa-train-subway';
@@ -562,7 +574,7 @@ const getCategoryIcon = (item: ScheduleItem): string => {
 
 // Helper Component for Rendering a single Schedule Row
 const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
-    const isTransport = item.category === 'transport';
+    const isMajor = item.category === 'transport' || item.category === 'ASSEMBLE' || item.category === 'GATHERING';
     const timeStr = item.displayTime || item.time;
     const [mainTime, subTime] = timeStr.includes('\n') ? timeStr.split('\n') : [timeStr, null];
     const [hour, minute] = mainTime.split(':');
@@ -574,7 +586,7 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
         <div className="relative mb-2 flex gap-0 group">
             {/* 1. Time Column - Optimised for space & layout */}
             <div className="w-12 py-4 flex flex-col items-end justify-start flex-shrink-0 pr-2">
-                {isTransport ? (
+                {isMajor ? (
                     <>
                         <div className="flex items-baseline justify-end gap-[1px] leading-none text-zen-text">
                             <span className="text-xl font-mono font-bold tracking-tighter text-stone-700">{hour}</span>
@@ -597,7 +609,7 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                     className={`
                         relative z-10 flex items-center justify-center transition-all duration-300 mt-[1.4rem]
                         bg-zen-bg rounded-full border-2 
-                        ${isTransport 
+                        ${isMajor 
                             ? `w-8 h-8 ${NODE_TEXT_COLORS[item.categoryColor || 'gray']} border-current shadow-sm` 
                             : `w-7 h-7 text-stone-400 border-stone-300 bg-white`
                         }
@@ -733,7 +745,7 @@ const DATE_ITEM_GAP = 8;
 const DATE_CONTAINER_PADDING = 16;
 
 export const ScheduleTab: React.FC = () => {
-  const [selectedDate, setSelectedDate] = useState('2026-02-15');
+  const [selectedDate, setSelectedDate] = useState('2026-02-14');
   const [items, setItems] = useState(MOCK_SCHEDULE);
   const [weather, setWeather] = useState<WeatherInfo>({ condition: 'cloudy', temp: 5, locationName: '布拉格' });
   const [loadingWeather, setLoadingWeather] = useState(false);
@@ -774,6 +786,7 @@ export const ScheduleTab: React.FC = () => {
   }, [selectedDate, dates]);
 
   const getLocationInfo = (date: string) => {
+      if (date === '2026-02-14') return '台灣 Taiwan';
       if (date >= '2026-02-15' && date <= '2026-02-19') return '捷克 Czech Republic';
       if (date === '2026-02-20') return '德國 Germany';
       if (date >= '2026-02-21' && date <= '2026-02-24') return '奧地利 Austria';
@@ -789,7 +802,10 @@ export const ScheduleTab: React.FC = () => {
         let url = '';
         let locationName = '';
 
-        if (selectedDate >= '2026-02-15' && selectedDate <= '2026-02-19') {
+        if (selectedDate === '2026-02-14') {
+            url = 'https://api.open-meteo.com/v1/forecast?latitude=25.03&longitude=121.56&current_weather=true&timezone=auto';
+            locationName = '桃園';
+        } else if (selectedDate >= '2026-02-15' && selectedDate <= '2026-02-19') {
             url = 'https://api.open-meteo.com/v1/forecast?latitude=50.08&longitude=14.43&current_weather=true&timezone=auto';
             locationName = '布拉格';
         } else if (selectedDate === '2026-02-20') {
