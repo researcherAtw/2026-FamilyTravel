@@ -349,7 +349,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/doX4N77JodZMSQ1r8',
       guideInfo: {
           story: "紀念1679年奪走維也納三分之一人口的瘟疫。",
-          tip: "位於步行街中央的露天雕塑。紀念柱的最頂端是「聖三一」（父、子、聖靈），中間是皇帝利奧波德一世跪地祈禱的雕像，底座則是象徵瘟疫的女巫。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
+          tip: "位於步行街中央的露天雕塑。紀念柱的最頂端是「聖三一」（父、子、聖靈），中間是皇帝利奧波德一世跪地祈禱的雕像，底座則是象蹤瘟疫的女巫。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
           highlights: [
               { id: 'h1', text: '聖三一', color: 'orange' },
               { id: 'h2', text: '巴洛克雕塑', color: 'gray' },
@@ -400,7 +400,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/d6ob7ph5DwFvTL949',
       guideInfo: {
           story: "維也納的靈魂象徵，始建於12世紀. 曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n哈布斯堡家族是極度虔誠的天主教徒. 這個分開埋葬最初出於實務的防腐程序，然而隨著時間演變，被昇華為一種隆重的宗教儀式。\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
-          tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘. 亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭Candied Violets」。",
+          tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘. 亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
           highlights: [
               { id: 'h1', text: '南塔(樓梯)', color: 'red' },
               { id: 'h2', text: '北塔(電梯)', color: 'blue' },
@@ -588,7 +588,7 @@ const getCategoryIcon = (item: ScheduleItem): string => {
     return 'fa-location-dot';
 };
 
-const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
+const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean }> = ({ item, showDate }) => {
     const isMajor = ['transport', 'ASSEMBLE', 'GATHERING', 'TELEPORT', 'UNLOCKED', 'CHECKPOINT', 'MISSION CLEAR'].includes(item.category);
     const timeStr = item.displayTime || item.time;
     const [mainTime, subTime] = timeStr.includes('\n') ? timeStr.split('\n') : [timeStr, null];
@@ -629,6 +629,11 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
             </div>
             <div className="flex-grow min-w-0 py-2 pb-6 pl-3">
                 <div className="bg-white rounded-2xl p-4 shadow-zen border border-stone-50 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-zen-hover relative overflow-hidden">
+                    {showDate && (
+                        <div className="absolute top-0 right-0 px-3 py-1 bg-stone-100 text-[9px] font-black text-stone-400 rounded-bl-xl uppercase tracking-widest z-20 border-b border-l border-stone-50">
+                            {item.date}
+                        </div>
+                    )}
                     <div className="absolute -bottom-4 -right-4 text-8xl text-stone-800 opacity-[0.03] transform -rotate-12 pointer-events-none select-none z-0">
                         <i className={`fa-solid ${iconClass}`}></i>
                     </div>
@@ -692,24 +697,6 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                                         ))}
                                     </div>
                                 )}
-                                {item.guideInfo?.relatedLink && (
-                                    <div className="flex justify-end mt-3">
-                                        <a 
-                                            href={item.guideInfo.relatedLink.url}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            onClick={(e) => e.stopPropagation()}
-                                            className="inline-flex items-center gap-2 pl-1 pr-3 py-1 mt-2 bg-white hover:bg-stone-50 active:scale-95 active:bg-stone-100 active:border-stone-300 border border-stone-200 rounded-full transition-all duration-200 shadow-sm group/link"
-                                        >
-                                            <div className="w-6 h-6 rounded-full bg-stone-100 flex items-center justify-center text-stone-400 group-hover/link:text-stone-500 group-hover/link:bg-stone-200 transition-colors">
-                                                 <i className="fa-solid fa-location-dot text-[10px]"></i>
-                                            </div>
-                                            <span className="text-xs font-bold text-stone-500 group-hover/link:text-stone-600">
-                                                {item.guideInfo.relatedLink.text}
-                                            </span>
-                                        </a>
-                                    </div>
-                                )}
                             </div>
                         )}
                     </div>
@@ -723,7 +710,7 @@ const DATE_ITEM_WIDTH = 52;
 const DATE_ITEM_GAP = 8;
 const DATE_CONTAINER_PADDING = 16;
 
-export const ScheduleTab: React.FC = () => {
+export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = '' }) => {
   const [selectedDate, setSelectedDate] = useState('2026-02-14');
   const [items] = useState(MOCK_SCHEDULE);
   const [weather, setWeather] = useState<WeatherInfo>({ condition: 'cloudy', temp: 5, locationName: '布拉格' });
@@ -734,6 +721,17 @@ export const ScheduleTab: React.FC = () => {
   const dateScrollRef = useRef<HTMLDivElement>(null);
   const dates = useMemo(() => Array.from(new Set(items.map(i => i.date))).sort() as string[], [items]);
   const currentIndex = dates.indexOf(selectedDate);
+
+  const filteredResults = useMemo(() => {
+    if (!searchTerm.trim()) return [];
+    const query = searchTerm.toLowerCase();
+    return items.filter(item => 
+        item.title.toLowerCase().includes(query) ||
+        item.enTitle?.toLowerCase().includes(query) ||
+        item.location.toLowerCase().includes(query) ||
+        item.description?.toLowerCase().includes(query)
+    );
+  }, [searchTerm, items]);
 
   useLayoutEffect(() => {
     if (currentIndex >= 0 && scrollRefs.current[currentIndex]) {
@@ -806,10 +804,12 @@ export const ScheduleTab: React.FC = () => {
   }, [selectedDate]);
   
   const onTouchStart = (e: React.TouchEvent) => {
+    if (searchTerm) return; // Disable swiping when searching
     setTouchEnd(null);
     setTouchStart({ x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY });
   };
   const onTouchMove = (e: React.TouchEvent) => {
+    if (searchTerm) return;
     setTouchEnd({ x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY });
   };
   const onTouchEnd = () => {
@@ -829,21 +829,21 @@ export const ScheduleTab: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="flex-shrink-0 bg-zen-bg z-20 px-4 pb-4 shadow-sm">
+      <div className="flex-shrink-0 bg-zen-bg z-20 px-4 pb-3 shadow-sm">
           <div className="-mx-4 mb-2">
               <div 
                 ref={dateScrollRef}
                 className="flex gap-[8px] overflow-x-auto no-scrollbar px-[16px] py-[4px] snap-x items-center relative"
               >
                 <div 
-                    className={`absolute top-[4px] bottom-[4px] w-[52px] bg-[#464646] rounded-[16px] shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0 ${currentIndex === -1 ? 'opacity-0' : 'opacity-100'}`}
+                    className={`absolute top-[4px] bottom-[4px] w-[52px] bg-[#464646] rounded-[16px] shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0 ${currentIndex === -1 || searchTerm ? 'opacity-0' : 'opacity-100'}`}
                     style={{ left: `${DATE_CONTAINER_PADDING + (currentIndex === -1 ? 0 : currentIndex) * (DATE_ITEM_WIDTH + DATE_ITEM_GAP)}px` }}
                 />
                 {dates.map((date) => {
                     const d = new Date(date);
                     const dayName = d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
                     const dayNum = d.getDate();
-                    const isSelected = date === selectedDate;
+                    const isSelected = date === selectedDate && !searchTerm;
                     return (
                         <button
                             key={date}
@@ -858,62 +858,89 @@ export const ScheduleTab: React.FC = () => {
                 })}
               </div>
           </div>
-          <div className="flex justify-between items-end px-2 relative">
-             <div>
-                <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Day Plan</div>
-                <div className="flex items-center gap-2">
-                    <h2 className="text-2xl font-mono font-bold text-zen-text leading-none">{selectedDate}</h2>
-                    {lunarText && (
-                        <div className="bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm tracking-widest flex items-center gap-1">
-                            <i className="fa-solid fa-star text-[8px]"></i>
-                            <span>{lunarText}</span>
-                        </div>
-                    )}
-                </div>
-                <div className="flex items-center gap-2 mt-1 text-gray-500 text-sm">
-                    <i className="fa-solid fa-location-dot text-zen-primary"></i> 
-                    <span>{locationHeader}</span>
-                </div>
-             </div>
-             <div className="bg-white/30 backdrop-blur-xl border border-white/40 p-3 rounded-2xl shadow-lg flex flex-col items-center justify-center min-w-[80px] h-[82px] box-border z-10 relative">
-                {loadingWeather ? (
-                     <i className="fa-solid fa-spinner fa-spin text-gray-300 text-2xl"></i>
-                ) : (
-                    <>
-                        <div className="text-2xl mb-1 h-8 flex items-center justify-center filter drop-shadow-sm">
-                            {weather.condition === 'sunny' && <i className="fa-solid fa-sun text-orange-400 animate-spin-slow"></i>}
-                            {weather.condition === 'cloudy' && <i className="fa-solid fa-cloud text-gray-400"></i>}
-                            {weather.condition === 'rain' && <i className="fa-solid fa-cloud-rain text-blue-400"></i>}
-                            {weather.condition === 'snow' && <i className="fa-regular fa-snowflake text-blue-200"></i>}
-                        </div>
-                        <div className="text-sm font-bold font-mono h-5 flex items-center text-gray-700">{weather.temp}°C</div>
-                    </>
-                )}
-             </div>
-          </div>
+          
+          {!searchTerm ? (
+            <div className="flex justify-between items-end px-2 relative animate-fade-in">
+               <div>
+                  <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Day Plan</div>
+                  <div className="flex items-center gap-2">
+                      <h2 className="text-2xl font-mono font-bold text-zen-text leading-none">{selectedDate}</h2>
+                      {lunarText && (
+                          <div className="bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm tracking-widest flex items-center gap-1">
+                              <i className="fa-solid fa-star text-[8px]"></i>
+                              <span>{lunarText}</span>
+                          </div>
+                      )}
+                  </div>
+                  <div className="flex items-center gap-2 mt-1 text-gray-500 text-sm">
+                      <i className="fa-solid fa-location-dot text-zen-primary"></i> 
+                      <span>{locationHeader}</span>
+                  </div>
+               </div>
+               <div className="bg-white/30 backdrop-blur-xl border border-white/40 p-3 rounded-2xl shadow-lg flex flex-col items-center justify-center min-w-[80px] h-[82px] box-border z-10 relative">
+                  {loadingWeather ? (
+                       <i className="fa-solid fa-spinner fa-spin text-gray-300 text-2xl"></i>
+                  ) : (
+                      <>
+                          <div className="text-2xl mb-1 h-8 flex items-center justify-center filter drop-shadow-sm">
+                              {weather.condition === 'sunny' && <i className="fa-solid fa-sun text-orange-400 animate-spin-slow"></i>}
+                              {weather.condition === 'cloudy' && <i className="fa-solid fa-cloud text-gray-400"></i>}
+                              {weather.condition === 'rain' && <i className="fa-solid fa-cloud-rain text-blue-400"></i>}
+                              {weather.condition === 'snow' && <i className="fa-regular fa-snowflake text-blue-200"></i>}
+                          </div>
+                          <div className="text-sm font-bold font-mono h-5 flex items-center text-gray-700">{weather.temp}°C</div>
+                      </>
+                  )}
+               </div>
+            </div>
+          ) : (
+            <div className="px-2 animate-fade-in">
+                <div className="text-xs font-bold text-stone-400 uppercase tracking-widest mb-1">Search Results</div>
+                <div className="text-xl font-bold text-zen-text">找到了 {filteredResults.length} 個行程</div>
+            </div>
+          )}
       </div>
+
       <div 
         className="flex-1 overflow-hidden relative w-full touch-pan-y"
         onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}
       >
-         <div className="flex h-full transition-transform duration-300 ease-out will-change-transform" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-            {dates.map((date, idx) => {
-                const dayItems = items.filter(i => i.date === date);
-                return (
-                    <div key={date} ref={el => { scrollRefs.current[idx] = el; }} className="w-full h-full flex-shrink-0 overflow-y-auto no-scrollbar px-4 pb-24">
-                        <div className="relative pt-4">
-                             {dayItems.map((item) => <ScheduleItemRow key={item.id} item={item} />)}
-                             {dayItems.length === 0 && (
-                                <div className="text-center py-10 text-gray-400 opacity-60">
-                                    <i className="fa-regular fa-calendar-plus text-4xl mb-2"></i>
-                                    <p className="text-sm">No plans for this day yet.</p>
-                                </div>
-                             )}
+         {!searchTerm ? (
+            <div className="flex h-full transition-transform duration-300 ease-out will-change-transform" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+                {dates.map((date, idx) => {
+                    const dayItems = items.filter(i => i.date === date);
+                    return (
+                        <div key={date} ref={el => { scrollRefs.current[idx] = el; }} className="w-full h-full flex-shrink-0 overflow-y-auto no-scrollbar px-4 pb-24">
+                            <div className="relative pt-4">
+                                {dayItems.map((item) => <ScheduleItemRow key={item.id} item={item} />)}
+                                {dayItems.length === 0 && (
+                                    <div className="text-center py-10 text-gray-400 opacity-60">
+                                        <i className="fa-regular fa-calendar-plus text-4xl mb-2"></i>
+                                        <p className="text-sm">No plans for this day yet.</p>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    </div>
-                );
-            })}
-         </div>
+                    );
+                })}
+            </div>
+         ) : (
+            <div className="w-full h-full overflow-y-auto no-scrollbar px-4 pb-24 animate-fade-in-up">
+                <div className="relative pt-4">
+                    {filteredResults.length > 0 ? (
+                        filteredResults.map((item) => (
+                            <ScheduleItemRow key={item.id} item={item} showDate={true} />
+                        ))
+                    ) : (
+                        <div className="text-center py-20 text-stone-400 opacity-60">
+                            <i className="fa-solid fa-map-marked-alt text-5xl mb-4"></i>
+                            <p className="text-sm font-bold">地圖上找不到符合關鍵字的標記</p>
+                            <p className="text-xs mt-1">請嘗試輸入其他關鍵字⋯</p>
+                        </div>
+                    )}
+                </div>
+            </div>
+         )}
       </div>
     </div>
   );
@@ -962,12 +989,10 @@ export const BookingsTab: React.FC = () => {
 
                     return (
                         <div key={booking.id} className="relative group">
-                            {/* Decorative Runes */}
                             <i className="fa-solid fa-dharmachakra absolute -top-1 -left-1 text-[10px] text-zen-primary/30 z-20 group-hover:rotate-180 transition-transform duration-1000"></i>
                             <i className="fa-solid fa-dharmachakra absolute -top-1 -right-1 text-[10px] text-zen-primary/30 z-20 group-hover:rotate-180 transition-transform duration-1000"></i>
                             
                             <div className={`bg-white rounded-3xl shadow-zen border border-stone-100 relative overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-zen-hover`}>
-                                {/* Top Decoration */}
                                 <div className={`h-2 w-full ${accentColor} opacity-70`}></div>
                                 
                                 <div className="px-5 py-4 flex justify-between items-center bg-stone-50/40 border-b border-stone-100">
@@ -987,23 +1012,18 @@ export const BookingsTab: React.FC = () => {
                                     </div>
                                 </div>
 
-                                {/* Main Content Area */}
                                 <div className="p-6">
                                     <div className="flex justify-between items-center relative">
-                                        {/* Origin */}
                                         <div className="flex flex-col z-10 w-24">
                                             <div className="text-[8px] font-black text-zen-primary mb-1 uppercase tracking-[0.15em] opacity-80">召喚座標</div>
                                             <div className="text-3xl font-mono font-black text-stone-700 leading-none tracking-tighter mb-1">
                                                 {booking.time}
                                             </div>
                                             <div className="text-[10px] font-bold text-stone-400 font-mono tracking-tight">{booking.date}</div>
-                                            {/* Airport Code - Slightly reduced top margin */}
                                             <div className="text-xl font-black text-stone-600 mt-1.5 tracking-widest leading-none">{originCode}</div>
-                                            {/* City Name - Tightly following with mt-0.5 */}
                                             <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-0.5 leading-none opacity-80 uppercase">{CITY_NAMES[originCode] || 'Realm'}</div>
                                         </div>
 
-                                        {/* Teleport Gate Animation - BALANCED VISIBILITY */}
                                         <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none z-0">
                                             <div className="mb-2 flex items-center gap-1.5 px-3 py-0.5 bg-stone-50 rounded-full border border-stone-100 shadow-sm">
                                                  <i className="fa-regular fa-hourglass-half text-[8px] text-zen-primary/70 animate-pulse"></i>
@@ -1011,22 +1031,15 @@ export const BookingsTab: React.FC = () => {
                                             </div>
                                             
                                             <div className="relative w-32 h-10 flex items-center justify-center">
-                                                {/* Connecting Magical Energy Line - Softened */}
                                                 <div className="absolute w-full h-[1px] bg-gradient-to-r from-stone-50 via-stone-200 to-stone-50"></div>
-                                                
-                                                {/* Central Portal Circle - Refined */}
                                                 <div className="relative w-10 h-10 rounded-full bg-white border border-stone-100 shadow-zen-sm flex items-center justify-center z-10 animate-spin-slow">
-                                                    {/* Background Glow - More subtle */}
                                                     <div className="absolute inset-0 rounded-full bg-zen-primary/5"></div>
-                                                    {/* Dharmachakra Icon - Zen Primary color for harmony */}
                                                     <i className="fa-solid fa-dharmachakra text-stone-400 text-lg"></i>
                                                 </div>
-                                                
                                                 <i className="fa-solid fa-bolt-lightning absolute text-[9px] text-zen-primary/60 animate-bounce top-[-12px]"></i>
                                             </div>
                                         </div>
 
-                                        {/* Destination */}
                                         <div className="flex flex-col text-right z-10 w-24">
                                             <div className="text-[8px] font-black text-zen-primary mb-1 uppercase tracking-[0.15em] opacity-80">降落座標</div>
                                             <div className="text-3xl font-mono font-black text-stone-700 leading-none tracking-tighter mb-1">
@@ -1035,15 +1048,12 @@ export const BookingsTab: React.FC = () => {
                                             <div className="text-[10px] font-bold text-stone-400 font-mono uppercase tracking-wider tracking-tight">
                                                 {getArrivalDate(booking.date, booking.details['抵達'])}
                                             </div>
-                                            {/* Airport Code - Slightly reduced top margin */}
                                             <div className="text-xl font-black text-stone-600 mt-1.5 tracking-widest leading-none">{destCode}</div>
-                                            {/* City Name - Tightly following with mt-0.5 */}
                                             <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-0.5 leading-none opacity-80 uppercase">{CITY_NAMES[destCode] || 'Realm'}</div>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Bottom Info / Seal Area */}
                                 <div className="bg-stone-50/50 px-6 py-3.5 border-t border-dashed border-stone-100 flex justify-between items-center relative">
                                     <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white border border-stone-100 flex items-center justify-center shadow-sm">
                                         <i className="fa-solid fa-key text-[7px] text-stone-300"></i>
@@ -1057,7 +1067,6 @@ export const BookingsTab: React.FC = () => {
                                         </span>
                                     </div>
 
-                                    {/* Mission Stamp Area */}
                                     <div className="relative flex items-center gap-3">
                                         <div className="flex flex-col items-end">
                                             <span className="text-[8px] text-gray-400 font-black tracking-widest uppercase mb-0.5">Teleport Code</span>
@@ -1065,8 +1074,6 @@ export const BookingsTab: React.FC = () => {
                                                 {booking.referenceNo}
                                             </span>
                                         </div>
-                                        
-                                        {/* Visual Barcode - More subtle */}
                                         <div className="flex gap-[1.5px] opacity-20 group-hover:opacity-60 transition-opacity">
                                             {[1, 0, 1, 1, 0, 1, 0, 1].map((v, i) => (
                                                 <div key={i} className={`w-[1px] rounded-full bg-stone-700`} style={{ height: v ? '14px' : '8px' }}></div>
@@ -1074,7 +1081,6 @@ export const BookingsTab: React.FC = () => {
                                         </div>
                                     </div>
 
-                                    {/* Floating Red Stamp of Quest Approval - Very subtle */}
                                     <div className="absolute -right-1 -bottom-1 w-14 h-14 pointer-events-none opacity-[0.05] transform -rotate-12 group-hover:scale-105 transition-transform duration-500">
                                         <div className="w-full h-full rounded-full border-2 border-red-800 flex items-center justify-center p-0.5">
                                             <div className="w-full h-full rounded-full border border-red-800 flex flex-col items-center justify-center leading-none">

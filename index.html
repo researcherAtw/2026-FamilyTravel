@@ -43,6 +43,21 @@
               'zen': '4px 4px 0px #E0E5D5',
               'zen-sm': '2px 2px 0px #E0E5D5',
               'zen-hover': '6px 6px 0px #E0E5D5',
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.3s ease-out',
+              'fade-in-up': 'fadeInUp 0.4s ease-out',
+              'spin-slow': 'spin 8s linear infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
             }
           }
         }
@@ -63,6 +78,8 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
       }
+      .animate-fade-in { animation: fadeIn 0.3s ease-out; }
+      .animate-fade-in-up { animation: fadeInUp 0.4s ease-out forwards; }
     </style>
 <script type="importmap">
 {
