@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-export type TabType = 'schedule' | 'bookings';
+export type TabType = 'schedule' | 'bookings' | 'support';
 
 // Changed from union to string to allow custom categories
 export type CategoryType = string; 

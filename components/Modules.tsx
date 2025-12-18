@@ -932,8 +932,186 @@ export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = ''
   );
 };
 
+// --- SUPPORT TAB (Guild Sanctuary) ---
+
+export const SupportTab: React.FC = () => {
+    return (
+        <div className="h-full overflow-y-auto px-5 pb-32 space-y-8 no-scrollbar bg-zen-bg pt-4 animate-fade-in">
+            <div className="flex items-center gap-3 mb-2 px-1">
+                <div className="w-12 h-12 rounded-2xl bg-white border-2 border-zen-primary/20 flex items-center justify-center shadow-zen-sm transform -rotate-3">
+                    <i className="fa-solid fa-shield-heart text-zen-primary text-xl"></i>
+                </div>
+                <div>
+                    <h2 className="text-xl font-black text-zen-text leading-tight tracking-tight">冒險者聖域</h2>
+                    <p className="text-[10px] text-stone-400 font-bold uppercase tracking-[0.2em]">Sanctuary & Guild Support</p>
+                </div>
+            </div>
+
+            <div className="space-y-10">
+                {/* Czech Republic Card */}
+                <div className="relative group">
+                    <div className="absolute -top-3 -left-2 z-20 bg-white border border-stone-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-2 transform -rotate-2">
+                        <span className="text-sm">🇨🇿</span>
+                        <span className="text-[10px] font-black text-stone-600 uppercase tracking-widest">捷克分部</span>
+                    </div>
+                    <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
+                        <div className="p-6 pt-8 space-y-5">
+                            <div className="flex flex-col">
+                                <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                    <i className="fa-solid fa-map-pin text-[8px]"></i> 公會座標 Coordinates
+                                </span>
+                                <p className="text-xs text-zen-text font-bold leading-relaxed pl-3 border-l-2 border-zen-primary/20">
+                                    Evropska 2590/33c, 160 00 Praha 6, Czech Republic
+                                </p>
+                            </div>
+                            <div className="grid grid-cols-1 gap-4">
+                                <div className="flex flex-col">
+                                    <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                        <i className="fa-solid fa-phone text-[8px]"></i> 傳送專線 Phone
+                                    </span>
+                                    <div className="flex flex-wrap gap-2 pl-3 border-l-2 border-zen-primary/20">
+                                        <a href="tel:+420233320606" className="text-xs font-mono font-black text-stone-600 bg-stone-100 px-2 py-1 rounded">+420 233-320-606</a>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-[9px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                        <i className="fa-solid fa-heart-pulse text-[8px]"></i> 聖療術專線 Emergency
+                                    </span>
+                                    <div className="flex flex-wrap gap-2 pl-3 border-l-2 border-zen-danger/20">
+                                        <a href="tel:+420603166707" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">境外：+420 603-166-707</a>
+                                        <a href="tel:603166707" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">境內直撥：603-166-707</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="pt-4 border-t border-dashed border-stone-100">
+                                <div className="flex items-center gap-2 mb-3">
+                                    <i className="fa-solid fa-hourglass-start text-[10px] text-stone-400"></i>
+                                    <span className="text-[10px] font-bold text-stone-500">領務時間：週一 ~ 週五 09:30-16:30</span>
+                                </div>
+                                <div className="bg-stone-50 rounded-xl p-3 border border-stone-100/50">
+                                    <div className="flex gap-2">
+                                        <i className="fa-solid fa-feather-pointed text-zen-primary mt-0.5 text-xs"></i>
+                                        <p className="text-[11px] text-stone-500 font-medium leading-relaxed">
+                                            這就像「大使館」一樣的台灣代表機構，可協助急難救助、護照補發、遺失證件協助等。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Card>
+                </div>
+
+                {/* Germany Card */}
+                <div className="relative group">
+                    <div className="absolute -top-3 -left-2 z-20 bg-white border border-stone-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-2 transform rotate-2">
+                        <span className="text-sm">🇩🇪</span>
+                        <span className="text-[10px] font-black text-stone-600 uppercase tracking-widest">德國總部</span>
+                    </div>
+                    <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
+                        <div className="p-6 pt-8 space-y-5">
+                            <div className="flex flex-col">
+                                <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                    <i className="fa-solid fa-location-arrow text-[8px]"></i> 座標 Coordinates
+                                </span>
+                                <p className="text-xs text-zen-text font-bold leading-relaxed pl-3 border-l-2 border-zen-primary/20">
+                                    Markgrafenstrasse 35, 10117 Berlin, Germany
+                                </p>
+                            </div>
+                            <div className="grid grid-cols-1 gap-4">
+                                <div className="flex flex-col">
+                                    <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                        <i className="fa-solid fa-phone text-[8px]"></i> 傳送專線 Phone
+                                    </span>
+                                    <div className="flex pl-3 border-l-2 border-zen-primary/20">
+                                        <a href="tel:+4930203610" className="text-xs font-mono font-black text-stone-600 bg-stone-100 px-2 py-1 rounded">+49-30-203610</a>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-[9px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                        <i className="fa-solid fa-heart-pulse text-[8px]"></i> 聖療術專線 Emergency
+                                    </span>
+                                    <div className="flex pl-3 border-l-2 border-zen-danger/20">
+                                        <a href="tel:+491713898257" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm">+49-171-3898257</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="pt-4 border-t border-dashed border-stone-100">
+                                <div className="flex items-center gap-2 mb-3">
+                                    <i className="fa-solid fa-hourglass-start text-[10px] text-stone-400"></i>
+                                    <span className="text-[10px] font-bold text-stone-500">領務時間：週一～週五 09:00–12:30、14:00–17:00</span>
+                                </div>
+                                <div className="bg-stone-50 rounded-xl p-3 border border-stone-100/50">
+                                    <div className="flex gap-2">
+                                        <i className="fa-solid fa-scroll text-stone-400 mt-0.5 text-xs"></i>
+                                        <p className="text-[11px] text-stone-500 font-medium leading-relaxed">
+                                            如果你在德國其他城市（例如希特斯加登），可先聯絡柏林總處，他們會指引最近的分辦事處。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Card>
+                </div>
+
+                {/* Austria Card */}
+                <div className="relative group">
+                    <div className="absolute -top-3 -left-2 z-20 bg-white border border-stone-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-2 transform -rotate-1">
+                        <span className="text-sm">🇦🇹</span>
+                        <span className="text-[10px] font-black text-stone-600 uppercase tracking-widest">奧地利分部</span>
+                    </div>
+                    <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
+                        <div className="p-6 pt-8 space-y-5">
+                            <div className="flex flex-col">
+                                <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                    <i className="fa-solid fa-anchor text-[8px]"></i> 座標 Coordinates
+                                </span>
+                                <p className="text-xs text-zen-text font-bold leading-relaxed pl-3 border-l-2 border-zen-primary/20">
+                                    Wagramer Strasse 19/11. OG, A-1220 Vienna, Austria
+                                </p>
+                            </div>
+                            <div className="grid grid-cols-1 gap-4">
+                                <div className="flex flex-col">
+                                    <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                        <i className="fa-solid fa-phone text-[8px]"></i> 傳送專線 Phone
+                                    </span>
+                                    <div className="flex pl-3 border-l-2 border-zen-primary/20">
+                                        <a href="tel:+4312124720" className="text-xs font-mono font-black text-stone-600 bg-stone-100 px-2 py-1 rounded">+43-1-2124720</a>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-[9px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                        <i className="fa-solid fa-heart-pulse text-[8px]"></i> 聖療術專線 Emergency
+                                    </span>
+                                    <div className="flex flex-wrap gap-2 pl-3 border-l-2 border-zen-danger/20">
+                                        <a href="tel:+436643450455" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">+43-664-345-0455</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="pt-4 border-t border-dashed border-stone-100">
+                                <div className="flex items-center gap-2 mb-3">
+                                    <i className="fa-solid fa-clock text-[10px] text-stone-400"></i>
+                                    <span className="text-[10px] font-bold text-stone-500">領務時間：週一 ~ 週五 09:00-17:00</span>
+                                </div>
+                                <div className="bg-stone-50 rounded-xl p-3 border border-stone-100/50">
+                                    <div className="flex gap-2">
+                                        <i className="fa-solid fa-shield-halved text-zen-primary mt-0.5 text-xs"></i>
+                                        <p className="text-[11px] text-stone-500 font-medium leading-relaxed">
+                                            協助急難救援、護照、文件公證等主要代表機構。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Card>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 // --- BOOKINGS TAB (Teleportation Log) ---
 
+// Fix: Define missing MOCK_BOOKINGS constant to solve the reference error in BookingsTab
 const MOCK_BOOKINGS: Booking[] = [
   {
     id: 'b1',

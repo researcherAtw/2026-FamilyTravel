@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { NAV_ITEMS } from './constants';
 import { TabType } from './types';
-import { ScheduleTab, BookingsTab } from './components/Modules';
+import { ScheduleTab, BookingsTab, SupportTab } from './components/Modules';
 
 const BrandLogo: React.FC = () => (
   <svg viewBox="0 0 1276 1398" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -20,8 +20,13 @@ const App: React.FC = () => {
     if (searchTerm) {
         return <ScheduleTab searchTerm={searchTerm} />;
     }
-    // 否則，保持在使用者點選搜尋前所在的分頁 (contentTab)
-    return contentTab === 'schedule' ? <ScheduleTab /> : <BookingsTab />;
+    
+    switch(contentTab) {
+        case 'schedule': return <ScheduleTab />;
+        case 'bookings': return <BookingsTab />;
+        case 'support': return <SupportTab />;
+        default: return <ScheduleTab />;
+    }
   };
 
   const handleTabClick = (id: TabType | 'search') => {
@@ -34,9 +39,17 @@ const App: React.FC = () => {
         }
     } else {
         setActiveTab(id);
-        setContentTab(id);
-        if (id === 'bookings') setSearchTerm('');
+        setContentTab(id as TabType);
+        if (id === 'bookings' || id === 'support') setSearchTerm('');
     }
+  };
+
+  // 計算膠囊位置 (現在有 4 個分頁 + 1 個搜尋模式下的分頁表現)
+  const getPillPosition = () => {
+    const totalItems = 4; // 副本, 探索, 傳送, 支援
+    const index = NAV_ITEMS.findIndex(item => item.id === activeTab);
+    if (index === -1) return '0%';
+    return `${(index / totalItems) * 100}%`;
   };
 
   return (
@@ -67,7 +80,7 @@ const App: React.FC = () => {
         {renderContent()}
       </main>
 
-      {/* Floating Search Pill Wrapper - Stable centering using flex */}
+      {/* Floating Search Pill Wrapper */}
       {activeTab === 'search' && (
         <div className="absolute bottom-24 inset-x-0 z-[60] flex justify-center px-8">
             <div className="w-full max-w-sm animate-fade-in-up">
@@ -97,15 +110,15 @@ const App: React.FC = () => {
       )}
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex justify-center pointer-events-none w-full max-w-md">
-        <div className="bg-white rounded-full p-1.5 shadow-zen border border-stone-100 grid grid-cols-3 gap-1 relative pointer-events-auto min-w-[280px]">
+      <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex justify-center pointer-events-none w-full max-w-md px-4">
+        <div className="bg-white/90 backdrop-blur-md rounded-full p-1 shadow-zen border border-stone-100 grid grid-cols-4 gap-0 relative pointer-events-auto w-full">
           
           {/* Sliding Background Pill */}
           <div 
-            className="absolute top-1.5 bottom-1.5 rounded-full bg-zen-primary shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)]"
+            className="absolute top-1 bottom-1 rounded-full bg-zen-primary shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0"
             style={{
-              width: 'calc(33.33% - 0.5rem)',
-              left: activeTab === 'schedule' ? '0.375rem' : activeTab === 'bookings' ? 'calc(33.33% + 0.125rem)' : 'calc(66.66% + 0.125rem)'
+              width: 'calc(25% - 4px)',
+              left: `calc(${getPillPosition()} + 2px)`
             }}
           />
 
@@ -116,17 +129,17 @@ const App: React.FC = () => {
                 key={item.id}
                 onClick={() => handleTabClick(item.id)}
                 className={`
-                  px-4 py-2.5 rounded-full flex items-center justify-center gap-2 transition-colors duration-300 relative z-10 w-full
+                  px-2 py-2.5 rounded-full flex flex-col items-center justify-center gap-0.5 transition-colors duration-300 relative z-10 w-full
                   ${isActive 
                     ? 'text-white' 
-                    : 'text-stone-400 hover:text-stone-600 hover:bg-stone-50/50'
+                    : 'text-stone-400 hover:text-stone-600'
                   }
                 `}
               >
-                <div className={`text-base ${isActive ? 'animate-bounce-subtle' : ''}`}>
+                <div className={`text-lg ${isActive ? 'scale-110' : 'scale-100'} transition-transform`}>
                     <i className={`fa-solid ${item.icon}`}></i>
                 </div>
-                <span className="text-[10px] font-bold tracking-widest uppercase">
+                <span className="text-[8px] font-black tracking-widest uppercase">
                   {item.label}
                 </span>
               </button>
