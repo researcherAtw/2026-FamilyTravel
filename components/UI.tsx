@@ -56,7 +56,11 @@ export const CategoryBadge: React.FC<{ type: string; color?: HighlightColor }> =
     sightseeing: "bg-blue-100 text-blue-800",
     food: "bg-orange-100 text-orange-800",
     transport: "bg-gray-200 text-gray-800",
-    stay: "bg-purple-100 text-purple-800"
+    stay: "bg-purple-100 text-purple-800",
+    TELEPORT: "bg-indigo-500 text-white shadow-sm",
+    UNLOCKED: "bg-emerald-500 text-white shadow-sm",
+    CHECKPOINT: "bg-orange-500 text-white shadow-sm",
+    ASSEMBLE: "bg-teal-500 text-white shadow-sm"
   };
 
   const colorStyles: Record<HighlightColor, string> = {
@@ -65,13 +69,14 @@ export const CategoryBadge: React.FC<{ type: string; color?: HighlightColor }> =
     green: "bg-green-100 text-green-800",
     blue: "bg-blue-100 text-blue-800",
     purple: "bg-purple-100 text-purple-800",
-    gray: "bg-gray-200 text-gray-800"
+    gray: "bg-gray-200 text-gray-800",
+    teal: "bg-teal-100 text-teal-800"
   };
 
   const styleClass = color ? colorStyles[color] : (defaultStyles[type] || "bg-gray-100 text-gray-800");
 
   return (
-    <span className={`px-2 py-1 rounded-md text-xs font-bold uppercase ${styleClass}`}>
+    <span className={`px-2 py-1 rounded-md text-[10px] font-black uppercase tracking-tighter ${styleClass}`}>
       {type}
     </span>
   );

@@ -6,7 +6,7 @@ export type TabType = 'schedule' | 'bookings';
 // Changed from union to string to allow custom categories
 export type CategoryType = string; 
 
-export type HighlightColor = 'red' | 'orange' | 'green' | 'blue' | 'purple' | 'gray';
+export type HighlightColor = 'red' | 'orange' | 'green' | 'blue' | 'purple' | 'gray' | 'teal';
 
 export interface HighlightTag {
   id: string;

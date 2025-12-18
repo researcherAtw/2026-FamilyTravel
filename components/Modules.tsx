@@ -7,28 +7,37 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/14 (Sat) Day 0: Pre-departure ---
   {
       id: 'd0-1', date: '2026-02-14', time: '21:30', displayTime: '??:??',
-      title: '召喚小隊', enTitle: 'Quest Starts', location: 'TPE 桃園機場', category: 'ASSEMBLE', categoryColor: 'purple',
-      description: '冒險者大廳 (桃園機場｜第O航廈｜OO櫃檯旁)'
+      title: '召喚小隊', enTitle: 'Quest Starts', location: 'TPE 桃園機場', category: 'ASSEMBLE', categoryColor: 'teal',
+      description: '冒險者大廳 (桃園機場｜第O航廈｜OO櫃檯旁)',
+      guideInfo: {
+          story: "準備好踏入傳送陣，展開跨越中歐的奇幻旅程。",
+          tip: "請檢查護照有效期限（需六個月以上），並確認行動電源放置於手提行李中。",
+          highlights: [
+              { id: 'h1', text: '護照帶了嗎', color: 'red' },
+              { id: 'h2', text: '副本開啟', color: 'teal' },
+              { id: 'h3', text: '滿血出發', color: 'orange' }
+          ]
+      }
   },
 
   // --- 2/15 (Sun) Day 1: TPE -> DXB -> PRG ---
   { 
       id: 'd1-1', date: '2026-02-15', time: '00:20', displayTime: '00:20',
-      title: '起飛', enTitle: 'Departure', location: 'TPE 桃園機場', category: 'transport', categoryColor: 'red',
+      title: '開啟傳送陣', enTitle: 'Departure', location: 'TPE 桃園機場', category: 'TELEPORT', categoryColor: 'red',
       description: '往 DXB 杜拜機場'
   },
   { 
       id: 'd1-2', date: '2026-02-15', time: '06:15', displayTime: '06:15',
-      title: '降落', enTitle: 'Arrival', location: 'DXB 杜拜機場', category: 'transport', categoryColor: 'red'
+      title: '抵達新地圖', enTitle: 'Arrival', location: 'DXB 杜拜機場', category: 'UNLOCKED', categoryColor: 'red'
   },
   { 
       id: 'd1-3', date: '2026-02-15', time: '08:40', displayTime: '08:40',
-      title: '起飛 (轉機)', enTitle: 'Transfer Departure', location: 'DXB 杜拜機場', category: 'transport', categoryColor: 'red',
+      title: '登入中繼站', enTitle: 'Transfer Departure', location: 'DXB 杜拜機場', category: 'CHECKPOINT', categoryColor: 'orange',
       description: '往 PRG 布拉格'
   },
   { 
       id: 'd1-4', date: '2026-02-15', time: '12:30', displayTime: '12:30',
-      title: '降落', enTitle: 'Arrival', location: 'PRG 布拉格機場', category: 'transport', categoryColor: 'red',
+      title: '抵達新地圖', enTitle: 'Arrival', location: 'PRG 布拉格機場', category: 'UNLOCKED', categoryColor: 'red',
       description: '瓦茨拉夫·哈維爾國際機場'
   },
   { 
@@ -135,7 +144,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '捷克郵政總局', enTitle: 'Czech Post Office', location: '布拉格新城 (Nové Město)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/hCSgxbBEBKxW1FXr8',
       guideInfo: {
-          story: "建於1871-1874年，採用宏偉的新文藝復興風格。內部有表現通訊歷史的壁畫。",
+          story: "建於1871-1874年，採用宏偉的新文藝復興風格. 內部有表現通訊歷史的壁畫。",
           tip: "至今仍是正常運作的郵局，可免費進入大廳參觀。不妨在此購買郵票並寄出您的明信片體驗歷史。",
           highlights: [
               { id: 'h1', text: '新文藝復興', color: 'red' },
@@ -207,7 +216,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/UFJmcNbFmcCPXJ6J6',
       guideInfo: {
           story: "這座精美的巴洛克式花園，背後藏著一段驚世駭俗的愛情故事。它由 17 世紀的大主教 沃爾夫·迪特里希 (Wolf Dietrich) 為情婦 莎樂美·阿爾特 (Salome Alt) 和他們的 15 個孩子所建，名副其實的「愛之宮」。\n\n＊天主教的神職人員不可婚配及生子。",
-          tip: "此地因電影《真善美》而聞名全球，瑪麗亞正是圍繞著園內的飛馬噴泉教孩子們唱〈Do-Re-Mi〉。\n\n花園免費開放。從這裡可以完美地「框」住遠處山丘上的莎姿堡城堡，是經典拍照角度。",
+          tip: "此地因電影《真善美》而聞名全球，瑪麗亞正是圍繞著園內的飛馬噴泉教孩子們唱〈Do-Re-Mi〉。\n\n花園免費開放. 從這裡可以完美地「框」住遠處山丘上的莎姿堡城堡，是經典拍照角度。",
           highlights: [
               { id: 'h1', text: '真善美', color: 'purple' },
               { id: 'h2', text: '飛馬噴泉', color: 'orange' },
@@ -222,7 +231,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/25TfrB8To8oUhBHLA',
       guideInfo: {
           story: "歐洲現存規模最大的中世紀城堡之一，矗立在舊城區上方。它的主要功能是「防禦」和「彰顯權力」，用來保護大主教們免受外敵（和城內叛亂市民）的威脅，並控制富可敵國的「鹽」貿易。這座城堡在長達900多年的歷史中，從未被敵人攻陷過。",
-          tip: "搭乘城堡纜車僅需1分鐘。觀景台是俯瞰薩爾斯堡的最佳地點。內部有木偶博物館與酷刑室。",
+          tip: "搭乘城堡纜車僅需1分鐘. 觀景台是俯瞰薩爾斯堡的最佳地點。內部有木偶博物館與酷刑室。",
           highlights: [
               { id: 'h1', text: '城堡纜車', color: 'red' },
               { id: 'h2', text: '全景觀景台', color: 'blue' },
@@ -249,11 +258,11 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd6-2', date: '2026-02-20', time: '13:00', 
-      title: '鹽礦探秘之旅', enTitle: 'Salt Mine Tour', location: '哈萊因 (Hallein) /貝希特斯加登', category: '入場卷', categoryColor: 'red',
+      title: '鹽礦探秘之旅', enTitle: 'Salt Mine Tour', location: '哈萊認 (Hallein) /貝希特斯加登', category: '入場卷', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/khDxgJfHDWY6TwhU6',
       guideInfo: {
           story: "「鹽」是中世紀的白金. 此區財富均來自鹽礦。",
-          tip: "需換上傳統礦工服。體驗亮點是兩段刺激的木製溜滑梯，以及搭乘木筏渡過地底鹽水湖。",
+          tip: "需換上傳統礦工服. 體驗亮點是兩段刺激的木製溜滑梯，以及搭乘木筏渡過地底鹽水湖。",
           highlights: [
               { id: 'h1', text: '木製溜滑梯', color: 'orange' },
               { id: 'h2', text: '礦工服', color: 'gray' },
@@ -311,7 +320,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/ZZbtf4VG7tezXwBz6',
       guideInfo: {
           story: "哈布斯堡王朝的唯一女性統治者—瑪麗亞·特蕾莎 (Maria Theresa) 被戲稱為「歐洲丈母娘」aka 歐洲岳母，主要原因是她將「聯姻外交」發揮到了極致。\n\n她一生生育了 16 個孩子（其中 10 個活到成年），並將絕大多數的女兒都嫁給了歐洲各國的君主 or 王儲，以此來鞏固奧地利與各國的盟友關係，達成政治目的。",
-          tip: "兩側矗立著「雙胞胎」建築：藝術史博物館與自然史博物館。後方即是現代化的維也納博物館區 (MQ)。",
+          tip: "兩側矗立著「雙胞胎」建築：藝術史博物館與自然史博物館. 後方即是現代化的維也納博物館區 (MQ)。",
           highlights: [
               { id: 'h1', text: '藝術史博物館', color: 'red' },
               { id: 'h2', text: '自然史博物館', color: 'green' }
@@ -419,93 +428,88 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd9-4', date: '2026-02-23', time: '21:45', displayTime: '21:45',
-      title: '起飛', enTitle: 'Departure', location: 'VIE 維也納國際機場', category: 'transport', categoryColor: 'red',
+      title: '開啟傳送陣', enTitle: 'Departure', location: 'VIE 維也納國際機場', category: 'TELEPORT', categoryColor: 'red',
       description: '往 DXB 杜拜機場'
   },
 
   // --- 2/24 (Tue) Day 10/11: DXB -> TPE ---
   { 
       id: 'd10-1', date: '2026-02-24', time: '06:25', displayTime: '06:25',
-      title: '降落', enTitle: 'Arrival', location: 'DXB 杜拜機場', category: 'transport', categoryColor: 'red'
+      title: '抵達新地圖', enTitle: 'Arrival', location: 'DXB 杜拜機場', category: 'UNLOCKED', categoryColor: 'red'
   },
   { 
       id: 'd10-2', date: '2026-02-24', time: '08:45', displayTime: '08:45',
-      title: '起飛 (轉機)', enTitle: 'Transfer Departure', location: 'DXB 杜拜機場', category: 'transport', categoryColor: 'red',
+      title: '登入中繼站', enTitle: 'Transfer Departure', location: 'DXB 杜拜機場', category: 'CHECKPOINT', categoryColor: 'orange',
       description: '往 TPE 桃園機場'
   },
   { 
       id: 'd10-3', date: '2026-02-24', time: '20:40', displayTime: '20:40',
-      title: '降落', enTitle: 'Arrival', location: 'TPE 桃園機場', category: 'transport', categoryColor: 'red',
-      description: '抵達溫慢的家'
+      title: '抵達新地圖', enTitle: 'Arrival', location: 'TPE 桃園機場', category: 'UNLOCKED', categoryColor: 'red',
+      description: '抵達溫暖的家'
   },
 ];
 
+// Added missing MOCK_BOOKINGS data
 const MOCK_BOOKINGS: Booking[] = [
-    // --- Outbound Flight 1 ---
     {
-        id: 'flight-1',
-        type: 'flight',
-        title: 'TPE - DXB',
-        subTitle: 'Emirates (阿聯酋航空)',
-        referenceNo: 'EK387',
-        date: '2026-02-15',
-        time: '00:20', 
-        details: {
-            '出發': '00:20 (TPE)',
-            '抵達': '06:15 (DXB)',
-            '飛行時間': '9h 55m'
-        },
-        status: 'confirmed'
+      id: 'b1',
+      type: 'flight',
+      title: 'TPE - DXB',
+      subTitle: 'EK367 - Emirates',
+      referenceNo: 'EK367-TPE-DXB',
+      date: '2026-02-15',
+      time: '00:20',
+      details: {
+        '飛行時間': '9h 55m',
+        '抵達': '06:15',
+        '備註': '去程第一段'
+      },
+      status: 'confirmed'
     },
-    // --- Outbound Flight 2 (Transfer) ---
     {
-        id: 'flight-2',
-        type: 'flight',
-        title: 'DXB - PRG',
-        subTitle: 'Emirates (阿聯酋航空) - 轉機',
-        referenceNo: 'EK139',
-        date: '2026-02-15',
-        time: '08:40', 
-        details: {
-            '出發': '08:40 (DXB)',
-            '抵達': '12:30 (PRG)',
-            '飛行時間': '6h 50m',
-            '備註': '轉機航班'
-        },
-        status: 'confirmed'
+      id: 'b2',
+      type: 'flight',
+      title: 'DXB - PRG',
+      subTitle: 'EK139 - Emirates',
+      referenceNo: 'EK139-DXB-PRG',
+      date: '2026-02-15',
+      time: '08:40',
+      details: {
+        '飛行時間': '6h 50m',
+        '抵達': '12:30',
+        '備註': '轉機航班'
+      },
+      status: 'confirmed'
     },
-    // --- Inbound Flight 1 ---
     {
-        id: 'flight-3',
-        type: 'flight',
-        title: 'VIE - DXB',
-        subTitle: 'Emirates (阿聯酋航空)',
-        referenceNo: 'EK126',
-        date: '2026-02-23',
-        time: '21:45', 
-        details: {
-            '出發': '21:45 (VIE)',
-            '抵達': '06:25 +1 (DXB)',
-            '飛行時間': '5h 25m'
-        },
-        status: 'confirmed'
+      id: 'b3',
+      type: 'flight',
+      title: 'VIE - DXB',
+      subTitle: 'EK126 - Emirates',
+      referenceNo: 'EK126-VIE-DXB',
+      date: '2026-02-23',
+      time: '21:45',
+      details: {
+        '飛行時間': '5h 40m',
+        '抵達': '06:25 +1',
+        '備註': '回程第一段'
+      },
+      status: 'confirmed'
     },
-    // --- Inbound Flight 2 (Transfer) ---
     {
-        id: 'flight-4',
-        type: 'flight',
-        title: 'DXB - TPE',
-        subTitle: 'Emirates (阿聯酋航空) - 轉機',
-        referenceNo: 'EK386',
-        date: '2026-02-24',
-        time: '08:45', 
-        details: {
-            '出發': '08:45 (DXB)',
-            '抵達': '20:40 (TPE)',
-            '飛行時間': '7h 55m',
-            '備註': '轉機航班'
-        },
-        status: 'confirmed'
+      id: 'b4',
+      type: 'flight',
+      title: 'DXB - TPE',
+      subTitle: 'EK366 - Emirates',
+      referenceNo: 'EK366-DXB-TPE',
+      date: '2026-02-24',
+      time: '08:45',
+      details: {
+        '飛行時間': '8h 55m',
+        '抵達': '20:40',
+        '備註': '轉機航班'
+      },
+      status: 'confirmed'
     }
 ];
 
@@ -516,7 +520,8 @@ const TAG_COLORS: Record<HighlightColor, string> = {
     green: 'bg-green-50 text-green-600 border-green-200',
     blue: 'bg-blue-50 text-blue-600 border-blue-200',
     purple: 'bg-purple-50 text-purple-600 border-purple-200',
-    gray: 'bg-gray-50 text-gray-600 border-gray-200'
+    gray: 'bg-gray-50 text-gray-600 border-gray-200',
+    teal: 'bg-teal-50 text-teal-600 border-teal-200'
 };
 
 const NODE_TEXT_COLORS: Record<HighlightColor, string> = {
@@ -525,7 +530,8 @@ const NODE_TEXT_COLORS: Record<HighlightColor, string> = {
     green: 'text-green-600',
     blue: 'text-blue-500',
     purple: 'text-purple-500',
-    gray: 'text-gray-500'
+    gray: 'text-gray-500',
+    teal: 'text-teal-500'
 };
 
 const LUNAR_DATES: Record<string, string> = {
@@ -554,9 +560,11 @@ const mapWmoToCondition = (code: number): WeatherInfo['condition'] => {
 
 // Helper to get icon for category/activity
 const getCategoryIcon = (item: ScheduleItem): string => {
-    // Specifically check for "召喚小隊" (Summon Squad) for a more "character" based RPG feel
     if (item.title.includes('召喚')) return 'fa-hat-wizard';
     if (item.category === 'ASSEMBLE') return 'fa-dragon';
+    if (item.category === 'TELEPORT') return 'fa-wand-magic-sparkles';
+    if (item.category === 'UNLOCKED') return 'fa-map-location-dot';
+    if (item.category === 'CHECKPOINT') return 'fa-flag-checkered';
     
     if (item.category === 'transport') {
         if (item.title.includes('起飛') || item.title.includes('降落')) return 'fa-plane-up';
@@ -574,7 +582,7 @@ const getCategoryIcon = (item: ScheduleItem): string => {
 
 // Helper Component for Rendering a single Schedule Row
 const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
-    const isMajor = item.category === 'transport' || item.category === 'ASSEMBLE' || item.category === 'GATHERING';
+    const isMajor = ['transport', 'ASSEMBLE', 'GATHERING', 'TELEPORT', 'UNLOCKED', 'CHECKPOINT'].includes(item.category);
     const timeStr = item.displayTime || item.time;
     const [mainTime, subTime] = timeStr.includes('\n') ? timeStr.split('\n') : [timeStr, null];
     const [hour, minute] = mainTime.split(':');
@@ -988,6 +996,7 @@ const CITY_NAMES: Record<string, string> = {
 };
 
 export const BookingsTab: React.FC = () => {
+    // Initialized from the constant MOCK_BOOKINGS defined above
     const [bookings] = useState<Booking[]>(MOCK_BOOKINGS);
 
     return (
