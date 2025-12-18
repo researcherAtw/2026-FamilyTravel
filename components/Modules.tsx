@@ -998,6 +998,7 @@ export const BookingsTab: React.FC = () => {
                                             </div>
                                             <div className="text-[10px] font-bold text-stone-400 font-mono tracking-tight">{booking.date}</div>
                                             <div className="text-xl font-black text-stone-600 mt-2 tracking-widest leading-none">{originCode}</div>
+                                            <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-1.5 leading-none opacity-80 uppercase">{CITY_NAMES[originCode] || 'Realm'}</div>
                                         </div>
 
                                         {/* Teleport Gate Animation - BALANCED VISIBILITY */}
@@ -1033,12 +1034,8 @@ export const BookingsTab: React.FC = () => {
                                                 {getArrivalDate(booking.date, booking.details['抵達'])}
                                             </div>
                                             <div className="text-xl font-black text-stone-600 mt-2 tracking-widest leading-none">{destCode}</div>
+                                            <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-1.5 leading-none opacity-80 uppercase">{CITY_NAMES[destCode] || 'Realm'}</div>
                                         </div>
-                                    </div>
-                                    
-                                    <div className="flex justify-between mt-5 px-1 opacity-70">
-                                        <span className="text-[10px] font-bold text-stone-400 tracking-wide">{CITY_NAMES[originCode] || 'Realm'}</span>
-                                        <span className="text-[10px] font-bold text-stone-400 tracking-wide">{CITY_NAMES[destCode] || 'Realm'}</span>
                                     </div>
                                 </div>
 
