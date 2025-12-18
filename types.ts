@@ -1,4 +1,6 @@
 
+import React from 'react';
+
 export type TabType = 'schedule' | 'bookings';
 
 // Changed from union to string to allow custom categories
@@ -30,7 +32,7 @@ export interface RelatedLink {
 }
 
 export interface GuideInfo {
-  story: string;
+  story: string | React.ReactNode;
   highlights: HighlightTag[];
   tip: string;
   relatedLink?: RelatedLink;

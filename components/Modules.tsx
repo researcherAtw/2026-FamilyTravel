@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useLayoutEffect, useRef, useMemo } from 'react';
 import { Card, Button, CategoryBadge } from './UI';
 import { ScheduleItem, Booking, HighlightTag, HighlightColor, WeatherInfo } from '../types';
@@ -28,7 +27,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   { 
       id: 'd1-5', date: '2026-02-15', time: '14:00', 
       title: '老城廣場', enTitle: 'Old Town Square', location: '布拉格舊城區 (Staré Město)', category: '下車參觀', categoryColor: 'green',
-      mapUrl: 'https://maps.app.goo.gl/EbR7UJn3LuzL94aE6',
+      mapUrl: 'https://maps.app.goo.gl/EbR7UJn3LuzL94E6',
       guideInfo: {
           story: "自12世紀以來，這裡就是中歐最重要的市集廣場，是商貿路線的十字路口。",
           tip: "舊市政廳的塔樓是俯瞰廣場全景、拍攝泰恩教堂日落美景的最佳地點（有電梯）。",
@@ -45,7 +44,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/cobq4axapwgb5nNq5',
       guideInfo: {
           story: "這座晚期哥德式塔樓始建於1475年，是布拉格舊城區的13座城門之一。",
-          tip: "塔樓內部有展覽並開放登頂（需爬186級旋轉樓梯）。火藥塔旁邊緊鄰著華麗的「市民會館」(Municipal House)，是布拉格新藝術運動風格的巔峰之作。",
+          tip: "塔樓內部有展覽並開放導覽（需爬186級旋轉樓梯）。火藥塔旁邊緊鄰著華麗的「市民會館」(Municipal House)，是布拉格新藝術運動風格的巔峰之作。",
           highlights: [
               { id: 'h1', text: '登塔186階', color: 'blue' },
               { id: 'h2', text: '市民會館', color: 'orange' }
@@ -74,7 +73,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/KHgBnM7yiGxodwn86',
       guideInfo: {
           story: "這座橋是捷克最著名的地標，始建於一三五七年，由查理四世皇帝奠基（傳說他當時諮詢了天文學家，選擇了一三五七年九月七日五點三十一分這個「迴文」吉時）。",
-          tip: "找到雕像底座的兩塊青銅浮雕（一塊描繪聖約翰被丟下河，另一塊是騎士與狗），據說觸摸它們會帶來好運，並確保您能再次回到布拉格。",
+          tip: "找到雕像底座的兩塊青銅浮雕（一塊描繪聖約翰被丟下河，塊是騎士與狗），據說觸摸它們會帶來好運，並確保您能再次回到布拉格。",
           highlights: [
               { id: 'h1', text: '聖約翰雕像', color: 'purple' },
               { id: 'h2', text: '觸摸幸運符', color: 'orange' }
@@ -86,9 +85,10 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '布拉格古堡', enTitle: 'Prague Castle', location: '城堡區 (Hradčany)', category: '入場卷', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/XK51NPV4JhyTtMTh8',
       guideInfo: {
-          story: "這不是一座單一城堡，而是金氏世界紀錄認證的「世界上最大的古堡建築群」。",
-          tip: "參觀主要景點需購買套票(Circuit B)。務必入內欣賞聖維特大教堂中慕夏(Alfons Mucha)設計的彩繪玻璃窗。每天中午12點在正門有衛兵交接。",
+          story: "這不只是一座城堡，而是金氏世界紀錄認證的「世界上最大的古堡建築群」。\n\n這裡曾是波希米亞國王與神聖羅馬帝國皇帝的居所，集結了羅馬式、哥德式、文藝復興至巴洛克等千年的建築精華。\n\n城堡的心臟是「聖維特大教堂」(St. Vitus Cathedral)，這座耗時近 600 年才完工的哥德式傑作，不僅是歷代國王加冕之處，更是捷克精神的永恆象徵。",
+          tip: "參觀主要景點需購買套票(Circuit B)。務必入內欣賞聖維特大教堂中慕夏(Alfons Mucha)設計的彩繪玻璃窗. 每天中午12點在正門有衛兵交接。",
           highlights: [
+              { id: 'h4', text: '金氏世界紀錄認證', color: 'orange' },
               { id: 'h1', text: '聖維特大教堂', color: 'purple' },
               { id: 'h2', text: '衛兵交接', color: 'red' },
               { id: 'h3', text: 'Circuit B', color: 'gray' }
@@ -100,11 +100,11 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '黃金小徑', enTitle: 'Golden Lane', location: '城堡區 (Hradčany)', category: '入場卷', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/myHMM35Cz5zSB9HG7',
       guideInfo: {
-          story: "這條位於城堡圍牆內的小徑，最初建於16世紀末，是城堡守衛和僕人的居所。\n\n著名作家卡夫卡 (Franz Kafka) 曾在1916至1917年間，於水藍色的「22號」房舍短暫居住並進行創作。",
-          tip: "現在小房子內部被改造成各種主題展覽。通常在下午5點（冬季4點）城堡展館關閉後，黃金小徑會開放免費進入。",
+          story: "這條位於城堡圍牆內色彩繽紛的小徑，最初建於 16 世紀末，原是城堡守衛的住所。\n\n傳說這裡曾是魯道夫二世的煉金術士試圖「煉製黃金」的實驗室，但這多半是後世杜撰的故事；實際上，小徑得名於後來遷居此地的金匠。\n\n著名作家卡夫卡 (Franz Kafka) 曾在1916至1917年間，於水藍色的「22號」房舍短暫居住並進行創作。在其居住期間內主要完成的作品為短篇小說集《鄉村醫生》(Ein Landarzt) 中的大部分故事。這段時間被認為是他創作生涯中非常平靜且多產的時期。",
+          tip: "現在小房子內部被改造成各種主題展覽。",
           highlights: [
               { id: 'h1', text: 'No.22 卡夫卡', color: 'blue' },
-              { id: 'h2', text: '免費時段', color: 'green' }
+              { id: 'h3', text: '金匠', color: 'orange' }
           ]
       }
   },
@@ -138,13 +138,14 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd3-2', date: '2026-02-17', time: '10:30', 
-      title: '國家博物館', enTitle: 'National Museum', location: '瓦茨拉夫廣場 (Wenceslas Square)', category: '入場卷', categoryColor: 'red',
+      title: '捷克國家博物館', enTitle: 'National Museum', location: '瓦茨拉夫廣場 (Wenceslas Square)', category: '入場卷', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/RQpVaL8PULVdoEgEA',
       guideInfo: {
-          story: "捷克國家認同的象徵。2011-2018年間進行了大規模翻修，內部展覽現代且宏偉。",
-          tip: "從博物館頂樓的圓頂可以俯瞰整個瓦茨拉夫廣場。主館與新館（原國會大廈）有地下通道相連。",
+          story: "這座雄偉的新文藝復興建築本身就是捷克國家認同的象徵。它成立於1818年，但現在的主建築於1891年完工。\n\n在19世紀「捷克民族復興」運動中，建立一個收藏捷克自然與歷史的博物館，是向當時統治的奧地利（哈布斯堡王朝）宣示捷克文化獨立性的重要舉動。\n\n「捷克民族復興」：針對奧地利哈布斯堡王朝統治下「德國化」政策的反動，目的是「搶救瀕臨滅絕的捷克語言與文化」。",
+          tip: "從博物館頂樓的圓頂可以俯瞰整個瓦茨拉夫廣場. 主館與新館（原國會大廈）有地下通道相連。",
           highlights: [
-              { id: 'h1', text: '圓頂景觀', color: 'blue' }
+              { id: 'h1', text: '圓頂景觀', color: 'blue' },
+              { id: 'h2', text: '國家認同', color: 'red' }
           ]
       }
   },
@@ -167,10 +168,10 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd4-2', date: '2026-02-18', time: '13:00', 
-      title: '布拉格舊城區', enTitle: 'Old Town (Vnitřní Město)', location: '庫倫洛夫舊城 (Vnitřní Město)', category: '下車參觀', categoryColor: 'green',
+      title: '庫倫洛夫舊城區', enTitle: 'Český Krumlov Old Town (Vnitřní Město)', location: '庫倫洛夫舊城 (Vnitřní Město)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/b6So1t939ae8LC5A7',
       guideInfo: {
-          story: "1992年列為世界文化遺產，被譽為「中世紀的完美縮影」。",
+          story: "庫倫洛夫舊城區在1992年被聯合國教科文組織列為世界文化遺產，被譽為「中世紀的完美縮影」。漫步在完整保留十四至十七世紀建築風貌的巷弄間，彷彿時光倒流，置身於輝煌的文藝復興時期。",
           tip: "舊城區內幾乎禁止車輛通行，步行是最佳方式。除了城堡，拉特蘭街 (Latrán) 也有許多絕佳拍照點。",
           highlights: [
               { id: 'h1', text: '世界遺產', color: 'blue' },
@@ -198,11 +199,12 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '米拉貝爾花園', enTitle: 'Mirabell Palace & Gardens', location: '薩爾斯堡新城 (Schloss Mirabell)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/UFJmcNbFmcCPXJ6J6',
       guideInfo: {
-          story: "精美的巴洛克式花園，電影《真善美》瑪麗亞和孩子們歡唱〈Do-Re-Mi〉的場景。",
-          tip: "花園免費開放。從這裡可以完美地「框」住遠處山丘上的莎姿堡城堡，是經典拍照角度。",
+          story: "這座精美的巴洛克式花園，背後藏著一段驚世駭俗的愛情故事。它由 17 世紀的大主教 沃爾夫·迪特里希 (Wolf Dietrich) 為情婦 莎樂美·阿爾特 (Salome Alt) 和他們的 15 個孩子所建，名副其實的「愛之宮」。\n\n＊天主教的神職人員不可婚配及生子。",
+          tip: "此地因電影《真善美》而聞名全球，瑪麗亞正是圍繞著園內的飛馬噴泉教孩子們唱〈Do-Re-Mi〉。\n\n花園免費開放。從這裡可以完美地「框」住遠處山丘上的莎姿堡城堡，是經典拍照角度。",
           highlights: [
               { id: 'h1', text: '真善美', color: 'purple' },
-              { id: 'h2', text: 'Do-Re-Mi階梯', color: 'orange' }
+              { id: 'h2', text: '飛馬噴泉', color: 'orange' },
+              { id: 'h3', text: '禁忌之愛', color: 'red' }
           ]
       }
   },
@@ -212,7 +214,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(含上下纜車)',
       mapUrl: 'https://maps.app.goo.gl/25TfrB8To8oUhBHLA',
       guideInfo: {
-          story: "歐洲現存規模最大的中世紀城堡之一，矗立在舊城區上方。",
+          story: "歐洲現存規模最大的中世紀城堡之一，矗立在舊城區上方。它的主要功能是「防禦」和「彰顯權力」，用來保護大主教們免受外敵（和城內叛亂市民）的威脅，並控制富可敵國的「鹽」貿易。這座城堡在長達900多年的歷史中，從未被敵人攻陷過。",
           tip: "搭乘城堡纜車僅需1分鐘。觀景台是俯瞰薩爾斯堡的最佳地點。內部有木偶博物館與酷刑室。",
           highlights: [
               { id: 'h1', text: '城堡纜車', color: 'red' },
@@ -225,7 +227,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/20 (Fri) Day 6: Austria -> Germany -> Austria ---
   { 
       id: 'd6-1', date: '2026-02-20', time: '09:30', 
-      title: '國王湖遊船', enTitle: 'Lake Königssee Boat Tour', location: '德國貝希特斯加登 (Berchtesgaden)', category: '入場卷', categoryColor: 'red',
+      title: '國王湖遊船', enTitle: 'Königssee', location: '德國貝希特斯加登 (Berchtesgaden)', category: '入場卷', categoryColor: 'red',
       description: 'Königssee',
       mapUrl: 'https://maps.app.goo.gl/WB3CMR6fsZ4wGTXF6',
       guideInfo: {
@@ -243,7 +245,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '鹽礦探秘之旅', enTitle: 'Salt Mine Tour', location: '哈萊因 (Hallein) /貝希特斯加登', category: '入場卷', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/khDxgJfHDWY6TwhU6',
       guideInfo: {
-          story: "「鹽」是中世紀的白金。此區財富均來自鹽礦。",
+          story: "「鹽」是中世紀的白金. 此區財富均來自鹽礦。",
           tip: "需換上傳統礦工服。體驗亮點是兩段刺激的木製溜滑梯，以及搭乘木筏渡過地底鹽水湖。",
           highlights: [
               { id: 'h1', text: '木製溜滑梯', color: 'orange' },
@@ -261,7 +263,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/MnHJtGZ3FC9mLT2SA',
       guideInfo: {
           story: "1997年列為世界文化遺產，被譽為世界上最美的小鎮之一，歷史與鹽礦密不可分。",
-          tip: "經典明信片角度位於小鎮北側公路旁。因墓地空間有限，教堂旁有獨特的「人骨室」。",
+          tip: "經典明信片角度位於小鎮北側公路旁. 因墓地專用空間有限，教堂旁有獨特的「人骨室」。",
           highlights: [
               { id: 'h1', text: '世界遺產', color: 'blue' },
               { id: 'h2', text: '人骨室', color: 'gray' }
@@ -273,7 +275,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/dcfSuaNqNjkhTEJp6',
       guideInfo: {
-          story: "由藝術家「百水先生」設計，於1985年完工的公共住宅，是維也納建築的異類。",
+          story: <>這座公寓於 1985 年完工，是由奧地利身兼藝術家與建築師雙重身分的 <strong>「百水先生」(Friedensreich Hundertwasser)</strong> 所設計，堪稱維也納建築界獨樹一幟的異數。<br /><br />百水先生極度痛恨「直線」，甚至稱其為「邪惡的產物」；相反地，他推崇回歸自然與有機的形態。這座公寓，正是他將這些反骨理念付諸實踐的集大成之作。</>,
           tip: "內部有居民無法參觀。建議去對面的「百水藝術村」商場體驗其風格，或步行至附近的百水藝術館。",
           highlights: [
               { id: 'h1', text: '奇特建築', color: 'orange' },
@@ -286,7 +288,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '卡爾教堂', enTitle: 'Karlskirche', location: '卡爾廣場 (Karlsplatz)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/FMdKhrTT6ye6FD388',
       guideInfo: {
-          story: "巴洛克建築巔峰，1713年皇帝卡爾六世為感謝黑死病結束而建。",
+          story: "巴洛克建築巔峰，1713年皇帝卡爾六世為感謝黑死病結束而建。融合了古希臘的神殿門廊、古羅馬的兩根「圖拉真柱」（上面雕刻著聖人的生平）以及拜占庭式的巨大橢圓形穹頂。",
           tip: "前方水池可拍出完美倒影。教堂內部有全景電梯可直達穹頂近距離欣賞濕壁畫（需購票）。",
           highlights: [
               { id: 'h1', text: '巴洛克', color: 'orange' },
@@ -301,7 +303,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '瑪麗亞特蕾莎廣場', enTitle: 'Maria-Theresien-Platz', location: '博物館區 (Museumsquartier)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/ZZbtf4VG7tezXwBz6',
       guideInfo: {
-          story: "紀念哈布斯堡王朝國母 瑪麗亞·特蕾莎女皇 (歐洲丈母娘) 的廣場。",
+          story: "哈布斯堡王朝的唯一女性統治者—瑪麗亞·特蕾莎 (Maria Theresa) 被戲稱為「歐洲丈母娘」aka 歐洲岳母，主要原因是她將「聯姻外交」發揮到了極致。\n\n她一生生育了 16 個孩子（其中 10 個活到成年），並將絕大多數的女兒都嫁給了歐洲各國的君主 or 王儲，以此來鞏固奧地利與各國的盟友關係，達成政治目的。",
           tip: "兩側矗立著「雙胞胎」建築：藝術史博物館與自然史博物館。後方即是現代化的維也納博物館區 (MQ)。",
           highlights: [
               { id: 'h1', text: '藝術史博物館', color: 'red' },
@@ -314,8 +316,8 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '霍夫堡宮', enTitle: 'The Hofburg', location: '維也納第1區 (Innere Stadt)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/bPPsM1JA2y2oMD8U6',
       guideInfo: {
-          story: "哈布斯堡王朝的冬宮。西西 (Sisi) 是伊莉莎白皇后的真實暱稱，茜茜則是電影譯名。",
-          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館。西班牙馬術學校也位於此區。",
+          story: "哈布斯堡王朝的冬宮，也是西西 (Sisi，伊莉莎白皇后) 的黃金牢籠。\n\n西西 (Sisi) 是伊莉莎白皇后的真實暱稱，茜茜則是電影譯名。\n霍夫堡宮是西西皇后權力的象徵，也是她痛苦的根源。在這裡看到的不是一個幸福皇后的家，而是一位女性試圖在壓抑體制中，衝撞並尋找自我的掙扎痕跡。",
+          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館. 西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇后的關鍵展品\n私人物品： 西西皇后的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
           highlights: [
               { id: 'h0', text: '冬宮', color: 'blue' },
               { id: 'h1', text: '西西博物館', color: 'purple' },
@@ -330,7 +332,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/doX4N77JodZMSQ1r8',
       guideInfo: {
           story: "紀念1679年奪走維也納三分之一人口的瘟疫。",
-          tip: "位於步行街中央的露天雕塑。頂端是聖三一，底座象蹟瘟疫女巫，中間是皇帝利奧波德一世。\n\n可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
+          tip: "位於步行街中央的露天雕塑。紀念柱的最頂端是「聖三一」（父、子、聖靈），中間是皇帝利奧波德一世跪地祈禱的雕像，底座則是象徵瘟疫的女巫。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
           highlights: [
               { id: 'h1', text: '聖三一', color: 'orange' },
               { id: 'h2', text: '巴洛克雕塑', color: 'gray' },
@@ -366,7 +368,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/dcfSuaNqNjkhTEJp6',
       guideInfo: {
-          story: "再次造訪這座充滿生命力的綠建築，感受其與自然共生的理念。",
+          story: <>這座公寓於 1985 年完工，是由奧地利身兼藝術家與建築師雙重身分的 <strong>「百水先生」(Friedensreich Hundertwasser)</strong> 所設計，堪稱維也納建築界獨樹一幟的異數。<br /><br />百水先生極度痛恨「直線」，甚至稱其為「邪惡的產物」；相反地，他推崇回歸自然與有機的形態。這座公寓，正是他將這些反骨理念付諸實踐的集大成之作。</>,
           tip: "若上次未參觀百水藝術館，今日可安排前往，欣賞更多百水先生的畫作與建築模型。",
           highlights: [
               { id: 'h1', text: '自然共生', color: 'green' },
@@ -380,7 +382,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(南塔、北塔二擇一登頂)',
       mapUrl: 'https://maps.app.goo.gl/d6ob7ph5DwFvTL949',
       guideInfo: {
-          story: "維也納的靈魂象徵，始建於12世紀。",
+          story: "維也納的靈魂象徵，始建於12世紀。曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n哈布斯堡家族是極度虔誠的天主教徒。這個分開埋葬最初出於實務的防腐程序，然而隨著時間演變，被昇華為一種隆重的宗教儀式。\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
           tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘。亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭Candied Violets」。",
           highlights: [
               { id: 'h1', text: '南塔(樓梯)', color: 'red' },
@@ -427,7 +429,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   { 
       id: 'd10-3', date: '2026-02-24', time: '20:40', displayTime: '20:40',
       title: '降落', enTitle: 'Arrival', location: 'TPE 桃園機場', category: 'transport', categoryColor: 'red',
-      description: '抵達溫暖的家'
+      description: '抵達溫慢的家'
   },
 ];
 
@@ -664,9 +666,9 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem }> = ({ item }) => {
                         {(item.guideInfo?.story || item.guideInfo?.tip || (item.guideInfo?.highlights && item.guideInfo.highlights.length > 0)) && (
                             <div className="mt-4 pt-3 border-t border-dashed border-gray-100">
                                 {item.guideInfo?.story && (
-                                    <p className="text-sm text-gray-600 leading-relaxed font-sans mb-3 whitespace-pre-line text-left">
+                                    <div className="text-sm text-gray-600 leading-relaxed font-sans mb-3 whitespace-pre-line text-left">
                                         {item.guideInfo.story}
-                                    </p>
+                                    </div>
                                 )}
                                 
                                 {item.guideInfo?.tip && (
@@ -960,7 +962,7 @@ export const ScheduleTab: React.FC = () => {
 
 // --- BOOKINGS TAB ---
 
-const BARCODE_SVG = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAxMDAgMzAiPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIwIi8+PHJlY3Qgd2lkdGg9IjIiIGhlaWdodD0iMzAiIHg9IjQiLz48cmVjdCB3aWR0aD0iMyIgaGVpZ2h0PSIzMCIgeD0iOCIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSIxMyIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSIxNiIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIyMiIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSIyNiIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSIyOSIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIzNCIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSIzOCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI0NCIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSI0OCIvPjxyZWN0IHdpZHRoPSI1IiBoZWlnaHQ9IjMwIiB4PSI1MiIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI1OSIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI2NCIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSI2OCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI3MyIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSI3NyIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI4MyIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSI4NyIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI5MCIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSI5NCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI5OCIvPjwvc3ZnPg==";
+const BARCODE_SVG = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAxMDAgMzAiPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIwIi8+PHJlY3Qgd2lkdGg9IjIiIGhlaWdodD0iMzAiIHg9IjQiLz48cmVjdCB3aWR0aD0iMyIgaGVpZ2h0PSIzMCIgeD0iOCIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSIxMyIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSIxNiIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIyMiIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSIyNiIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSIyOSIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSIyNCIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSIzOCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI0NCIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSI0OCIvPjxyZWN0IHdpZHRoPSI1IiBoZWlnaHQ9IjMwIiB4PSI1MiIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI1OSIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI2NCIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSI2OCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI3MyIvPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMwIiB4PSI3NyIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI4MyIvPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjMwIiB4PSI4NyIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI5MCIvPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMwIiB4PSI5NCIvPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjMwIiB4PSI5OCIvPjwvc3ZnPg==";
 
 const CITY_NAMES: Record<string, string> = {
     'TPE': 'Taipei',
@@ -986,6 +988,15 @@ export const BookingsTab: React.FC = () => {
                     
                     const originCode = booking.title.split(' - ')[0];
                     const destCode = booking.title.split(' - ')[1];
+
+                    // Logic to show actual arrival date
+                    const arrivalDateText = booking.details['抵達']?.includes('+1') 
+                        ? (() => {
+                            const d = new Date(booking.date);
+                            d.setDate(d.getDate() + 1);
+                            return d.toISOString().split('T')[0];
+                        })()
+                        : booking.date;
 
                     return (
                         <div key={booking.id} className="bg-white rounded-2xl shadow-zen relative overflow-hidden flex flex-col transition-transform active:scale-[0.99] group">
@@ -1032,7 +1043,7 @@ export const BookingsTab: React.FC = () => {
                                             {booking.details['抵達']?.split(' ')[0] || '--:--'}
                                         </div>
                                          <div className="text-xs font-bold text-stone-300 mt-1">
-                                            {booking.details['抵達']?.includes('+1') ? 'Next Day' : booking.date}
+                                            {arrivalDateText}
                                         </div>
                                         <div className="text-lg font-bold text-stone-200 mt-1">{destCode}</div>
                                     </div>
