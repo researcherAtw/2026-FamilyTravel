@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef, useMemo } from 'react';
 
 export type TabType = 'schedule' | 'bookings' | 'support';
 

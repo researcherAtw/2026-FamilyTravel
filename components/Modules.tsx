@@ -62,7 +62,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   { 
       id: 'd1-5', date: '2026-02-15', time: '14:00', 
       title: '老城廣場', enTitle: 'Old Town Square', location: '布拉格舊城區 (Staré Město)', category: '下車參觀', categoryColor: 'green',
-      mapUrl: 'https://maps.app.goo.gl/EbR7UJn3LuzL94E6',
+      mapUrl: 'https://maps.app.goo.gl/EbR7UJn3LuzL94aE6',
       guideInfo: {
           story: "自12世紀以來，這裡就是中歐最重要的市集廣場，是商貿路線的十字路口。",
           tip: "舊市政廳的塔樓是俯瞰廣場全景、拍攝泰恩教堂日落美景的最佳地點（有電梯）。",
@@ -188,7 +188,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/18 (Wed) Day 4: Cesky Krumlov ---
   { 
       id: 'd4-1', date: '2026-02-18', time: '10:00', 
-      title: '庫倫洛夫城堡', enTitle: 'Český Krumlov Castle', location: '彩繪塔周邊 (Zámek庫倫洛夫城堡)', category: '下車參觀', categoryColor: 'green',
+      title: '庫倫洛夫城堡', enTitle: 'Český Krumlov Castle', location: '彩繪塔周邊 (Zámek 庫倫洛夫城堡)', category: '下車參觀', categoryColor: 'green',
       description: 'CK小鎮',
       mapUrl: 'https://maps.app.goo.gl/grD5vxzNSLBpn7889',
       guideInfo: {
@@ -280,7 +280,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '鹽礦探秘之旅', enTitle: 'Salt Mine Tour', location: '哈萊認 (Hallein) /貝希特斯加登', category: '入場卷', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/khDxgJfHDWY6TwhU6',
       guideInfo: {
-          story: "「鹽」是中世紀的白金。此區財富均來自鹽礦。",
+          story: "「鹽」是中世紀的白金.此區財富均來自鹽礦。",
           tip: "需換上傳統礦工服。體驗亮點是兩段刺激的木製溜滑梯，以及搭乘木筏渡過地底鹽水湖。",
           highlights: [
               { id: 'h1', text: '木製溜滑梯', color: 'orange' },
@@ -323,7 +323,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '卡爾教堂', enTitle: 'Karlskirche', location: '卡爾廣場 (Karlsplatz)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/FMdKhrTT6ye6FD388',
       guideInfo: {
-          story: "巴洛克建築巔峰，1713年皇帝卡爾六世為感謝黑死病結束而建。融合了古希臘的神殿門廊、古羅馬的兩根「圖拉真柱」（上面雕刻著聖人的生平）以及拜占庭式的巨大橢圓形穹頂。",
+          story: "巴洛克建築巔峰，1713年皇帝卡爾六世為感謝黑死病結束而建.融合了古希臘的神殿門廊、古羅馬的兩根「圖拉真柱」（上面雕刻著聖人的生平）以及拜占庭式的巨大橢圓形穹頂。",
           tip: "前方水池可拍出完美倒影。教堂內部有全景電梯可直達穹頂近距離欣賞濕壁畫（需購票）。",
           highlights: [
               { id: 'h1', text: '巴洛克', color: 'orange' },
@@ -351,7 +351,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '霍夫堡宮', enTitle: 'The Hofburg', location: '維也納第1區 (Innere Stadt)', category: '下車參觀', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/bPPsM1JA2y2oMD8U6',
       guideInfo: {
-          story: "哈布斯堡王朝的冬宮，也是西西 (Sisi，伊莉莎白皇后) 的黃金牢籠。\n\n西西 (Sisi) 是伊莉莎白皇后的真實暱稱，茜茜則是電影譯名。\n霍夫堡宮是西西皇后權力的象徵，也是她痛苦的根源。在這裡看到的不是一個幸福皇后的家，而是一位女性試圖在壓抑體制中，衝撞並尋找自我的掙扎痕跡。",
+          story: "哈布斯堡王朝的冬宮，也是西西 (Sisi，伊莉莎白皇后) 的黃金牢籠。\n\n西西 (Sisi) 是伊莉莎白皇后的真實暱稱，茜茜則是電影譯名。\n霍夫堡宮是西西皇后權力的象徵，也是她痛苦的根源。在這裡看到的不是一個幸福皇後的家，而是一位女性試圖在壓抑體制中，衝撞並尋找自我的掙扎痕跡。",
           tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館。西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇后的關鍵展品\n私個人物品： 西西皇后的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
           highlights: [
               { id: 'h0', text: '冬宮', color: 'blue' },
@@ -385,7 +385,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: 'Schönbrunn Palace',
       mapUrl: 'https://maps.app.goo.gl/nommjbpqLek8AkKL6',
       guideInfo: {
-          story: "1996年列為世界文化遺產。此處原為皇家狩獵小屋，後經瑪麗亞·特蕾莎女皇（歐洲丈母娘）改建為巴洛克式宮殿。\n\n這裡曾是6歲神童莫札特演奏之地，也是末代皇帝卡爾一世簽署放棄權力文件、終結帝國統治的歷史現場。",
+          story: "1996年列為世界文化遺產.此處原為皇家狩獵小屋，後經瑪麗亞·特蕾莎女皇（歐洲丈母娘）改建為巴洛克式宮殿。\n\n這裡曾是6歲神童莫札特演奏之地，也是末代皇帝卡爾一世簽署放棄權力文件、終結帝國統治的歷史現場。",
           tip: "購票：參觀宮殿內部必須購票（如 Imperial Tour 或 Grand Tour），強烈建議「提早上網預訂」。\n花園：宮殿後方的法式花園是免費開放的。\n凱旋門：務必爬上花園對面的山丘，抵達「凱旋門」，那是俯瞰全景的「最佳地點」。\n動物園：世界上現存最古老的動物園也位於此。",
           highlights: [
               { id: 'h0', text: '夏宮', color: 'blue' },
@@ -417,7 +417,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(南塔、北塔二擇一登頂)',
       mapUrl: 'https://maps.app.goo.gl/d6ob7ph5DwFvTL949',
       guideInfo: {
-          story: "維也納的靈魂象徵，始建於12世紀。曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
+          story: "維也納的靈魂象徵，始建於12世紀.曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
           tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘。亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
           highlights: [
               { id: 'h1', text: '南塔(樓梯)', color: 'red' },
@@ -581,7 +581,7 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; search
                 </div>
             </div>
             <div className="flex-grow min-w-0 py-2 pb-6 pl-3">
-                <div className="bg-white rounded-2xl p-4 shadow-zen border border-stone-50 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-zen-hover relative overflow-hidden">
+                <div className="bg-white rounded-2xl p-4 shadow-zen border border-stone-100 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-zen-hover relative overflow-hidden">
                     {showDate && (
                         <div className="absolute top-0 right-0 px-3 py-1 bg-stone-100 text-[9px] font-black text-stone-400 rounded-bl-xl uppercase tracking-widest z-20 border-b border-l border-stone-50">
                             {item.date}
@@ -685,13 +685,11 @@ export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = ''
   const dates = useMemo(() => Array.from(new Set(items.map(i => i.date))).sort() as string[], [items]);
   const currentIndex = dates.indexOf(selectedDate);
 
-  // 強化搜尋邏輯：檢查所有可見文字欄位，並將 JSX 故事預處理為純文字以便搜尋
   const filteredResults = useMemo(() => {
     if (!searchTerm.trim()) return [];
     const query = searchTerm.toLowerCase();
     
     return items.filter(item => {
-        // 核心欄位搜尋
         const basicMatch = 
             item.title.toLowerCase().includes(query) ||
             item.enTitle?.toLowerCase().includes(query) ||
@@ -700,18 +698,11 @@ export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = ''
 
         if (basicMatch) return true;
 
-        // 攻略詳情搜尋
         if (item.guideInfo) {
-            // 故事內容 (JSX 自動轉換為純文字搜尋)
             const storyMatch = typeof item.guideInfo.story === 'string' && 
                                item.guideInfo.story.toLowerCase().includes(query);
-            
-            // 小撇步
             const tipMatch = item.guideInfo.tip?.toLowerCase().includes(query);
-            
-            // 標籤亮點
             const highlightMatch = item.guideInfo.highlights?.some(h => h.text.toLowerCase().includes(query));
-
             return storyMatch || tipMatch || highlightMatch;
         }
 
@@ -1014,7 +1005,7 @@ export const SupportTab: React.FC = () => {
 
                 {/* Germany Card */}
                 <div className="relative group">
-                    <div className="absolute -top-3 -left-2 z-20 bg-white border border-stone-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-2 transform rotate-2">
+                    <div className="absolute -top-3 -left-2 z-20 bg-white border border-stone-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-2 transform -rotate-2">
                         <span className="text-sm">🇩🇪</span>
                         <span className="text-[10px] font-black text-stone-600 uppercase tracking-widest">德國總部</span>
                     </div>
@@ -1053,7 +1044,7 @@ export const SupportTab: React.FC = () => {
                                         <i className="fa-solid fa-heart-pulse text-[8px]"></i> 聖療術專線 Emergency
                                     </span>
                                     <div className="flex pl-3 border-l-2 border-zen-danger/20">
-                                        <a href="tel:+491713898257" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm">+49-171-3898257</a>
+                                        <a href="tel:+491713898257" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">+49-171-3898257</a>
                                     </div>
                                 </div>
                             </div>
@@ -1144,7 +1135,6 @@ export const SupportTab: React.FC = () => {
 
 // --- BOOKINGS TAB (Teleportation Log) ---
 
-// Fix: Define missing MOCK_BOOKINGS constant to solve the reference error in BookingsTab
 const MOCK_BOOKINGS: Booking[] = [
   {
     id: 'b1',
