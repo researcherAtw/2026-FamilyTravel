@@ -61,7 +61,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd1-5', date: '2026-02-15', time: '14:00', 
-      title: '老城廣場', enTitle: 'Old Town Square', location: '布拉格舊城區 (Staré Město)', category: '下車參觀', categoryColor: 'green',
+      title: '老城廣場', enTitle: 'Old Town Square', location: '布拉格舊城區 (Staré Město)', category: '座標登錄', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/EbR7UJn3LuzL94aE6',
       guideInfo: {
           story: "自12世紀以來，這裡就是中歐最重要的市集廣場，是商貿路線的十字路口。",
@@ -75,7 +75,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd1-6', date: '2026-02-15', time: '15:00', 
-      title: '火藥塔', enTitle: 'Powder Tower', location: '共和國廣場 (Náměstí Republiky)', category: '下車參觀', categoryColor: 'green',
+      title: '火藥塔', enTitle: 'Powder Tower', location: '共和國廣場 (Náměstí Republiky)', category: '座標登錄', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/cobq4axapwgb5nNq5',
       guideInfo: {
           story: "這座晚期哥德式塔樓始建於1475年，是布拉格舊城區的13座城門之一。",
@@ -88,7 +88,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd1-7', date: '2026-02-15', time: '16:00', 
-      title: '布拉格天文鐘', enTitle: 'Prague Astronomical Clock', location: '舊市政廳南牆', category: '入場卷', categoryColor: 'red',
+      title: '布拉格天文鐘', enTitle: 'Prague Astronomical Clock', location: '舊市政廳南牆', category: '區域解鎖', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/wSprGNidwrzM6Eb5A',
       guideInfo: {
           story: "位於舊市政廳的南面牆上，是廣場的靈魂。",
@@ -104,7 +104,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/16 (Mon) Day 2: Prague ---
   { 
       id: 'd2-1', date: '2026-02-16', time: '09:00', 
-      title: '查理士大橋', enTitle: 'Charles Bridge', location: '伏爾塔瓦河 (Vltava)', category: '下車參觀', categoryColor: 'green',
+      title: '查理士大橋', enTitle: 'Charles Bridge', location: '伏爾塔瓦河 (Vltava)', category: '座標登錄', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/KHgBnM7yiGxodwn86',
       guideInfo: {
           story: "這座橋是捷克最著名的地標，始建於一三五七年，由查理四世皇帝奠基（傳說他當時諮詢了天文學家，選擇了一三五七年九月七日五點三十一分這個「迴文」吉時）。",
@@ -117,7 +117,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd2-2', date: '2026-02-16', time: '10:30', 
-      title: '布拉格古堡', enTitle: 'Prague Castle', location: '城堡區 (Hradčany)', category: '入場卷', categoryColor: 'red',
+      title: '布拉格古堡', enTitle: 'Prague Castle', location: '城堡區 (Hradčany)', category: '區域解鎖', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/XK51NPV4JhyTtMTh8',
       guideInfo: {
           story: "這不只是一座城堡，而是金氏世界紀錄認證的「世界上最大的古堡建築群」。\n\n這裡曾是波希米亞國王與神聖羅馬帝國皇帝的居所，集結了羅馬式、哥德式、文藝復興至巴洛克等千年的建築精華。\n\n城堡的心臟是「聖維特大教堂」(St. Vitus Cathedral)，這座耗時近 600 年才完工的哥德式傑作，不僅是歷代國王加冕之處，更是捷克精神的英恆象徵。",
@@ -132,7 +132,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd2-3', date: '2026-02-16', time: '13:00', 
-      title: '黃金小徑', enTitle: 'Golden Lane', location: '城堡區 (Hradčany)', category: '入場卷', categoryColor: 'red',
+      title: '黃金小徑', enTitle: 'Golden Lane', location: '城堡區 (Hradčany)', category: '區域解鎖', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/myHMM35Cz5zSB9HG7',
       guideInfo: {
           story: "這條位於城堡圍牆內色彩繽紛的小徑，最初建於 16 世紀末，原是城堡守衛的住所。\n\n傳說這裡曾是魯道夫二世的煉金術士試圖「煉製黃金」的實驗室，但這多半是後世杜撰的故事；實際上，小徑得名於後來遷居此地的金匠。\n\n著名作家卡夫卡 (Franz Kafka) 曾在1916至1917年間，於水藍色的「22號」房舍短暫居住並進行創作。\n在其居住期間內主要完成的作品為短篇小說集《鄉村醫生》(Ein Landarzt) 中的大部分故事。這段時間被認為是他創作生涯中非常平靜且多產的時期。",
@@ -145,7 +145,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd2-4', date: '2026-02-16', time: '15:00', 
-      title: '伏爾他瓦河遊船', enTitle: 'Vltava River Cruise', location: '什切廷碼頭', category: '入場卷', categoryColor: 'red',
+      title: '伏爾他瓦河遊船', enTitle: 'Vltava River Cruise', location: '什切廷碼頭', category: '區域解鎖', categoryColor: 'red',
       guideInfo: {
           story: "伏爾他瓦河是捷克的「母親河」，也是捷克民族精神的象徵。",
           tip: "靠近卡夫卡博物館的地方是著名的「天鵝餵食點」。在新城區一側的河岸 (Náplavka)則是當地人週末喜愛的農夫市集與酒吧聚集地。",
@@ -160,7 +160,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/17 (Tue) Day 3: Prague ---
   { 
       id: 'd3-1', date: '2026-02-17', time: '09:00', 
-      title: '捷克郵政總局', enTitle: 'Czech Post Office', location: '布拉格新城 (Nové Město)', category: '下車參觀', categoryColor: 'green',
+      title: '捷克郵政總局', enTitle: 'Czech Post Office', location: '布拉格新城 (Nové Město)', category: '座標登錄', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/hCSgxbBEBKxW1FXr8',
       guideInfo: {
           story: "建於1871-1874年，採用宏偉的新文藝復興風格。內部有表現通訊歷史的壁畫。",
@@ -173,7 +173,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd3-2', date: '2026-02-17', time: '10:30', 
-      title: '捷克國家博物館', enTitle: 'National Museum', location: '瓦茨拉夫廣場 (Wenceslas Square)', category: '入場卷', categoryColor: 'red',
+      title: '捷克國家博物館', enTitle: 'National Museum', location: '瓦茨拉夫廣場 (Wenceslas Square)', category: '區域解鎖', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/RQpVaL8PULVdoEgEA',
       guideInfo: {
           story: "這座雄偉的新文藝復興建築本身就是捷克國家認同的象徵。它成立於1818年，但現在的主建築於1891年完工。\n\n在19世紀「捷克民族復興」運動中，建立一個收藏捷克自然與歷史的博物館，是向當時統治的奧地利（哈布斯堡王朝）宣示捷克文化獨立性的重要舉動。\n\n「捷克民族復興」：針對奧地利哈布斯堡王朝統治下「德國化」政策的反動，目的是「搶救瀕臨滅絕的捷克語言與文化」。",
@@ -188,7 +188,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/18 (Wed) Day 4: Cesky Krumlov ---
   { 
       id: 'd4-1', date: '2026-02-18', time: '10:00', 
-      title: '庫倫洛夫城堡', enTitle: 'Český Krumlov Castle', location: '彩繪塔周邊 (Zámek 庫倫洛夫城堡)', category: '下車參觀', categoryColor: 'green',
+      title: '庫倫洛夫城堡', enTitle: 'Český Krumlov Castle', location: '彩繪塔周邊 (Zámek 庫倫洛夫城堡)', category: '座標登錄', categoryColor: 'green',
       description: 'CK小鎮',
       mapUrl: 'https://maps.app.goo.gl/grD5vxzNSLBpn7889',
       guideInfo: {
@@ -203,7 +203,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd4-2', date: '2026-02-18', time: '13:00', 
-      title: '庫倫洛夫舊城區', enTitle: 'Český Krumlov Old Town (Vnitřní Město)', location: '庫倫洛夫舊城 (Vnitřní Město)', category: '下車參觀', categoryColor: 'green',
+      title: '庫倫洛夫舊城區', enTitle: 'Český Krumlov Old Town (Vnitřní Město)', location: '庫倫洛夫舊城 (Vnitřní Město)', category: '座標登錄', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/b6So1t939ae8LC5A7',
       guideInfo: {
           story: "庫倫洛夫舊城區在1992年被聯合國教科文組織列為世界文化遺產，被譽為「中世紀的完美縮影」。漫步在完整保留十四至十七世紀建築風貌的巷弄間，彷彿時光倒流，置身於輝煌的文藝復興時期。",
@@ -218,7 +218,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/19 (Thu) Day 5: Salzburg ---
   { 
       id: 'd5-1', date: '2026-02-19', time: '09:00', 
-      title: '莫札特故居', enTitle: 'Mozart Residence', location: '格特萊德街 (Getreidegasse)', category: '下車參觀', categoryColor: 'green',
+      title: '莫札特故居', enTitle: 'Mozart Residence', location: '格特萊德街 (Getreidegasse)', category: '座標登錄', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/JiHurAt2cuXSMmAHA',
       guideInfo: {
           story: "莫札特一家在1773年時搬入的住所 (Wohnhaus)，而非出生地。",
@@ -231,7 +231,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd5-2', date: '2026-02-19', time: '10:30', 
-      title: '米拉貝爾花園', enTitle: 'Mirabell Palace & Gardens', location: '薩爾斯堡新城 (Schloss Mirabell)', category: '下車參觀', categoryColor: 'green',
+      title: '米拉貝爾花園', enTitle: 'Mirabell Palace & Gardens', location: '薩爾斯堡新城 (Schloss Mirabell)', category: '座標登錄', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/UFJmcNbFmcCPXJ6J6',
       guideInfo: {
           story: "這座精美的巴洛克式花園，背後藏著一段驚世駭俗的愛情故事。它由 17 世紀的大主教 沃爾夫·迪特里希 (Wolf Dietrich) 為情婦 莎樂美·阿爾特 (Salome Alt) 和他們的 15 個孩子所建，名副其實的「愛之宮」。\n\n＊天主教的神職人員不可婚配及生子。",
@@ -245,7 +245,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd5-3', date: '2026-02-19', time: '13:00', 
-      title: '莎姿堡城堡', enTitle: 'Hohensalzburg Fortress', location: '僧侶山 (Mönchsberg)', category: '入場卷', categoryColor: 'red',
+      title: '莎姿堡城堡', enTitle: 'Hohensalzburg Fortress', location: '僧侶山 (Mönchsberg)', category: '區域解鎖', categoryColor: 'red',
       description: '(含上下纜車)',
       mapUrl: 'https://maps.app.goo.gl/25TfrB8To8oUhBHLA',
       guideInfo: {
@@ -262,7 +262,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/20 (Fri) Day 6: Austria -> Germany -> Austria ---
   { 
       id: 'd6-1', date: '2026-02-20', time: '09:30', 
-      title: '國王湖遊船', enTitle: 'Königssee', location: '德國貝希特斯加登 (Berchtesgaden)', category: '入場卷', categoryColor: 'red',
+      title: '國王湖遊船', enTitle: 'Königssee', location: '德國貝希特斯加登 (Berchtesgaden)', category: '區域解鎖', categoryColor: 'red',
       description: 'Königssee',
       mapUrl: 'https://maps.app.goo.gl/WB3CMR6fsZ4wGTXF6',
       guideInfo: {
@@ -277,7 +277,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd6-2', date: '2026-02-20', time: '13:00', 
-      title: '鹽礦探秘之旅', enTitle: 'Salt Mine Tour', location: '哈萊認 (Hallein) /貝希特斯加登', category: '入場卷', categoryColor: 'red',
+      title: '鹽礦探秘之旅', enTitle: 'Salt Mine Tour', location: '哈萊認 (Hallein) /貝希特斯加登', category: '區域解鎖', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/khDxgJfHDWY6TwhU6',
       guideInfo: {
           story: "「鹽」是中世紀的白金.此區財富均來自鹽礦。",
@@ -293,7 +293,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/21 (Sat) Day 7: Germany/Austria Border ---
   { 
       id: 'd7-1', date: '2026-02-21', time: '09:00', 
-      title: '哈斯達特小鎮', enTitle: 'Hallstatt Old Town', location: '哈修塔特湖區 (Hallstatt)', category: '下車參觀', categoryColor: 'green',
+      title: '哈斯達特小鎮', enTitle: 'Hallstatt Old Town', location: '哈修塔特湖區 (Hallstatt)', category: '座標登錄', categoryColor: 'green',
       description: 'Hallstatt',
       mapUrl: 'https://maps.app.goo.gl/MnHJtGZ3FC9mLT2SA',
       guideInfo: {
@@ -307,7 +307,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd7-2', date: '2026-02-21', time: '13:00', 
-      title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '下車參觀', categoryColor: 'green',
+      title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '座標登錄', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/dcfSuaNqNjkhTEJp6',
       guideInfo: {
           story: "這座公寓於 1985 年完工，是由奧地利身兼藝術家與建築師雙重身分的「百水先生」(Friedensreich Hundertwasser) 所設計，堪稱維也納建築界獨樹一幟的異數。\n\n百水先生極度痛恨「直線」，甚至稱其為「邪惡的產物」；相反地，他推崇回歸自然與有機的形態。這座公寓，正是他將這些反骨理念付諸實踐的集大成之作。",
@@ -320,7 +320,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd7-3', date: '2026-02-21', time: '15:00', 
-      title: '卡爾教堂', enTitle: 'Karlskirche', location: '卡爾廣場 (Karlsplatz)', category: '下車參觀', categoryColor: 'green',
+      title: '卡爾教堂', enTitle: 'Karlskirche', location: '卡爾廣場 (Karlsplatz)', category: '座標登錄', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/FMdKhrTT6ye6FD388',
       guideInfo: {
           story: "巴洛克建築巔峰，1713年皇帝卡爾六世為感謝黑死病結束而建.融合了古希臘的神殿門廊、古羅馬的兩根「圖拉真柱」（上面雕刻著聖人的生平）以及拜占庭式的巨大橢圓形穹頂。",
@@ -335,7 +335,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/22 (Sun) Day 8: Hallstatt/Vienna ---
   { 
       id: 'd8-1', date: '2026-02-22', time: '09:00', 
-      title: '瑪麗亞特蕾莎廣場', enTitle: 'Maria-Theresien-Platz', location: '博物館區 (Museumquartier)', category: '下車參觀', categoryColor: 'green',
+      title: '瑪麗亞特蕾莎廣場', enTitle: 'Maria-Theresien-Platz', location: '博物館區 (Museumquartier)', category: '座標登錄', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/ZZbtf4VG7tezXwBz6',
       guideInfo: {
           story: "哈布斯堡王朝的唯一女性統治者—瑪麗亞·特蕾莎 (Maria Theresa) 被戲稱為「歐洲丈母娘」aka 歐洲岳母，主要原因是她將「聯姻外交」發揮到了極致。\n\n她一生生育了 16 個孩子（其中 10 個活到成年），並將絕大多數的女兒都嫁給了歐洲各國的君主 or 王儲，以此來鞏固奧地利與各國的盟友關係，達成政治目的。",
@@ -348,7 +348,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd8-2', date: '2026-02-22', time: '10:00', 
-      title: '霍夫堡宮', enTitle: 'The Hofburg', location: '維也納第1區 (Innere Stadt)', category: '下車參觀', categoryColor: 'green',
+      title: '霍夫堡宮', enTitle: 'The Hofburg', location: '維也納第1區 (Innere Stadt)', category: '座標登錄', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/bPPsM1JA2y2oMD8U6',
       guideInfo: {
           story: "哈布斯堡王朝的冬宮，也是西西 (Sisi，伊莉莎白皇后) 的黃金牢籠。\n\n西西 (Sisi) 是伊莉莎白皇后的真實暱稱，茜茜則是電影譯名。\n霍夫堡宮是西西皇后權力的象徵，也是她痛苦的根源。在這裡看到的不是一個幸福皇後的家，而是一位女性試圖在壓抑體制中，衝撞並尋找自我的掙扎痕跡。",
@@ -363,7 +363,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd8-3', date: '2026-02-22', time: '11:00', 
-      title: '黑死病紀念柱', enTitle: 'Plague Column (Pestsäule)', location: '格拉本大街 (Graben)', category: '下車參觀', categoryColor: 'green',
+      title: '黑死病紀念柱', enTitle: 'Plague Column (Pestsäule)', location: '格拉本大街 (Graben)', category: '座標登錄', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/doX4N77JodZMSQ1r8',
       guideInfo: {
           story: "紀念1679年奪走維也納三分之一人口的瘟疫。",
@@ -381,7 +381,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd8-4', date: '2026-02-22', time: '14:00', 
-      title: '熊布朗宮 (美泉宮)', enTitle: 'Schönbrunn Palace', location: '維也納第13區 (Hietzing)', category: '入場卷', categoryColor: 'red',
+      title: '熊布朗宮 (美泉宮)', enTitle: 'Schönbrunn Palace', location: '維也納第13區 (Hietzing)', category: '區域解鎖', categoryColor: 'red',
       description: 'Schönbrunn Palace',
       mapUrl: 'https://maps.app.goo.gl/nommjbpqLek8AkKL6',
       guideInfo: {
@@ -400,7 +400,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/23 (Mon) Day 9: Vienna ---
   { 
       id: 'd9-1', date: '2026-02-23', time: '09:00', 
-      title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '下車參觀', categoryColor: 'green',
+      title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '座標登錄', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/dcfSuaNqNjkhTEJp6',
       guideInfo: {
           story: "這座公寓於 1985 年完工，是由奧地利身兼藝術家與建築師雙重身分的「百水先生」(Friedensreich Hundertwasser) 所設計，堪稱維也納建築界獨樹一幟的異數。\n\n百水先生極度痛恨「直線」，甚至稱其為「邪惡的產物」；相反地，他推崇回歸自然與有機的形態。這座公寓，正是他將這些反骨理念付諸實踐的集大成之作。",
@@ -413,7 +413,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd9-2', date: '2026-02-23', time: '10:00', 
-      title: '聖史帝芬教堂', enTitle: "St. Stephen's Cathedral", location: '史蒂芬廣場 (Stephansplatz)', category: '入場卷', categoryColor: 'red',
+      title: '聖史帝芬教堂', enTitle: "St. Stephen's Cathedral", location: '史蒂芬廣場 (Stephansplatz)', category: '區域解鎖', categoryColor: 'red',
       description: '(南塔、北塔二擇一登頂)',
       mapUrl: 'https://maps.app.goo.gl/d6ob7ph5DwFvTL949',
       guideInfo: {
@@ -433,7 +433,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd9-3', date: '2026-02-23', time: '14:00', 
-      title: '潘朵夫購物村', enTitle: 'Designer Outlet Parndorf', location: '潘朵夫 (Parndorf)', category: '入場卷', categoryColor: 'red',
+      title: '潘朵夫購物村', enTitle: 'Designer Outlet Parndorf', location: '潘朵夫 (Parndorf)', category: '區域解鎖', categoryColor: 'red',
       description: 'Parndorf Outlet',
       mapUrl: 'https://maps.app.goo.gl/kSB8ToNAZydoHitT7',
       guideInfo: {
@@ -537,7 +537,7 @@ const getCategoryIcon = (item: ScheduleItem): string => {
     if (item.title.includes('博物館') || item.title.includes('故居')) return 'fa-building-columns';
     if (item.title.includes('花園') || item.title.includes('湖')) return 'fa-tree';
     if (item.title.includes('購物')) return 'fa-bag-shopping';
-    if (item.category === '下車參觀') return 'fa-camera-retro';
+    if (item.category === '座標登錄') return 'fa-camera-retro';
     return 'fa-location-dot';
 };
 
@@ -694,7 +694,8 @@ export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = ''
             item.title.toLowerCase().includes(query) ||
             item.enTitle?.toLowerCase().includes(query) ||
             item.location.toLowerCase().includes(query) ||
-            item.description?.toLowerCase().includes(query);
+            item.description?.toLowerCase().includes(query) ||
+            item.category.toLowerCase().includes(query);
 
         if (basicMatch) return true;
 
