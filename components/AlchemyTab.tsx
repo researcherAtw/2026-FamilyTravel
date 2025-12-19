@@ -64,7 +64,7 @@ const BorderShine: React.FC<{ active: boolean }> = ({ active }) => (
 
 // --- Enhanced Alchemical Current Flow ---
 const LiquidFlow: React.FC<{ active: boolean }> = ({ active }) => (
-    <div className="absolute left-1/2 -translate-x-1/2 w-8 h-4 z-0 pointer-events-none -my-1">
+    <div className="absolute left-1/2 -translate-x-1/2 w-8 h-4 z-0 pointer-events-none -my-2.5">
         <svg viewBox="0 0 40 40" className="w-full h-full overflow-visible">
             <path 
                 d="M 20 0 L 20 40" 
@@ -237,15 +237,15 @@ export const AlchemyTab: React.FC = () => {
                 {/* CZK Card */}
                 <div className="relative group">
                     <div className={`alchemical-frame transition-all duration-500 ${isCzkSynthesizing ? 'shadow-alchemy-glow' : ''}`}>
-                        <div className="p-3 px-4 space-y-1 relative rounded-[1.5rem] overflow-hidden bg-white/60">
+                        <div className="p-3 px-4 space-y-0.5 relative rounded-[1.5rem] overflow-hidden bg-white/60">
                             <CardPattern active={isCzkSynthesizing} />
                             
-                            <div className="flex justify-between items-start relative z-10">
+                            <div className="flex justify-between items-start relative z-10 mb-1">
                                 <MaterialSeal symbol="₡" label="捷克克朗素材" active={isCzkSynthesizing} />
                                 <span className="text-[6px] font-mono font-bold text-stone-300 uppercase tracking-widest">Portal: CZK</span>
                             </div>
 
-                            <div className="relative z-10 flex items-center justify-center h-11">
+                            <div className="relative z-10 flex items-center justify-center h-12">
                                 <input 
                                     type="number"
                                     value={czkAmount}
@@ -255,16 +255,16 @@ export const AlchemyTab: React.FC = () => {
                                 <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded text-stone-500 font-black text-[10px] font-mono tracking-widest pointer-events-none shadow-sm">CZK</div>
                             </div>
 
-                            <div className="relative h-1"><LiquidFlow active={isCzkSynthesizing} /></div>
+                            <div className="relative h-1 mt-0.5"><LiquidFlow active={isCzkSynthesizing} /></div>
 
                             <div className={`bg-stone-50/80 rounded-xl h-14 flex flex-col items-center justify-center border transition-all duration-500 relative overflow-hidden ${isCzkSynthesizing ? 'border-zen-primary bg-white' : 'border-stone-100'}`}>
                                 <BorderShine active={showCzkShine} />
                                 <EssenceParticles active={isCzkSynthesizing} />
-                                <div className="relative z-10 mb-1 flex items-center gap-1.5">
+                                <div className="absolute top-1 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 opacity-60">
                                     <div className={`w-1 h-1 rounded-full ${isCzkSynthesizing ? 'bg-zen-primary animate-pulse' : 'bg-stone-300'}`}></div>
-                                    <span className="text-[8px] font-black text-zen-primary uppercase tracking-[0.2em] leading-none">煉成精華 Essence</span>
+                                    <span className="text-[7px] font-black text-zen-primary uppercase tracking-[0.2em] leading-none">Essence</span>
                                 </div>
-                                <div className={`text-xl font-mono font-black flex items-center justify-center transition-all duration-300 relative z-10 ${isCzkSynthesizing ? 'text-zen-primary scale-105' : 'text-stone-700'}`}>
+                                <div className={`text-xl font-mono font-black flex items-center justify-center transition-all duration-300 relative z-10 pt-1 ${isCzkSynthesizing ? 'text-zen-primary scale-105' : 'text-stone-700'}`}>
                                     <RunicNumber value={czkResult} active={isCzkSynthesizing} onSettle={() => { setShowCzkShine(true); setTimeout(() => setShowCzkShine(false), 800); }} />
                                     <span className="bg-zen-primary/10 border border-zen-primary/20 text-zen-primary px-1.5 py-0.5 rounded text-[11px] font-black tracking-widest ml-2 leading-none">TWD</span>
                                 </div>
@@ -276,15 +276,15 @@ export const AlchemyTab: React.FC = () => {
                 {/* EUR Card */}
                 <div className="relative group">
                     <div className={`alchemical-frame transition-all duration-500 ${isEurSynthesizing ? 'shadow-alchemy-glow' : ''}`}>
-                        <div className="p-3 px-4 space-y-1 relative rounded-[1.5rem] overflow-hidden bg-white/60">
+                        <div className="p-3 px-4 space-y-0.5 relative rounded-[1.5rem] overflow-hidden bg-white/60">
                             <CardPattern active={isEurSynthesizing} />
                             
-                            <div className="flex justify-between items-start relative z-10">
+                            <div className="flex justify-between items-start relative z-10 mb-1">
                                 <MaterialSeal symbol="€" label="歐元素材" active={isEurSynthesizing} />
                                 <span className="text-[6px] font-mono font-bold text-stone-300 uppercase tracking-widest">Portal: EUR</span>
                             </div>
 
-                            <div className="relative z-10 flex items-center justify-center h-11">
+                            <div className="relative z-10 flex items-center justify-center h-12">
                                 <input 
                                     type="number"
                                     value={eurAmount}
@@ -294,16 +294,16 @@ export const AlchemyTab: React.FC = () => {
                                 <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded text-stone-500 font-black text-[10px] font-mono tracking-widest pointer-events-none shadow-sm">EUR</div>
                             </div>
 
-                            <div className="relative h-1"><LiquidFlow active={isEurSynthesizing} /></div>
+                            <div className="relative h-1 mt-0.5"><LiquidFlow active={isEurSynthesizing} /></div>
 
                             <div className={`bg-stone-50/80 rounded-xl h-14 flex flex-col items-center justify-center border transition-all duration-500 relative overflow-hidden ${isEurSynthesizing ? 'border-zen-primary bg-white' : 'border-stone-100'}`}>
                                 <BorderShine active={showEurShine} />
                                 <EssenceParticles active={isEurSynthesizing} />
-                                <div className="relative z-10 mb-1 flex items-center gap-1.5">
+                                <div className="absolute top-1 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 opacity-60">
                                     <div className={`w-1 h-1 rounded-full ${isEurSynthesizing ? 'bg-zen-primary animate-pulse' : 'bg-stone-300'}`}></div>
-                                    <span className="text-[8px] font-black text-zen-primary uppercase tracking-[0.2em] leading-none">煉成精華 Essence</span>
+                                    <span className="text-[7px] font-black text-zen-primary uppercase tracking-[0.2em] leading-none">Essence</span>
                                 </div>
-                                <div className={`text-xl font-mono font-black flex items-center justify-center transition-all duration-300 relative z-10 ${isEurSynthesizing ? 'text-zen-primary scale-105' : 'text-stone-700'}`}>
+                                <div className={`text-xl font-mono font-black flex items-center justify-center transition-all duration-300 relative z-10 pt-1 ${isEurSynthesizing ? 'text-zen-primary scale-105' : 'text-stone-700'}`}>
                                     <RunicNumber value={eurResult} active={isEurSynthesizing} onSettle={() => { setShowEurShine(true); setTimeout(() => setShowEurShine(false), 800); }} />
                                     <span className="bg-zen-primary/10 border border-zen-primary/20 text-zen-primary px-1.5 py-0.5 rounded text-[11px] font-black tracking-widest ml-2 leading-none">TWD</span>
                                 </div>

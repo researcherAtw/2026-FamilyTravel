@@ -57,11 +57,13 @@ export const CategoryBadge: React.FC<{ type: string; color?: HighlightColor }> =
     food: "bg-orange-100 text-orange-800",
     transport: "bg-gray-200 text-gray-800",
     stay: "bg-purple-100 text-purple-800",
-    TELEPORT: "bg-indigo-500 text-white shadow-sm",
-    UNLOCKED: "bg-emerald-500 text-white shadow-sm",
-    CHECKPOINT: "bg-orange-500 text-white shadow-sm",
-    ASSEMBLE: "bg-teal-500 text-white shadow-sm",
-    "MISSION CLEAR": "bg-green-500 text-white shadow-sm"
+    "起飛": "bg-indigo-500 text-white shadow-sm",
+    "降落": "bg-emerald-500 text-white shadow-sm",
+    "轉機": "bg-orange-500 text-white shadow-sm",
+    "集合": "bg-teal-500 text-white shadow-sm",
+    "區域解鎖": "bg-red-500 text-white shadow-sm",
+    "登錄地圖": "bg-emerald-600 text-white shadow-sm",
+    "抵達": "bg-green-600 text-white shadow-sm"
   };
 
   const colorStyles: Record<HighlightColor, string> = {

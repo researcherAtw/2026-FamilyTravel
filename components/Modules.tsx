@@ -26,8 +26,8 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/14 (Sat) Day 0: Pre-departure ---
   {
       id: 'd0-1', date: '2026-02-14', time: '21:30', displayTime: '??:??',
-      title: '召喚小隊', enTitle: 'Quest Starts', location: 'TPE 桃園機場', category: 'ASSEMBLE', categoryColor: 'teal',
-      description: '冒險者大廳 (桃園機場｜第O航廈｜OO櫃檯旁)',
+      title: '召喚小隊', enTitle: 'Quest Starts', location: 'TPE 桃園機場', category: '集合', categoryColor: 'teal',
+      description: '冒險者大廳\n(桃園機場｜第O航廈｜OO櫃檯旁)',
       guideInfo: {
           story: "準備好踏入傳送陣，展開跨越中歐的奇幻旅程。",
           tip: "請檢查護照有效期限（需六個月以上），並確認行動電源放置於手提行李中。",
@@ -42,26 +42,26 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/15 (Sun) Day 1: TPE -> DXB -> PRG ---
   { 
       id: 'd1-1', date: '2026-02-15', time: '00:20', displayTime: '00:20',
-      title: '開啟傳送陣', enTitle: 'Departure', location: 'TPE 桃園機場', category: 'TELEPORT', categoryColor: 'red',
+      title: '開啟傳送陣', enTitle: 'Departure', location: 'TPE 桃園機場', category: '起飛', categoryColor: 'red',
       description: '往 DXB 杜拜機場'
   },
   { 
       id: 'd1-2', date: '2026-02-15', time: '06:15', displayTime: '06:15',
-      title: '抵達新地圖', enTitle: 'Arrival', location: 'DXB 杜拜機場', category: 'UNLOCKED', categoryColor: 'red'
+      title: '抵達新地圖', enTitle: 'Arrival', location: 'DXB 杜拜機場', category: '降落', categoryColor: 'red'
   },
   { 
       id: 'd1-3', date: '2026-02-15', time: '08:40', displayTime: '08:40',
-      title: '登入中繼站', enTitle: 'Transfer Departure', location: 'DXB 杜拜機場', category: 'CHECKPOINT', categoryColor: 'orange',
+      title: '登入中繼站', enTitle: 'Transfer Departure', location: 'DXB 杜拜機場', category: '轉機', categoryColor: 'orange',
       description: '往 PRG 布拉格'
   },
   { 
       id: 'd1-4', date: '2026-02-15', time: '12:30', displayTime: '12:30',
-      title: '抵達新地圖', enTitle: 'Arrival', location: 'PRG 布拉格機場', category: 'UNLOCKED', categoryColor: 'red',
+      title: '抵達新地圖', enTitle: 'Arrival', location: 'PRG 布拉格機場', category: '降落', categoryColor: 'red',
       description: '瓦茨拉夫·哈維爾國際機場'
   },
   { 
       id: 'd1-5', date: '2026-02-15', time: '14:00', 
-      title: '老城廣場', enTitle: 'Old Town Square', location: '布拉格舊城區 (Staré Město)', category: '座標登錄', categoryColor: 'green',
+      title: '老城廣場', enTitle: 'Old Town Square', location: '布拉格舊城區 (Staré Město)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/EbR7UJn3LuzL94aE6',
       guideInfo: {
           story: "自12世紀以來，這裡就是中歐最重要的市集廣場，是商貿路線的十字路口。",
@@ -75,7 +75,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd1-6', date: '2026-02-15', time: '15:00', 
-      title: '火藥塔', enTitle: 'Powder Tower', location: '共和國廣場 (Náměstí Republiky)', category: '座標登錄', categoryColor: 'green',
+      title: '火藥塔', enTitle: 'Powder Tower', location: '共和國廣場 (Náměstí Republiky)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/cobq4axapwgb5nNq5',
       guideInfo: {
           story: "這座晚期哥德式塔樓始建於1475年，是布拉格舊城區的13座城門之一。",
@@ -104,7 +104,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/16 (Mon) Day 2: Prague ---
   { 
       id: 'd2-1', date: '2026-02-16', time: '09:00', 
-      title: '查理士大橋', enTitle: 'Charles Bridge', location: '伏爾塔瓦河 (Vltava)', category: '座標登錄', categoryColor: 'green',
+      title: '查理士大橋', enTitle: 'Charles Bridge', location: '伏爾塔瓦河 (Vltava)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/KHgBnM7yiGxodwn86',
       guideInfo: {
           story: "這座橋是捷克最著名的地標，始建於一三五七年，由查理四世皇帝奠基（傳說他當時諮詢了天文學家，選擇了一三五七年九月七日五點三十一分這個「迴文」吉時）。",
@@ -160,7 +160,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/17 (Tue) Day 3: Prague ---
   { 
       id: 'd3-1', date: '2026-02-17', time: '09:00', 
-      title: '捷克郵政總局', enTitle: 'Czech Post Office', location: '布拉格新城 (Nové Město)', category: '座標登錄', categoryColor: 'green',
+      title: '捷克郵政總局', enTitle: 'Czech Post Office', location: '布拉格新城 (Nové Město)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/hCSgxbBEBKxW1FXr8',
       guideInfo: {
           story: "建於1871-1874年，採用宏偉的新文藝復興風格。內部有表現通訊歷史的壁畫。",
@@ -188,7 +188,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/18 (Wed) Day 4: Cesky Krumlov ---
   { 
       id: 'd4-1', date: '2026-02-18', time: '10:00', 
-      title: '庫倫洛夫城堡', enTitle: 'Český Krumlov Castle', location: '彩繪塔周邊 (Zámek 庫倫洛夫城堡)', category: '座標登錄', categoryColor: 'green',
+      title: '庫倫洛夫城堡', enTitle: 'Český Krumlov Castle', location: '彩繪塔周邊 (Zámek 庫倫洛夫城堡)', category: '登錄地圖', categoryColor: 'green',
       description: 'CK小鎮',
       mapUrl: 'https://maps.app.goo.gl/grD5vxzNSLBpn7889',
       guideInfo: {
@@ -203,11 +203,11 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd4-2', date: '2026-02-18', time: '13:00', 
-      title: '庫倫洛夫舊城區', enTitle: 'Český Krumlov Old Town (Vnitř內 Město)', location: '庫倫洛夫舊城 (Vnitř內 Město)', category: '座標登錄', categoryColor: 'green',
+      title: '庫倫洛夫舊城區', enTitle: 'Český Krumlov Old Town (Vnitř內 Město)', location: '庫倫洛夫舊城 (Vnitř內 Město)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/b6So1t939ae8LC5A7',
       guideInfo: {
           story: "庫倫洛夫舊城區在1992年被聯合國教科文組織列為世界文化遺產，被譽為「中世紀的完美縮影」。漫步在完整保留十四至十七世紀建築風貌的巷弄間，彷彿時光倒流，置身於輝煌的文藝復興時期。",
-          tip: "舊城區內幾乎禁止車輛通行，步行是最佳方式。除了城堡，拉特蘭街 (Latrán) 也有許多絕佳拍照點。",
+          tip: "舊城區內幾乎禁止車輛通行，步行方式最佳。除了城堡，拉特蘭街 (Latrán) 也有許多絕佳拍照點。",
           highlights: [
               { id: 'h1', text: '世界遺產', color: 'blue' },
               { id: 'h2', text: '步行天堂', color: 'green' }
@@ -218,7 +218,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/19 (Thu) Day 5: Salzburg ---
   { 
       id: 'd5-1', date: '2026-02-19', time: '09:00', 
-      title: '莫札特故居', enTitle: 'Mozart Residence', location: '格特萊德街 (Getreidegasse)', category: '座標登錄', categoryColor: 'green',
+      title: '莫札特故居', enTitle: 'Mozart Residence', location: '格特萊德街 (Getreidegasse)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/JiHurAt2cuXSMmAHA',
       guideInfo: {
           story: "莫札特一家在1773年時搬入的住所 (Wohnhaus)，而非出生地。",
@@ -231,7 +231,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd5-2', date: '2026-02-19', time: '10:30', 
-      title: '米拉貝爾花園', enTitle: 'Mirabell Palace & Gardens', location: '薩爾斯堡新城 (Schloss Mirabell)', category: '座標登錄', categoryColor: 'green',
+      title: '米拉貝爾花園', enTitle: 'Mirabell Palace & Gardens', location: '薩爾斯堡新城 (Schloss Mirabell)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/UFJmcNbFmcCPXJ6J6',
       guideInfo: {
           story: "這座精美的巴洛克式花園，背後藏著一段驚世駭俗的愛情故事。它由 17 世紀的大主教 沃爾夫·迪特里希 (Wolf Dietrich) 為情婦 莎樂美·阿爾特 (Salome Alt) 和他們的 15 個孩子所建，名副其實的「愛之宮」。\n\n＊天主教的神職人員不可婚配及生子。",
@@ -293,7 +293,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/21 (Sat) Day 7: Germany/Austria Border ---
   { 
       id: 'd7-1', date: '2026-02-21', time: '09:00', 
-      title: '哈斯達特小鎮', enTitle: 'Hallstatt Old Town', location: '哈修塔特湖區 (Hallstatt)', category: '座標登錄', categoryColor: 'green',
+      title: '哈斯達特小鎮', enTitle: 'Hallstatt Old Town', location: '哈修塔特湖區 (Hallstatt)', category: '登錄地圖', categoryColor: 'green',
       description: 'Hallstatt',
       mapUrl: 'https://maps.app.goo.gl/MnHJtGZ3FC9mLT2SA',
       guideInfo: {
@@ -307,7 +307,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd7-2', date: '2026-02-21', time: '13:00', 
-      title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '座標登錄', categoryColor: 'green',
+      title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/dcfSuaNqNjkhTEJp6',
       guideInfo: {
           story: "這座公寓於 1985 年完工，是由奧地利身兼藝術家與建築師雙重身分的「百水先生」(Friedensreich Hundertwasser) 所設計，堪稱維也納建築界獨樹一幟的異數。\n\n百水先生極度痛恨「直線」，甚至稱其為「邪惡的產物」；相反地，他推崇回歸自然與有機的形態。這座公寓，正是他將這些反骨理念付諸實踐的集大成之作。",
@@ -320,10 +320,10 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd7-3', date: '2026-02-21', time: '15:00', 
-      title: '卡爾教堂', enTitle: 'Karlskirche', location: '卡爾廣場 (Karlsplatz)', category: '座標登錄', categoryColor: 'green',
+      title: '卡爾教堂', enTitle: 'Karlskirche', location: '卡爾廣場 (Karlsplatz)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/FMdKhrTT6ye6FD388',
       guideInfo: {
-          story: "巴洛克建築巔峰，1713年皇帝卡爾六世為感謝黑死病結束而建.融合了古希臘的神殿門廊、古羅馬的兩根「圖拉真柱」（上面雕刻著聖人的生平）以及拜占庭式的巨大橢圓形穹頂。",
+          story: "巴洛克建築巔峰，1713年皇帝卡爾六世為感謝黑死病結束而建.融合了官希臘的神殿門廊、古羅馬的兩根「圖拉真柱」（上面雕刻著聖人的生平）以及拜占庭式的巨大橢圓形穹頂。",
           tip: "前方水池可拍出完美倒影。教堂內部有全景電梯可直達穹頂近距離欣賞濕壁畫（需購票）。",
           highlights: [
               { id: 'h1', text: '巴洛克', color: 'orange' },
@@ -335,7 +335,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/22 (Sun) Day 8: Hallstatt/Vienna ---
   { 
       id: 'd8-1', date: '2026-02-22', time: '09:00', 
-      title: '瑪麗亞特蕾莎廣場', enTitle: 'Maria-Theresien-Platz', location: '博物館區 (Museumquartier)', category: '座標登錄', categoryColor: 'green',
+      title: '瑪麗亞特蕾莎廣場', enTitle: 'Maria-Theresien-Platz', location: '博物館區 (Museumquartier)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/ZZbtf4VG7tezXwBz6',
       guideInfo: {
           story: "哈布斯堡王朝的唯一女性統治者—瑪麗亞·特蕾莎 (Maria Theresa) 被戲稱為「歐洲丈母娘」aka 歐洲岳母，主要原因是她將「聯姻外交」發揮到了極致。\n\n她一生生育了 16 個孩子（其中 10 個活到成年），並將絕大多數的女兒都嫁給了歐洲各國的君主 or 王儲，以此來鞏固奧地利與各國的盟友關係，達成政治目的。",
@@ -348,11 +348,11 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd8-2', date: '2026-02-22', time: '10:00', 
-      title: '霍夫堡宮', enTitle: 'The Hofburg', location: '維也納第1區 (Innere Stadt)', category: '座標登錄', categoryColor: 'green',
+      title: '霍夫堡宮', enTitle: 'The Hofburg', location: '維也納第1區 (Innere Stadt)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/bPPsM1JA2y2oMD8U6',
       guideInfo: {
           story: "哈布斯堡王朝的冬宮，也是西西 (Sisi，伊莉莎白皇后) 的黃金牢籠。\n\n西西 (Sisi) 是伊莉莎白皇后的真實暱稱，茜茜則是電影譯名。\n霍夫堡宮是西西皇后權力的象徵，也是她痛苦的根源。在這裡看到的不是一個幸福皇後的家，而是一位女性試圖在壓抑體制中，衝撞並尋找自我的掙扎痕跡。",
-          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館。西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇后的關鍵展品\n私個人物品： 西西皇後的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
+          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館。西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇後的關鍵展品\n私個人物品： 西西皇後的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
           highlights: [
               { id: 'h0', text: '冬宮', color: 'blue' },
               { id: 'h1', text: '西西博物館', color: 'purple' },
@@ -363,7 +363,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd8-3', date: '2026-02-22', time: '11:00', 
-      title: '黑死病紀念柱', enTitle: 'Plague Column (Pestsäule)', location: '格拉本大街 (Graben)', category: '座標登錄', categoryColor: 'green',
+      title: '黑死病紀念柱', enTitle: 'Plague Column (Pestsäule)', location: '格拉本大街 (Graben)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/doX4N77JodZMSQ1r8',
       guideInfo: {
           story: "紀念1679年奪走維也納三分之一人口的瘟疫。",
@@ -400,7 +400,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/23 (Mon) Day 9: Vienna ---
   { 
       id: 'd9-1', date: '2026-02-23', time: '09:00', 
-      title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '座標登錄', categoryColor: 'green',
+      title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/dcfSuaNqNjkhTEJp6',
       guideInfo: {
           story: "這座公寓於 1985 年完工，是由奧地利身兼藝術家與建築師雙重身分的「百水先生」(Friedensreich Hundertwasser) 所設計，堪稱維也納建築界獨樹一幟的異數。\n\n百水先生極度痛恨「直線」，甚至稱其為「邪惡的產物」；相反地，他推崇回歸自然與有機的形態。這座公寓，正是他將這些反骨理念付諸實踐的集大成之作。",
@@ -417,7 +417,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(南塔、北塔二擇一登頂)',
       mapUrl: 'https://maps.app.goo.gl/d6ob7ph5DwFvTL949',
       guideInfo: {
-          story: "維也納的靈魂象徵，始建於12世紀.曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
+          story: "維也納的靈魂象測，始建於12世紀.曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
           tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘。亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
           highlights: [
               { id: 'h1', text: '南塔(樓梯)', color: 'red' },
@@ -447,23 +447,23 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd9-4', date: '2026-02-23', time: '21:45', displayTime: '21:45',
-      title: '開啟傳送陣', enTitle: 'Departure', location: 'VIE 維也納國際機場', category: 'TELEPORT', categoryColor: 'red',
+      title: '開啟傳送陣', enTitle: 'Departure', location: 'VIE 維也納國際機場', category: '起飛', categoryColor: 'red',
       description: '往 DXB 杜拜機場'
   },
 
   // --- 2/24 (Tue) Day 10/11: DXB -> TPE ---
   { 
       id: 'd10-1', date: '2026-02-24', time: '06:25', displayTime: '06:25',
-      title: '抵達新地圖', enTitle: 'Arrival', location: 'DXB 杜拜機場', category: 'UNLOCKED', categoryColor: 'red'
+      title: '抵達新地圖', enTitle: 'Arrival', location: 'DXB 杜拜機場', category: '降落', categoryColor: 'red'
   },
   { 
       id: 'd10-2', date: '2026-02-24', time: '08:45', displayTime: '08:45',
-      title: '登入中繼站', enTitle: 'Transfer Departure', location: 'DXB 杜拜機場', category: 'CHECKPOINT', categoryColor: 'orange',
+      title: '登入中繼站', enTitle: 'Transfer Departure', location: 'DXB 杜拜機場', category: '轉機', categoryColor: 'orange',
       description: '往 TPE 桃園機場'
   },
   { 
       id: 'd10-3', date: '2026-02-24', time: '20:40', displayTime: '20:40',
-      title: '任務完成', enTitle: 'Arrival', location: 'TPE 桃園機場', category: 'MISSION CLEAR', categoryColor: 'green',
+      title: '任務完成', enTitle: 'Arrival', location: 'TPE 桃園機場', category: '抵達', categoryColor: 'green',
       description: '抵達溫暖的家',
       guideInfo: {
         story: "勇者凱旋！",
@@ -489,7 +489,7 @@ const TAG_COLORS: Record<HighlightColor, string> = {
 const NODE_TEXT_COLORS: Record<HighlightColor, string> = {
     red: 'text-red-500',
     orange: 'text-orange-500',
-    green: 'text-green-600',
+    green: 'text-emerald-500',
     blue: 'text-blue-500',
     purple: 'text-purple-500',
     gray: 'text-gray-500',
@@ -519,34 +519,65 @@ const mapWmoToCondition = (code: number): WeatherInfo['condition'] => {
     return 'rain';
 };
 
+/**
+ * 精準圖標適配邏輯
+ * 針對特定的世界遺產與地標進行更精確的 Icon 分類
+ * 回傳完整類別字串，包含 fa-solid 或 fa-brands 等前綴
+ */
 const getCategoryIcon = (item: ScheduleItem): string => {
-    if (item.title.includes('任務完成')) return 'fa-trophy';
-    if (item.title.includes('召喚')) return 'fa-hat-wizard';
-    if (item.category === 'ASSEMBLE') return 'fa-dragon';
-    if (item.category === 'TELEPORT') return 'fa-wand-magic-sparkles';
-    if (item.category === 'UNLOCKED') return 'fa-map-location-dot';
-    if (item.category === 'CHECKPOINT') return 'fa-flag-checkered';
+    const title = item.title;
     
-    if (item.category === 'transport') {
-        if (item.title.includes('起飛') || item.title.includes('降落')) return 'fa-plane-up';
-        return 'fa-train-subway';
-    }
-    if (item.title.includes('廣場') || item.title.includes('小鎮')) return 'fa-archway';
-    if (item.title.includes('城堡') || item.title.includes('宮')) return 'fa-chess-rook';
-    if (item.title.includes('教堂')) return 'fa-church';
-    if (item.title.includes('博物館') || item.title.includes('故居')) return 'fa-building-columns';
-    if (item.title.includes('花園') || item.title.includes('湖')) return 'fa-tree';
-    if (item.title.includes('購物')) return 'fa-bag-shopping';
-    if (item.category === '座標登錄') return 'fa-camera-retro';
-    return 'fa-location-dot';
+    // --- 特定核心地標優先精準適配 ---
+    if (title.includes('布拉格古堡')) return 'fa-solid fa-chess-rook';
+    if (title.includes('庫倫洛夫城堡')) return 'fa-brands fa-fort-awesome'; 
+    if (title.includes('米拉貝爾花園')) return 'fa-solid fa-music';
+    if (title.includes('莎姿堡城堡')) return 'fa-solid fa-tower-observation'; // 重新設計：要塞暸望塔形象，呼應高處位置與纜車體驗
+    
+    // 其他特定地標與活動
+    if (title.includes('國王湖') || title.includes('遊船')) return 'fa-solid fa-ship';
+    if (title.includes('鹽礦')) return 'fa-solid fa-gem';
+    if (title.includes('天文鐘')) return 'fa-solid fa-clock';
+    if (title.includes('黃金小徑')) return 'fa-solid fa-person-walking';
+    if (title.includes('購物') || title.includes('Outlet')) return 'fa-solid fa-bag-shopping';
+    
+    // 建築物類型通用細分
+    if (title.includes('教堂')) return 'fa-solid fa-church';
+    if (title.includes('城堡')) return 'fa-solid fa-chess-rook';
+    if (title.includes('宮')) return 'fa-solid fa-landmark-dome';
+    if (title.includes('廣場')) return 'fa-solid fa-mountain-city';
+    if (title.includes('塔')) return 'fa-solid fa-tower-observation';
+    if (title.includes('郵政') || title.includes('郵局')) return 'fa-solid fa-envelope-open-text';
+    if (title.includes('公寓') || title.includes('故居')) return 'fa-solid fa-building-user';
+    if (title.includes('大橋')) return 'fa-solid fa-bridge';
+    if (title.includes('博物館')) return 'fa-solid fa-building-columns';
+    if (title.includes('小鎮')) return 'fa-solid fa-city';
+    if (title.includes('紀念柱')) return 'fa-solid fa-monument';
+    
+    // 任務與傳送分類基礎適配
+    if (item.category === '抵達') return 'fa-solid fa-trophy';
+    if (item.title.includes('召喚')) return 'fa-solid fa-hat-wizard';
+    if (item.category === '集合') return 'fa-solid fa-dragon';
+    if (item.category === '起飛') return 'fa-solid fa-plane-up';
+    if (item.category === '降落') return 'fa-solid fa-plane-arrival';
+    if (item.category === '轉機') return 'fa-solid fa-shuffle';
+    if (item.category === '區域解鎖') return 'fa-solid fa-unlock-keyhole';
+    if (item.category === '登錄地圖') return 'fa-solid fa-map-location-dot';
+    
+    if (item.category === 'transport') return 'fa-solid fa-train-subway';
+    if (title.includes('花園') || title.includes('湖')) return 'fa-solid fa-tree';
+    if (item.category === '座標登錄') return 'fa-solid fa-camera-retro';
+    
+    return 'fa-solid fa-location-dot';
 };
 
 const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; searchTerm?: string }> = ({ item, showDate, searchTerm = '' }) => {
-    const isMajor = ['transport', 'ASSEMBLE', 'GATHERING', 'TELEPORT', 'UNLOCKED', 'CHECKPOINT', 'MISSION CLEAR'].includes(item.category);
+    // 交通與特定重大類別顯示大時間
+    const isMajor = ['transport', '集合', '起飛', '降落', '轉機', '抵達'].includes(item.category);
+    
     const timeStr = item.displayTime || item.time;
     const [mainTime, subTime] = timeStr.includes('\n') ? timeStr.split('\n') : [timeStr, null];
     const [hour, minute] = mainTime.split(':');
-    const iconClass = getCategoryIcon(item);
+    const iconClasses = getCategoryIcon(item);
 
     return (
         <div className="relative mb-2 flex gap-0 group">
@@ -571,13 +602,13 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; search
                     className={`
                         relative z-10 flex items-center justify-center transition-all duration-300 mt-[1.4rem]
                         bg-zen-bg rounded-full border-2 
-                        ${isMajor 
-                            ? `w-8 h-8 ${NODE_TEXT_COLORS[item.categoryColor || 'gray']} border-current shadow-sm` 
+                        ${isMajor || ['區域解鎖', '登錄地圖'].includes(item.category)
+                            ? `w-8 h-8 ${NODE_TEXT_COLORS[item.categoryColor || 'gray']} border-current shadow-sm bg-white` 
                             : `w-7 h-7 text-stone-400 border-stone-300 bg-white`
                         }
                     `}
                 >
-                    <i className={`fa-solid ${iconClass} text-[10px]`}></i>
+                    <i className={`${iconClasses} text-[10px]`}></i>
                 </div>
             </div>
             <div className="flex-grow min-w-0 py-2 pb-6 pl-3">
@@ -588,7 +619,7 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; search
                         </div>
                     )}
                     <div className="absolute -bottom-4 -right-4 text-8xl text-stone-800 opacity-[0.03] transform -rotate-12 pointer-events-none select-none z-0">
-                        <i className={`fa-solid ${iconClass}`}></i>
+                        <i className={`${iconClasses}`}></i>
                     </div>
                     <div className="relative z-10">
                         <div className="flex justify-between items-start gap-2 mb-1">
@@ -924,8 +955,6 @@ export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = ''
   );
 };
 
-// --- SUPPORT TAB (Guild Sanctuary) ---
-
 export const SupportTab: React.FC = () => {
     return (
         <div className="h-full flex flex-col bg-zen-bg">
@@ -936,8 +965,8 @@ export const SupportTab: React.FC = () => {
                         <i className="fa-solid fa-shield-heart text-zen-primary text-lg"></i>
                     </div>
                     <div>
-                        <h2 className="text-xl font-black text-zen-text leading-tight tracking-tight">冒險者聖域</h2>
-                        <p className="text-[10px] text-stone-400 font-bold uppercase tracking-[0.2em]">Sanctuary & Guild Support</p>
+                        <h2 className="text-xl font-black text-zen-text leading-tight tracking-tight">冒險者緊急救助</h2>
+                        <p className="text-[10px] text-stone-400 font-bold uppercase tracking-[0.2em]">EMERGENCY ASSISTANCE</p>
                     </div>
                 </div>
             </div>
@@ -983,7 +1012,7 @@ export const SupportTab: React.FC = () => {
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-[9px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                            <i className="fa-solid fa-heart-pulse text-[8px]"></i> 聖療術專線 Emergency
+                                            <i className="fa-solid fa-heart-pulse text-[8px]"></i> 緊急救助專線 Emergency
                                         </span>
                                         <div className="flex flex-wrap gap-2 pl-3 border-l-2 border-zen-danger/20">
                                             <a href="tel:+420603166707" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">境外：+420 603-166-707</a>
@@ -1047,7 +1076,7 @@ export const SupportTab: React.FC = () => {
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-[9px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                            <i className="fa-solid fa-heart-pulse text-[8px]"></i> 聖療術專線 Emergency
+                                            <i className="fa-solid fa-heart-pulse text-[8px]"></i> 緊急救助專線 Emergency
                                         </span>
                                         <div className="flex pl-3 border-l-2 border-zen-danger/20">
                                             <a href="tel:+491713898257" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">+49-171-3898257</a>
@@ -1110,7 +1139,7 @@ export const SupportTab: React.FC = () => {
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-[9px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                            <i className="fa-solid fa-heart-pulse text-[8px]"></i> 聖療術專線 Emergency
+                                            <i className="fa-solid fa-heart-pulse text-[8px]"></i> 緊急救助專線 Emergency
                                         </span>
                                         <div className="flex flex-wrap gap-2 pl-3 border-l-2 border-zen-danger/20">
                                             <a href="tel:+436643450455" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">+43-664-345-0455</a>
@@ -1139,8 +1168,6 @@ export const SupportTab: React.FC = () => {
         </div>
     );
 };
-
-// --- BOOKINGS TAB (Teleportation Log) ---
 
 const MOCK_BOOKINGS: Booking[] = [
   {
@@ -1266,9 +1293,11 @@ export const BookingsTab: React.FC = () => {
                                             </div>
                                         </div>
                                         <div className="flex flex-col items-end">
-                                            <span className={`px-2.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest border ${isTransfer ? 'bg-indigo-50 border-indigo-100 text-indigo-400' : 'bg-green-50 border-green-100 text-green-500'}`}>
-                                                {isTransfer ? 'PORTAL RECHARGING' : 'ENTERING PORTAL'}
-                                            </span>
+                                            {isTransfer && (
+                                                <span className="px-2.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest border bg-indigo-50 border-indigo-100 text-indigo-400">
+                                                    LAYOVER
+                                                </span>
+                                            )}
                                         </div>
                                     </div>
 
@@ -1281,7 +1310,7 @@ export const BookingsTab: React.FC = () => {
                                                 </div>
                                                 <div className="text-[10px] font-bold text-stone-400 font-mono tracking-tight">{booking.date}</div>
                                                 <div className="text-xl font-black text-stone-600 mt-1.5 tracking-widest leading-none">{originCode}</div>
-                                                <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-0.5 leading-none opacity-80 uppercase">{CITY_NAMES[originCode] || 'Realm'}</div>
+                                                <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-0.5 leading-none uppercase">{CITY_NAMES[originCode] || 'Realm'}</div>
                                             </div>
 
                                             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none z-0">
@@ -1305,11 +1334,11 @@ export const BookingsTab: React.FC = () => {
                                                 <div className="text-3xl font-mono font-black text-stone-700 leading-none tracking-tighter mb-1">
                                                     {booking.details['抵達']?.split(' ')[0] || '--:--'}
                                                 </div>
-                                                <div className="text-[10px] font-bold text-stone-400 font-mono uppercase tracking-wider tracking-tight">
+                                                <div className="text-[10px] font-bold text-stone-400 font-mono tracking-tight uppercase">
                                                     {getArrivalDate(booking.date, booking.details['抵達'])}
                                                 </div>
                                                 <div className="text-xl font-black text-stone-600 mt-1.5 tracking-widest leading-none">{destCode}</div>
-                                                <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-0.5 leading-none opacity-80 uppercase">{CITY_NAMES[destCode] || 'Realm'}</div>
+                                                <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-0.5 leading-none uppercase">{CITY_NAMES[destCode] || 'Realm'}</div>
                                             </div>
                                         </div>
                                     </div>
