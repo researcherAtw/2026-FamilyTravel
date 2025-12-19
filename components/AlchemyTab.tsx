@@ -21,7 +21,7 @@ const RunicNumber: React.FC<{ value: number; active: boolean; onSettle: () => vo
         if (active) {
             setIsScrambling(true);
             let frame = 0;
-            const maxFrames = 12; // ~0.4s
+            const maxFrames = 5; // 縮短幀數從 6 -> 5，縮減動畫長度
 
             if (timerRef.current) clearInterval(timerRef.current);
 
@@ -40,7 +40,7 @@ const RunicNumber: React.FC<{ value: number; active: boolean; onSettle: () => vo
                     onSettle(); 
                     if (timerRef.current) clearInterval(timerRef.current);
                 }
-            }, 35);
+            }, 20); // 20ms * 5 = 100ms 完成數值轉化
         } else if (!isScrambling) {
             setDisplayValue(targetValue);
         }
@@ -209,13 +209,15 @@ export const AlchemyTab: React.FC = () => {
     const triggerCzkAlchemy = () => {
         setIsCzkSynthesizing(true);
         setShowCzkShine(false);
-        setTimeout(() => setIsCzkSynthesizing(false), 800);
+        // 合成狀態持續時間縮短至 150ms，配合 100ms 的數字動畫，確保在 200ms 內完成
+        setTimeout(() => setIsCzkSynthesizing(false), 150);
     };
 
     const triggerEurAlchemy = () => {
         setIsEurSynthesizing(true);
         setShowEurShine(false);
-        setTimeout(() => setIsEurSynthesizing(false), 800);
+        // 同樣縮短至 150ms
+        setTimeout(() => setIsEurSynthesizing(false), 150);
     };
 
     const czkResult = (parseFloat(czkAmount) || 0) * rates.czk;
