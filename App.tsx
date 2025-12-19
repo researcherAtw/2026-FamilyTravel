@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { NAV_ITEMS } from './constants';
 import { TabType } from './types';
 import { ScheduleTab, BookingsTab, SupportTab } from './components/Modules';
@@ -7,20 +7,74 @@ import { AlchemyTab } from './components/AlchemyTab';
 
 const BrandLogo: React.FC = () => (
   <svg viewBox="0 0 1276 1398" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-    <path fill="currentColor" fillRule="evenodd" d="M 479.00 1397.50 L 469.00 1396.50 L 461.50 1389.00 L 457.50 1351.00 L 461.50 1129.00 L 412.00 1095.50 L 377.00 1062.50 L 364.50 1092.00 L 340.50 1175.00 L 317.50 1292.00 L 302.50 1316.00 L 275.00 1344.50 L 262.00 1347.50 L 252.50 1340.00 L 248.50 1332.00 L 244.50 1312.00 L 244.50 1312.00 L 245.50 1296.00 L 257.50 1242.00 L 288.50 1144.00 L 338.50 1005.00 L 323.50 972.00 L 315.50 943.00 L 314.50 926.00 L 311.00 922.50 L 203.00 1014.50 L 120.50 1100.00 L 83.50 1147.00 L 35.00 1194.50 L 18.00 1204.50 L 7.00 1204.50 L -0.50 1197.00 L 2.50 1181.00 L 22.50 1147.00 L 59.50 1098.00 L 112.50 1038.00 L 183.00 968.50 L 313.50 871.00 L 321.50 806.00 L 336.50 745.00 L 336.50 745.00 L 360.50 683.00 L 387.50 634.00 L 384.00 629.50 L 302.00 628.50 L 214.00 617.50 L 148.00 599.50 L 110.00 582.50 L 89.00 568.50 L 70.00 577.50 L 55.00 578.50 L 51.50 575.00 L 50.50 563.00 L 52.50 512.00 L 60.50 467.00 L 75.50 417.00 L 111.50 339.00 L 141.50 292.00 L 172.50 253.00 L 206.00 218.50 L 237.00 192.50 L 270.00 170.50 L 306.50 152.00 L 309.50 30.00 L 312.50 9.00 L 319.00 -0.50 L 325.00 0.50 L 334.50 10.00 L 347.50 30.00 L 367.50 72.00 L 390.00 131.50 L 605.00 116.50 L 712.00 103.50 L 826.00 76.50 L 918.00 31.50 L 935.00 26.50 L 945.00 27.50 L 950.50 32.00 L 945.50 46.00 L 887.50 105.00 L 904.50 177.00 L 915.50 277.00 L 925.50 327.00 L 948.50 377.00 L 969.50 409.00 L 1055.50 496.00 L 1160.50 610.00 L 1186.50 647.00 L 1186.50 665.00 L 1174.00 673.50 L 1144.00 681.50 L 1128.00 682.50 L 1116.00 678.50 L 928.50 494.00 L 904.50 462.00 L 873.00 406.50 L 816.50 477.00 L 939.50 635.00 L 968.50 684.00 L 973.50 700.00 L 973.50 717.00 L 963.50 737.00 L 950.00 750.50 L 927.00 760.50 L 909.50 743.00 L 755.00 532.50 L 722.00 555.50 L 674.50 582.00 L 697.50 611.00 L 713.50 638.00 L 732.50 678.00 L 754.50 741.00 L 758.50 761.00 L 757.50 782.00 L 749.50 812.00 L 741.00 822.50 L 735.00 824.50 L 729.00 821.50 L 688.50 773.00 L 622.50 668.00 L 622.50 668.00 L 591.00 610.50 L 516.50 623.00 L 517.50 643.00 L 528.50 681.00 L 544.50 719.00 L 578.50 784.00 L 607.50 832.00 L 660.50 908.00 L 704.00 950.50 L 752.00 978.50 L 811.00 996.50 L 872.00 1003.50 L 976.00 1000.50 L 1026.00 994.50 L 1052.00 987.50 L 1086.00 975.50 L 1125.00 954.50 L 1179.50 854.00 L 1193.00 841.50 L 1203.00 839.50 L 1207.50 846.00 L 1206.50 858.00 L 1159.50 939.00 L 1165.00 941.50 L 1234.00 896.50 L 1250.00 894.50 L 1254.50 899.00 L 1254.50 906.00 L 1245.50 923.00 L 1225.00 944.50 L 1186.50 976.00 L 1190.00 979.50 L 1263.00 994.50 L 1272.00 998.50 L 1275.50 1005.00 L 1251.00 1033.50 L 1230.00 1034.50 L 1118.00 1004.50 L 1088.00 1021.50 L 1037.00 1040.50 L 969.00 1058.50 L 918.00 1067.50 L 833.00 1062.50 L 723.00 1042.50 L 722.50 1047.00 L 751.50 1082.00 L 888.50 1228.00 L 897.50 1242.00 L 899.50 1255.00 L 894.50 1266.00 L 862.50 1304.00 L 846.00 1315.50 L 834.00 1315.50 L 813.00 1304.50 L 708.50 1196.00 L 614.00 1090.50 L 585.00 1114.50 L 529.50 1139.00 L 528.50 1337.00 L 521.50 1355.00 L 504.50 1380.00 L 492.00 1391.50 L 479.00 1397.50 Z M 365.50 538.00 L 367.50 533.00 L 344.50 506.00 L 328.50 474.00 L 317.50 434.00 L 312.50 383.00 L 314.50 332.00 L 321.50 295.00 L 333.50 260.00 L 364.50 209.00 L 359.00 205.50 L 324.00 215.50 L 282.00 234.50 L 244.00 261.50 L 217.50 290.00 L 187.50 336.00 L 162.50 386.00 L 144.50 437.00 L 133.50 489.00 L 164.00 502.50 L 233.00 520.50 L 307.00 533.50 L 365.50 538.00 Z M 570.50 491.00 L 604.00 484.50 L 634.00 468.50 L 660.50 438.00 L 675.50 412.00 L 682.50 375.00 L 683.50 336.00 L 678.50 305.00 L 664.50 272.00 L 648.50 250.00 L 626.00 229.50 L 595.00 211.50 L 555.00 198.50 L 521.00 194.50 L 470.00 194.50 L 435.00 200.50 L 411.00 210.50 L 395.50 223.00 L 385.50 238.00 L 380.50 260.00 L 378.50 297.00 L 384.50 368.00 L 402.50 414.00 L 429.00 445.50 L 469.00 471.50 L 527.00 489.50 L 570.50 491.00 Z M 644.50 511.00 L 700.00 489.50 L 734.00 468.50 L 769.50 434.00 L 794.50 392.00 L 808.50 350.00 L 818.50 285.00 L 819.50 189.00 L 817.50 151.00 L 813.00 141.50 L 772.00 156.50 L 710.00 168.50 L 706.50 172.00 L 729.50 204.00 L 748.50 245.00 L 757.50 289.00 L 755.50 335.00 L 742.50 381.00 L 718.50 426.00 L 641.50 506.00 L 644.50 511.00 Z M 563.50 1032.00 L 571.50 1026.00 L 573.50 1020.00 L 571.50 990.00 L 531.50 859.00 L 472.50 740.00 L 460.00 722.50 L 432.00 701.50 L 422.50 710.00 L 409.50 735.00 L 391.50 797.00 L 389.50 851.00 L 401.50 908.00 L 421.50 947.00 L 452.00 980.50 L 492.00 1005.50 L 542.00 1021.50 L 555.00 1032.50 L 563.50 1032.00 Z M 499.00 428.50 L 489.50 423.00 L 480.50 396.00 L 444.50 358.00 L 440.50 342.00 L 449.50 322.00 L 468.00 305.50 L 495.00 296.50 L 517.00 296.50 L 530.00 301.50 L 549.50 321.00 L 560.50 342.00 L 563.50 357.00 L 558.50 373.00 L 539.50 396.00 L 518.00 417.50 L 499.00 428.50 Z" />
+    <path fill="currentColor" fillRule="evenodd" d="M 479.00 1397.50 L 469.00 1396.50 L 461.50 1389.00 L 457.50 1351.00 L 461.50 1129.00 L 412.00 1095.50 L 377.00 1062.50 L 364.50 1092.00 L 340.50 1175.00 L 317.50 1292.00 L 302.50 1316.00 L 275.00 1344.50 L 262.00 1347.50 L 252.50 1340.00 L 248.50 1332.00 L 244.50 1312.00 L 245.50 1296.00 L 257.50 1242.00 L 288.50 1144.00 L 338.50 1005.00 L 323.50 972.00 L 315.50 943.00 L 314.50 926.00 L 311.00 922.50 L 203.00 1014.50 L 120.50 1100.00 L 83.50 1147.00 L 35.00 1194.50 L 18.00 1204.50 L 7.00 1204.50 L -0.50 1197.00 L 2.50 1181.00 L 22.50 1147.00 L 59.50 1098.00 L 112.50 1038.00 L 183.00 968.50 L 313.50 871.00 L 321.50 806.00 L 336.50 745.00 L 360.50 683.00 L 387.50 634.00 L 384.00 629.50 L 302.00 628.50 L 214.00 617.50 L 148.00 599.50 L 110.00 582.50 L 89.00 568.50 L 70.00 577.50 L 55.00 578.50 L 51.50 575.00 L 50.50 563.00 L 52.50 512.00 L 60.50 467.00 L 75.50 417.00 L 111.50 339.00 L 141.50 292.00 L 172.50 253.00 L 206.00 218.50 L 237.00 192.50 L 270.00 170.50 L 306.50 152.00 L 309.50 30.00 L 312.50 9.00 L 319.00 -0.50 L 325.00 0.50 L 334.50 10.00 L 347.50 30.00 L 367.50 72.00 L 390.00 131.50 L 605.00 116.50 L 712.00 103.50 L 826.00 76.50 L 918.00 31.50 L 935.00 26.50 L 945.00 27.50 L 950.50 32.00 L 945.50 46.00 L 887.50 105.00 L 904.50 177.00 L 915.50 277.00 L 925.50 327.00 L 948.50 377.00 L 969.50 409.00 L 1055.50 496.00 L 1160.50 610.00 L 1186.50 647.00 L 1186.50 665.00 L 1174.00 673.50 L 1144.00 681.50 L 1128.00 682.50 L 1116.00 678.50 L 928.50 494.00 L 904.50 462.00 L 873.00 406.50 L 816.50 477.00 L 939.50 635.00 L 968.50 684.00 L 973.50 700.00 L 973.50 717.00 L 963.50 737.00 L 950.00 750.50 L 927.00 760.50 L 909.50 743.00 L 755.00 532.50 L 722.00 555.50 L 674.50 582.00 L 697.50 611.00 L 713.50 638.00 L 732.50 678.00 L 754.50 741.00 L 758.50 761.00 L 757.50 782.00 L 749.50 812.00 L 741.00 822.50 L 735.00 824.50 L 729.00 821.50 L 688.50 773.00 L 622.50 668.00 L 591.00 610.50 L 516.50 623.00 L 517.50 643.00 L 528.50 681.00 L 544.50 719.00 L 578.50 784.00 L 607.50 832.00 L 660.50 908.00 L 704.00 950.50 L 752.00 978.50 L 811.00 996.50 L 872.00 1003.50 L 976.00 1000.50 L 1026.00 994.50 L 1052.00 987.50 L 1086.00 975.50 L 1125.00 954.50 L 1179.50 854.00 L 1193.00 841.50 L 1203.00 839.50 L 1207.50 846.00 L 1206.50 858.00 L 1159.50 939.00 L 1165.00 941.50 L 1234.00 896.50 L 1250.00 894.50 L 1254.50 899.00 L 1254.50 906.00 L 1245.50 923.00 L 1225.00 944.50 L 1186.50 976.00 L 1190.00 979.50 L 1263.00 994.50 L 1272.00 998.50 L 1275.50 1005.00 L 1251.00 1033.50 L 1230.00 1034.50 L 1118.00 1004.50 L 1088.00 1021.50 L 1037.00 1040.50 L 969.00 1058.50 L 918.00 1067.50 L 833.00 1062.50 L 723.00 1042.50 L 722.50 1047.00 L 751.50 1082.00 L 888.50 1228.00 L 897.50 1242.00 L 899.50 1255.00 L 894.50 1266.00 L 862.50 1304.00 L 846.00 1315.50 L 834.00 1315.50 L 813.00 1304.50 L 708.50 1196.00 L 614.00 1090.50 L 585.00 1114.50 L 529.50 1139.00 L 528.50 1337.00 L 521.50 1355.00 L 504.50 1380.00 L 492.00 1391.50 L 479.00 1397.50 Z M 365.50 538.00 L 367.50 533.00 L 344.50 506.00 L 328.50 474.00 L 317.50 434.00 L 312.50 383.00 L 314.50 332.00 L 321.50 295.00 L 333.50 260.00 L 364.50 209.00 L 359.00 205.50 L 324.00 215.50 L 282.00 234.50 L 244.00 261.50 L 217.50 290.00 L 187.50 336.00 L 162.50 386.00 L 144.50 437.00 L 133.50 489.00 L 164.00 502.50 L 233.00 520.50 L 307.00 533.50 L 365.50 538.00 Z M 570.50 491.00 L 604.00 484.50 L 634.00 468.50 L 660.50 438.00 L 675.50 412.00 L 682.50 375.00 L 683.50 336.00 L 678.50 305.00 L 664.50 272.00 L 648.50 250.00 L 626.00 229.50 L 595.00 211.50 L 555.00 198.50 L 521.00 194.50 L 470.00 194.50 L 435.00 200.50 L 411.00 210.50 L 395.50 223.00 L 385.50 238.00 L 380.50 260.00 L 378.50 297.00 L 384.50 368.00 L 402.50 414.00 L 429.00 445.50 L 469.00 471.50 L 527.00 489.50 L 570.50 491.00 Z M 644.50 511.00 L 700.00 489.50 L 734.00 468.50 L 769.50 434.00 L 794.50 392.00 L 808.50 350.00 L 818.50 285.00 L 819.50 189.00 L 817.50 151.00 L 813.00 141.50 L 772.00 156.50 L 710.00 168.50 L 706.50 172.00 L 729.50 204.00 L 748.50 245.00 L 757.50 289.00 L 755.50 335.00 L 742.50 381.00 L 718.50 426.00 L 687.50 465.00 L 641.50 506.00 L 644.50 511.00 Z M 563.50 1032.00 L 571.50 1026.00 L 573.50 1020.00 L 571.50 990.00 L 531.50 859.00 L 472.50 740.00 L 460.00 722.50 L 432.00 701.50 L 422.50 710.00 L 409.50 735.00 L 391.50 797.00 L 389.50 851.00 L 401.50 908.00 L 421.50 947.00 L 452.00 980.50 L 492.00 1005.50 L 542.00 1021.50 L 555.00 1032.50 L 563.50 1032.00 Z M 499.00 428.50 L 489.50 423.00 L 480.50 396.00 L 444.50 358.00 L 440.50 342.00 L 449.50 322.00 L 468.00 305.50 L 495.00 296.50 L 517.00 296.50 L 530.00 301.50 L 549.50 321.00 L 560.50 342.00 L 563.50 357.00 L 558.50 373.00 L 539.50 396.00 L 518.00 417.50 L 499.00 428.50 Z" />
   </svg>
 );
 
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<TabType | 'search'>('schedule');
   const [contentTab, setContentTab] = useState<TabType>('schedule');
+  const [isSearching, setIsSearching] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  
+  // Draggable FAB State
+  const [fabPos, setFabPos] = useState({ x: window.innerWidth > 448 ? 368 : window.innerWidth - 80, y: window.innerHeight - 180 });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStart = useRef({ x: 0, y: 0 });
+  const initialFabPos = useRef({ x: 0, y: 0 });
+  const hasMoved = useRef(false);
+
+  useEffect(() => {
+    // Keep FAB in bounds on resize
+    const handleResize = () => {
+        setFabPos(prev => ({
+            x: Math.min(prev.x, window.innerWidth - 64),
+            y: Math.min(prev.y, window.innerHeight - 64)
+        }));
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
+    setIsDragging(true);
+    hasMoved.current = false;
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    dragStart.current = { x: clientX, y: clientY };
+    initialFabPos.current = { ...fabPos };
+  };
+
+  const handleDragMove = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!isDragging) return;
+    
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    
+    const dx = clientX - dragStart.current.x;
+    const dy = clientY - dragStart.current.y;
+
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+        hasMoved.current = true;
+    }
+
+    // Constraint within viewport
+    const nextX = Math.max(16, Math.min(window.innerWidth - 64, initialFabPos.current.x + dx));
+    const nextY = Math.max(16, Math.min(window.innerHeight - 64, initialFabPos.current.y + dy));
+
+    setFabPos({ x: nextX, y: nextY });
+  };
+
+  const handleDragEnd = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    // If we didn't move much, treat it as a click
+    if (!hasMoved.current) {
+        toggleSearch();
+    }
+  };
 
   const renderContent = () => {
-    if (searchTerm) {
-        return <ScheduleTab searchTerm={searchTerm} />;
-    }
-    
+    if (searchTerm) return <ScheduleTab searchTerm={searchTerm} />;
     switch(contentTab) {
         case 'schedule': return <ScheduleTab />;
         case 'bookings': return <BookingsTab />;
@@ -30,39 +84,41 @@ const App: React.FC = () => {
     }
   };
 
-  const handleTabClick = (id: TabType | 'search') => {
-    if (id === 'search') {
-        if (activeTab === 'search') {
-            setActiveTab(contentTab);
-            setSearchTerm('');
-        } else {
-            setActiveTab('search');
-        }
-    } else {
-        setActiveTab(id);
-        setContentTab(id);
+  const handleTabClick = (id: TabType) => {
+    setContentTab(id);
+    setIsSearching(false);
+    setSearchTerm('');
+  };
+
+  const toggleSearch = () => {
+    setIsSearching(!isSearching);
+    if (isSearching) {
         setSearchTerm('');
     }
   };
 
   const handleBackdropClick = () => {
-    // If we are in search mode but haven't typed anything, clicking away closes search
-    if (activeTab === 'search' && !searchTerm) {
-        setActiveTab(contentTab);
+    if (isSearching && !searchTerm) {
+        setIsSearching(false);
     }
   };
 
   const getPillPosition = () => {
-    const totalItems = 5; 
-    const index = NAV_ITEMS.findIndex(item => item.id === activeTab);
+    const index = NAV_ITEMS.findIndex(item => item.id === contentTab);
     if (index === -1) return '0%';
-    return `${(index / totalItems) * 100}%`;
+    return `${(index / NAV_ITEMS.length) * 100}%`;
   };
 
   return (
-    <div className="h-[100dvh] text-zen-text font-sans max-w-md mx-auto relative shadow-2xl bg-zen-bg overflow-hidden flex flex-col">
+    <div 
+        className="h-[100dvh] text-zen-text font-sans max-w-md mx-auto relative shadow-2xl bg-zen-bg overflow-hidden flex flex-col"
+        onMouseMove={handleDragMove}
+        onMouseUp={handleDragEnd}
+        onTouchMove={handleDragMove}
+        onTouchEnd={handleDragEnd}
+    >
       
-      {/* Top Bar - Static */}
+      {/* Top Bar */}
       <header className="flex-shrink-0 px-6 pt-6 pb-4 flex justify-between items-center bg-zen-bg z-30 transition-all">
         <div className="flex flex-col">
             <div className="flex items-center gap-1.5 mb-1">
@@ -84,19 +140,68 @@ const App: React.FC = () => {
 
       {/* Main Content Area */}
       <main 
-        className="flex-1 overflow-hidden relative w-full" 
+        className={`flex-1 overflow-hidden relative w-full transition-all duration-300 ${isSearching ? 'brightness-[0.98]' : ''}`} 
         onClick={handleBackdropClick}
       >
         {renderContent()}
       </main>
 
-      {/* Floating Search Pill Wrapper (Moved to Top) */}
-      {activeTab === 'search' && (
+      {/* Arcanic All-Seeing Core - HYPER-TRANSPARENT DRAGGABLE FAB */}
+      <div 
+        className={`fixed z-[70] transition-transform duration-500 pointer-events-none ${isSearching ? 'scale-90 opacity-80' : !isDragging ? 'animate-float' : ''}`}
+        style={{ 
+            left: `${fabPos.x}px`, 
+            top: `${fabPos.y}px`,
+            transition: isDragging ? 'none' : 'all 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28)'
+        }}
+      >
+        <button 
+          onMouseDown={handleDragStart}
+          onTouchStart={handleDragStart}
+          className={`
+            pointer-events-auto relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 active:scale-95 overflow-visible group
+            ${isSearching 
+              ? 'bg-stone-800 text-stone-200 border border-stone-600 shadow-xl opacity-100' 
+              : isDragging
+                ? 'bg-white/30 backdrop-blur-md text-zen-primary border border-zen-primary/40 shadow-xl scale-110 opacity-100'
+                : 'bg-white/5 backdrop-blur-[1px] text-zen-primary/30 border-[0.5px] border-zen-primary/10 shadow-none'
+            }
+            ${isDragging ? 'cursor-grabbing' : 'cursor-grab hover:text-zen-primary/60 hover:border-zen-primary/20 hover:bg-white/10'}
+          `}
+        >
+          {/* Pulsating Shockwave Ring - Only visible when interacting */}
+          {!isSearching && (
+            <div className={`absolute inset-0 rounded-full border border-zen-primary/10 animate-shockwave pointer-events-none transition-opacity duration-500 ${isDragging ? 'opacity-100' : 'opacity-0'}`}></div>
+          )}
+
+          {/* Rotating Magic Circles - Subtler idle state */}
+          <div className={`absolute -inset-[3px] pointer-events-none transition-all duration-700 ${isSearching ? 'opacity-0 scale-110' : isDragging ? 'opacity-60 scale-100' : 'opacity-20 scale-95'}`}>
+            <svg viewBox="0 0 100 100" className="w-full h-full fill-none stroke-current animate-spin-slow">
+              <circle cx="50" cy="50" r="49" strokeWidth="0.5" strokeDasharray="3 5" />
+              <circle cx="50" cy="50" r="46" strokeWidth="0.8" strokeDasharray="6 10" className="animate-spin-slow-reverse" />
+            </svg>
+          </div>
+
+          {/* Compass Markers - Subtler idle state */}
+          <div className={`absolute -inset-[1px] pointer-events-none transition-all duration-700 ${isSearching ? 'opacity-0' : isDragging ? 'opacity-40' : 'opacity-15'}`}>
+            <svg viewBox="0 0 100 100" className="w-full h-full fill-none stroke-current animate-spin-fast">
+              <path d="M50 0 L50 4 M50 96 L50 100 M0 50 L4 50 M96 50 L100 50" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </div>
+
+          <div className={`absolute inset-0 rounded-full z-0 transition-opacity duration-700 ${isSearching ? 'opacity-0' : isDragging ? 'opacity-20 bg-gradient-to-tr from-white/40 via-white/10 to-transparent' : 'opacity-0'}`}></div>
+
+          <i className={`fa-solid ${isSearching ? 'fa-xmark' : 'fa-magnifying-glass-plus'} text-2xl relative z-10 transition-all duration-500 ${!isSearching && 'group-hover:scale-110'}`}></i>
+        </button>
+      </div>
+
+      {/* Floating Search Pill Wrapper */}
+      {isSearching && (
         <div className="absolute top-24 inset-x-0 z-[60] flex justify-center px-8">
             <div className="w-full max-w-sm animate-fade-in-up">
                 <div 
                   className="bg-white/95 backdrop-blur-2xl border-2 border-zen-primary/20 rounded-full shadow-2xl p-1.5 flex items-center gap-2 group"
-                  onClick={(e) => e.stopPropagation()} // Prevent closing when clicking search box itself
+                  onClick={(e) => e.stopPropagation()} 
                 >
                     <div className="w-9 h-9 rounded-full bg-zen-primary text-white flex items-center justify-center flex-shrink-0 shadow-lg shadow-zen-primary/20">
                         <i className="fa-solid fa-magnifying-glass text-[12px]"></i>
@@ -111,7 +216,7 @@ const App: React.FC = () => {
                     />
                     {searchTerm && (
                         <button 
-                            onClick={() => setSearchTerm('')}
+                            onClick={() => { setSearchTerm(''); setIsSearching(false); }}
                             className="w-8 h-8 rounded-full flex items-center justify-center text-stone-300 hover:text-stone-500 transition-colors"
                         >
                             <i className="fa-solid fa-circle-xmark text-sm"></i>
@@ -122,21 +227,20 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* Bottom Navigation - Contained within parent */}
+      {/* Bottom Navigation */}
       <nav className="absolute bottom-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4">
-        <div className="bg-white/90 backdrop-blur-md rounded-full p-1 shadow-zen border border-stone-100 grid grid-cols-5 gap-0 relative pointer-events-auto w-full max-w-sm">
+        <div className="bg-white/90 backdrop-blur-md rounded-full p-1 shadow-zen border border-stone-100 grid grid-cols-4 gap-0 relative pointer-events-auto w-full max-w-sm">
           
-          {/* Sliding Background Pill */}
           <div 
             className="absolute top-1 bottom-1 rounded-full bg-zen-primary shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0"
             style={{
-              width: 'calc(20% - 4px)',
+              width: 'calc(25% - 4px)',
               left: `calc(${getPillPosition()} + 2px)`
             }}
           />
 
           {NAV_ITEMS.map((item) => {
-            const isActive = activeTab === item.id;
+            const isActive = contentTab === item.id;
             return (
               <button
                 key={item.id}
