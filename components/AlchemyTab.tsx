@@ -170,8 +170,8 @@ const MaterialSeal: React.FC<{ symbol: string; label: string; active: boolean }>
             <span className="text-base font-black font-mono">{symbol}</span>
         </div>
         <div className="flex flex-col">
-            <span className={`text-[7px] font-black uppercase tracking-[0.2em] ${active ? 'text-zen-primary' : 'text-stone-400'}`}>Material</span>
-            <span className={`text-[10px] font-black tracking-widest ${active ? 'text-stone-800' : 'text-stone-600'}`}>{label}</span>
+            <span className={`text-[9px] font-black uppercase tracking-[0.2em] ${active ? 'text-zen-primary' : 'text-stone-400'}`}>Material</span>
+            <span className={`text-sm font-black tracking-widest ${active ? 'text-stone-800' : 'text-stone-600'}`}>{label}</span>
         </div>
     </div>
 );
@@ -258,7 +258,7 @@ export const AlchemyTab: React.FC = () => {
                                     onChange={(e) => { setCzkAmount(e.target.value); triggerCzkAlchemy(); }}
                                     className="w-full h-full bg-white/80 border border-stone-200 rounded-xl text-xl font-mono font-black text-stone-700 text-center focus:border-zen-primary transition-all outline-none"
                                 />
-                                <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded text-stone-500 font-black text-[10px] font-mono tracking-widest pointer-events-none shadow-sm">CZK</div>
+                                <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded text-stone-500 font-black text-xs font-mono tracking-widest pointer-events-none shadow-sm">CZK</div>
                             </div>
 
                             <div className="relative h-1 mt-0.5"><LiquidFlow active={isCzkSynthesizing} /></div>
@@ -272,7 +272,7 @@ export const AlchemyTab: React.FC = () => {
                                 </div>
                                 <div className={`text-xl font-mono font-black flex items-center justify-center transition-all duration-300 relative z-10 pt-1 ${isCzkSynthesizing ? 'text-zen-primary scale-105' : 'text-stone-700'}`}>
                                     <RunicNumber value={czkResult} active={isCzkSynthesizing} onSettle={() => { setShowCzkShine(true); setTimeout(() => setShowCzkShine(false), 800); }} />
-                                    <span className="bg-zen-primary/10 border border-zen-primary/20 text-zen-primary px-1.5 py-0.5 rounded text-[11px] font-black tracking-widest ml-2 leading-none">TWD</span>
+                                    <span className="bg-zen-primary/10 border border-zen-primary/20 text-zen-primary px-1.5 py-0.5 rounded text-xs font-black tracking-widest ml-2 leading-none">TWD</span>
                                 </div>
                             </div>
                         </div>
@@ -297,7 +297,7 @@ export const AlchemyTab: React.FC = () => {
                                     onChange={(e) => { setEurAmount(e.target.value); triggerEurAlchemy(); }}
                                     className="w-full h-full bg-white/80 border border-stone-200 rounded-xl text-xl font-mono font-black text-stone-700 text-center focus:border-zen-primary transition-all outline-none"
                                 />
-                                <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded text-stone-500 font-black text-[10px] font-mono tracking-widest pointer-events-none shadow-sm">EUR</div>
+                                <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded text-stone-500 font-black text-xs font-mono tracking-widest pointer-events-none shadow-sm">EUR</div>
                             </div>
 
                             <div className="relative h-1 mt-0.5"><LiquidFlow active={isEurSynthesizing} /></div>
@@ -311,7 +311,7 @@ export const AlchemyTab: React.FC = () => {
                                 </div>
                                 <div className={`text-xl font-mono font-black flex items-center justify-center transition-all duration-300 relative z-10 pt-1 ${isEurSynthesizing ? 'text-zen-primary scale-105' : 'text-stone-700'}`}>
                                     <RunicNumber value={eurResult} active={isEurSynthesizing} onSettle={() => { setShowEurShine(true); setTimeout(() => setShowEurShine(false), 800); }} />
-                                    <span className="bg-zen-primary/10 border border-zen-primary/20 text-zen-primary px-1.5 py-0.5 rounded text-[11px] font-black tracking-widest ml-2 leading-none">TWD</span>
+                                    <span className="bg-zen-primary/10 border border-zen-primary/20 text-zen-primary px-1.5 py-0.5 rounded text-xs font-black tracking-widest ml-2 leading-none">TWD</span>
                                 </div>
                             </div>
                         </div>

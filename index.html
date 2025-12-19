@@ -61,6 +61,7 @@
               'shockwave': 'shockwave 0.8s ease-out forwards',
               'flow': 'flow 2s linear infinite',
               'border-shine': 'borderShine 0.8s ease-out forwards',
+              'shimmer': 'shimmer 3s infinite linear',
             },
             keyframes: {
               fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
@@ -99,6 +100,10 @@
                 '10%': { opacity: '1' },
                 '90%': { opacity: '1' },
                 '100%': { strokeDashoffset: '0', opacity: '0' }
+              },
+              shimmer: {
+                '0%': { transform: 'translateX(-250%) skewX(-20deg)' },
+                '100%': { transform: 'translateX(250%) skewX(-20deg)' }
               }
             }
           }

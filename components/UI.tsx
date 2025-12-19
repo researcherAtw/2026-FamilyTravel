@@ -79,7 +79,7 @@ export const CategoryBadge: React.FC<{ type: string; color?: HighlightColor }> =
   const styleClass = color ? colorStyles[color] : (defaultStyles[type] || "bg-gray-100 text-gray-800");
 
   return (
-    <span className={`px-2 py-1 rounded-md text-[10px] font-black uppercase tracking-tighter ${styleClass}`}>
+    <span className={`px-2.5 py-[5px] rounded-md text-[11px] font-black uppercase tracking-tighter ${styleClass}`}>
       {type}
     </span>
   );

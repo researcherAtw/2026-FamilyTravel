@@ -47,6 +47,11 @@ const App: React.FC = () => {
   const handleDragMove = (e: React.MouseEvent | React.TouchEvent) => {
     if (!isDragging) return;
     
+    // 防止拖曳時頁面跟著捲動
+    if (e.cancelable) {
+        e.preventDefault();
+    }
+    
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
     const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
     
@@ -155,35 +160,48 @@ const App: React.FC = () => {
             transition: isDragging ? 'none' : 'all 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28)'
         }}
       >
+        {/* Magic Aura - Subtle breathing glow even in idle */}
+        {!isSearching && !isDragging && (
+          <div className="absolute inset-0 -m-3 rounded-full bg-zen-primary/10 blur-xl animate-pulse-slow pointer-events-none"></div>
+        )}
+
         <button 
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
+          style={{ touchAction: 'none' }}
           className={`
-            pointer-events-auto relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 active:scale-95 overflow-visible group
+            pointer-events-auto relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 active:scale-95 overflow-hidden group
             ${isSearching 
               ? 'bg-stone-800 text-stone-200 border border-stone-600 shadow-xl opacity-100' 
               : isDragging
                 ? 'bg-white/30 backdrop-blur-md text-zen-primary border border-zen-primary/40 shadow-xl scale-110 opacity-100'
-                : 'bg-white/5 backdrop-blur-[1px] text-zen-primary/30 border-[0.5px] border-zen-primary/10 shadow-none'
+                : 'bg-white/20 backdrop-blur-sm text-zen-primary/70 border border-zen-primary/30 shadow-mystic'
             }
-            ${isDragging ? 'cursor-grabbing' : 'cursor-grab hover:text-zen-primary/60 hover:border-zen-primary/20 hover:bg-white/10'}
+            ${isDragging ? 'cursor-grabbing' : 'cursor-grab hover:text-zen-primary hover:border-zen-primary/50 hover:bg-white/30'}
           `}
         >
+          {/* Shimmer Brush Effect - Only in normal state */}
+          {!isSearching && !isDragging && (
+            <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-full">
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent -skew-x-[30deg] animate-shimmer"></div>
+            </div>
+          )}
+
           {/* Pulsating Shockwave Ring - Only visible when interacting */}
           {!isSearching && (
             <div className={`absolute inset-0 rounded-full border border-zen-primary/10 animate-shockwave pointer-events-none transition-opacity duration-500 ${isDragging ? 'opacity-100' : 'opacity-0'}`}></div>
           )}
 
-          {/* Rotating Magic Circles - Subtler idle state */}
-          <div className={`absolute -inset-[3px] pointer-events-none transition-all duration-700 ${isSearching ? 'opacity-0 scale-110' : isDragging ? 'opacity-60 scale-100' : 'opacity-20 scale-95'}`}>
+          {/* Rotating Magic Circles - Noticeable idle state */}
+          <div className={`absolute -inset-[3px] pointer-events-none transition-all duration-700 ${isSearching ? 'opacity-0 scale-110' : isDragging ? 'opacity-60 scale-100' : 'opacity-40 scale-95'}`}>
             <svg viewBox="0 0 100 100" className="w-full h-full fill-none stroke-current animate-spin-slow">
               <circle cx="50" cy="50" r="49" strokeWidth="0.5" strokeDasharray="3 5" />
               <circle cx="50" cy="50" r="46" strokeWidth="0.8" strokeDasharray="6 10" className="animate-spin-slow-reverse" />
             </svg>
           </div>
 
-          {/* Compass Markers - Subtler idle state */}
-          <div className={`absolute -inset-[1px] pointer-events-none transition-all duration-700 ${isSearching ? 'opacity-0' : isDragging ? 'opacity-40' : 'opacity-15'}`}>
+          {/* Compass Markers - Noticeable idle state */}
+          <div className={`absolute -inset-[1px] pointer-events-none transition-all duration-700 ${isSearching ? 'opacity-0' : isDragging ? 'opacity-40' : 'opacity-30'}`}>
             <svg viewBox="0 0 100 100" className="w-full h-full fill-none stroke-current animate-spin-fast">
               <path d="M50 0 L50 4 M50 96 L50 100 M0 50 L4 50 M96 50 L100 50" strokeWidth="2" strokeLinecap="round" />
             </svg>
