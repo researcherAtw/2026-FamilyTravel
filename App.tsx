@@ -45,6 +45,13 @@ const App: React.FC = () => {
     }
   };
 
+  const handleBackdropClick = () => {
+    // If we are in search mode but haven't typed anything, clicking away closes search
+    if (activeTab === 'search' && !searchTerm) {
+        setActiveTab(contentTab);
+    }
+  };
+
   const getPillPosition = () => {
     const totalItems = 5; 
     const index = NAV_ITEMS.findIndex(item => item.id === activeTab);
@@ -56,7 +63,7 @@ const App: React.FC = () => {
     <div className="h-[100dvh] text-zen-text font-sans max-w-md mx-auto relative shadow-2xl bg-zen-bg overflow-hidden flex flex-col">
       
       {/* Top Bar - Static */}
-      <header className={`flex-shrink-0 px-6 pt-6 pb-4 flex justify-between items-center bg-zen-bg z-30 transition-all ${activeTab === 'search' ? 'blur-sm opacity-50' : 'opacity-100'}`}>
+      <header className="flex-shrink-0 px-6 pt-6 pb-4 flex justify-between items-center bg-zen-bg z-30 transition-all">
         <div className="flex flex-col">
             <div className="flex items-center gap-1.5 mb-1">
                 <span className="inline-flex items-center bg-zen-primary text-white text-[9px] font-black px-2 py-0.5 rounded shadow-zen-sm tracking-[0.1em] uppercase">
@@ -76,18 +83,21 @@ const App: React.FC = () => {
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-hidden relative w-full">
+      <main 
+        className="flex-1 overflow-hidden relative w-full" 
+        onClick={handleBackdropClick}
+      >
         {renderContent()}
-        {activeTab === 'search' && (
-          <div className="absolute inset-0 bg-stone-100/30 backdrop-blur-sm z-40 transition-all pointer-events-none" onClick={() => handleTabClick(contentTab)}></div>
-        )}
       </main>
 
       {/* Floating Search Pill Wrapper (Moved to Top) */}
       {activeTab === 'search' && (
         <div className="absolute top-24 inset-x-0 z-[60] flex justify-center px-8">
             <div className="w-full max-w-sm animate-fade-in-up">
-                <div className="bg-white/95 backdrop-blur-2xl border-2 border-zen-primary/20 rounded-full shadow-2xl p-1.5 flex items-center gap-2 group">
+                <div 
+                  className="bg-white/95 backdrop-blur-2xl border-2 border-zen-primary/20 rounded-full shadow-2xl p-1.5 flex items-center gap-2 group"
+                  onClick={(e) => e.stopPropagation()} // Prevent closing when clicking search box itself
+                >
                     <div className="w-9 h-9 rounded-full bg-zen-primary text-white flex items-center justify-center flex-shrink-0 shadow-lg shadow-zen-primary/20">
                         <i className="fa-solid fa-magnifying-glass text-[12px]"></i>
                     </div>
