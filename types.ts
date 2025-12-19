@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useLayoutEffect, useRef, useMemo } from 'react';
 
-export type TabType = 'schedule' | 'bookings' | 'support';
+export type TabType = 'schedule' | 'bookings' | 'support' | 'alchemy';
 
 // Changed from union to string to allow custom categories
 export type CategoryType = string; 

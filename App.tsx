@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { NAV_ITEMS } from './constants';
 import { TabType } from './types';
 import { ScheduleTab, BookingsTab, SupportTab } from './components/Modules';
+import { AlchemyTab } from './components/AlchemyTab';
 
 const BrandLogo: React.FC = () => (
   <svg viewBox="0 0 1276 1398" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -16,7 +17,6 @@ const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const renderContent = () => {
-    // 如果使用者在搜尋框輸入了內容，無論目前處在哪個主要分頁，都切換至 ScheduleTab 顯示結果
     if (searchTerm) {
         return <ScheduleTab searchTerm={searchTerm} />;
     }
@@ -25,6 +25,7 @@ const App: React.FC = () => {
         case 'schedule': return <ScheduleTab />;
         case 'bookings': return <BookingsTab />;
         case 'support': return <SupportTab />;
+        case 'alchemy': return <AlchemyTab />;
         default: return <ScheduleTab />;
     }
   };
@@ -44,9 +45,8 @@ const App: React.FC = () => {
     }
   };
 
-  // 計算膠囊位置 (現在有 4 個分頁: 副本, 探索, 傳送, 支援)
   const getPillPosition = () => {
-    const totalItems = 4; 
+    const totalItems = 5; 
     const index = NAV_ITEMS.findIndex(item => item.id === activeTab);
     if (index === -1) return '0%';
     return `${(index / totalItems) * 100}%`;
@@ -80,7 +80,7 @@ const App: React.FC = () => {
         {renderContent()}
       </main>
 
-      {/* Floating Search Pill Wrapper - moved slightly higher (bottom-24 -> bottom-28) */}
+      {/* Floating Search Pill Wrapper */}
       {activeTab === 'search' && (
         <div className="absolute bottom-28 inset-x-0 z-[60] flex justify-center px-8">
             <div className="w-full max-w-sm animate-fade-in-up">
@@ -111,13 +111,13 @@ const App: React.FC = () => {
 
       {/* Bottom Navigation */}
       <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex justify-center pointer-events-none w-full max-w-md px-4">
-        <div className="bg-white/90 backdrop-blur-md rounded-full p-1 shadow-zen border border-stone-100 grid grid-cols-4 gap-0 relative pointer-events-auto w-full">
+        <div className="bg-white/90 backdrop-blur-md rounded-full p-1 shadow-zen border border-stone-100 grid grid-cols-5 gap-0 relative pointer-events-auto w-full">
           
           {/* Sliding Background Pill */}
           <div 
             className="absolute top-1 bottom-1 rounded-full bg-zen-primary shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0"
             style={{
-              width: 'calc(25% - 4px)',
+              width: 'calc(20% - 4px)',
               left: `calc(${getPillPosition()} + 2px)`
             }}
           />

@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#F7F4EB" />
     <title>Family Trip 2026</title>
     
-    <!-- Google Fonts: Inconsolata for English/Numbers, Noto Sans TC for Chinese -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Tailwind CSS (CDN for Lite version) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -25,14 +25,14 @@
           extend: {
             colors: {
               zen: {
-                bg: '#F7F4EB',       // Beige texture background
-                card: '#FFFFFF',     // White
-                text: '#4A4A4A',     // Soft Black
-                primary: '#D4A373',  // Warm Brown
-                secondary: '#CCD5AE', // Soft Green
-                accent: '#E9EDC9',   // Light Green
-                danger: '#E07A5F',   // Muted Red
-                shadow: '#E0E5D5',   // Shadow color
+                bg: '#F7F4EB',
+                card: '#FFFFFF',
+                text: '#4A4A4A',
+                primary: '#D4A373',
+                secondary: '#CCD5AE',
+                accent: '#E9EDC9',
+                danger: '#E07A5F',
+                shadow: '#E0E5D5',
               }
             },
             fontFamily: {
@@ -43,20 +43,62 @@
               'zen': '4px 4px 0px #E0E5D5',
               'zen-sm': '2px 2px 0px #E0E5D5',
               'zen-hover': '6px 6px 0px #E0E5D5',
+              'mystic': '0 10px 40px -10px rgba(212, 163, 115, 0.25)',
+              'alchemy-glow': '0 0 15px 2px rgba(212, 163, 115, 0.3)',
+              'philosopher-glow': '0 0 20px 5px rgba(224, 122, 95, 0.3)',
             },
             animation: {
               'fade-in': 'fadeIn 0.3s ease-out',
-              'fade-in-up': 'fadeInUp 0.4s ease-out',
-              'spin-slow': 'spin 8s linear infinite',
+              'fade-in-up': 'fadeInUp 0.4s ease-out forwards',
+              'spin-slow': 'spin 60s linear infinite',
+              'spin-slow-reverse': 'spinReverse 60s linear infinite',
+              'spin-fast': 'spin 3s linear infinite',
+              'spin-fast-reverse': 'spinReverse 3s linear infinite',
+              'float': 'float 6s ease-in-out infinite',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'breathe': 'breathe 2.5s ease-in-out infinite',
+              'particle-float': 'particleFloat 4s ease-in-out infinite',
+              'shockwave': 'shockwave 0.8s ease-out forwards',
+              'flow': 'flow 2s linear infinite',
+              'border-shine': 'borderShine 0.8s ease-out forwards',
             },
             keyframes: {
-              fadeIn: {
-                '0%': { opacity: '0' },
-                '100%': { opacity: '1' },
-              },
+              fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
               fadeInUp: {
                 '0%': { opacity: '0', transform: 'translateY(10px)' },
                 '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-8px)' },
+              },
+              spinReverse: {
+                'from': { transform: 'rotate(360deg)' },
+                'to': { transform: 'rotate(0deg)' }
+              },
+              breathe: {
+                '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                '50%': { opacity: '1', transform: 'scale(1.05)' },
+              },
+              particleFloat: {
+                '0%': { transform: 'translate(0, 0)', opacity: '0' },
+                '20%': { opacity: '0.4' },
+                '80%': { opacity: '0.4' },
+                '100%': { transform: 'translate(var(--tw-translate-x), -60px)', opacity: '0' },
+              },
+              shockwave: {
+                '0%': { transform: 'scale(0.8)', opacity: '0.8' },
+                '100%': { transform: 'scale(2.5)', opacity: '0' },
+              },
+              flow: {
+                'from': { strokeDashoffset: '40' },
+                'to': { strokeDashoffset: '0' }
+              },
+              borderShine: {
+                '0%': { strokeDashoffset: '400', opacity: '0' },
+                '10%': { opacity: '1' },
+                '90%': { opacity: '1' },
+                '100%': { strokeDashoffset: '0', opacity: '0' }
               }
             }
           }
@@ -67,19 +109,52 @@
       body {
         background-color: #F7F4EB;
         background-image: radial-gradient(#E0E5D5 1px, transparent 1px);
-        background-size: 20px 20px; /* Dot pattern */
-        overscroll-behavior-y: none; /* Prevent pull-to-refresh on mobile */
+        background-size: 24px 24px;
+        overscroll-behavior-y: none;
       }
-      /* Hide scrollbar for clean horizontal scrolling */
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      
+      .alchemical-frame {
+        position: relative;
+        background: #FFFFFF;
+        border: 1px solid rgba(212, 163, 115, 0.4);
+        border-radius: 2rem;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       }
-      .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+      
+      .alchemical-frame::before {
+        content: '';
+        position: absolute;
+        inset: 4px;
+        border: 1px solid rgba(212, 163, 115, 0.15);
+        border-radius: 1.8rem;
+        pointer-events: none;
       }
-      .animate-fade-in { animation: fadeIn 0.3s ease-out; }
-      .animate-fade-in-up { animation: fadeInUp 0.4s ease-out forwards; }
+
+      .star-map-pattern {
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23D4A373' stroke-width='0.5' stroke-opacity='0.08'%3E%3Ccircle cx='50' cy='50' r='40' /%3E%3Cpath d='M50 10 L50 90 M10 50 L90 50 M20 20 L80 80 M80 20 L20 80' /%3E%3Ccircle cx='50' cy='10' r='2' fill='%23D4A373' fill-opacity='0.1' /%3E%3Ccircle cx='90' cy='50' r='2' fill='%23D4A373' fill-opacity='0.1' /%3E%3Ccircle cx='50' cy='90' r='2' fill='%23D4A373' fill-opacity='0.1' /%3E%3Ccircle cx='10' cy='50' r='2' fill='%23D4A373' fill-opacity='0.1' /%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      /* Odometer Slot Machine Effect */
+      .odometer-digit {
+        display: inline-block;
+        height: 1.1em;
+        overflow: hidden;
+        line-height: 1.1;
+        vertical-align: top;
+      }
+      .odometer-strip {
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .odometer-num {
+        height: 1.1em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     </style>
 <script type="importmap">
 {

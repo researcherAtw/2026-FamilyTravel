@@ -203,7 +203,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd4-2', date: '2026-02-18', time: '13:00', 
-      title: '庫倫洛夫舊城區', enTitle: 'Český Krumlov Old Town (Vnitřní Město)', location: '庫倫洛夫舊城 (Vnitřní Město)', category: '座標登錄', categoryColor: 'green',
+      title: '庫倫洛夫舊城區', enTitle: 'Český Krumlov Old Town (Vnitř內 Město)', location: '庫倫洛夫舊城 (Vnitř內 Město)', category: '座標登錄', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/b6So1t939ae8LC5A7',
       guideInfo: {
           story: "庫倫洛夫舊城區在1992年被聯合國教科文組織列為世界文化遺產，被譽為「中世紀的完美縮影」。漫步在完整保留十四至十七世紀建築風貌的巷弄間，彷彿時光倒流，置身於輝煌的文藝復興時期。",
@@ -352,7 +352,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/bPPsM1JA2y2oMD8U6',
       guideInfo: {
           story: "哈布斯堡王朝的冬宮，也是西西 (Sisi，伊莉莎白皇后) 的黃金牢籠。\n\n西西 (Sisi) 是伊莉莎白皇后的真實暱稱，茜茜則是電影譯名。\n霍夫堡宮是西西皇后權力的象徵，也是她痛苦的根源。在這裡看到的不是一個幸福皇後的家，而是一位女性試圖在壓抑體制中，衝撞並尋找自我的掙扎痕跡。",
-          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館。西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇后的關鍵展品\n私個人物品： 西西皇后的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
+          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館。西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇后的關鍵展品\n私個人物品： 西西皇後的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
           highlights: [
               { id: 'h0', text: '冬宮', color: 'blue' },
               { id: 'h1', text: '西西博物館', color: 'purple' },
@@ -928,206 +928,212 @@ export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = ''
 
 export const SupportTab: React.FC = () => {
     return (
-        <div className="h-full overflow-y-auto px-5 pb-32 space-y-8 no-scrollbar bg-zen-bg pt-4 animate-fade-in">
-            <div className="flex items-center gap-3 mb-2 px-1">
-                <div className="w-12 h-12 rounded-2xl bg-white border-2 border-zen-primary/20 flex items-center justify-center shadow-zen-sm transform -rotate-3">
-                    <i className="fa-solid fa-shield-heart text-zen-primary text-xl"></i>
-                </div>
-                <div>
-                    <h2 className="text-xl font-black text-zen-text leading-tight tracking-tight">冒險者聖域</h2>
-                    <p className="text-[10px] text-stone-400 font-bold uppercase tracking-[0.2em]">Sanctuary & Guild Support</p>
+        <div className="h-full flex flex-col bg-zen-bg">
+            {/* Frozen Header */}
+            <div className="flex-shrink-0 px-5 pt-4 pb-3 bg-zen-bg/80 backdrop-blur-md border-b border-zen-primary/10 z-20">
+                <div className="flex items-center gap-3 px-1">
+                    <div className="w-10 h-10 rounded-2xl bg-white border-2 border-zen-primary/20 flex items-center justify-center shadow-zen-sm transform -rotate-3 flex-shrink-0">
+                        <i className="fa-solid fa-shield-heart text-zen-primary text-lg"></i>
+                    </div>
+                    <div>
+                        <h2 className="text-xl font-black text-zen-text leading-tight tracking-tight">冒險者聖域</h2>
+                        <p className="text-[10px] text-stone-400 font-bold uppercase tracking-[0.2em]">Sanctuary & Guild Support</p>
+                    </div>
                 </div>
             </div>
 
-            <div className="space-y-10">
-                {/* Czech Republic Card */}
-                <div className="relative group">
-                    <div className="absolute -top-3 -left-2 z-20 bg-white border border-stone-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-2 transform -rotate-2">
-                        <span className="text-sm">🇨🇿</span>
-                        <span className="text-[10px] font-black text-stone-600 uppercase tracking-widest">捷克分部</span>
-                    </div>
-                    <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
-                        <div className="p-6 pt-8 space-y-5">
-                            <div className="flex flex-col">
-                                <div className="flex justify-between items-center mb-1.5">
-                                    <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest flex items-center gap-1.5">
-                                        <i className="fa-solid fa-map-pin text-[8px]"></i> 公會座標 Coordinates
-                                    </span>
-                                    <a 
-                                        href="https://maps.app.goo.gl/RUG3WXz5bVJoGWHo8"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-stone-100 text-[10px] font-bold text-stone-500 hover:bg-zen-primary/10 hover:text-zen-primary transition-colors border border-stone-200/60 shadow-sm"
-                                    >
-                                        <i className="fa-solid fa-diamond-turn-right"></i>
-                                        <span>導航</span>
-                                    </a>
-                                </div>
-                                <p className="text-xs text-zen-text font-bold leading-relaxed pl-3 border-l-2 border-zen-primary/20">
-                                    Evropska 2590/33c, 160 00 Praha 6, Czech Republic
-                                </p>
-                            </div>
-                            <div className="grid grid-cols-1 gap-4">
-                                <div className="flex flex-col">
-                                    <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                        <i className="fa-solid fa-phone text-[8px]"></i> 傳送專線 Phone
-                                    </span>
-                                    <div className="flex flex-wrap gap-2 pl-3 border-l-2 border-zen-primary/20">
-                                        <a href="tel:+420233320606" className="text-xs font-mono font-black text-stone-600 bg-stone-100 px-2 py-1 rounded">+420 233-320-606</a>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col">
-                                    <span className="text-[9px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                        <i className="fa-solid fa-heart-pulse text-[8px]"></i> 聖療術專線 Emergency
-                                    </span>
-                                    <div className="flex flex-wrap gap-2 pl-3 border-l-2 border-zen-danger/20">
-                                        <a href="tel:+420603166707" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">境外：+420 603-166-707</a>
-                                        <a href="tel:603166707" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">境內直撥：603-166-707</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="pt-4 border-t border-dashed border-stone-100">
-                                <div className="flex items-center gap-2 mb-3">
-                                    <i className="fa-solid fa-hourglass-start text-[10px] text-stone-400"></i>
-                                    <span className="text-[10px] font-bold text-stone-500">領務時間：週一～週五 09:30–11:30、13:30–16:30</span>
-                                </div>
-                                <div className="bg-stone-50 rounded-xl p-3 border border-stone-100/50">
-                                    <div className="flex gap-2">
-                                        <i className="fa-solid fa-feather-pointed text-zen-primary mt-0.5 text-xs"></i>
-                                        <p className="text-[11px] text-stone-500 font-medium leading-relaxed">
-                                            這就像「大使館」一樣的台灣代表機構，可協助急難救助、護照補發、遺失證件協助等。
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+            {/* Scrollable Content */}
+            <div className="flex-1 overflow-y-auto px-5 pb-32 pt-5 space-y-8 no-scrollbar animate-fade-in">
+                <div className="space-y-10">
+                    {/* Czech Republic Card */}
+                    <div className="relative group">
+                        <div className="absolute -top-3 -left-2 z-20 bg-white border border-stone-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-2 transform -rotate-2">
+                            <span className="text-sm">🇨🇿</span>
+                            <span className="text-[10px] font-black text-stone-600 uppercase tracking-widest">捷克分部</span>
                         </div>
-                    </Card>
-                </div>
+                        <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
+                            <div className="p-6 pt-8 space-y-5">
+                                <div className="flex flex-col">
+                                    <div className="flex justify-between items-center mb-1.5">
+                                        <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest flex items-center gap-1.5">
+                                            <i className="fa-solid fa-map-pin text-[8px]"></i> 公會座標 Coordinates
+                                        </span>
+                                        <a 
+                                            href="https://maps.app.goo.gl/RUG3WXz5bVJoGWHo8"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-stone-100 text-[10px] font-bold text-stone-500 hover:bg-zen-primary/10 hover:text-zen-primary transition-colors border border-stone-200/60 shadow-sm"
+                                        >
+                                            <i className="fa-solid fa-diamond-turn-right"></i>
+                                            <span>導航</span>
+                                        </a>
+                                    </div>
+                                    <p className="text-xs text-zen-text font-bold leading-relaxed pl-3 border-l-2 border-zen-primary/20">
+                                        Evropska 2590/33c, 160 00 Praha 6, Czech Republic
+                                    </p>
+                                </div>
+                                <div className="grid grid-cols-1 gap-4">
+                                    <div className="flex flex-col">
+                                        <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                            <i className="fa-solid fa-phone text-[8px]"></i> 傳送專線 Phone
+                                        </span>
+                                        <div className="flex flex-wrap gap-2 pl-3 border-l-2 border-zen-primary/20">
+                                            <a href="tel:+420233320606" className="text-xs font-mono font-black text-stone-600 bg-stone-100 px-2 py-1 rounded">+420 233-320-606</a>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-[9px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                            <i className="fa-solid fa-heart-pulse text-[8px]"></i> 聖療術專線 Emergency
+                                        </span>
+                                        <div className="flex flex-wrap gap-2 pl-3 border-l-2 border-zen-danger/20">
+                                            <a href="tel:+420603166707" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">境外：+420 603-166-707</a>
+                                            <a href="tel:603166707" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">境內直撥：603-166-707</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="pt-4 border-t border-dashed border-stone-100">
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <i className="fa-solid fa-hourglass-start text-[10px] text-stone-400"></i>
+                                        <span className="text-[10px] font-bold text-stone-500">領務時間：週一～週五 09:30–11:30、13:30–16:30</span>
+                                    </div>
+                                    <div className="bg-stone-50 rounded-xl p-3 border border-stone-100/50">
+                                        <div className="flex gap-2">
+                                            <i className="fa-solid fa-feather-pointed text-zen-primary mt-0.5 text-xs"></i>
+                                            <p className="text-[11px] text-stone-500 font-medium leading-relaxed">
+                                                這就像「大使館」一樣的台灣代表機構，可協助急難救助、護照補發、遺失證件協助等。
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Card>
+                    </div>
 
-                {/* Germany Card */}
-                <div className="relative group">
-                    <div className="absolute -top-3 -left-2 z-20 bg-white border border-stone-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-2 transform -rotate-2">
-                        <span className="text-sm">🇩🇪</span>
-                        <span className="text-[10px] font-black text-stone-600 uppercase tracking-widest">德國總部</span>
-                    </div>
-                    <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
-                        <div className="p-6 pt-8 space-y-5">
-                            <div className="flex flex-col">
-                                <div className="flex justify-between items-center mb-1.5">
-                                    <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest flex items-center gap-1.5">
-                                        <i className="fa-solid fa-location-arrow text-[8px]"></i> 座標 Coordinates
-                                    </span>
-                                    <a 
-                                        href="https://maps.app.goo.gl/7XJr4SGCjofJBKmY6"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-stone-100 text-[10px] font-bold text-stone-500 hover:bg-zen-primary/10 hover:text-zen-primary transition-colors border border-stone-200/60 shadow-sm"
-                                    >
-                                        <i className="fa-solid fa-diamond-turn-right"></i>
-                                        <span>導航</span>
-                                    </a>
-                                </div>
-                                <p className="text-xs text-zen-text font-bold leading-relaxed pl-3 border-l-2 border-zen-primary/20">
-                                    Markgrafenstrasse 35, 10117 Berlin, Germany
-                                </p>
-                            </div>
-                            <div className="grid grid-cols-1 gap-4">
-                                <div className="flex flex-col">
-                                    <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                        <i className="fa-solid fa-phone text-[8px]"></i> 傳送專線 Phone
-                                    </span>
-                                    <div className="flex pl-3 border-l-2 border-zen-primary/20">
-                                        <a href="tel:+4930203610" className="text-xs font-mono font-black text-stone-600 bg-stone-100 px-2 py-1 rounded">+49-30-203610</a>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col">
-                                    <span className="text-[9px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                        <i className="fa-solid fa-heart-pulse text-[8px]"></i> 聖療術專線 Emergency
-                                    </span>
-                                    <div className="flex pl-3 border-l-2 border-zen-danger/20">
-                                        <a href="tel:+491713898257" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">+49-171-3898257</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="pt-4 border-t border-dashed border-stone-100">
-                                <div className="flex items-center gap-2 mb-3">
-                                    <i className="fa-solid fa-hourglass-start text-[10px] text-stone-400"></i>
-                                    <span className="text-[10px] font-bold text-stone-500">領務時間：週一～週五 09:00–12:30、14:00–17:00</span>
-                                </div>
-                                <div className="bg-stone-50 rounded-xl p-3 border border-stone-100/50">
-                                    <div className="flex gap-2">
-                                        <i className="fa-solid fa-scroll text-stone-400 mt-0.5 text-xs"></i>
-                                        <p className="text-[11px] text-stone-500 font-medium leading-relaxed">
-                                            如果你在德國其他城市（例如希特斯加登），可先聯絡柏林總處，他們會指引最近的分辦事處。
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                    {/* Germany Card */}
+                    <div className="relative group">
+                        <div className="absolute -top-3 -left-2 z-20 bg-white border border-stone-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-2 transform -rotate-2">
+                            <span className="text-sm">🇩🇪</span>
+                            <span className="text-[10px] font-black text-stone-600 uppercase tracking-widest">德國總部</span>
                         </div>
-                    </Card>
-                </div>
+                        <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
+                            <div className="p-6 pt-8 space-y-5">
+                                <div className="flex flex-col">
+                                    <div className="flex justify-between items-center mb-1.5">
+                                        <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest flex items-center gap-1.5">
+                                            <i className="fa-solid fa-location-arrow text-[8px]"></i> 座標 Coordinates
+                                        </span>
+                                        <a 
+                                            href="https://maps.app.goo.gl/7XJr4SGCjofJBKmY6"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-stone-100 text-[10px] font-bold text-stone-500 hover:bg-zen-primary/10 hover:text-zen-primary transition-colors border border-stone-200/60 shadow-sm"
+                                        >
+                                            <i className="fa-solid fa-diamond-turn-right"></i>
+                                            <span>導航</span>
+                                        </a>
+                                    </div>
+                                    <p className="text-xs text-zen-text font-bold leading-relaxed pl-3 border-l-2 border-zen-primary/20">
+                                        Markgrafenstrasse 35, 10117 Berlin, Germany
+                                    </p>
+                                </div>
+                                <div className="grid grid-cols-1 gap-4">
+                                    <div className="flex flex-col">
+                                        <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                            <i className="fa-solid fa-phone text-[8px]"></i> 傳送專線 Phone
+                                        </span>
+                                        <div className="flex pl-3 border-l-2 border-zen-primary/20">
+                                            <a href="tel:+4930203610" className="text-xs font-mono font-black text-stone-600 bg-stone-100 px-2 py-1 rounded">+49-30-203610</a>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-[9px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                            <i className="fa-solid fa-heart-pulse text-[8px]"></i> 聖療術專線 Emergency
+                                        </span>
+                                        <div className="flex pl-3 border-l-2 border-zen-danger/20">
+                                            <a href="tel:+491713898257" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">+49-171-3898257</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="pt-4 border-t border-dashed border-stone-100">
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <i className="fa-solid fa-hourglass-start text-[10px] text-stone-400"></i>
+                                        <span className="text-[10px] font-bold text-stone-500">領務時間：週一～週五 09:00–12:30、14:00–17:00</span>
+                                    </div>
+                                    <div className="bg-stone-50 rounded-xl p-3 border border-stone-100/50">
+                                        <div className="flex gap-2">
+                                            <i className="fa-solid fa-scroll text-stone-400 mt-0.5 text-xs"></i>
+                                            <p className="text-[11px] text-stone-500 font-medium leading-relaxed">
+                                                如果你在德國其他城市（例如希特斯加登），可先聯絡柏林總處，他們會指引最近的分辦事處。
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Card>
+                    </div>
 
-                {/* Austria Card */}
-                <div className="relative group">
-                    <div className="absolute -top-3 -left-2 z-20 bg-white border border-stone-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-2 transform -rotate-1">
-                        <span className="text-sm">🇦🇹</span>
-                        <span className="text-[10px] font-black text-stone-600 uppercase tracking-widest">奧地利分部</span>
-                    </div>
-                    <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
-                        <div className="p-6 pt-8 space-y-5">
-                            <div className="flex flex-col">
-                                <div className="flex justify-between items-center mb-1.5">
-                                    <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest flex items-center gap-1.5">
-                                        <i className="fa-solid fa-anchor text-[8px]"></i> 座標 Coordinates
-                                    </span>
-                                    <a 
-                                        href="https://maps.app.goo.gl/6WjwL37Gt4DqphaN9"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-stone-100 text-[10px] font-bold text-stone-500 hover:bg-zen-primary/10 hover:text-zen-primary transition-colors border border-stone-200/60 shadow-sm"
-                                    >
-                                        <i className="fa-solid fa-diamond-turn-right"></i>
-                                        <span>導航</span>
-                                    </a>
-                                </div>
-                                <p className="text-xs text-zen-text font-bold leading-relaxed pl-3 border-l-2 border-zen-primary/20">
-                                    Wagramer Strasse 19/11. OG, A-1220 Vienna, Austria
-                                </p>
-                            </div>
-                            <div className="grid grid-cols-1 gap-4">
-                                <div className="flex flex-col">
-                                    <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                        <i className="fa-solid fa-phone text-[8px]"></i> 傳送專線 Phone
-                                    </span>
-                                    <div className="flex pl-3 border-l-2 border-zen-primary/20">
-                                        <a href="tel:+4312124720" className="text-xs font-mono font-black text-stone-600 bg-stone-100 px-2 py-1 rounded">+43-1-2124720</a>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col">
-                                    <span className="text-[9px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                        <i className="fa-solid fa-heart-pulse text-[8px]"></i> 聖療術專線 Emergency
-                                    </span>
-                                    <div className="flex flex-wrap gap-2 pl-3 border-l-2 border-zen-danger/20">
-                                        <a href="tel:+436643450455" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">+43-664-345-0455</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="pt-4 border-t border-dashed border-stone-100">
-                                <div className="flex items-center gap-2 mb-3">
-                                    <i className="fa-solid fa-clock text-[10px] text-stone-400"></i>
-                                    <span className="text-[10px] font-bold text-stone-500">領務時間：週一 ~ 週五 09:00-17:00</span>
-                                </div>
-                                <div className="bg-stone-50 rounded-xl p-3 border border-stone-100/50">
-                                    <div className="flex gap-2">
-                                        <i className="fa-solid fa-shield-halved text-zen-primary mt-0.5 text-xs"></i>
-                                        <p className="text-[11px] text-stone-500 font-medium leading-relaxed">
-                                            協助急難救援、護照、文件公證等主要代表機構。
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                    {/* Austria Card */}
+                    <div className="relative group">
+                        <div className="absolute -top-3 -left-2 z-20 bg-white border border-stone-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-2 transform -rotate-1">
+                            <span className="text-sm">🇦🇹</span>
+                            <span className="text-[10px] font-black text-stone-600 uppercase tracking-widest">奧地利分部</span>
                         </div>
-                    </Card>
+                        <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
+                            <div className="p-6 pt-8 space-y-5">
+                                <div className="flex flex-col">
+                                    <div className="flex justify-between items-center mb-1.5">
+                                        <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest flex items-center gap-1.5">
+                                            <i className="fa-solid fa-anchor text-[8px]"></i> 座標 Coordinates
+                                        </span>
+                                        <a 
+                                            href="https://maps.app.goo.gl/6WjwL37Gt4DqphaN9"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-stone-100 text-[10px] font-bold text-stone-500 hover:bg-zen-primary/10 hover:text-zen-primary transition-colors border border-stone-200/60 shadow-sm"
+                                        >
+                                            <i className="fa-solid fa-diamond-turn-right"></i>
+                                            <span>導航</span>
+                                        </a>
+                                    </div>
+                                    <p className="text-xs text-zen-text font-bold leading-relaxed pl-3 border-l-2 border-zen-primary/20">
+                                        Wagramer Strasse 19/11. OG, A-1220 Vienna, Austria
+                                    </p>
+                                </div>
+                                <div className="grid grid-cols-1 gap-4">
+                                    <div className="flex flex-col">
+                                        <span className="text-[9px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                            <i className="fa-solid fa-phone text-[8px]"></i> 傳送專線 Phone
+                                        </span>
+                                        <div className="flex pl-3 border-l-2 border-zen-primary/20">
+                                            <a href="tel:+4312124720" className="text-xs font-mono font-black text-stone-600 bg-stone-100 px-2 py-1 rounded">+43-1-2124720</a>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-[9px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                                            <i className="fa-solid fa-heart-pulse text-[8px]"></i> 聖療術專線 Emergency
+                                        </span>
+                                        <div className="flex flex-wrap gap-2 pl-3 border-l-2 border-zen-danger/20">
+                                            <a href="tel:+436643450455" className="text-xs font-mono font-black text-zen-danger bg-red-50 px-2 py-1 rounded border border-red-100 shadow-sm transition-all active:scale-95">+43-664-345-0455</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="pt-4 border-t border-dashed border-stone-100">
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <i className="fa-solid fa-clock text-[10px] text-stone-400"></i>
+                                        <span className="text-[10px] font-bold text-stone-500">領務時間：週一 ~ 週五 09:00-17:00</span>
+                                    </div>
+                                    <div className="bg-stone-50 rounded-xl p-3 border border-stone-100/50">
+                                        <div className="flex gap-2">
+                                            <i className="fa-solid fa-shield-halved text-zen-primary mt-0.5 text-xs"></i>
+                                            <p className="text-[11px] text-stone-500 font-medium leading-relaxed">
+                                                協助急難救援、護照、文件公證等主要代表機構。
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Card>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1218,131 +1224,137 @@ export const BookingsTab: React.FC = () => {
     const [bookings] = useState<Booking[]>(MOCK_BOOKINGS);
 
     return (
-        <div className="h-full overflow-y-auto px-5 pb-24 space-y-6 no-scrollbar bg-zen-bg pt-4">
-            <div className="flex items-center gap-3 mb-2 px-1">
-                <div className="w-10 h-10 rounded-full bg-zen-primary/10 border border-zen-primary/30 flex items-center justify-center shadow-zen-sm">
-                    <i className="fa-solid fa-scroll text-zen-primary"></i>
-                </div>
-                <div>
-                    <h2 className="text-xl font-black text-zen-text leading-tight tracking-tight">冒險者傳送日誌</h2>
-                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em]">Teleportation Archive</p>
+        <div className="h-full flex flex-col bg-zen-bg">
+            {/* Frozen Header */}
+            <div className="flex-shrink-0 px-5 pt-4 pb-3 bg-zen-bg/80 backdrop-blur-md border-b border-zen-primary/10 z-20">
+                <div className="flex items-center gap-3 px-1">
+                    <div className="w-10 h-10 rounded-full bg-zen-primary/10 border border-zen-primary/30 flex items-center justify-center shadow-zen-sm flex-shrink-0">
+                        <i className="fa-solid fa-scroll text-zen-primary"></i>
+                    </div>
+                    <div>
+                        <h2 className="text-xl font-black text-zen-text leading-tight tracking-tight">冒險者傳送日誌</h2>
+                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em]">Teleportation Archive</p>
+                    </div>
                 </div>
             </div>
-            
-            <div className="space-y-8">
-                {bookings.map((booking) => {
-                    const isTransfer = booking.details['備註'] === '轉機航班';
-                    const accentColor = isTransfer ? 'bg-indigo-500' : 'bg-zen-primary';
-                    const originCode = booking.title.split(' - ')[0];
-                    const destCode = booking.title.split(' - ')[1];
 
-                    return (
-                        <div key={booking.id} className="relative group">
-                            <i className="fa-solid fa-dharmachakra absolute -top-1 -left-1 text-[10px] text-zen-primary/30 z-20 group-hover:rotate-180 transition-transform duration-1000"></i>
-                            <i className="fa-solid fa-dharmachakra absolute -top-1 -right-1 text-[10px] text-zen-primary/30 z-20 group-hover:rotate-180 transition-transform duration-1000"></i>
-                            
-                            <div className={`bg-white rounded-3xl shadow-zen border border-stone-100 relative overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-zen-hover`}>
-                                <div className={`h-2 w-full ${accentColor} opacity-70`}></div>
+            {/* Scrollable Content */}
+            <div className="flex-1 overflow-y-auto px-5 pb-32 pt-5 space-y-8 no-scrollbar bg-zen-bg animate-fade-in">
+                <div className="space-y-8">
+                    {bookings.map((booking) => {
+                        const isTransfer = booking.details['備註'] === '轉機航班';
+                        const accentColor = isTransfer ? 'bg-indigo-500' : 'bg-zen-primary';
+                        const originCode = booking.title.split(' - ')[0];
+                        const destCode = booking.title.split(' - ')[1];
+
+                        return (
+                            <div key={booking.id} className="relative group">
+                                <i className="fa-solid fa-dharmachakra absolute -top-1 -left-1 text-[10px] text-zen-primary/30 z-20 group-hover:rotate-180 transition-transform duration-1000"></i>
+                                <i className="fa-solid fa-dharmachakra absolute -top-1 -right-1 text-[10px] text-zen-primary/30 z-20 group-hover:rotate-180 transition-transform duration-1000"></i>
                                 
-                                <div className="px-5 py-4 flex justify-between items-center bg-stone-50/40 border-b border-stone-100">
-                                    <div className="flex items-center gap-2.5">
-                                        <div className={`w-8 h-8 rounded-lg ${accentColor} flex items-center justify-center shadow-md transform -rotate-3`}>
-                                            <i className="fa-solid fa-wand-magic-sparkles text-white text-[10px]"></i>
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest">傳送陣 ID</span>
-                                            <span className="text-xs font-black text-zen-text font-mono tracking-tight leading-none">{booking.subTitle?.split(' - ')[0]}</span>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col items-end">
-                                        <span className={`px-2.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest border ${isTransfer ? 'bg-indigo-50 border-indigo-100 text-indigo-400' : 'bg-green-50 border-green-100 text-green-500'}`}>
-                                            {isTransfer ? 'PORTAL RECHARGING' : 'ENTERING PORTAL'}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div className="p-6">
-                                    <div className="flex justify-between items-center relative">
-                                        <div className="flex flex-col z-10 w-24">
-                                            <div className="text-[8px] font-black text-zen-primary mb-1 uppercase tracking-[0.15em] opacity-80">召喚座標</div>
-                                            <div className="text-3xl font-mono font-black text-stone-700 leading-none tracking-tighter mb-1">
-                                                {booking.time}
-                                            </div>
-                                            <div className="text-[10px] font-bold text-stone-400 font-mono tracking-tight">{booking.date}</div>
-                                            <div className="text-xl font-black text-stone-600 mt-1.5 tracking-widest leading-none">{originCode}</div>
-                                            <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-0.5 leading-none opacity-80 uppercase">{CITY_NAMES[originCode] || 'Realm'}</div>
-                                        </div>
-
-                                        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none z-0">
-                                            <div className="mb-2 flex items-center gap-1.5 px-3 py-0.5 bg-stone-50 rounded-full border border-stone-100 shadow-sm">
-                                                 <i className="fa-regular fa-hourglass-half text-[8px] text-zen-primary/70 animate-pulse"></i>
-                                                 <span className="text-[9px] font-mono font-black text-stone-500">{booking.details['飛行時間']}</span>
-                                            </div>
-                                            
-                                            <div className="relative w-32 h-10 flex items-center justify-center">
-                                                <div className="absolute w-full h-[1px] bg-gradient-to-r from-stone-50 via-stone-200 to-stone-50"></div>
-                                                <div className="relative w-10 h-10 rounded-full bg-white border border-stone-100 shadow-zen-sm flex items-center justify-center z-10 animate-spin-slow">
-                                                    <div className="absolute inset-0 rounded-full bg-zen-primary/5"></div>
-                                                    <i className="fa-solid fa-dharmachakra text-stone-400 text-lg"></i>
-                                                </div>
-                                                <i className="fa-solid fa-bolt-lightning absolute text-[9px] text-zen-primary/60 animate-bounce top-[-12px]"></i>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex flex-col text-right z-10 w-24">
-                                            <div className="text-[8px] font-black text-zen-primary mb-1 uppercase tracking-[0.15em] opacity-80">降落座標</div>
-                                            <div className="text-3xl font-mono font-black text-stone-700 leading-none tracking-tighter mb-1">
-                                                {booking.details['抵達']?.split(' ')[0] || '--:--'}
-                                            </div>
-                                            <div className="text-[10px] font-bold text-stone-400 font-mono uppercase tracking-wider tracking-tight">
-                                                {getArrivalDate(booking.date, booking.details['抵達'])}
-                                            </div>
-                                            <div className="text-xl font-black text-stone-600 mt-1.5 tracking-widest leading-none">{destCode}</div>
-                                            <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-0.5 leading-none opacity-80 uppercase">{CITY_NAMES[destCode] || 'Realm'}</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="bg-stone-50/50 px-6 py-3.5 border-t border-dashed border-stone-100 flex justify-between items-center relative">
-                                    <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white border border-stone-100 flex items-center justify-center shadow-sm">
-                                        <i className="fa-solid fa-key text-[7px] text-stone-300"></i>
-                                    </div>
+                                <div className={`bg-white rounded-3xl shadow-zen border border-stone-100 relative overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-zen-hover`}>
+                                    <div className={`h-2 w-full ${accentColor} opacity-70`}></div>
                                     
-                                    <div className="flex flex-col">
-                                        <span className="text-[8px] text-gray-400 font-black tracking-widest uppercase mb-0.5">Hero Party</span>
-                                        <span className="text-[11px] font-black text-stone-500 flex items-center gap-1.5">
-                                            FAMILY ADVENTURERS
-                                            <i className="fa-solid fa-crown text-[8px] text-zen-primary/40"></i>
-                                        </span>
-                                    </div>
-
-                                    <div className="relative flex items-center gap-3">
+                                    <div className="px-5 py-4 flex justify-between items-center bg-stone-50/40 border-b border-stone-100">
+                                        <div className="flex items-center gap-2.5">
+                                            <div className={`w-8 h-8 rounded-lg ${accentColor} flex items-center justify-center shadow-md transform -rotate-3`}>
+                                                <i className="fa-solid fa-wand-magic-sparkles text-white text-[10px]"></i>
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest">傳送陣 ID</span>
+                                                <span className="text-xs font-black text-zen-text font-mono tracking-tight leading-none">{booking.subTitle?.split(' - ')[0]}</span>
+                                            </div>
+                                        </div>
                                         <div className="flex flex-col items-end">
-                                            <span className="text-[8px] text-gray-400 font-black tracking-widest uppercase mb-0.5">Teleport Code</span>
-                                            <span className="text-[10px] font-mono font-black text-stone-600 bg-white px-1.5 py-0.5 rounded border border-stone-200 shadow-sm leading-none">
-                                                {booking.referenceNo}
+                                            <span className={`px-2.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest border ${isTransfer ? 'bg-indigo-50 border-indigo-100 text-indigo-400' : 'bg-green-50 border-green-100 text-green-500'}`}>
+                                                {isTransfer ? 'PORTAL RECHARGING' : 'ENTERING PORTAL'}
                                             </span>
                                         </div>
-                                        <div className="flex gap-[1.5px] opacity-20 group-hover:opacity-60 transition-opacity">
-                                            {[1, 0, 1, 1, 0, 1, 0, 1].map((v, i) => (
-                                                <div key={i} className={`w-[1px] rounded-full bg-stone-700`} style={{ height: v ? '14px' : '8px' }}></div>
-                                            ))}
+                                    </div>
+
+                                    <div className="p-6">
+                                        <div className="flex justify-between items-center relative">
+                                            <div className="flex flex-col z-10 w-24">
+                                                <div className="text-[8px] font-black text-zen-primary mb-1 uppercase tracking-[0.15em] opacity-80">召喚座標</div>
+                                                <div className="text-3xl font-mono font-black text-stone-700 leading-none tracking-tighter mb-1">
+                                                    {booking.time}
+                                                </div>
+                                                <div className="text-[10px] font-bold text-stone-400 font-mono tracking-tight">{booking.date}</div>
+                                                <div className="text-xl font-black text-stone-600 mt-1.5 tracking-widest leading-none">{originCode}</div>
+                                                <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-0.5 leading-none opacity-80 uppercase">{CITY_NAMES[originCode] || 'Realm'}</div>
+                                            </div>
+
+                                            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none z-0">
+                                                <div className="mb-2 flex items-center gap-1.5 px-3 py-0.5 bg-stone-50 rounded-full border border-stone-100 shadow-sm">
+                                                     <i className="fa-regular fa-hourglass-half text-[8px] text-zen-primary/70 animate-pulse"></i>
+                                                     <span className="text-[9px] font-mono font-black text-stone-500">{booking.details['飛行時間']}</span>
+                                                </div>
+                                                
+                                                <div className="relative w-32 h-10 flex items-center justify-center">
+                                                    <div className="absolute w-full h-[1px] bg-gradient-to-r from-stone-50 via-stone-200 to-stone-50"></div>
+                                                    <div className="relative w-10 h-10 rounded-full bg-white border border-stone-100 shadow-zen-sm flex items-center justify-center z-10 animate-spin-slow">
+                                                        <div className="absolute inset-0 rounded-full bg-zen-primary/5"></div>
+                                                        <i className="fa-solid fa-dharmachakra text-stone-400 text-lg"></i>
+                                                    </div>
+                                                    <i className="fa-solid fa-bolt-lightning absolute text-[9px] text-zen-primary/60 animate-bounce top-[-12px]"></i>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex flex-col text-right z-10 w-24">
+                                                <div className="text-[8px] font-black text-zen-primary mb-1 uppercase tracking-[0.15em] opacity-80">降落座標</div>
+                                                <div className="text-3xl font-mono font-black text-stone-700 leading-none tracking-tighter mb-1">
+                                                    {booking.details['抵達']?.split(' ')[0] || '--:--'}
+                                                </div>
+                                                <div className="text-[10px] font-bold text-stone-400 font-mono uppercase tracking-wider tracking-tight">
+                                                    {getArrivalDate(booking.date, booking.details['抵達'])}
+                                                </div>
+                                                <div className="text-xl font-black text-stone-600 mt-1.5 tracking-widest leading-none">{destCode}</div>
+                                                <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-0.5 leading-none opacity-80 uppercase">{CITY_NAMES[destCode] || 'Realm'}</div>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div className="absolute -right-1 -bottom-1 w-14 h-14 pointer-events-none opacity-[0.05] transform -rotate-12 group-hover:scale-105 transition-transform duration-500">
-                                        <div className="w-full h-full rounded-full border-2 border-red-800 flex items-center justify-center p-0.5">
-                                            <div className="w-full h-full rounded-full border border-red-800 flex flex-col items-center justify-center leading-none">
-                                                <span className="text-[7px] font-black text-red-800 uppercase">Quest</span>
-                                                <span className="text-[9px] font-black text-red-800 uppercase">Passed</span>
+                                    <div className="bg-stone-50/50 px-6 py-3.5 border-t border-dashed border-stone-100 flex justify-between items-center relative">
+                                        <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white border border-stone-100 flex items-center justify-center shadow-sm">
+                                            <i className="fa-solid fa-key text-[7px] text-stone-300"></i>
+                                        </div>
+                                        
+                                        <div className="flex flex-col">
+                                            <span className="text-[8px] text-gray-400 font-black tracking-widest uppercase mb-0.5">Hero Party</span>
+                                            <span className="text-[11px] font-black text-stone-500 flex items-center gap-1.5">
+                                                FAMILY ADVENTURERS
+                                                <i className="fa-solid fa-crown text-[8px] text-zen-primary/40"></i>
+                                            </span>
+                                        </div>
+
+                                        <div className="relative flex items-center gap-3">
+                                            <div className="flex flex-col items-end">
+                                                <span className="text-[8px] text-gray-400 font-black tracking-widest uppercase mb-0.5">Teleport Code</span>
+                                                <span className="text-[10px] font-mono font-black text-stone-600 bg-white px-1.5 py-0.5 rounded border border-stone-200 shadow-sm leading-none">
+                                                    {booking.referenceNo}
+                                                </span>
+                                            </div>
+                                            <div className="flex gap-[1.5px] opacity-20 group-hover:opacity-60 transition-opacity">
+                                                {[1, 0, 1, 1, 0, 1, 0, 1].map((v, i) => (
+                                                    <div key={i} className={`w-[1px] rounded-full bg-stone-700`} style={{ height: v ? '14px' : '8px' }}></div>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <div className="absolute -right-1 -bottom-1 w-14 h-14 pointer-events-none opacity-[0.05] transform -rotate-12 group-hover:scale-105 transition-transform duration-500">
+                                            <div className="w-full h-full rounded-full border-2 border-red-800 flex items-center justify-center p-0.5">
+                                                <div className="w-full h-full rounded-full border border-red-800 flex flex-col items-center justify-center leading-none">
+                                                    <span className="text-[7px] font-black text-red-800 uppercase">Quest</span>
+                                                    <span className="text-[9px] font-black text-red-800 uppercase">Passed</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+                </div>
             </div>
         </div>
     );
