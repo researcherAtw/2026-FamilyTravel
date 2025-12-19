@@ -7,9 +7,14 @@ const RUNIC_SYMBOLS = ['ᚠ', 'ᚢ', 'ᚦ', 'ᚨ', 'ᚱ', 'ᚲ', 'ᚷ', 'ᚹ', '
 
 // --- Runic Scrambling Number Component ---
 const RunicNumber: React.FC<{ value: number; active: boolean; onSettle: () => void }> = ({ value, active, onSettle }) => {
-    const [displayValue, setDisplayValue] = useState<string>('0');
+    const [displayValue, setDisplayValue] = useState<string>('0.00');
     const [isScrambling, setIsScrambling] = useState(false);
-    const targetValue = Math.round(value).toLocaleString();
+    
+    // 將數值格式化為包含兩位小數的字串
+    const targetValue = useMemo(() => 
+        value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+    [value]);
+
     const timerRef = useRef<number | null>(null);
 
     useEffect(() => {
@@ -24,6 +29,7 @@ const RunicNumber: React.FC<{ value: number; active: boolean; onSettle: () => vo
                 frame++;
                 if (frame < maxFrames) {
                     const scrambled = targetValue.split('').map(char => {
+                        // 保留分隔符號與小數點，只混淆數字
                         if (char === ',' || char === '.') return char;
                         return RUNIC_SYMBOLS[Math.floor(Math.random() * RUNIC_SYMBOLS.length)];
                     }).join('');
@@ -38,7 +44,7 @@ const RunicNumber: React.FC<{ value: number; active: boolean; onSettle: () => vo
         } else if (!isScrambling) {
             setDisplayValue(targetValue);
         }
-    }, [value, active, targetValue]);
+    }, [targetValue, active, onSettle, isScrambling]);
 
     return (
         <span className={`transition-all duration-300 ${isScrambling ? 'text-zen-primary blur-[0.3px] scale-105' : ''}`}>
