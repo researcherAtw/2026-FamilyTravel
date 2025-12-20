@@ -415,8 +415,8 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(南塔、北塔二擇一登頂)',
       mapUrl: 'https://maps.app.goo.gl/d6ob7ph5DwFvTL949',
       guideInfo: {
-          story: "維也納的靈魂象徵，始建於12世紀。曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n＊關於分開埋葬：哈布斯堡家族是極度虔誠的天主教徒。最初出於實務的防腐程序，而後被昇華為一種隆重的宗教儀式。\n身體 (Body) → 皇家墓穴（嘉布遣會教堂）\n心臟 (Heart) → 心臟墓穴（奧古斯丁教堂）\n內臟 (Viscera) → 公爵墓穴（聖史帝芬教堂）",
-          tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘。亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
+          story: "維也納的靈魂象徵，始建於12世紀。曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n＊關於分開埋葬：哈布斯堡家族是極度虔誠的天主教徒。最初出於實務的防腐程序，而後被昇華為一種隆重的宗教儀式。\n- 身體 (Body) ➔ 皇家墓穴\n（嘉布遣會教堂 Kapuzinerkirche）\n- 心臟 (Heart) ➔ 心臟墓穴\n（奧古斯丁教堂 Augustinerkirche）\n- 內臟 (Viscera) ➔ 公爵墓穴\n（聖史帝芬教堂 Stephansdom）",
+          tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘. 亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
           highlights: [
               { id: 'h1', text: '南塔(樓梯)', color: 'red' },
               { id: 'h2', text: '北塔(電梯)', color: 'blue' },
@@ -431,7 +431,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd9-3', date: '2026-02-23', time: '14:00', 
-      title: '潘朵夫Outlet', enTitle: 'Designer Outlet Parndorf', location: '潘朵夫 (Parndorf)', category: '區域解鎖', categoryColor: 'red',
+      title: '潘朵夫Outlet', enTitle: 'Designer Outlet Parndorf', location: '潘朵夫 (Parndorf)', category: '購物中心', categoryColor: 'red',
       description: 'Parndorf Outlet',
       mapUrl: 'https://maps.app.goo.gl/kSB8ToNAZydoHitT7',
       guideInfo: {
@@ -600,7 +600,7 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; search
                     className={`
                         relative z-10 flex items-center justify-center transition-all duration-300 mt-[1.4rem]
                         bg-zen-bg rounded-full border-2 
-                        ${isMajor || ['區域解鎖', '登錄地圖'].includes(item.category)
+                        ${isMajor || ['區域解鎖', '登錄地圖', '購物中心'].includes(item.category)
                             ? `w-8 h-8 ${NODE_TEXT_COLORS[item.categoryColor || 'gray']} border-current shadow-sm bg-white` 
                             : `w-7 h-7 text-stone-400 border-stone-300 bg-white`
                         }

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 
 // 更新為最新每日同步的 API 來源
@@ -21,7 +20,7 @@ const RunicNumber: React.FC<{ value: number; active: boolean; onSettle: () => vo
         if (active) {
             setIsScrambling(true);
             let frame = 0;
-            const maxFrames = 5; // 縮短幀數從 6 -> 5，縮減動畫長度
+            const maxFrames = 5; 
 
             if (timerRef.current) clearInterval(timerRef.current);
 
@@ -29,7 +28,6 @@ const RunicNumber: React.FC<{ value: number; active: boolean; onSettle: () => vo
                 frame++;
                 if (frame < maxFrames) {
                     const scrambled = targetValue.split('').map(char => {
-                        // 保留分隔符號與小數點，只混淆數字
                         if (char === ',' || char === '.') return char;
                         return RUNIC_SYMBOLS[Math.floor(Math.random() * RUNIC_SYMBOLS.length)];
                     }).join('');
@@ -40,7 +38,7 @@ const RunicNumber: React.FC<{ value: number; active: boolean; onSettle: () => vo
                     onSettle(); 
                     if (timerRef.current) clearInterval(timerRef.current);
                 }
-            }, 20); // 20ms * 5 = 100ms 完成數值轉化
+            }, 20);
         } else if (!isScrambling) {
             setDisplayValue(targetValue);
         }
@@ -213,7 +211,6 @@ export const AlchemyTab: React.FC = () => {
         setActiveMaterial('czk');
         setIsCzkSynthesizing(true);
         setShowCzkShine(false);
-        // 合成狀態持續時間縮短至 150ms，配合 100ms 的數字動畫，確保在 200ms 內完成
         setTimeout(() => setIsCzkSynthesizing(false), 150);
     };
 
@@ -221,7 +218,6 @@ export const AlchemyTab: React.FC = () => {
         setActiveMaterial('eur');
         setIsEurSynthesizing(true);
         setShowEurShine(false);
-        // 同樣縮短至 150ms
         setTimeout(() => setIsEurSynthesizing(false), 150);
     };
 
@@ -229,7 +225,7 @@ export const AlchemyTab: React.FC = () => {
     const eurResult = (parseFloat(eurAmount) || 0) * rates.eur;
 
     return (
-        <div className="h-full flex flex-col relative star-map-pattern overflow-hidden">
+        <div className="h-full flex flex-col relative star-map-pattern overflow-hidden text-zen-text">
             <MysticBackground />
             
             {/* Header */}
@@ -249,15 +245,15 @@ export const AlchemyTab: React.FC = () => {
             <div className="flex-1 overflow-y-auto px-5 pb-24 pt-4 no-scrollbar space-y-3 relative z-10">
                 {/* CZK Card */}
                 <div 
-                    className={`relative group transition-all duration-500 ${activeMaterial && activeMaterial !== 'czk' ? 'opacity-60 scale-[0.98]' : 'opacity-100 scale-100'}`}
+                    className={`relative group transition-all duration-500 ${activeMaterial && activeMaterial !== 'czk' ? 'opacity-40 scale-[0.98] blur-[0.5px]' : 'opacity-100 scale-100'}`}
                     onClick={() => setActiveMaterial('czk')}
                 >
-                    <div className={`alchemical-frame transition-all duration-500 ${isCzkSynthesizing || activeMaterial === 'czk' ? 'shadow-alchemy-glow border-zen-primary/60' : 'border-stone-100'}`}>
-                        <div className="p-3 px-4 space-y-0.5 relative rounded-[1.5rem] overflow-hidden bg-white/60">
-                            <CardPattern active={isCzkSynthesizing || activeMaterial === 'czk'} />
+                    <div className={`alchemical-frame transition-all duration-500 overflow-hidden ${activeMaterial === 'czk' ? 'shadow-[0_0_30px_-5px_rgba(212,163,115,0.5)] border-zen-primary scale-[1.02]' : 'border-stone-100 shadow-zen'}`}>
+                        <div className={`p-3 px-4 space-y-0.5 relative rounded-[1.5rem] overflow-hidden transition-colors duration-500 ${activeMaterial === 'czk' ? 'bg-white' : 'bg-white/60'}`}>
+                            <CardPattern active={activeMaterial === 'czk'} />
                             
                             <div className="flex justify-between items-start relative z-10 mb-1">
-                                <MaterialSeal symbol="₡" label="捷克克朗素材" active={isCzkSynthesizing || activeMaterial === 'czk'} />
+                                <MaterialSeal symbol="₡" label="捷克克朗素材" active={activeMaterial === 'czk'} />
                                 <span className={`text-[6px] font-mono font-bold uppercase tracking-widest transition-colors duration-500 ${activeMaterial === 'czk' ? 'text-zen-primary' : 'text-stone-300'}`}>Portal: CZK</span>
                             </div>
 
@@ -272,16 +268,16 @@ export const AlchemyTab: React.FC = () => {
                                 <div className={`absolute right-3 top-1/2 -translate-y-1/2 border px-2 py-0.5 rounded font-black text-xs font-mono tracking-widest pointer-events-none shadow-sm transition-all duration-500 ${activeMaterial === 'czk' ? 'bg-zen-primary text-white border-zen-primary' : 'bg-stone-100 text-stone-500 border-stone-200'}`}>CZK</div>
                             </div>
 
-                            <div className="relative h-1 mt-0.5"><LiquidFlow active={isCzkSynthesizing || activeMaterial === 'czk'} /></div>
+                            <div className="relative h-1 mt-0.5"><LiquidFlow active={activeMaterial === 'czk'} /></div>
 
-                            <div className={`bg-stone-50/80 rounded-xl h-14 flex flex-col items-center justify-center border transition-all duration-500 relative overflow-hidden ${isCzkSynthesizing || activeMaterial === 'czk' ? 'border-zen-primary/40 bg-white' : 'border-stone-100'}`}>
+                            <div className={`bg-stone-50/80 rounded-xl h-14 flex flex-col items-center justify-center border transition-all duration-500 relative overflow-hidden ${activeMaterial === 'czk' ? 'border-zen-primary/40 bg-white' : 'border-stone-100'}`}>
                                 <BorderShine active={showCzkShine} />
-                                <EssenceParticles active={isCzkSynthesizing || activeMaterial === 'czk'} />
+                                <EssenceParticles active={activeMaterial === 'czk'} />
                                 <div className="absolute top-1 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 opacity-60">
-                                    <div className={`w-1 h-1 rounded-full ${isCzkSynthesizing || activeMaterial === 'czk' ? 'bg-zen-primary animate-pulse' : 'bg-stone-300'}`}></div>
+                                    <div className={`w-1 h-1 rounded-full ${activeMaterial === 'czk' ? 'bg-zen-primary animate-pulse' : 'bg-stone-300'}`}></div>
                                     <span className={`text-[7px] font-black uppercase tracking-[0.2em] leading-none transition-colors duration-500 ${activeMaterial === 'czk' ? 'text-zen-primary' : 'text-stone-400'}`}>Essence</span>
                                 </div>
-                                <div className={`text-xl font-mono font-black flex items-center justify-center transition-all duration-300 relative z-10 pt-1 ${isCzkSynthesizing || activeMaterial === 'czk' ? 'text-zen-primary scale-105' : 'text-stone-700'}`}>
+                                <div className={`text-xl font-mono font-black flex items-center justify-center transition-all duration-300 relative z-10 pt-1 ${activeMaterial === 'czk' ? 'text-zen-primary scale-105' : 'text-stone-700'}`}>
                                     <RunicNumber value={czkResult} active={isCzkSynthesizing} onSettle={() => { setShowCzkShine(true); setTimeout(() => setShowCzkShine(false), 800); }} />
                                     <span className={`px-1.5 py-0.5 rounded text-xs font-black tracking-widest ml-2 leading-none border transition-all duration-500 ${activeMaterial === 'czk' ? 'bg-zen-primary/10 border-zen-primary/20 text-zen-primary' : 'bg-stone-100 border-stone-200 text-stone-400'}`}>TWD</span>
                                 </div>
@@ -292,15 +288,15 @@ export const AlchemyTab: React.FC = () => {
 
                 {/* EUR Card */}
                 <div 
-                    className={`relative group transition-all duration-500 ${activeMaterial && activeMaterial !== 'eur' ? 'opacity-60 scale-[0.98]' : 'opacity-100 scale-100'}`}
+                    className={`relative group transition-all duration-500 ${activeMaterial && activeMaterial !== 'eur' ? 'opacity-40 scale-[0.98] blur-[0.5px]' : 'opacity-100 scale-100'}`}
                     onClick={() => setActiveMaterial('eur')}
                 >
-                    <div className={`alchemical-frame transition-all duration-500 ${isEurSynthesizing || activeMaterial === 'eur' ? 'shadow-alchemy-glow border-zen-primary/60' : 'border-stone-100'}`}>
-                        <div className="p-3 px-4 space-y-0.5 relative rounded-[1.5rem] overflow-hidden bg-white/60">
-                            <CardPattern active={isEurSynthesizing || activeMaterial === 'eur'} />
+                    <div className={`alchemical-frame transition-all duration-500 overflow-hidden ${activeMaterial === 'eur' ? 'shadow-[0_0_30px_-5px_rgba(212,163,115,0.5)] border-zen-primary scale-[1.02]' : 'border-stone-100 shadow-zen'}`}>
+                        <div className={`p-3 px-4 space-y-0.5 relative rounded-[1.5rem] overflow-hidden transition-colors duration-500 ${activeMaterial === 'eur' ? 'bg-white' : 'bg-white/60'}`}>
+                            <CardPattern active={activeMaterial === 'eur'} />
                             
                             <div className="flex justify-between items-start relative z-10 mb-1">
-                                <MaterialSeal symbol="€" label="歐元素材" active={isEurSynthesizing || activeMaterial === 'eur'} />
+                                <MaterialSeal symbol="€" label="歐元素材" active={activeMaterial === 'eur'} />
                                 <span className={`text-[6px] font-mono font-bold uppercase tracking-widest transition-colors duration-500 ${activeMaterial === 'eur' ? 'text-zen-primary' : 'text-stone-300'}`}>Portal: EUR</span>
                             </div>
 
@@ -315,16 +311,16 @@ export const AlchemyTab: React.FC = () => {
                                 <div className={`absolute right-3 top-1/2 -translate-y-1/2 border px-2 py-0.5 rounded font-black text-xs font-mono tracking-widest pointer-events-none shadow-sm transition-all duration-500 ${activeMaterial === 'eur' ? 'bg-zen-primary text-white border-zen-primary' : 'bg-stone-100 text-stone-500 border-stone-200'}`}>EUR</div>
                             </div>
 
-                            <div className="relative h-1 mt-0.5"><LiquidFlow active={isEurSynthesizing || activeMaterial === 'eur'} /></div>
+                            <div className="relative h-1 mt-0.5"><LiquidFlow active={activeMaterial === 'eur'} /></div>
 
-                            <div className={`bg-stone-50/80 rounded-xl h-14 flex flex-col items-center justify-center border transition-all duration-500 relative overflow-hidden ${isEurSynthesizing || activeMaterial === 'eur' ? 'border-zen-primary/40 bg-white' : 'border-stone-100'}`}>
+                            <div className={`bg-stone-50/80 rounded-xl h-14 flex flex-col items-center justify-center border transition-all duration-500 relative overflow-hidden ${activeMaterial === 'eur' ? 'border-zen-primary/40 bg-white' : 'border-stone-100'}`}>
                                 <BorderShine active={showEurShine} />
-                                <EssenceParticles active={isEurSynthesizing || activeMaterial === 'eur'} />
+                                <EssenceParticles active={activeMaterial === 'eur'} />
                                 <div className="absolute top-1 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 opacity-60">
-                                    <div className={`w-1 h-1 rounded-full ${isEurSynthesizing || activeMaterial === 'eur' ? 'bg-zen-primary animate-pulse' : 'bg-stone-300'}`}></div>
+                                    <div className={`w-1 h-1 rounded-full ${activeMaterial === 'eur' ? 'bg-zen-primary animate-pulse' : 'bg-stone-300'}`}></div>
                                     <span className={`text-[7px] font-black uppercase tracking-[0.2em] leading-none transition-colors duration-500 ${activeMaterial === 'eur' ? 'text-zen-primary' : 'text-stone-400'}`}>Essence</span>
                                 </div>
-                                <div className={`text-xl font-mono font-black flex items-center justify-center transition-all duration-300 relative z-10 pt-1 ${isEurSynthesizing || activeMaterial === 'eur' ? 'text-zen-primary scale-105' : 'text-stone-700'}`}>
+                                <div className={`text-xl font-mono font-black flex items-center justify-center transition-all duration-300 relative z-10 pt-1 ${activeMaterial === 'eur' ? 'text-zen-primary scale-105' : 'text-stone-700'}`}>
                                     <RunicNumber value={eurResult} active={isEurSynthesizing} onSettle={() => { setShowEurShine(true); setTimeout(() => setShowEurShine(false), 800); }} />
                                     <span className={`px-1.5 py-0.5 rounded text-xs font-black tracking-widest ml-2 leading-none border transition-all duration-500 ${activeMaterial === 'eur' ? 'bg-zen-primary/10 border-zen-primary/20 text-zen-primary' : 'bg-stone-100 border-stone-200 text-stone-400'}`}>TWD</span>
                                 </div>
