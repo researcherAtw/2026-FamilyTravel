@@ -16,19 +16,22 @@ const App: React.FC = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   
-  // Draggable FAB State
-  const [fabPos, setFabPos] = useState({ x: window.innerWidth > 448 ? 368 : window.innerWidth - 80, y: window.innerHeight - 180 });
+  // Draggable FAB State - 初始位置優化：距離底部 170px，視覺上更緊湊
+  const [fabPos, setFabPos] = useState({ 
+    x: window.innerWidth > 448 ? 368 : window.innerWidth - 80, 
+    y: window.innerHeight - 170 
+  });
   const [isDragging, setIsDragging] = useState(false);
   const dragStart = useRef({ x: 0, y: 0 });
   const initialFabPos = useRef({ x: 0, y: 0 });
   const hasMoved = useRef(false);
 
   useEffect(() => {
-    // Keep FAB in bounds on resize
+    // Keep FAB in bounds on resize, 邊界調整為 130px 以維持緊湊感
     const handleResize = () => {
         setFabPos(prev => ({
             x: Math.min(prev.x, window.innerWidth - 64),
-            y: Math.min(prev.y, window.innerHeight - 64)
+            y: Math.min(prev.y, window.innerHeight - 130)
         }));
     };
     window.addEventListener('resize', handleResize);
@@ -62,9 +65,9 @@ const App: React.FC = () => {
         hasMoved.current = true;
     }
 
-    // Constraint within viewport
+    // Constraint within viewport - 底部留出緊湊空間 (130px)
     const nextX = Math.max(16, Math.min(window.innerWidth - 64, initialFabPos.current.x + dx));
-    const nextY = Math.max(16, Math.min(window.innerHeight - 64, initialFabPos.current.y + dy));
+    const nextY = Math.max(16, Math.min(window.innerHeight - 130, initialFabPos.current.y + dy));
 
     setFabPos({ x: nextX, y: nextY });
   };
