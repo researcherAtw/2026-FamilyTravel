@@ -186,6 +186,9 @@ export const AlchemyTab: React.FC = () => {
     const [showCzkShine, setShowCzkShine] = useState(false);
     const [showEurShine, setShowEurShine] = useState(false);
     
+    // 選取狀態
+    const [activeMaterial, setActiveMaterial] = useState<'czk' | 'eur' | null>(null);
+
     const [lastUpdated, setLastUpdated] = useState<string>('同步中...');
 
     useEffect(() => {
@@ -207,6 +210,7 @@ export const AlchemyTab: React.FC = () => {
     }, []);
 
     const triggerCzkAlchemy = () => {
+        setActiveMaterial('czk');
         setIsCzkSynthesizing(true);
         setShowCzkShine(false);
         // 合成狀態持續時間縮短至 150ms，配合 100ms 的數字動畫，確保在 200ms 內完成
@@ -214,6 +218,7 @@ export const AlchemyTab: React.FC = () => {
     };
 
     const triggerEurAlchemy = () => {
+        setActiveMaterial('eur');
         setIsEurSynthesizing(true);
         setShowEurShine(false);
         // 同樣縮短至 150ms
@@ -243,38 +248,42 @@ export const AlchemyTab: React.FC = () => {
             {/* Content */}
             <div className="flex-1 overflow-y-auto px-5 pb-24 pt-4 no-scrollbar space-y-3 relative z-10">
                 {/* CZK Card */}
-                <div className="relative group">
-                    <div className={`alchemical-frame transition-all duration-500 ${isCzkSynthesizing ? 'shadow-alchemy-glow' : ''}`}>
+                <div 
+                    className={`relative group transition-all duration-500 ${activeMaterial && activeMaterial !== 'czk' ? 'opacity-60 scale-[0.98]' : 'opacity-100 scale-100'}`}
+                    onClick={() => setActiveMaterial('czk')}
+                >
+                    <div className={`alchemical-frame transition-all duration-500 ${isCzkSynthesizing || activeMaterial === 'czk' ? 'shadow-alchemy-glow border-zen-primary/60' : 'border-stone-100'}`}>
                         <div className="p-3 px-4 space-y-0.5 relative rounded-[1.5rem] overflow-hidden bg-white/60">
-                            <CardPattern active={isCzkSynthesizing} />
+                            <CardPattern active={isCzkSynthesizing || activeMaterial === 'czk'} />
                             
                             <div className="flex justify-between items-start relative z-10 mb-1">
-                                <MaterialSeal symbol="₡" label="捷克克朗素材" active={isCzkSynthesizing} />
-                                <span className="text-[6px] font-mono font-bold text-stone-300 uppercase tracking-widest">Portal: CZK</span>
+                                <MaterialSeal symbol="₡" label="捷克克朗素材" active={isCzkSynthesizing || activeMaterial === 'czk'} />
+                                <span className={`text-[6px] font-mono font-bold uppercase tracking-widest transition-colors duration-500 ${activeMaterial === 'czk' ? 'text-zen-primary' : 'text-stone-300'}`}>Portal: CZK</span>
                             </div>
 
                             <div className="relative z-10 flex items-center justify-center h-12">
                                 <input 
                                     type="number"
                                     value={czkAmount}
+                                    onFocus={() => setActiveMaterial('czk')}
                                     onChange={(e) => { setCzkAmount(e.target.value); triggerCzkAlchemy(); }}
-                                    className="w-full h-full bg-white/80 border border-stone-200 rounded-xl text-xl font-mono font-black text-stone-700 text-center focus:border-zen-primary transition-all outline-none"
+                                    className={`w-full h-full bg-white/80 border rounded-xl text-xl font-mono font-black text-stone-700 text-center transition-all outline-none ${activeMaterial === 'czk' ? 'border-zen-primary ring-1 ring-zen-primary/20 shadow-inner' : 'border-stone-200'}`}
                                 />
-                                <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded text-stone-500 font-black text-xs font-mono tracking-widest pointer-events-none shadow-sm">CZK</div>
+                                <div className={`absolute right-3 top-1/2 -translate-y-1/2 border px-2 py-0.5 rounded font-black text-xs font-mono tracking-widest pointer-events-none shadow-sm transition-all duration-500 ${activeMaterial === 'czk' ? 'bg-zen-primary text-white border-zen-primary' : 'bg-stone-100 text-stone-500 border-stone-200'}`}>CZK</div>
                             </div>
 
-                            <div className="relative h-1 mt-0.5"><LiquidFlow active={isCzkSynthesizing} /></div>
+                            <div className="relative h-1 mt-0.5"><LiquidFlow active={isCzkSynthesizing || activeMaterial === 'czk'} /></div>
 
-                            <div className={`bg-stone-50/80 rounded-xl h-14 flex flex-col items-center justify-center border transition-all duration-500 relative overflow-hidden ${isCzkSynthesizing ? 'border-zen-primary bg-white' : 'border-stone-100'}`}>
+                            <div className={`bg-stone-50/80 rounded-xl h-14 flex flex-col items-center justify-center border transition-all duration-500 relative overflow-hidden ${isCzkSynthesizing || activeMaterial === 'czk' ? 'border-zen-primary/40 bg-white' : 'border-stone-100'}`}>
                                 <BorderShine active={showCzkShine} />
-                                <EssenceParticles active={isCzkSynthesizing} />
+                                <EssenceParticles active={isCzkSynthesizing || activeMaterial === 'czk'} />
                                 <div className="absolute top-1 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 opacity-60">
-                                    <div className={`w-1 h-1 rounded-full ${isCzkSynthesizing ? 'bg-zen-primary animate-pulse' : 'bg-stone-300'}`}></div>
-                                    <span className="text-[7px] font-black text-zen-primary uppercase tracking-[0.2em] leading-none">Essence</span>
+                                    <div className={`w-1 h-1 rounded-full ${isCzkSynthesizing || activeMaterial === 'czk' ? 'bg-zen-primary animate-pulse' : 'bg-stone-300'}`}></div>
+                                    <span className={`text-[7px] font-black uppercase tracking-[0.2em] leading-none transition-colors duration-500 ${activeMaterial === 'czk' ? 'text-zen-primary' : 'text-stone-400'}`}>Essence</span>
                                 </div>
-                                <div className={`text-xl font-mono font-black flex items-center justify-center transition-all duration-300 relative z-10 pt-1 ${isCzkSynthesizing ? 'text-zen-primary scale-105' : 'text-stone-700'}`}>
+                                <div className={`text-xl font-mono font-black flex items-center justify-center transition-all duration-300 relative z-10 pt-1 ${isCzkSynthesizing || activeMaterial === 'czk' ? 'text-zen-primary scale-105' : 'text-stone-700'}`}>
                                     <RunicNumber value={czkResult} active={isCzkSynthesizing} onSettle={() => { setShowCzkShine(true); setTimeout(() => setShowCzkShine(false), 800); }} />
-                                    <span className="bg-zen-primary/10 border border-zen-primary/20 text-zen-primary px-1.5 py-0.5 rounded text-xs font-black tracking-widest ml-2 leading-none">TWD</span>
+                                    <span className={`px-1.5 py-0.5 rounded text-xs font-black tracking-widest ml-2 leading-none border transition-all duration-500 ${activeMaterial === 'czk' ? 'bg-zen-primary/10 border-zen-primary/20 text-zen-primary' : 'bg-stone-100 border-stone-200 text-stone-400'}`}>TWD</span>
                                 </div>
                             </div>
                         </div>
@@ -282,38 +291,42 @@ export const AlchemyTab: React.FC = () => {
                 </div>
 
                 {/* EUR Card */}
-                <div className="relative group">
-                    <div className={`alchemical-frame transition-all duration-500 ${isEurSynthesizing ? 'shadow-alchemy-glow' : ''}`}>
+                <div 
+                    className={`relative group transition-all duration-500 ${activeMaterial && activeMaterial !== 'eur' ? 'opacity-60 scale-[0.98]' : 'opacity-100 scale-100'}`}
+                    onClick={() => setActiveMaterial('eur')}
+                >
+                    <div className={`alchemical-frame transition-all duration-500 ${isEurSynthesizing || activeMaterial === 'eur' ? 'shadow-alchemy-glow border-zen-primary/60' : 'border-stone-100'}`}>
                         <div className="p-3 px-4 space-y-0.5 relative rounded-[1.5rem] overflow-hidden bg-white/60">
-                            <CardPattern active={isEurSynthesizing} />
+                            <CardPattern active={isEurSynthesizing || activeMaterial === 'eur'} />
                             
                             <div className="flex justify-between items-start relative z-10 mb-1">
-                                <MaterialSeal symbol="€" label="歐元素材" active={isEurSynthesizing} />
-                                <span className="text-[6px] font-mono font-bold text-stone-300 uppercase tracking-widest">Portal: EUR</span>
+                                <MaterialSeal symbol="€" label="歐元素材" active={isEurSynthesizing || activeMaterial === 'eur'} />
+                                <span className={`text-[6px] font-mono font-bold uppercase tracking-widest transition-colors duration-500 ${activeMaterial === 'eur' ? 'text-zen-primary' : 'text-stone-300'}`}>Portal: EUR</span>
                             </div>
 
                             <div className="relative z-10 flex items-center justify-center h-12">
                                 <input 
                                     type="number"
                                     value={eurAmount}
+                                    onFocus={() => setActiveMaterial('eur')}
                                     onChange={(e) => { setEurAmount(e.target.value); triggerEurAlchemy(); }}
-                                    className="w-full h-full bg-white/80 border border-stone-200 rounded-xl text-xl font-mono font-black text-stone-700 text-center focus:border-zen-primary transition-all outline-none"
+                                    className={`w-full h-full bg-white/80 border rounded-xl text-xl font-mono font-black text-stone-700 text-center transition-all outline-none ${activeMaterial === 'eur' ? 'border-zen-primary ring-1 ring-zen-primary/20 shadow-inner' : 'border-stone-200'}`}
                                 />
-                                <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded text-stone-500 font-black text-xs font-mono tracking-widest pointer-events-none shadow-sm">EUR</div>
+                                <div className={`absolute right-3 top-1/2 -translate-y-1/2 border px-2 py-0.5 rounded font-black text-xs font-mono tracking-widest pointer-events-none shadow-sm transition-all duration-500 ${activeMaterial === 'eur' ? 'bg-zen-primary text-white border-zen-primary' : 'bg-stone-100 text-stone-500 border-stone-200'}`}>EUR</div>
                             </div>
 
-                            <div className="relative h-1 mt-0.5"><LiquidFlow active={isEurSynthesizing} /></div>
+                            <div className="relative h-1 mt-0.5"><LiquidFlow active={isEurSynthesizing || activeMaterial === 'eur'} /></div>
 
-                            <div className={`bg-stone-50/80 rounded-xl h-14 flex flex-col items-center justify-center border transition-all duration-500 relative overflow-hidden ${isEurSynthesizing ? 'border-zen-primary bg-white' : 'border-stone-100'}`}>
+                            <div className={`bg-stone-50/80 rounded-xl h-14 flex flex-col items-center justify-center border transition-all duration-500 relative overflow-hidden ${isEurSynthesizing || activeMaterial === 'eur' ? 'border-zen-primary/40 bg-white' : 'border-stone-100'}`}>
                                 <BorderShine active={showEurShine} />
-                                <EssenceParticles active={isEurSynthesizing} />
+                                <EssenceParticles active={isEurSynthesizing || activeMaterial === 'eur'} />
                                 <div className="absolute top-1 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 opacity-60">
-                                    <div className={`w-1 h-1 rounded-full ${isEurSynthesizing ? 'bg-zen-primary animate-pulse' : 'bg-stone-300'}`}></div>
-                                    <span className="text-[7px] font-black text-zen-primary uppercase tracking-[0.2em] leading-none">Essence</span>
+                                    <div className={`w-1 h-1 rounded-full ${isEurSynthesizing || activeMaterial === 'eur' ? 'bg-zen-primary animate-pulse' : 'bg-stone-300'}`}></div>
+                                    <span className={`text-[7px] font-black uppercase tracking-[0.2em] leading-none transition-colors duration-500 ${activeMaterial === 'eur' ? 'text-zen-primary' : 'text-stone-400'}`}>Essence</span>
                                 </div>
-                                <div className={`text-xl font-mono font-black flex items-center justify-center transition-all duration-300 relative z-10 pt-1 ${isEurSynthesizing ? 'text-zen-primary scale-105' : 'text-stone-700'}`}>
+                                <div className={`text-xl font-mono font-black flex items-center justify-center transition-all duration-300 relative z-10 pt-1 ${isEurSynthesizing || activeMaterial === 'eur' ? 'text-zen-primary scale-105' : 'text-stone-700'}`}>
                                     <RunicNumber value={eurResult} active={isEurSynthesizing} onSettle={() => { setShowEurShine(true); setTimeout(() => setShowEurShine(false), 800); }} />
-                                    <span className="bg-zen-primary/10 border border-zen-primary/20 text-zen-primary px-1.5 py-0.5 rounded text-xs font-black tracking-widest ml-2 leading-none">TWD</span>
+                                    <span className={`px-1.5 py-0.5 rounded text-xs font-black tracking-widest ml-2 leading-none border transition-all duration-500 ${activeMaterial === 'eur' ? 'bg-zen-primary/10 border-zen-primary/20 text-zen-primary' : 'bg-stone-100 border-stone-200 text-stone-400'}`}>TWD</span>
                                 </div>
                             </div>
                         </div>
