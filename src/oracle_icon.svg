@@ -1,0 +1,9 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- 水晶球主體 -->
+  <circle cx="50" cy="42" r="38" stroke="currentColor" stroke-width="6" />
+  <!-- 中央閃耀星芒 -->
+  <path d="M50 18 L54 36 L72 40 L54 44 L50 62 L46 44 L28 40 L46 36 Z" fill="currentColor" />
+  <!-- 簡約底座 -->
+  <path d="M30 85 C 30 75, 70 75, 70 85" stroke="currentColor" stroke-width="6" stroke-linecap="round" fill="none" />
+</svg>

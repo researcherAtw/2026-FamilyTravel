@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   
-  // Draggable FAB State - 初始位置優化：距離底部 170px，視覺上更緊湊
+  // Draggable FAB State
   const [fabPos, setFabPos] = useState({ 
     x: window.innerWidth > 448 ? 368 : window.innerWidth - 80, 
     y: window.innerHeight - 170 
@@ -27,7 +27,6 @@ const App: React.FC = () => {
   const hasMoved = useRef(false);
 
   useEffect(() => {
-    // Keep FAB in bounds on resize, 邊界調整為 130px 以維持緊湊感
     const handleResize = () => {
         setFabPos(prev => ({
             x: Math.min(prev.x, window.innerWidth - 64),
@@ -39,6 +38,7 @@ const App: React.FC = () => {
   }, []);
 
   const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
+    e.stopPropagation(); // 防止觸發背景點擊
     setIsDragging(true);
     hasMoved.current = false;
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
@@ -49,11 +49,7 @@ const App: React.FC = () => {
 
   const handleDragMove = (e: React.MouseEvent | React.TouchEvent) => {
     if (!isDragging) return;
-    
-    // 防止拖曳時頁面跟著捲動
-    if (e.cancelable) {
-        e.preventDefault();
-    }
+    if (e.cancelable) e.preventDefault();
     
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
     const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
@@ -61,24 +57,20 @@ const App: React.FC = () => {
     const dx = clientX - dragStart.current.x;
     const dy = clientY - dragStart.current.y;
 
-    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
-        hasMoved.current = true;
-    }
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) hasMoved.current = true;
 
-    // Constraint within viewport - 底部留出緊湊空間 (130px)
     const nextX = Math.max(16, Math.min(window.innerWidth - 64, initialFabPos.current.x + dx));
     const nextY = Math.max(16, Math.min(window.innerHeight - 130, initialFabPos.current.y + dy));
 
     setFabPos({ x: nextX, y: nextY });
   };
 
-  const handleDragEnd = () => {
+  const handleDragEnd = (e?: React.MouseEvent | React.TouchEvent) => {
     if (!isDragging) return;
+    if (e) e.stopPropagation(); // 關鍵：阻止冒泡，避免觸發背景 handleBackgroundClick
+    
     setIsDragging(false);
-    // If we didn't move much, treat it as a click
-    if (!hasMoved.current) {
-        toggleSearch();
-    }
+    if (!hasMoved.current) toggleSearch();
   };
 
   const renderContent = () => {
@@ -100,34 +92,27 @@ const App: React.FC = () => {
 
   const toggleSearch = () => {
     setIsSearching(!isSearching);
-    if (isSearching) {
-        setSearchTerm('');
-    }
+    if (isSearching) setSearchTerm('');
   };
 
-  const handleBackdropClick = () => {
-    if (isSearching && !searchTerm) {
-        setIsSearching(false);
+  // 背景點擊處理：無關鍵字時自動關閉
+  const handleBackgroundClick = (e: React.MouseEvent) => {
+    if (isSearching && !searchTerm.trim()) {
+      toggleSearch();
     }
-  };
-
-  const getPillPosition = () => {
-    const index = NAV_ITEMS.findIndex(item => item.id === contentTab);
-    if (index === -1) return '0%';
-    return `${(index / NAV_ITEMS.length) * 100}%`;
   };
 
   return (
     <div 
         className="h-[100dvh] text-zen-text font-sans max-w-md mx-auto relative shadow-2xl bg-zen-bg overflow-hidden flex flex-col"
         onMouseMove={handleDragMove}
-        onMouseUp={handleDragEnd}
+        onMouseUp={() => handleDragEnd()}
         onTouchMove={handleDragMove}
-        onTouchEnd={handleDragEnd}
+        onTouchEnd={() => handleDragEnd()}
     >
       
       {/* Top Bar */}
-      <header className="flex-shrink-0 px-6 pt-6 pb-4 flex justify-between items-center bg-zen-bg z-30 transition-all">
+      <header className="flex-shrink-0 px-6 pt-6 pb-4 flex justify-between items-center bg-zen-bg z-30">
         <div className="flex flex-col">
             <div className="flex items-center gap-1.5 mb-1">
                 <span className="inline-flex items-center bg-zen-primary text-white text-[9px] font-black px-2 py-0.5 rounded shadow-zen-sm tracking-[0.1em] uppercase">
@@ -139,22 +124,17 @@ const App: React.FC = () => {
                 被召喚的勇者與金色奧捷
             </h1>
         </div>
-        <div>
-            <div className="w-14 h-14 p-2 bg-white/40 backdrop-blur-md rounded-2xl border border-white/50 shadow-sm text-zen-text flex items-center justify-center transition-all duration-300">
-                <BrandLogo />
-            </div>
+        <div className="w-14 h-14 p-2 bg-white/40 backdrop-blur-md rounded-2xl border border-white/50 shadow-sm text-zen-text flex items-center justify-center">
+            <BrandLogo />
         </div>
       </header>
 
       {/* Main Content Area */}
-      <main 
-        className={`flex-1 overflow-hidden relative w-full transition-all duration-300 ${isSearching ? 'brightness-[0.98]' : ''}`} 
-        onClick={handleBackdropClick}
-      >
+      <main className={`flex-1 overflow-hidden relative w-full transition-all duration-300 ${isSearching ? 'brightness-[0.98]' : ''}`}>
         {renderContent()}
       </main>
 
-      {/* Arcanic All-Seeing Core - HYPER-TRANSPARENT DRAGGABLE FAB */}
+      {/* Draggable FAB */}
       <div 
         className={`fixed z-[70] transition-transform duration-500 pointer-events-none ${isSearching ? 'scale-90 opacity-80' : !isDragging ? 'animate-float' : ''}`}
         style={{ 
@@ -163,14 +143,12 @@ const App: React.FC = () => {
             transition: isDragging ? 'none' : 'all 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28)'
         }}
       >
-        {/* Magic Aura - Subtle breathing glow even in idle */}
-        {!isSearching && !isDragging && (
-          <div className="absolute inset-0 -m-3 rounded-full bg-zen-primary/10 blur-xl animate-pulse-slow pointer-events-none"></div>
-        )}
-
         <button 
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
+          onMouseUp={(e) => handleDragEnd(e)}
+          onTouchEnd={(e) => handleDragEnd(e)}
+          onClick={(e) => e.stopPropagation()} // 阻止單擊事件冒泡
           style={{ touchAction: 'none' }}
           className={`
             pointer-events-auto relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 active:scale-95 overflow-hidden group
@@ -180,83 +158,60 @@ const App: React.FC = () => {
                 ? 'bg-white/30 backdrop-blur-md text-zen-primary border border-zen-primary/40 shadow-xl scale-110 opacity-100'
                 : 'bg-white/20 backdrop-blur-sm text-zen-primary/70 border border-zen-primary/30 shadow-mystic'
             }
-            ${isDragging ? 'cursor-grabbing' : 'cursor-grab hover:text-zen-primary hover:border-zen-primary/50 hover:bg-white/30'}
           `}
         >
-          {/* Shimmer Brush Effect - Only in normal state */}
           {!isSearching && !isDragging && (
             <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-full">
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent -skew-x-[30deg] animate-shimmer"></div>
             </div>
           )}
-
-          {/* Pulsating Shockwave Ring - Only visible when interacting */}
-          {!isSearching && (
-            <div className={`absolute inset-0 rounded-full border border-zen-primary/10 animate-shockwave pointer-events-none transition-opacity duration-500 ${isDragging ? 'opacity-100' : 'opacity-0'}`}></div>
-          )}
-
-          {/* Rotating Magic Circles - Noticeable idle state */}
-          <div className={`absolute -inset-[3px] pointer-events-none transition-all duration-700 ${isSearching ? 'opacity-0 scale-110' : isDragging ? 'opacity-60 scale-100' : 'opacity-40 scale-95'}`}>
-            <svg viewBox="0 0 100 100" className="w-full h-full fill-none stroke-current animate-spin-slow">
-              <circle cx="50" cy="50" r="49" strokeWidth="0.5" strokeDasharray="3 5" />
-              <circle cx="50" cy="50" r="46" strokeWidth="0.8" strokeDasharray="6 10" className="animate-spin-slow-reverse" />
-            </svg>
-          </div>
-
-          {/* Compass Markers - Noticeable idle state */}
-          <div className={`absolute -inset-[1px] pointer-events-none transition-all duration-700 ${isSearching ? 'opacity-0' : isDragging ? 'opacity-40' : 'opacity-30'}`}>
-            <svg viewBox="0 0 100 100" className="w-full h-full fill-none stroke-current animate-spin-fast">
-              <path d="M50 0 L50 4 M50 96 L50 100 M0 50 L4 50 M96 50 L100 50" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-          </div>
-
-          <div className={`absolute inset-0 rounded-full z-0 transition-opacity duration-700 ${isSearching ? 'opacity-0' : isDragging ? 'opacity-20 bg-gradient-to-tr from-white/40 via-white/10 to-transparent' : 'opacity-0'}`}></div>
-
-          <i className={`fa-solid ${isSearching ? 'fa-xmark' : 'fa-magnifying-glass-plus'} text-2xl relative z-10 transition-all duration-500 ${!isSearching && 'group-hover:scale-110'}`}></i>
+          <i className={`fa-solid ${isSearching ? 'fa-xmark' : 'fa-magnifying-glass-plus'} text-2xl relative z-10 transition-all duration-500`}></i>
         </button>
       </div>
 
-      {/* Floating Search Pill Wrapper */}
+      {/* Search Overlay & Backdrop */}
       {isSearching && (
-        <div className="absolute top-24 inset-x-0 z-[60] flex justify-center px-8">
-            <div className="w-full max-w-sm animate-fade-in-up">
-                <div 
-                  className="bg-white/95 backdrop-blur-2xl border-2 border-zen-primary/20 rounded-full shadow-2xl p-1.5 flex items-center gap-2 group"
-                  onClick={(e) => e.stopPropagation()} 
-                >
-                    <div className="w-9 h-9 rounded-full bg-zen-primary text-white flex items-center justify-center flex-shrink-0 shadow-lg shadow-zen-primary/20">
-                        <i className="fa-solid fa-magnifying-glass text-[12px]"></i>
+        <>
+            {/* 背景遮罩：僅在無關鍵字時攔截事件，有文字時變為 pointer-events-none 以利滑動下層內容 */}
+            <div 
+                className={`absolute inset-0 bg-transparent z-[55] transition-all ${searchTerm.trim() ? 'pointer-events-none opacity-0' : 'pointer-events-auto opacity-100'}`} 
+                onClick={(e) => {
+                    e.stopPropagation();
+                    handleBackgroundClick(e);
+                }}
+            />
+            <div className="absolute top-24 inset-x-0 z-[60] flex justify-center px-8 pointer-events-none">
+                <div className="w-full max-w-sm animate-fade-in-up pointer-events-auto">
+                    <div 
+                      className="bg-white/95 backdrop-blur-2xl border-2 border-zen-primary/20 rounded-full shadow-2xl p-1.5 flex items-center gap-2"
+                      onClick={(e) => e.stopPropagation()} 
+                    >
+                        <div className="w-9 h-9 rounded-full bg-zen-primary text-white flex items-center justify-center flex-shrink-0 shadow-lg">
+                            <i className="fa-solid fa-magnifying-glass text-[12px]"></i>
+                        </div>
+                        <input 
+                            autoFocus
+                            type="text" 
+                            placeholder="想知道些什麼⋯"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="flex-1 bg-transparent border-none outline-none text-sm font-bold text-stone-700"
+                        />
                     </div>
-                    <input 
-                        autoFocus
-                        type="text" 
-                        placeholder="冒險者，你想知道些什麼⋯"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="flex-1 bg-transparent border-none outline-none text-sm font-bold text-stone-700 placeholder:text-stone-300"
-                    />
-                    {searchTerm && (
-                        <button 
-                            onClick={() => { setSearchTerm(''); setIsSearching(false); }}
-                            className="w-8 h-8 rounded-full flex items-center justify-center text-stone-300 hover:text-stone-500 transition-colors"
-                        >
-                            <i className="fa-solid fa-circle-xmark text-sm"></i>
-                        </button>
-                    )}
                 </div>
             </div>
-        </div>
+        </>
       )}
 
       {/* Bottom Navigation */}
-      <nav className="absolute bottom-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4">
-        <div className="bg-white/90 backdrop-blur-md rounded-full p-1 shadow-zen border border-stone-100 grid grid-cols-4 gap-0 relative pointer-events-auto w-full max-w-sm">
+      <nav className="absolute bottom-6 left-0 right-0 z-50 flex justify-center pointer-events-auto px-4">
+        <div className="bg-white/90 backdrop-blur-md rounded-full p-1 shadow-zen border border-stone-100 grid grid-cols-4 gap-0 relative w-full max-w-sm overflow-hidden">
           
           <div 
             className="absolute top-1 bottom-1 rounded-full bg-zen-primary shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0"
             style={{
               width: 'calc(25% - 4px)',
-              left: `calc(${getPillPosition()} + 2px)`
+              left: `calc(${(NAV_ITEMS.findIndex(i => i.id === contentTab) / 4) * 100}% + 2px)`
             }}
           />
 
@@ -266,18 +221,12 @@ const App: React.FC = () => {
               <button
                 key={item.id}
                 onClick={() => handleTabClick(item.id)}
-                className={`
-                  px-1 py-2.5 rounded-full flex flex-col items-center justify-center gap-0.5 transition-colors duration-300 relative z-10 w-full
-                  ${isActive 
-                    ? 'text-white' 
-                    : 'text-stone-400 hover:text-stone-600'
-                  }
-                `}
+                className={`px-1 py-2.5 rounded-full flex flex-col items-center justify-center gap-0.5 transition-colors duration-300 relative z-10 w-full ${isActive ? 'text-white' : 'text-stone-400'}`}
               >
-                <div className={`text-lg ${isActive ? 'scale-110' : 'scale-100'} transition-transform`}>
-                    <i className={`fa-solid ${item.icon}`}></i>
+                <div className={`transition-all duration-300 ${isActive ? 'scale-110' : 'scale-100 opacity-80'}`}>
+                    <i className={`text-base fa-solid ${item.icon}`}></i>
                 </div>
-                <span className="text-[11px] font-black tracking-widest uppercase">
+                <span className="text-[10px] font-black tracking-widest uppercase mt-0.5">
                   {item.label}
                 </span>
               </button>
