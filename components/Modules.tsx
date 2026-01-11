@@ -351,8 +351,8 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '霍夫堡宮', enTitle: 'The Hofburg', location: '維也納第1區 (Innere Stadt)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/bPPsM1JA2y2oMD8U6',
       guideInfo: {
-          story: "哈布斯堡王朝的冬宮，也是西西 (Sisi，伊莉莎白皇后) 的黃金牢籠。\n\n西西 (Sisi) 是伊莉莎白皇后的真實暱稱，茜茜則是電影譯名。\n霍夫堡宮是西西皇后權力的象徵，也是她痛苦的根源。在這裡看到的不是一個幸福皇後的家，而是一位女性試圖在壓抑體制中，衝撞並尋找自我的掙扎痕跡。",
-          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館。西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇後的關鍵展品\n私個人物品： 西西皇後的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
+          story: "哈布斯堡王朝的冬宮，也是西西 (Sisi，伊莉莎白皇后) 的黃金牢籠。\n\n西西 (Sisi) 是伊莉莎白皇后的真實暱稱，茜茜則是電影譯名。\n霍夫堡宮是西西皇后權力的象徵，也是她痛苦的根源。在這裡看到的不是一個幸福皇后的家，而是一位女性試圖在壓抑體制中，衝撞並尋找自我的掙扎痕跡。",
+          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館。西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇后的關鍵展品\n私個人物品： 西西皇后的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
           highlights: [
               { id: 'h0', text: '冬宮', color: 'blue' },
               { id: 'h1', text: '西西博物館', color: 'purple' },
@@ -367,7 +367,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/doX4N77JodZMSQ1r8',
       guideInfo: {
           story: "紀念1679年奪走維也納三分之一人口的瘟疫。",
-          tip: "位於步行街中央的露天雕塑。紀念柱的最頂端是「聖三一」（父、子、聖靈），中間是皇帝利奧波德一世跪地祈禱的雕像，底座則是象蹤瘟疫的女巫。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
+          tip: "位於步行街中央的露天雕塑。紀念柱的最頂端是「聖三一」（父、子、聖靈），中間是皇帝利奧波德一世跪地祈禱的雕像，底座則是象徵瘟疫的女巫。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
           highlights: [
               { id: 'h1', text: '聖三一', color: 'orange' },
               { id: 'h2', text: '巴洛克雕塑', color: 'gray' },
@@ -417,7 +417,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(南塔、北塔二擇一登頂)',
       mapUrl: 'https://maps.app.goo.gl/d6ob7ph5DwFvTL949',
       guideInfo: {
-          story: "維也納的靈魂象測，始建於12世紀.曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
+          story: "維也納的靈魂象徵，始建於12世紀.曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
           tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘。亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
           highlights: [
               { id: 'h1', text: '南塔(樓梯)', color: 'red' },
@@ -521,26 +521,21 @@ const mapWmoToCondition = (code: number): WeatherInfo['condition'] => {
 
 /**
  * 精準圖標適配邏輯
- * 針對特定的世界遺產與地標進行更精確的 Icon 分類
- * 回傳完整類別字串，包含 fa-solid 或 fa-brands 等前綴
  */
 const getCategoryIcon = (item: ScheduleItem): string => {
     const title = item.title;
     
-    // --- 特定核心地標優先精準適配 ---
     if (title.includes('布拉格古堡')) return 'fa-solid fa-chess-rook';
     if (title.includes('庫倫洛夫城堡')) return 'fa-brands fa-fort-awesome'; 
     if (title.includes('米拉貝爾花園')) return 'fa-solid fa-music';
-    if (title.includes('莎姿堡城堡')) return 'fa-solid fa-tower-observation'; // 重新設計：要塞暸望塔形象，呼應高處位置與纜車體驗
+    if (title.includes('莎姿堡城堡')) return 'fa-solid fa-tower-observation';
     
-    // 其他特定地標與活動
     if (title.includes('國王湖') || title.includes('遊船')) return 'fa-solid fa-ship';
     if (title.includes('鹽礦')) return 'fa-solid fa-gem';
     if (title.includes('天文鐘')) return 'fa-solid fa-clock';
     if (title.includes('黃金小徑')) return 'fa-solid fa-person-walking';
     if (title.includes('購物') || title.includes('Outlet')) return 'fa-solid fa-bag-shopping';
     
-    // 建築物類型通用細分
     if (title.includes('教堂')) return 'fa-solid fa-church';
     if (title.includes('城堡')) return 'fa-solid fa-chess-rook';
     if (title.includes('宮')) return 'fa-solid fa-landmark-dome';
@@ -553,7 +548,6 @@ const getCategoryIcon = (item: ScheduleItem): string => {
     if (title.includes('小鎮')) return 'fa-solid fa-city';
     if (title.includes('紀念柱')) return 'fa-solid fa-monument';
     
-    // 任務與傳送分類基礎適配
     if (item.category === '抵達') return 'fa-solid fa-trophy';
     if (item.title.includes('召喚')) return 'fa-solid fa-hat-wizard';
     if (item.category === '集合') return 'fa-solid fa-dragon';
@@ -565,13 +559,11 @@ const getCategoryIcon = (item: ScheduleItem): string => {
     
     if (item.category === 'transport') return 'fa-solid fa-train-subway';
     if (title.includes('花園') || title.includes('湖')) return 'fa-solid fa-tree';
-    if (item.category === '座標登錄') return 'fa-solid fa-camera-retro';
     
     return 'fa-solid fa-location-dot';
 };
 
 const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; searchTerm?: string }> = ({ item, showDate, searchTerm = '' }) => {
-    // 交通與特定重大類別顯示大時間
     const isMajor = ['transport', '集合', '起飛', '降落', '轉機', '抵達'].includes(item.category);
     
     const timeStr = item.displayTime || item.time;
@@ -659,11 +651,6 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; search
                                 <HighlightedText text={item.description} highlight={searchTerm} />
                             </div>
                         )}
-                        {item.businessHours && (
-                            <div className="text-[10px] font-bold text-orange-400 bg-orange-50 px-2 py-0.5 rounded inline-block mb-1">
-                                <i className="fa-regular fa-clock mr-1"></i>營業時間: {item.businessHours}
-                            </div>
-                        )}
                         {(item.guideInfo?.story || item.guideInfo?.tip || (item.guideInfo?.highlights && item.guideInfo.highlights.length > 0)) && (
                             <div className="mt-4 pt-3 border-t border-dashed border-gray-100">
                                 {item.guideInfo?.story && (
@@ -699,10 +686,6 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; search
         </div>
     );
 };
-
-const DATE_ITEM_WIDTH = 52;
-const DATE_ITEM_GAP = 8;
-const DATE_CONTAINER_PADDING = 16;
 
 export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = '' }) => {
   const [selectedDate, setSelectedDate] = useState('2026-02-14');
@@ -753,7 +736,7 @@ export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = ''
         const index = dates.indexOf(selectedDate);
         if (index >= 0) {
             const container = dateScrollRef.current;
-            const itemCenter = DATE_CONTAINER_PADDING + index * (DATE_ITEM_WIDTH + DATE_ITEM_GAP) + DATE_ITEM_WIDTH / 2;
+            const itemCenter = 16 + index * (52 + 8) + 52 / 2;
             const containerCenter = container.clientWidth / 2;
             const scrollLeft = itemCenter - containerCenter;
             container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
@@ -846,7 +829,7 @@ export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = ''
               >
                 <div 
                     className={`absolute top-[4px] bottom-[4px] w-[52px] bg-[#464646] rounded-[16px] shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0 ${currentIndex === -1 || searchTerm ? 'opacity-0' : 'opacity-100'}`}
-                    style={{ left: `${DATE_CONTAINER_PADDING + (currentIndex === -1 ? 0 : currentIndex) * (DATE_ITEM_WIDTH + DATE_ITEM_GAP)}px` }}
+                    style={{ left: `${16 + (currentIndex === -1 ? 0 : currentIndex) * (52 + 8)}px` }}
                 />
                 {dates.map((date) => {
                     const d = new Date(date);
