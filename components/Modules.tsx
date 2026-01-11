@@ -352,7 +352,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/bPPsM1JA2y2oMD8U6',
       guideInfo: {
           story: "哈布斯堡王朝的冬宮，也是西西 (Sisi，伊莉莎白皇后) 的黃金牢籠。\n\n西西 (Sisi) 是伊莉莎白皇后的真實暱稱，茜茜則是電影譯名。\n霍夫堡宮是西西皇后權力的象徵，也是她痛苦的根源。在這裡看到的不是一個幸福皇后的家，而是一位女性試圖在壓抑體制中，衝撞並尋找自我的掙扎痕跡。",
-          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館。西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇后的關鍵展品\n私個人物品： 西西皇后的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
+          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館.西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇后的關鍵展品\n私個人物品： 西西皇后的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
           highlights: [
               { id: 'h0', text: '冬宮', color: 'blue' },
               { id: 'h1', text: '西西博物館', color: 'purple' },
@@ -374,8 +374,8 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
               { id: 'h3', text: '糖漬紫羅蘭', color: 'purple' }
           ],
           relatedLink: {
-              text: "Café Demel",
-              url: "https://maps.app.goo.gl/jj2MoyzjczhqNUCJ8"
+              text: "Café Demel 導航",
+              url: "https://maps.app.goo.gl/eSfnykh5Q4NUy6SCA"
           }
       }
   },
@@ -426,8 +426,8 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
               { id: 'h4', text: '糖漬紫羅蘭', color: 'purple' }
           ],
           relatedLink: {
-              text: "Café Demel",
-              url: "https://maps.app.goo.gl/9d1vrMbcqkoDpHqb6"
+              text: "Café Demel 導航",
+              url: "https://maps.app.goo.gl/eSfnykh5Q4NUy6SCA"
           }
       }
   },
@@ -676,6 +676,23 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; search
                                                 <HighlightedText text={h.text} highlight={searchTerm} />
                                             </span>
                                         ))}
+                                    </div>
+                                )}
+
+                                {/* 行程推薦地點導航按鈕 (例如德梅爾咖啡) */}
+                                {item.guideInfo?.relatedLink && (
+                                    <div className="mt-4 flex justify-end">
+                                        <a 
+                                            href={item.guideInfo.relatedLink.url}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            onClick={(e) => e.stopPropagation()}
+                                            className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-zen-primary/30 text-zen-primary text-[11px] font-black shadow-sm hover:shadow-md hover:bg-zen-primary/5 active:scale-95 transition-all"
+                                        >
+                                            <i className="fa-solid fa-utensils"></i>
+                                            <span>{item.guideInfo.relatedLink.text}</span>
+                                            <i className="fa-solid fa-chevron-right text-[8px] opacity-50"></i>
+                                        </a>
                                     </div>
                                 )}
                             </div>
