@@ -25,9 +25,9 @@ const HighlightedText: React.FC<{ text: string | React.ReactNode; highlight: str
 const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/14 (Sat) Day 0: Pre-departure ---
   {
-      id: 'd0-1', date: '2026-02-14', time: '21:30', displayTime: '??:??',
+      id: 'd0-1', date: '2026-02-14', time: '21:20', displayTime: '21:20',
       title: '召喚小隊', enTitle: 'Quest Starts', location: 'TPE 桃園機場', category: '集合', categoryColor: 'teal',
-      description: '冒險者大廳\n(桃園機場｜第O航廈｜OO櫃檯旁)',
+      description: '冒險者大廳\n(桃園機場｜第２航廈｜中華航空團體櫃檯旁)',
       guideInfo: {
           story: "準備好踏入傳送陣，展開跨越中歐的奇幻旅程。",
           tip: "請檢查護照有效期限（需六個月以上），並確認行動電源放置於手提行李中。",
@@ -100,6 +100,19 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
           ]
       }
   },
+  { 
+      id: 'd1-8', date: '2026-02-15', time: '20:00', 
+      title: 'Prague Marriott Hotel', enTitle: 'Accommodation', location: 'V Celnici 8, 110 00 Nové Město, Prague', category: '飯店', categoryColor: 'purple',
+      mapUrl: 'https://maps.app.goo.gl/7BM4PTe8185hQjsu6',
+      guideInfo: {
+          story: "冒險者的豪華休憩驛站，位於市中心心臟地帶，恢復體力與整備物資的神聖領域。",
+          tip: "飯店鄰近火藥塔與共和國廣場 (Náměstí Republiky)，步行即可抵達各大購物中心與舊城區。",
+          highlights: [
+              { id: 'h1', text: '五星級據點', color: 'purple' },
+              { id: 'h2', text: '市中心地利', color: 'teal' }
+          ]
+      }
+  },
 
   // --- 2/16 (Mon) Day 2: Prague ---
   { 
@@ -120,7 +133,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '布拉格古堡', enTitle: 'Prague Castle', location: '城堡區 (Hradčany)', category: '區域解鎖', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/XK51NPV4JhyTtMTh8',
       guideInfo: {
-          story: "這不只是一座城堡，而是金氏世界紀錄認證的「世界上最大的古堡建築群」。\n\n這裡曾是波希米亞國王與神聖羅馬帝國皇帝的居所，集結了羅馬式、哥德式、文藝復興至巴洛克等千年的建築精華。\n\n城堡的心臟是「聖維特大教堂」(St. Vitus Cathedral)，這座耗時近 600 年才完工的哥德式傑作，不僅是歷代國王加冕之處，更是捷克精神的英恆象徵。",
+          story: "這不只是一座城堡，而是金氏世界紀錄認證的「世界上最大的古堡建築群」。\n\n這裡曾是波希米亞國王與神聖羅馬帝國皇帝的居所，集結了羅馬式、哥德式、文藝復興至巴洛克等千年的建築精華。\n\n城堡的心臟是「聖維特大教堂」(St. Vitus Cathedral)，這座耗時近 600 年才完工的哥德式傑作，不僅是歷代國王加冕之處，更是捷克精神的永恆象徵。",
           tip: "參觀主要景點需購買套票(Circuit B)。務必入內欣賞聖維特大教堂中慕夏(Alfons Mucha)設計的彩繪玻璃窗。每天中午12點在正門有衛兵交接。",
           highlights: [
               { id: 'h4', text: '金氏世界紀錄認證', color: 'orange' },
@@ -156,11 +169,24 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
           ]
       }
   },
+  { 
+      id: 'd2-5', date: '2026-02-16', time: '20:00', 
+      title: 'Prague Marriott Hotel', enTitle: 'Accommodation', location: 'V Celnici 8, 110 00 Nové Město, Prague', category: '飯店', categoryColor: 'purple',
+      mapUrl: 'https://maps.app.goo.gl/7BM4PTe8185hQjsu6',
+      guideInfo: {
+          story: "冒險者的豪華休憩驛站，位於市中心心臟地帶，恢復體力與整備物資的神聖領域。",
+          tip: "飯店鄰近火藥塔與共和國廣場 (Náměstí Republiky)，步行即可抵達各大購物中心與舊城區。",
+          highlights: [
+              { id: 'h1', text: '五星級據點', color: 'purple' },
+              { id: 'h2', text: '市中心地利', color: 'teal' }
+          ]
+      }
+  },
 
   // --- 2/17 (Tue) Day 3: Prague ---
   { 
       id: 'd3-1', date: '2026-02-17', time: '09:00', 
-      title: '捷克郵政總局', enTitle: 'Czech Post Office', location: '布拉格新城 (Nové Město)', category: '登錄地圖', categoryColor: 'green',
+      title: '捷克郵政總局', enTitle: 'Czech Post Office', location: '布格新城 (Nové Město)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/hCSgxbBEBKxW1FXr8',
       guideInfo: {
           story: "建於1871-1874年，採用宏偉的新文藝復興風格。內部有表現通訊歷史的壁畫。",
@@ -177,10 +203,23 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/RQpVaL8PULVdoEgEA',
       guideInfo: {
           story: "這座雄偉的新文藝復興建築本身就是捷克國家認同的象徵。它成立於1818年，但現在的主建築於1891年完工。\n\n在19世紀「捷克民族復興」運動中，建立一個收藏捷克自然與歷史的博物館，是向當時統治的奧地利（哈布斯堡王朝）宣示捷克文化獨立性的重要舉動。\n\n「捷克民族復興」：針對奧地利哈布斯堡王朝統治下「德國化」政策的反動，目的是「搶救瀕臨滅絕的捷克語言與文化」。",
-          tip: "從博物館頂樓的圓頂可以俯瞰整個瓦茨拉夫廣場。主館與新館（原國會大廈）有地下通道相連。",
+          tip: "從博物館頂樓的圓頂可以俯瞰整個瓦茨拉夫廣場.主館與新館（原國會大廈）有地下通道相連。",
           highlights: [
               { id: 'h1', text: '圓頂景觀', color: 'blue' },
               { id: 'h2', text: '國家認同', color: 'red' }
+          ]
+      }
+  },
+  { 
+      id: 'd3-3', date: '2026-02-17', time: '20:00', 
+      title: 'Prague Marriott Hotel', enTitle: 'Accommodation', location: 'V Celnici 8, 110 00 Nové Město, Prague', category: '飯店', categoryColor: 'purple',
+      mapUrl: 'https://maps.app.goo.gl/7BM4PTe8185hQjsu6',
+      guideInfo: {
+          story: "今晚繼續在同一個頂級基地休整，為接下來前往庫倫洛夫的旅程蓄積魔力。",
+          tip: "飯店早餐非常豐富，建議準時下樓享用。附近有鈀金購物中心 (Palladium) 可作最後物資採買。",
+          highlights: [
+              { id: 'h1', text: '休整基地', color: 'purple' },
+              { id: 'h2', text: '最後採買', color: 'orange' }
           ]
       }
   },
@@ -211,6 +250,20 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
           highlights: [
               { id: 'h1', text: '世界遺產', color: 'blue' },
               { id: 'h2', text: '步行天堂', color: 'green' }
+          ]
+      }
+  },
+  { 
+      id: 'd4-3', date: '2026-02-18', time: '18:00', 
+      title: 'Hotel Grand Cesky Krumlov', enTitle: 'Accommodation', location: 'Náměstí Svornosti 3, 381 01 Český Krumlov', category: '飯店', categoryColor: 'purple',
+      mapUrl: 'https://maps.app.goo.gl/hbXSojozrywPzo9r9',
+      guideInfo: {
+          story: "坐落在庫倫洛夫最具標誌性的舊城廣場中心，是體驗這座中世紀小鎮脈動的絕佳據點。",
+          tip: "飯店位於行人徒步區核心。庫倫洛夫多為碎石路，建議行李箱使用較耐磨的輪子，或善用飯店接駁建議。從房間窗戶即有機會俯瞰廣場美景。",
+          highlights: [
+              { id: 'h1', text: '廣場核心', color: 'purple' },
+              { id: 'h2', text: '中世紀古宅', color: 'orange' },
+              { id: 'h3', text: '碎石路注意', color: 'red' }
           ]
       }
   },
@@ -258,6 +311,19 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
           ]
       }
   },
+  { 
+      id: 'd5-hotel', date: '2026-02-19', time: '20:00', 
+      title: 'Strandhotel Margaretha', enTitle: 'Accommodation', location: 'Seepromenade 21, 5322 St. Gilgen, Austria', category: '飯店', categoryColor: 'purple',
+      mapUrl: 'https://maps.app.goo.gl/TQd11ofvzu4kJR676',
+      guideInfo: {
+          story: "位於沃夫岡湖畔的絕美休憩點。",
+          tip: "聖吉爾根是莫札特母親的故鄉，風景秀麗。",
+          highlights: [
+              { id: 'h1', text: '湖畔飯店', color: 'purple' },
+              { id: 'h2', text: '絕美湖景', color: 'blue' }
+          ]
+      }
+  },
 
   // --- 2/20 (Fri) Day 6: Austria -> Germany -> Austria ---
   { 
@@ -277,7 +343,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   },
   { 
       id: 'd6-2', date: '2026-02-20', time: '13:00', 
-      title: '鹽礦探秘之旅', enTitle: 'Salt Mine Tour', location: '哈萊認 (Hallein) /貝希特斯加登', category: '區域解鎖', categoryColor: 'red',
+      title: '鹽礦探秘之旅', enTitle: 'Salt Mine Tour', location: '哈萊因 (Hallein) /貝希特斯加登', category: '區域解鎖', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/khDxgJfHDWY6TwhU6',
       guideInfo: {
           story: "「鹽」是中世紀的白金.此區財富均來自鹽礦。",
@@ -286,6 +352,17 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
               { id: 'h1', text: '木製溜滑梯', color: 'orange' },
               { id: 'h2', text: '礦工服', color: 'gray' },
               { id: 'h3', text: '地底鹽湖', color: 'blue' }
+          ]
+      }
+  },
+  { 
+      id: 'd6-hotel', date: '2026-02-20', time: '20:00', 
+      title: 'Strandhotel Margaretha', enTitle: 'Accommodation', location: 'Seepromenade 21, 5322 St. Gilgen, Austria', category: '飯店', categoryColor: 'purple',
+      mapUrl: 'https://maps.app.goo.gl/TQd11ofvzu4kJR676',
+      guideInfo: {
+          story: "第二晚駐紮於沃夫岡湖畔，享受寧靜夜晚。",
+          highlights: [
+              { id: 'h1', text: '湖畔連泊', color: 'purple' }
           ]
       }
   },
@@ -319,15 +396,14 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       }
   },
   { 
-      id: 'd7-3', date: '2026-02-21', time: '15:00', 
-      title: '卡爾教堂', enTitle: 'Karlskirche', location: '卡爾廣場 (Karlsplatz)', category: '登錄地圖', categoryColor: 'green',
-      mapUrl: 'https://maps.app.goo.gl/FMdKhrTT6ye6FD388',
+      id: 'd7-hotel', date: '2026-02-21', time: '20:00', 
+      title: 'Hilton Vienna Plaza', enTitle: 'Accommodation', location: 'Schottenring 11, 1010 Wien, Austria', category: '飯店', categoryColor: 'purple',
+      mapUrl: 'https://maps.app.goo.gl/xyrDAJLPd5zejjCp9',
       guideInfo: {
-          story: "巴洛克建築巔峰，1713年皇帝卡爾六世為感謝黑死病結束而建.融合了官希臘的神殿門廊、古羅馬的兩根「圖拉真柱」（上面雕刻著聖人的生平）以及拜占庭式的巨大橢圓形穹頂。",
-          tip: "前方水池可拍出完美倒影。教堂內部有全景電梯可直達穹頂近距離欣賞濕壁畫（需購票）。",
+          story: "位於維也納戒指大道上的精緻酒店，裝飾藝術風格令人難忘。",
           highlights: [
-              { id: 'h1', text: '巴洛克', color: 'orange' },
-              { id: 'h2', text: '穹頂電梯', color: 'blue' }
+              { id: 'h1', text: 'Art Deco', color: 'purple' },
+              { id: 'h2', text: '戒指大道', color: 'teal' }
           ]
       }
   },
@@ -352,7 +428,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/bPPsM1JA2y2oMD8U6',
       guideInfo: {
           story: "哈布斯堡王朝的冬宮，也是西西 (Sisi，伊莉莎白皇后) 的黃金牢籠。\n\n西西 (Sisi) 是伊莉莎白皇后的真實暱稱，茜茜則是電影譯名。\n霍夫堡宮是西西皇后權力的象徵，也是她痛苦的根源。在這裡看到的不是一個幸福皇后的家，而是一位女性試圖在壓抑體制中，衝撞並尋找自我的掙扎痕跡。",
-          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館.西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇后的關鍵展品\n私個人物品： 西西皇后的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
+          tip: "參觀重點包含西西博物館、皇家公寓與銀器收藏館.西班牙馬術學校也位於此區。\n\n＊西西 (Sisi) 皇后的關鍵展品\n個人物品： 西西皇后的梳妝用具、體操器材、旅行藥箱。\n著名禮服： 重現了她著名的匈牙利加冕禮服複製件。\n死亡證明： 展示了她在日內瓦遇刺時的相關文件與黑色的喪服（兒子自殺後她只穿黑衣）。",
           highlights: [
               { id: 'h0', text: '冬宮', color: 'blue' },
               { id: 'h1', text: '西西博物館', color: 'purple' },
@@ -396,21 +472,19 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
           ]
       }
   },
-
-  // --- 2/23 (Mon) Day 9: Vienna ---
   { 
-      id: 'd9-1', date: '2026-02-23', time: '09:00', 
-      title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '登錄地圖', categoryColor: 'green',
-      mapUrl: 'https://maps.app.goo.gl/dcfSuaNqNjkhTEJp6',
+      id: 'd8-hotel', date: '2026-02-22', time: '20:00', 
+      title: 'Hilton Vienna Plaza', enTitle: 'Accommodation', location: 'Schottenring 11, 1010 Wien, Austria', category: '飯店', categoryColor: 'purple',
+      mapUrl: 'https://maps.app.goo.gl/xyrDAJLPd5zejjCp9',
       guideInfo: {
-          story: "這座公寓於 1985 年完工，是由奧地利身兼藝術家與建築師雙重身分的「百水先生」(Friedensreich Hundertwasser) 所設計，堪稱維也納建築界獨樹一幟的異數。\n\n百水先生極度痛恨「直線」，甚至稱其為「邪惡的產物」；相反地，他推崇回歸自然與有機的形態。這座公寓，正是他將這些反骨理念付諸實踐的集大成之作。",
-          tip: "若上次未參觀百水藝術館，今日可安排前往，欣賞更多百水先生的畫作與建築模型。",
+          story: "今晚繼續在維也納希爾頓廣場飯店休憩。",
           highlights: [
-              { id: 'h1', text: '自然共生', color: 'green' },
-              { id: 'h2', text: '藝術巡禮', color: 'orange' }
+              { id: 'h1', text: '優雅連泊', color: 'purple' }
           ]
       }
   },
+
+  // --- 2/23 (Mon) Day 9: Vienna ---
   { 
       id: 'd9-2', date: '2026-02-23', time: '10:00', 
       title: '聖史帝芬教堂', enTitle: "St. Stephen's Cathedral", location: '史蒂芬廣場 (Stephansplatz)', category: '區域解鎖', categoryColor: 'red',
@@ -418,7 +492,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/d6ob7ph5DwFvTL949',
       guideInfo: {
           story: "維也納的靈魂象徵，始建於12世紀.曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
-          tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘。亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
+          tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘.亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
           highlights: [
               { id: 'h1', text: '南塔(樓梯)', color: 'red' },
               { id: 'h2', text: '北塔(電梯)', color: 'blue' },
@@ -558,12 +632,15 @@ const getCategoryIcon = (item: ScheduleItem): string => {
     if (item.category === '登錄地圖') return 'fa-solid fa-map-location-dot';
     
     if (item.category === 'transport') return 'fa-solid fa-train-subway';
+    if (item.category === 'stay' || item.category === '飯店') return 'fa-solid fa-hotel';
     if (title.includes('花園') || title.includes('湖')) return 'fa-solid fa-tree';
     
     return 'fa-solid fa-location-dot';
 };
 
 const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; searchTerm?: string }> = ({ item, showDate, searchTerm = '' }) => {
+    // 飯店類別不顯示左側時間
+    const isHotel = item.category === '飯店' || item.category === 'stay';
     const isMajor = ['transport', '集合', '起飛', '降落', '轉機', '抵達'].includes(item.category);
     
     const timeStr = item.displayTime || item.time;
@@ -574,7 +651,7 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; search
     return (
         <div className="relative mb-2 flex gap-0 group">
             <div className="w-12 py-4 flex flex-col items-end justify-start flex-shrink-0 pr-2">
-                {isMajor ? (
+                {!isHotel && isMajor ? (
                     <>
                         <div className="flex items-baseline justify-end gap-[1px] leading-none text-zen-text">
                             <span className="text-xl font-mono font-bold tracking-tighter text-stone-700">{hour}</span>
@@ -594,7 +671,7 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; search
                     className={`
                         relative z-10 flex items-center justify-center transition-all duration-300 mt-[1.4rem]
                         bg-zen-bg rounded-full border-2 
-                        ${isMajor || ['區域解鎖', '登錄地圖'].includes(item.category)
+                        ${isMajor || isHotel || ['區域解鎖', '登錄地圖'].includes(item.category)
                             ? `w-8 h-8 ${NODE_TEXT_COLORS[item.categoryColor || 'gray']} border-current shadow-sm bg-white` 
                             : `w-7 h-7 text-stone-400 border-stone-300 bg-white`
                         }
@@ -687,11 +764,11 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; search
                                             target="_blank"
                                             rel="noreferrer"
                                             onClick={(e) => e.stopPropagation()}
-                                            className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-zen-primary/30 text-zen-primary text-[11px] font-black shadow-sm hover:shadow-md hover:bg-zen-primary/5 active:scale-95 transition-all"
+                                            className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-zen-primary/30 text-zen-primary text-[11px] font-black shadow-sm hover:shadow-md hover:bg-zen-primary/5 active:scale-95 transition-all group/nav"
                                         >
-                                            <i className="fa-solid fa-utensils"></i>
+                                            <i className="fa-solid fa-utensils text-zen-primary/60 group-hover/nav:scale-110 transition-transform"></i>
                                             <span>{item.guideInfo.relatedLink.text}</span>
-                                            <i className="fa-solid fa-chevron-right text-[8px] opacity-50"></i>
+                                            <i className="fa-solid fa-chevron-right text-[8px] opacity-40 group-hover/nav:translate-x-0.5 transition-transform"></i>
                                         </a>
                                     </div>
                                 )}
@@ -1350,7 +1427,7 @@ export const BookingsTab: React.FC = () => {
                                         
                                         <div className="flex flex-col">
                                             <span className="text-[8px] text-gray-400 font-black tracking-widest uppercase mb-0.5">Hero Party</span>
-                                            <span className="text-[11px] font-black text-stone-500 flex items-center gap-1.5">
+                                            <span className="text-[11px] font-black text-stone-50 flex items-center gap-1.5">
                                                 FAMILY ADVENTURERS
                                                 <i className="fa-solid fa-crown text-[8px] text-zen-primary/40"></i>
                                             </span>

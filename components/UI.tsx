@@ -57,6 +57,7 @@ export const CategoryBadge: React.FC<{ type: string; color?: HighlightColor }> =
     food: "bg-orange-100 text-orange-800",
     transport: "bg-gray-200 text-gray-800",
     stay: "bg-purple-100 text-purple-800",
+    "飯店": "bg-purple-100 text-purple-800",
     "起飛": "bg-indigo-500 text-white shadow-sm",
     "降落": "bg-emerald-500 text-white shadow-sm",
     "轉機": "bg-orange-500 text-white shadow-sm",
