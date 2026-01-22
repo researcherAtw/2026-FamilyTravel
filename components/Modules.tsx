@@ -455,6 +455,20 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       }
   },
   { 
+      id: 'd8-karl', date: '2026-02-22', time: '12:00', 
+      title: '卡爾教堂', enTitle: "Karlskirche / St. Charles's Church", location: '維也納卡爾廣場 (Karlsplatz)', category: '登錄地圖', categoryColor: 'green',
+      mapUrl: 'https://maps.app.goo.gl/tqJk4R8Yx9XJ8R8RA',
+      guideInfo: {
+          story: "這座教堂被公認為維也納巴洛克建築的巔峰之作。\n1713年，維也納遭逢歐洲最後一次大規模瘟疫肆虐期間，哈布斯堡王朝皇帝卡爾六世（Charles VI）為了還願，下令興建此教堂，獻給在天主教中被尊為對抗瘟疫守護聖人的聖查理・波羅密歐（Charles Borromeo）。\n\n建築風格極具象徵性，融合了古希臘神殿式門廊、仿古羅馬圖拉真柱的雙柱設計（柱身浮雕描繪聖人的一生），以及以巴洛克語彙詮釋的巨大橢圓形穹頂，展現出跨越古典文明與信仰意象的建築語言。",
+          tip: "拍照點：教堂前方的水池在無風時可以拍到完美的倒影，是攝影愛好者的最愛。\n全景電梯：教堂內部有時會架設一座透明的「全景電梯」，可以直達穹頂（約32公尺高），近距離欣賞華麗的濕壁畫（需另外購票）。",
+          highlights: [
+              { id: 'h1', text: '巴洛克巔峰', color: 'purple' },
+              { id: 'h2', text: '圖拉真柱', color: 'orange' },
+              { id: 'h3', text: '絕美倒影', color: 'blue' }
+          ]
+      }
+  },
+  { 
       id: 'd8-4', date: '2026-02-22', time: '14:00', 
       title: '熊布朗宮 (美泉宮)', enTitle: 'Schönbrunn Palace', location: '維也納第13區 (Hietzing)', category: '區域解鎖', categoryColor: 'red',
       description: 'Schönbrunn Palace',
