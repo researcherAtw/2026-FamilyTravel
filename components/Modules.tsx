@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useLayoutEffect, useRef, useMemo } from 'react';
 import { Card, Button, CategoryBadge } from './UI';
 import { ScheduleItem, Booking, HighlightTag, HighlightColor, WeatherInfo } from '../types';
@@ -538,7 +537,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   { 
       id: 'd10-3', date: '2026-02-24', time: '20:40', displayTime: '20:40',
       title: '任務完成', enTitle: 'Arrival', location: 'TPE 桃園機場', category: '抵達', categoryColor: 'green',
-      description: '抵達溫溫的家',
+      description: '抵達溫暖的家',
       guideInfo: {
         story: "勇者凱旋！",
         highlights: [
@@ -632,7 +631,7 @@ const getCategoryIcon = (item: ScheduleItem): string => {
     if (item.category === '登錄地圖') return 'fa-solid fa-map-location-dot';
     
     if (item.category === 'transport') return 'fa-solid fa-train-subway';
-    if (item.category === 'stay' || item.category === '飯店') return 'fa-solid fa-hotel';
+    if (item.category === '飯店') return 'fa-solid fa-hotel';
     if (title.includes('花園') || title.includes('湖')) return 'fa-solid fa-tree';
     
     return 'fa-solid fa-location-dot';
