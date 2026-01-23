@@ -1182,7 +1182,7 @@ export const SupportTab: React.FC = () => {
                                         <div className="flex gap-2">
                                             <i className="fa-solid fa-scroll text-stone-400 mt-0.5 text-xs"></i>
                                             <p className="text-xs text-stone-500 font-medium leading-relaxed">
-                                                如果你在德國其他城市（例如希特斯加登），可先聯絡柏林總處，他們會指引最近的分辦事處。
+                                                如果你在德國其他城市（例如希特斯加登），可先聯絡柏林總處，他們會指引舉最近的分辦事處。
                                             </p>
                                         </div>
                                     </div>
@@ -1321,10 +1321,10 @@ const MOCK_BOOKINGS: Booking[] = [
 ];
 
 const CITY_NAMES: Record<string, string> = {
-    'TPE': 'Taipei',
-    'DXB': 'Dubai',
-    'PRG': 'Prague',
-    'VIE': 'Vienna'
+    'TPE': '桃園 · Taipei',
+    'DXB': '杜拜 · Dubai',
+    'PRG': '布拉格 · Prague',
+    'VIE': '維也納 · Vienna'
 };
 
 const getArrivalDate = (baseDate: string, arrivalStr: string | undefined) => {
@@ -1400,7 +1400,11 @@ export const BookingsTab: React.FC = () => {
                                                 </div>
                                                 <div className="text-[10px] font-bold text-stone-400 font-mono tracking-tight">{booking.date}</div>
                                                 <div className="text-xl font-black text-stone-600 mt-1.5 tracking-widest leading-none">{originCode}</div>
-                                                <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-0.5 leading-none uppercase">{CITY_NAMES[originCode] || 'Realm'}</div>
+                                                <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-1 leading-tight uppercase">
+                                                    {CITY_NAMES[originCode]?.split(' · ')[0] || '冒險之地'}
+                                                    <br/>
+                                                    <span className="text-[8px] opacity-60 font-mono tracking-tighter">{CITY_NAMES[originCode]?.split(' · ')[1] || 'Realm'}</span>
+                                                </div>
                                             </div>
 
                                             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none z-0">
@@ -1428,7 +1432,11 @@ export const BookingsTab: React.FC = () => {
                                                     {getArrivalDate(booking.date, booking.details['抵達'])}
                                                 </div>
                                                 <div className="text-xl font-black text-stone-600 mt-1.5 tracking-widest leading-none">{destCode}</div>
-                                                <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-0.5 leading-none uppercase">{CITY_NAMES[destCode] || 'Realm'}</div>
+                                                <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-1 leading-tight uppercase">
+                                                    {CITY_NAMES[destCode]?.split(' · ')[0] || '冒險之地'}
+                                                    <br/>
+                                                    <span className="text-[8px] opacity-60 font-mono tracking-tighter">{CITY_NAMES[destCode]?.split(' · ')[1] || 'Realm'}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

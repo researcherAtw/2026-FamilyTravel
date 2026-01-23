@@ -1,54 +1,25 @@
-
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 
 // 更新為最新每日同步的 API 來源
 const ALCHEMY_API_BASE = 'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies';
-const RUNIC_SYMBOLS = ['ᚠ', 'ᚢ', 'ᚦ', 'ᚨ', 'ᚱ', 'ᚲ', 'ᚷ', 'ᚹ', 'ᚺ', 'ᚻ', 'ᛁ', 'ᛃ', 'ᛇ', 'ᛈ', 'ᛉ', 'ᛊ', 'ᛋ', 'ᛏ', 'ᛒ', 'ᛖ', 'ᛗ', 'ᛚ', 'ᛜ', 'ᛝ', 'ᛟ', 'ᛞ', 'Δ', 'Φ', 'Ψ', 'Ω', 'Ξ'];
 
-// --- Runic Scrambling Number Component ---
+// --- Direct Number Component ---
 const RunicNumber: React.FC<{ value: number; active: boolean; onSettle: () => void }> = ({ value, active, onSettle }) => {
-    const [displayValue, setDisplayValue] = useState<string>('0.00');
-    const [isScrambling, setIsScrambling] = useState(false);
-    
     // 將數值格式化為包含兩位小數的字串
     const targetValue = useMemo(() => 
         value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
     [value]);
 
-    const timerRef = useRef<number | null>(null);
-
     useEffect(() => {
         if (active) {
-            setIsScrambling(true);
-            let frame = 0;
-            const maxFrames = 12; // ~0.4s
-
-            if (timerRef.current) clearInterval(timerRef.current);
-
-            timerRef.current = window.setInterval(() => {
-                frame++;
-                if (frame < maxFrames) {
-                    const scrambled = targetValue.split('').map(char => {
-                        // 保留分隔符號與小數點，只混淆數字
-                        if (char === ',' || char === '.') return char;
-                        return RUNIC_SYMBOLS[Math.floor(Math.random() * RUNIC_SYMBOLS.length)];
-                    }).join('');
-                    setDisplayValue(scrambled);
-                } else {
-                    setDisplayValue(targetValue);
-                    setIsScrambling(false);
-                    onSettle(); 
-                    if (timerRef.current) clearInterval(timerRef.current);
-                }
-            }, 35);
-        } else if (!isScrambling) {
-            setDisplayValue(targetValue);
+            // 立即觸發完成回調以啟動後續視覺特效（如邊框閃爍）
+            onSettle();
         }
-    }, [targetValue, active, onSettle, isScrambling]);
+    }, [active, onSettle]);
 
     return (
-        <span className={`transition-all duration-300 ${isScrambling ? 'text-zen-primary blur-[0.3px] scale-105' : ''}`}>
-            {displayValue}
+        <span className={`transition-all duration-300 ${active ? 'text-zen-primary scale-105 font-black' : ''}`}>
+            {targetValue}
         </span>
     );
 };
@@ -209,13 +180,15 @@ export const AlchemyTab: React.FC = () => {
     const triggerCzkAlchemy = () => {
         setIsCzkSynthesizing(true);
         setShowCzkShine(false);
-        setTimeout(() => setIsCzkSynthesizing(false), 800);
+        // 縮短合成狀態時間，僅保留視覺回饋
+        setTimeout(() => setIsCzkSynthesizing(false), 400);
     };
 
     const triggerEurAlchemy = () => {
         setIsEurSynthesizing(true);
         setShowEurShine(false);
-        setTimeout(() => setIsEurSynthesizing(false), 800);
+        // 縮短合成狀態時間，僅保留視覺回饋
+        setTimeout(() => setIsEurSynthesizing(false), 400);
     };
 
     const czkResult = (parseFloat(czkAmount) || 0) * rates.czk;
@@ -254,6 +227,7 @@ export const AlchemyTab: React.FC = () => {
                             <div className="relative z-10 flex items-center justify-center h-12">
                                 <input 
                                     type="number"
+                                    inputMode="decimal"
                                     value={czkAmount}
                                     onChange={(e) => { setCzkAmount(e.target.value); triggerCzkAlchemy(); }}
                                     className="w-full h-full bg-white/80 border border-stone-200 rounded-xl text-xl font-mono font-black text-stone-700 text-center focus:border-zen-primary transition-all outline-none"
@@ -293,6 +267,7 @@ export const AlchemyTab: React.FC = () => {
                             <div className="relative z-10 flex items-center justify-center h-12">
                                 <input 
                                     type="number"
+                                    inputMode="decimal"
                                     value={eurAmount}
                                     onChange={(e) => { setEurAmount(e.target.value); triggerEurAlchemy(); }}
                                     className="w-full h-full bg-white/80 border border-stone-200 rounded-xl text-xl font-mono font-black text-stone-700 text-center focus:border-zen-primary transition-all outline-none"
