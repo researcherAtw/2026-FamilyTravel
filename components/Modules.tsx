@@ -504,7 +504,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       description: '(南塔、北塔二擇一登頂)',
       mapUrl: 'https://maps.app.goo.gl/d6ob7ph5DwFvTL949',
       guideInfo: {
-          story: "維也納的靈魂象徵，始建於12世紀。曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
+          story: "維也納的靈魂象徵，始建於12世紀. 曾在二戰末期的1945年幾乎被大火燒毀並重建。\n\n身體 (Body) → 嘉布遣會教堂 (Kapuzinerkirche)\n心臟 (Heart) → 奧古斯丁教堂 (Augustinerkirche)\n內臟 (Viscera) → 聖史帝芬教堂 (Stephansdom)",
           tip: "南塔需爬343階樓梯但景色最佳；北塔有電梯可看普默林大鐘。亦可參加導覽參觀存放著哈布斯堡王朝早期成員內臟的地下墓穴。\n\n＊可至附近的德梅爾咖啡店（Café Demel）購買維也納知名甜點「糖漬紫羅蘭 Candied Violets」。",
           highlights: [
               { id: 'h1', text: '南塔(樓梯)', color: 'red' },
@@ -1264,12 +1264,12 @@ const MOCK_BOOKINGS: Booking[] = [
     id: 'b1',
     type: 'flight',
     title: 'TPE - DXB',
-    subTitle: 'EK367 - 阿聯酋航空',
-    referenceNo: 'QUEST-EK367',
+    subTitle: 'EK387 - 阿聯酋航空',
+    referenceNo: 'QUEST-EK387',
     date: '2026-02-15',
     time: '00:20',
     details: {
-      '飛行時間': '9小時 25分',
+      '飛行時間': '09 小時 55 分',
       '抵達': '06:15'
     },
     status: 'confirmed'
@@ -1283,7 +1283,7 @@ const MOCK_BOOKINGS: Booking[] = [
     date: '2026-02-15',
     time: '08:40',
     details: {
-      '飛行時間': '6小時 50分',
+      '飛行時間': '06 小時 50 分',
       '抵達': '12:30',
       '備註': '轉機航班'
     },
@@ -1298,7 +1298,7 @@ const MOCK_BOOKINGS: Booking[] = [
     date: '2026-02-23',
     time: '21:45',
     details: {
-      '飛行時間': '5小時 40分',
+      '飛行時間': '05 小時 40 分',
       '抵達': '06:25 (+1)'
     },
     status: 'confirmed'
@@ -1307,12 +1307,12 @@ const MOCK_BOOKINGS: Booking[] = [
     id: 'b4',
     type: 'flight',
     title: 'DXB - TPE',
-    subTitle: 'EK366 - 阿聯酋航空',
-    referenceNo: 'QUEST-EK366',
+    subTitle: 'EK386 - 阿聯酋航空',
+    referenceNo: 'QUEST-EK386',
     date: '2026-02-24',
     time: '08:45',
     details: {
-      '飛行時間': '8小時 55分',
+      '飛行時間': '07 小時 55 分',
       '抵達': '20:40',
       '備註': '轉機航班'
     },
@@ -1321,7 +1321,7 @@ const MOCK_BOOKINGS: Booking[] = [
 ];
 
 const CITY_NAMES: Record<string, string> = {
-    'TPE': '桃園 · Taipei',
+    'TPE': '桃園機場 · Taipei',
     'DXB': '杜拜 · Dubai',
     'PRG': '布拉格 · Prague',
     'VIE': '維也納 · Vienna'
