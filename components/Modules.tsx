@@ -188,7 +188,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '捷克郵政總局', enTitle: 'Czech Post Office', location: '布格新城 (Nové Město)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/hCSgxbBEBKxW1FXr8',
       guideInfo: {
-          story: "建於1871-1874年，採用宏偉的新文藝復興風格。內部有表現通訊歷史的壁畫。",
+          story: "建於1871-1874年，採用宏偉的新文藝復興風格. 內部有表現通訊歷史的壁畫。",
           tip: "至今仍是正常運作的郵局，可免費進入大廳參觀。不妨在此購買郵票並寄出您的明信片體驗歷史。",
           highlights: [
               { id: 'h1', text: '新文藝復興', color: 'red' },
@@ -345,7 +345,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '鹽礦探秘之旅', enTitle: 'Salt Mine Tour', location: '哈萊因 (Hallein) /貝希特斯加登', category: '區域解鎖', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/khDxgJfHDWY6TwhU6',
       guideInfo: {
-          story: "「鹽」是中世紀的白金。此區財富均來自鹽礦。",
+          story: "「鹽」是中世紀的白金. 此區財富均來自鹽礦。",
           tip: "需換上傳統礦工服。體驗亮點是兩段刺激的木製溜滑梯，以及搭乘木筏渡過地底鹽水湖。",
           highlights: [
               { id: 'h1', text: '木製溜滑梯', color: 'orange' },
@@ -414,7 +414,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/ZZbtf4VG7tezXwBz6',
       guideInfo: {
           story: "哈布斯堡王朝的唯一女性統治者—瑪麗亞·特蕾莎 (Maria Theresa) 被戲稱為「歐洲丈母娘」aka 歐洲岳母，主要原因是她將「聯姻外交」發揮到了極致。\n\n她一生生育了 16 個孩子（其中 10 個活到成年），並將絕大多數的女兒都嫁給了歐洲各國的君主 or 王儲，以此來鞏固奧地利與各國的盟友關係，達成政治目的。",
-          tip: "兩側矗立著「雙胞胎」建築：藝術史博物館與自然史博物館。後方即是現代化的維也納博物館區 (MQ)。",
+          tip: "兩側矗立著「雙胞胎」建築：藝術史博物館與自然史博物館. 後方即是現代化的維也納博物館區 (MQ)。",
           highlights: [
               { id: 'h1', text: '藝術史博物館', color: 'red' },
               { id: 'h2', text: '自然史博物館', color: 'green' }
@@ -457,7 +457,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   { 
       id: 'd8-karl', date: '2026-02-22', time: '12:00', 
       title: '卡爾教堂', enTitle: "Karlskirche / St. Charles's Church", location: '維也納卡爾廣場 (Karlsplatz)', category: '登錄地圖', categoryColor: 'green',
-      mapUrl: 'https://maps.app.goo.gl/tqJk4R8Yx9XJ8R8RA',
+      mapUrl: 'https://maps.app.goo.gl/eaqnJq4gQpF3q1cNA',
       guideInfo: {
           story: "這座教堂被公認為維也納巴洛克建築的巔峰之作。\n1713年，維也納遭逢歐洲最後一次大規模瘟疫肆虐期間，哈布斯堡王朝皇帝卡爾六世（Charles VI）為了還願，下令興建此教堂，獻給在天主教中被尊為對抗瘟疫守護聖人的聖查理・波羅密歐（Charles Borromeo）。\n\n建築風格極具象徵性，融合了古希臘神殿式門廊、仿古羅馬圖拉真柱的雙柱設計（柱身浮雕描繪聖人的一生），以及以巴洛克語彙詮釋的巨大橢圓形穹頂，展現出跨越古典文明與信仰意象的建築語言。",
           tip: "拍照點：教堂前方的水池在無風時可以拍到完美的倒影，是攝影愛好者的最愛。\n全景電梯：教堂內部有時會架設一座透明的「全景電梯」，可以直達穹頂（約32公尺高），近距離欣賞華麗的濕壁畫（需另外購票）。",
