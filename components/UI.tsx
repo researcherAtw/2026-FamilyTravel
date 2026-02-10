@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { HighlightColor } from '../types';
 
@@ -55,6 +54,7 @@ export const CategoryBadge: React.FC<{ type: string; color?: HighlightColor }> =
   const defaultStyles: Record<string, string> = {
     sightseeing: "bg-blue-100 text-blue-800",
     food: "bg-orange-100 text-orange-800",
+    "餐廳": "bg-orange-500 text-white shadow-sm",
     transport: "bg-gray-200 text-gray-800",
     stay: "bg-purple-100 text-purple-800",
     "飯店": "bg-purple-100 text-purple-800",

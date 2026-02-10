@@ -202,10 +202,24 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/RQpVaL8PULVdoEgEA',
       guideInfo: {
           story: "這座雄偉的新文藝復興建築本身就是捷克國家認同的象徵。它成立於1818年，但現在的主建築於1891年完工。\n\n在19世紀「捷克民族復興」運動中，建立一個收藏捷克自然與歷史的博物館，是向當時統治的奧地利（哈布斯堡王朝）宣示捷克文化獨立性的重要舉動。\n\n「捷克民族復興」：針對奧地利哈布斯堡王朝統治下「德國化」政策的反動，目的是「搶救瀕臨滅絕的捷克語言與文化」。",
-          tip: "從博物館頂樓的圓頂可以俯瞰整個瓦茨拉夫廣場。主館與新館（原國會大廈）有地下通道相連。",
+          tip: "從博物館頂樓的圓頂可以俯瞰整個瓦茨拉夫廣場. 主館與新館（原國會大廈）有地下通道相連。",
           highlights: [
               { id: 'h1', text: '圓頂景觀', color: 'blue' },
               { id: 'h2', text: '國家認同', color: 'red' }
+          ]
+      }
+  },
+  { 
+      id: 'd3-cafe', date: '2026-02-17', time: '13:00', 
+      title: '帝國咖啡廳', enTitle: 'Café Imperial', location: 'Na Poříčí 15, 110 00 Praha 1', category: '餐廳', categoryColor: 'orange',
+      mapUrl: 'https://maps.app.goo.gl/yjbnNVFW7atNKhzL6',
+      guideInfo: {
+          story: "帝國咖啡廳坐落於布拉格帝國酒店（Art Deco Imperial Hotel）內，自 1914 年 開幕以來，就是文人雅士、政商名流聚集的場所。\n\n儘管經歷過二戰與共產時期的更迭，它依然完整保留了那份屬於「美好年代」（Belle Époque）的壯麗。這裡目前的靈魂人物是捷克名廚 Zdeněk Pohlreich，他讓這家百年老店在現代餐飲界依然保有一席之地。",
+          tip: "＊招牌必點：\n燉羊膝 (Braised Lamb Shank)： 這是他們的明星料理，肉質軟嫩入味。\n捷克傳統料理： 如炸豬排、鴨胸或 Svíčková（奶油燉牛肉）。\n精緻甜點： 帝國蛋糕（Imperial Cake）是下午茶的最佳選擇。",
+          highlights: [
+              { id: 'h1', text: '美好年代 Belle Époque', color: 'orange' },
+              { id: 'h2', text: '燉羊膝', color: 'red' },
+              { id: 'h3', text: '百年名店', color: 'purple' }
           ]
       }
   },
@@ -475,7 +489,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/nommjbpqLek8AkKL6',
       guideInfo: {
           story: "1996年列為世界文化遺產。此處原為皇家狩獵小屋，後經瑪麗亞·特蕾莎女皇（歐洲丈母娘）改建為巴洛克式宮殿。\n\n這裡曾是6歲神童莫札特演奏之地，也是末代皇帝卡爾一世簽署放棄權力文件、終結帝國統治的歷史現場。",
-          tip: "購票：參觀宮殿內部必須購票（如 Imperial Tour 或 Grand Tour），強烈建議「提早上網預訂」。\n花園：宮殿後方的法式花園是免費開放的。\n凱旋門：務必爬上花園對面的山丘，抵達「凱旋門」，那是俯瞰全景的「最佳地點」。\n動物園：世界上現存最古老的動物園也位於此。",
+          tip: "購票：參觀宮殿內部必須購票（如 Imperial Tour 或 Grand Tour），強烈建議「提早上網預訂」。\n花園：宮殿後方的法式花園是免費開放的。\n凱旋門：務必爬上花園對面的山丘，抵達「凱旋門」，那是俯瞰全景的「最佳地點」。\n動物園：世界上現古老的動物園也位於此。",
           highlights: [
               { id: 'h0', text: '夏宮', color: 'blue' },
               { id: 'h3', text: '世界文化遺產', color: 'red' },
@@ -551,7 +565,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   { 
       id: 'd10-3', date: '2026-02-24', time: '20:40', displayTime: '20:40',
       title: '任務完成', enTitle: 'Arrival', location: 'TPE 桃園機場', category: '抵達', categoryColor: 'green',
-      description: '抵達溫暖的家',
+      description: '抵達溫慢的家',
       guideInfo: {
         story: "勇者凱旋！",
         highlights: [
@@ -621,6 +635,8 @@ const getCategoryIcon = (item: ScheduleItem): string => {
     if (title.includes('鹽礦')) return 'fa-solid fa-gem';
     if (title.includes('天文鐘')) return 'fa-solid fa-clock';
     if (title.includes('黃金小徑')) return 'fa-solid fa-person-walking';
+    // 優先匹配標題包含「咖啡」或類別為「餐廳」的圖示
+    if (title.includes('咖啡') || item.category === '餐廳') return 'fa-solid fa-utensils';
     if (title.includes('購物') || title.includes('Outlet')) return 'fa-solid fa-bag-shopping';
     
     if (title.includes('教堂')) return 'fa-solid fa-church';
@@ -654,7 +670,8 @@ const getCategoryIcon = (item: ScheduleItem): string => {
 const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; searchTerm?: string }> = ({ item, showDate, searchTerm = '' }) => {
     // 飯店類別不顯示左側時間
     const isHotel = item.category === '飯店' || item.category === 'stay';
-    const isMajor = ['transport', '集合', '起飛', '降落', '轉機', '抵達'].includes(item.category);
+    // 恢復原始 isMajor 範疇（交通、起降、集合），但針對「帝國咖啡廳」(id: d3-cafe) 額外開啟顯示時間標籤，其餘景點類別不顯示時間
+    const isMajor = ['transport', '集合', '起飛', '降落', '轉機', '抵達'].includes(item.category) || item.id === 'd3-cafe';
     
     const timeStr = item.displayTime || item.time;
     const [mainTime, subTime] = timeStr.includes('\n') ? timeStr.split('\n') : [timeStr, null];
@@ -794,693 +811,256 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; search
     );
 };
 
-export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = '' }) => {
-  const [selectedDate, setSelectedDate] = useState('2026-02-14');
-  const [items] = useState(MOCK_SCHEDULE);
-  const [weather, setWeather] = useState<WeatherInfo>({ condition: 'cloudy', temp: 5, locationName: '布拉格' });
-  const [loadingWeather, setLoadingWeather] = useState(false);
-  const [touchStart, setTouchStart] = useState<{x: number, y: number} | null>(null);
-  const [touchEnd, setTouchEnd] = useState<{x: number, y: number} | null>(null);
-  const scrollRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const dateScrollRef = useRef<HTMLDivElement>(null);
-  const dates = useMemo(() => Array.from(new Set(items.map(i => i.date))).sort() as string[], [items]);
-  const currentIndex = dates.indexOf(selectedDate);
+// --- SCHEDULE TAB ---
+export const ScheduleTab: React.FC<{ searchTerm?: string }> = ({ searchTerm = "" }) => {
+    const [selectedDate, setSelectedDate] = useState('2026-02-14');
+    const [weather, setWeather] = useState<WeatherInfo>({ condition: 'cloudy', temp: 5, locationName: '布拉格' });
+    const [loadingWeather, setLoadingWeather] = useState(false);
+    const dateScrollRef = useRef<HTMLDivElement>(null);
 
-  const filteredResults = useMemo(() => {
-    if (!searchTerm.trim()) return [];
-    const query = searchTerm.toLowerCase();
-    
-    return items.filter(item => {
-        const basicMatch = 
-            item.title.toLowerCase().includes(query) ||
-            item.enTitle?.toLowerCase().includes(query) ||
-            item.location.toLowerCase().includes(query) ||
-            item.description?.toLowerCase().includes(query) ||
-            item.category.toLowerCase().includes(query);
+    const filteredItems = useMemo(() => {
+        if (!searchTerm.trim()) return MOCK_SCHEDULE;
+        const lowerTerm = searchTerm.toLowerCase();
+        return MOCK_SCHEDULE.filter(item => 
+            item.title.toLowerCase().includes(lowerTerm) ||
+            item.location.toLowerCase().includes(lowerTerm) ||
+            item.enTitle?.toLowerCase().includes(lowerTerm) ||
+            item.description?.toLowerCase().includes(lowerTerm) ||
+            (typeof item.guideInfo?.story === 'string' && item.guideInfo.story.toLowerCase().includes(lowerTerm)) ||
+            item.guideInfo?.tip?.toLowerCase().includes(lowerTerm)
+        );
+    }, [searchTerm]);
 
-        if (basicMatch) return true;
+    const groupedItems = useMemo(() => {
+        const groups: Record<string, ScheduleItem[]> = {};
+        filteredItems.forEach(item => {
+            if (!groups[item.date]) groups[item.date] = [];
+            groups[item.date].push(item);
+        });
+        return groups;
+    }, [filteredItems]);
 
-        if (item.guideInfo) {
-            const storyMatch = typeof item.guideInfo.story === 'string' && 
-                               item.guideInfo.story.toLowerCase().includes(query);
-            const tipMatch = item.guideInfo.tip?.toLowerCase().includes(query);
-            const highlightMatch = item.guideInfo.highlights?.some(h => h.text.toLowerCase().includes(query));
-            return storyMatch || tipMatch || highlightMatch;
-        }
+    const dates = useMemo(() => Array.from(new Set(MOCK_SCHEDULE.map(i => i.date))).sort(), []);
+    const currentIndex = dates.indexOf(selectedDate);
 
-        return false;
-    });
-  }, [searchTerm, items]);
-
-  useLayoutEffect(() => {
-    if (currentIndex >= 0 && scrollRefs.current[currentIndex]) {
-        scrollRefs.current[currentIndex]!.scrollTo(0, 0);
-    }
-  }, [currentIndex]);
-
-  useEffect(() => {
-    if (dateScrollRef.current) {
-        const index = dates.indexOf(selectedDate);
-        if (index >= 0) {
-            const container = dateScrollRef.current;
-            const itemCenter = 16 + index * (52 + 8) + 52 / 2;
-            const containerCenter = container.clientWidth / 2;
-            const scrollLeft = itemCenter - containerCenter;
-            container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-        }
-    }
-  }, [selectedDate, dates]);
-
-  const getLocationInfo = (date: string) => {
-      if (date === '2026-02-14') return '台灣 Taiwan';
-      if (date >= '2026-02-15' && date <= '2026-02-19') return '捷克 Czech Republic';
-      if (date === '2026-02-20') return '德國 Germany';
-      if (date >= '2026-02-21' && date <= '2026-02-24') return '奧地利 Austria';
-      return '歐洲 Europe';
-  };
-
-  const locationHeader = getLocationInfo(selectedDate);
-  const lunarText = LUNAR_DATES[selectedDate];
-
-  useEffect(() => {
-    const fetchWeather = async () => {
-        setLoadingWeather(true);
-        let url = '';
-        let locationName = '';
-        if (selectedDate === '2026-02-14') {
-            url = 'https://api.open-meteo.com/v1/forecast?latitude=25.03&longitude=121.56&current_weather=true&timezone=auto';
-            locationName = '桃園';
-        } else if (selectedDate >= '2026-02-15' && selectedDate <= '2026-02-19') {
-            url = 'https://api.open-meteo.com/v1/forecast?latitude=50.08&longitude=14.43&current_weather=true&timezone=auto';
-            locationName = '布拉格';
-        } else if (selectedDate === '2026-02-20') {
-            url = 'https://api.open-meteo.com/v1/forecast?latitude=47.59&longitude=12.99&current_weather=true&timezone=auto';
-            locationName = '貝希特斯加登';
-        } else if (selectedDate >= '2026-02-21' && selectedDate <= '2026-02-24') {
-            url = 'https://api.open-meteo.com/v1/forecast?latitude=48.21&longitude=16.37&current_weather=true&timezone=auto';
-            locationName = '維也納';
-        } else {
-             url = 'https://api.open-meteo.com/v1/forecast?latitude=50.08&longitude=14.43&current_weather=true&timezone=auto';
-             locationName = '歐洲';
-        }
-        try {
-            const res = await fetch(url);
-            const data = await res.json();
-            if (data.current_weather) {
-                setWeather({
-                    temp: Math.round(data.current_weather.temperature),
-                    condition: mapWmoToCondition(data.current_weather.weathercode),
-                    locationName: locationName
-                });
+    useEffect(() => {
+        if (dateScrollRef.current) {
+            const index = dates.indexOf(selectedDate);
+            if (index >= 0) {
+                const container = dateScrollRef.current;
+                const itemCenter = 16 + index * (52 + 8) + 52 / 2;
+                const containerCenter = container.clientWidth / 2;
+                const scrollLeft = itemCenter - containerCenter;
+                container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
             }
-        } catch (error) {
-            console.error("Failed to fetch weather", error);
-        } finally {
-            setLoadingWeather(false);
         }
+    }, [selectedDate, dates]);
+
+    useEffect(() => {
+        const fetchWeather = async () => {
+            setLoadingWeather(true);
+            let url = '';
+            let locationName = '';
+            if (selectedDate === '2026-02-14') {
+                url = 'https://api.open-meteo.com/v1/forecast?latitude=25.03&longitude=121.56&current_weather=true&timezone=auto';
+                locationName = '桃園';
+            } else if (selectedDate >= '2026-02-15' && selectedDate <= '2026-02-19') {
+                url = 'https://api.open-meteo.com/v1/forecast?latitude=50.08&longitude=14.43&current_weather=true&timezone=auto';
+                locationName = '布拉格';
+            } else if (selectedDate === '2026-02-20') {
+                url = 'https://api.open-meteo.com/v1/forecast?latitude=47.59&longitude=12.99&current_weather=true&timezone=auto';
+                locationName = '貝希特斯加登';
+            } else if (selectedDate >= '2026-02-21' && selectedDate <= '2026-02-24') {
+                url = 'https://api.open-meteo.com/v1/forecast?latitude=48.21&longitude=16.37&current_weather=true&timezone=auto';
+                locationName = '維也納';
+            } else {
+                 url = 'https://api.open-meteo.com/v1/forecast?latitude=50.08&longitude=14.43&current_weather=true&timezone=auto';
+                 locationName = '歐洲';
+            }
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                if (data.current_weather) {
+                    setWeather({
+                        temp: Math.round(data.current_weather.temperature),
+                        condition: mapWmoToCondition(data.current_weather.weathercode),
+                        locationName: locationName
+                    });
+                }
+            } catch (error) {
+                console.error("Failed to fetch weather", error);
+            } finally {
+                setLoadingWeather(false);
+            }
+        };
+        fetchWeather();
+    }, [selectedDate]);
+
+    const getLocationInfo = (date: string) => {
+        if (date === '2026-02-14') return '台灣 Taiwan';
+        if (date >= '2026-02-15' && date <= '2026-02-19') return '捷克 Czech Republic';
+        if (date === '2026-02-20') return '德國 Germany';
+        if (date >= '2026-02-21' && date <= '2026-02-24') return '奧地利 Austria';
+        return '歐洲 Europe';
     };
-    fetchWeather();
-  }, [selectedDate]);
-  
-  const onTouchStart = (e: React.TouchEvent) => {
-    if (searchTerm) return; 
-    setTouchEnd(null);
-    setTouchStart({ x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY });
-  };
-  const onTouchMove = (e: React.TouchEvent) => {
-    if (searchTerm) return;
-    setTouchEnd({ x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY });
-  };
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distanceX = touchStart.x - touchEnd.x;
-    const distanceY = touchStart.y - touchEnd.y;
-    if (Math.abs(distanceX) > Math.abs(distanceY) && Math.abs(distanceX) > 50) {
-       if (distanceX > 0 && currentIndex < dates.length - 1) {
-           setSelectedDate(dates[currentIndex + 1]);
-       } else if (distanceX < 0 && currentIndex > 0) {
-           setSelectedDate(dates[currentIndex - 1]);
-       }
-    }
-    setTouchStart(null);
-    setTouchEnd(null);
-  };
 
-  return (
-    <div className="h-full flex flex-col">
-      <div className="flex-shrink-0 bg-zen-bg z-20 px-4 pb-3 shadow-sm">
-          <div className="-mx-4 mb-2">
-              <div 
-                ref={dateScrollRef}
-                className="flex gap-[8px] overflow-x-auto no-scrollbar px-[16px] py-[4px] snap-x items-center relative"
-              >
-                <div 
-                    className={`absolute top-[4px] bottom-[4px] w-[52px] bg-[#464646] rounded-[16px] shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0 ${currentIndex === -1 || searchTerm ? 'opacity-0' : 'opacity-100'}`}
-                    style={{ left: `${16 + (currentIndex === -1 ? 0 : currentIndex) * (52 + 8)}px` }}
-                />
-                {dates.map((date) => {
-                    const d = new Date(date);
-                    const dayName = d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
-                    const dayNum = d.getDate();
-                    const isSelected = date === selectedDate && !searchTerm;
-                    return (
-                        <button
-                            key={date}
-                            onClick={() => setSelectedDate(date)}
-                            className="snap-center flex-shrink-0 flex flex-col items-center justify-center w-[52px] h-[72px] rounded-[16px] transition-all duration-300 relative z-10 group"
-                        >
-                            <div className={`absolute inset-0 bg-white rounded-[16px] shadow-sm transition-all duration-300 -z-10 group-hover:bg-gray-50 ${isSelected ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}></div>
-                            <span className={`text-[9px] font-black tracking-widest mb-1 font-sans z-10 transition-colors duration-300 ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayName}</span>
-                            <span className={`text-[20px] font-bold font-sans leading-none z-10 transition-colors duration-300 ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayNum}</span>
-                        </button>
-                    )
-                })}
-              </div>
-          </div>
-          
-          {!searchTerm ? (
-            <div className="flex justify-between items-end px-2 relative animate-fade-in">
-               <div>
-                  <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Day Plan</div>
-                  <div className="flex items-center gap-2">
-                      <h2 className="text-2xl font-mono font-bold text-zen-text leading-none">{selectedDate}</h2>
-                      {lunarText && (
-                          <div className="bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm tracking-widest flex items-center gap-1">
-                              <i className="fa-solid fa-star text-[8px]"></i>
-                              <span>{lunarText}</span>
-                          </div>
-                      )}
-                  </div>
-                  <div className="flex items-center gap-2 mt-1 text-gray-500 text-sm">
-                      <i className="fa-solid fa-location-dot text-zen-primary"></i> 
-                      <span>{locationHeader}</span>
-                  </div>
-               </div>
-               <div className="bg-white/30 backdrop-blur-xl border border-white/40 p-3 rounded-2xl shadow-lg flex flex-col items-center justify-center min-w-[80px] h-[82px] box-border z-10 relative">
-                  {loadingWeather ? (
-                       <i className="fa-solid fa-spinner fa-spin text-gray-300 text-2xl"></i>
-                  ) : (
-                      <>
-                          <div className="text-2xl mb-1 h-8 flex items-center justify-center filter drop-shadow-sm">
-                              {weather.condition === 'sunny' && <i className="fa-solid fa-sun text-orange-400 animate-spin-slow"></i>}
-                              {weather.condition === 'cloudy' && <i className="fa-solid fa-cloud text-gray-400"></i>}
-                              {weather.condition === 'rain' && <i className="fa-solid fa-cloud-rain text-blue-400"></i>}
-                              {weather.condition === 'snow' && <i className="fa-regular fa-snowflake text-blue-200"></i>}
-                          </div>
-                          <div className="text-sm font-bold font-mono h-5 flex items-center text-gray-700">{weather.temp}°C</div>
-                      </>
-                  )}
-               </div>
-            </div>
-          ) : (
-            <div className="px-2 animate-fade-in">
-                <div className="text-xs font-bold text-stone-400 uppercase tracking-widest mb-1">Search Results</div>
-                <div className="text-xl font-bold text-zen-text">找到了 {filteredResults.length} 個行程</div>
-            </div>
-          )}
-      </div>
+    const lunarText = LUNAR_DATES[selectedDate];
 
-      <div 
-        className="flex-1 overflow-hidden relative w-full touch-pan-y"
-        onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}
-      >
-         {!searchTerm ? (
-            <div className="flex h-full transition-transform duration-300 ease-out will-change-transform" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-                {dates.map((date, idx) => {
-                    const dayItems = items.filter(i => i.date === date);
-                    return (
-                        <div key={date} ref={el => { scrollRefs.current[idx] = el; }} className="w-full h-full flex-shrink-0 overflow-y-auto no-scrollbar px-4 pb-24">
-                            <div className="relative pt-4">
-                                {dayItems.map((item) => <ScheduleItemRow key={item.id} item={item} />)}
-                                {dayItems.length === 0 && (
-                                    <div className="text-center py-10 text-gray-400 opacity-60">
-                                        <i className="fa-regular fa-calendar-plus text-4xl mb-2"></i>
-                                        <p className="text-sm">No plans for this day yet。</p>
+    return (
+        <div className="h-full flex flex-col">
+            <div className="flex-shrink-0 bg-zen-bg z-20 px-4 pb-3 shadow-sm">
+                <div className="-mx-4 mb-2">
+                    <div 
+                        ref={dateScrollRef}
+                        className="flex gap-[8px] overflow-x-auto no-scrollbar px-[16px] py-[4px] snap-x items-center relative"
+                    >
+                        {!searchTerm && (
+                            <div 
+                                className="absolute top-[4px] bottom-[4px] w-[52px] bg-[#464646] rounded-[16px] shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0"
+                                style={{ left: `${16 + currentIndex * (52 + 8)}px` }}
+                            />
+                        )}
+                        {dates.map((date) => {
+                            const d = new Date(date);
+                            const dayName = d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
+                            const dayNum = d.getDate();
+                            const isSelected = date === selectedDate && !searchTerm;
+                            return (
+                                <button
+                                    key={date}
+                                    onClick={() => setSelectedDate(date)}
+                                    className="snap-center flex-shrink-0 flex flex-col items-center justify-center w-[52px] h-[72px] rounded-[16px] transition-all duration-300 relative z-10 group"
+                                >
+                                    <div className={`absolute inset-0 bg-white rounded-[16px] shadow-sm transition-all duration-300 -z-10 group-hover:bg-gray-50 ${isSelected ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}></div>
+                                    <span className={`text-[9px] font-black tracking-widest mb-1 font-sans z-10 transition-colors duration-300 ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayName}</span>
+                                    <span className={`text-[20px] font-bold font-sans leading-none z-10 transition-colors duration-300 ${isSelected ? 'text-white' : 'text-gray-400'}`}>{dayNum}</span>
+                                </button>
+                            )
+                        })}
+                    </div>
+                </div>
+                
+                {!searchTerm ? (
+                    <div className="flex justify-between items-end px-2 relative animate-fade-in">
+                        <div>
+                            <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Day Plan</div>
+                            <div className="flex items-center gap-2">
+                                <h2 className="text-2xl font-mono font-bold text-zen-text leading-none">{selectedDate}</h2>
+                                {lunarText && (
+                                    <div className="bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm tracking-widest flex items-center gap-1">
+                                        <i className="fa-solid fa-star text-[8px]"></i>
+                                        <span>{lunarText}</span>
                                     </div>
                                 )}
                             </div>
+                            <div className="flex items-center gap-2 mt-1 text-gray-500 text-sm">
+                                <i className="fa-solid fa-location-dot text-zen-primary"></i> 
+                                <span>{getLocationInfo(selectedDate)}</span>
+                            </div>
                         </div>
-                    );
-                })}
-            </div>
-         ) : (
-            <div className="w-full h-full overflow-y-auto no-scrollbar px-4 pb-24 animate-fade-in-up">
-                <div className="relative pt-4">
-                    {filteredResults.length > 0 ? (
-                        filteredResults.map((item) => (
-                            <ScheduleItemRow key={item.id} item={item} showDate={true} searchTerm={searchTerm} />
-                        ))
-                    ) : (
-                        <div className="text-center py-20 text-stone-400 opacity-60">
-                            <i className="fa-solid fa-ghost text-6xl mb-4 animate-bounce"></i>
-                            <p className="text-sm font-bold px-8">冒險者公會的情報網裡沒聽說過這地方耶？</p>
-                            <p className="text-xs mt-1">請嘗試輸入其他線索⋯⋯</p>
+                        <div className="bg-white/30 backdrop-blur-xl border border-white/40 p-3 rounded-2xl shadow-lg flex flex-col items-center justify-center min-w-[80px] h-[82px] box-border z-10 relative">
+                            {loadingWeather ? (
+                                <i className="fa-solid fa-spinner fa-spin text-gray-300 text-2xl"></i>
+                            ) : (
+                                <>
+                                    <div className="text-2xl mb-1 h-8 flex items-center justify-center filter drop-shadow-sm">
+                                        {weather.condition === 'sunny' && <i className="fa-solid fa-sun text-orange-400 animate-spin-slow"></i>}
+                                        {weather.condition === 'cloudy' && <i className="fa-solid fa-cloud text-gray-400"></i>}
+                                        {weather.condition === 'rain' && <i className="fa-solid fa-cloud-rain text-blue-400"></i>}
+                                        {weather.condition === 'snow' && <i className="fa-regular fa-snowflake text-blue-200"></i>}
+                                    </div>
+                                    <div className="text-sm font-bold font-mono h-5 flex items-center text-gray-700">{weather.temp}°C</div>
+                                </>
+                            )}
                         </div>
-                    )}
-                </div>
-            </div>
-         )}
-      </div>
-    </div>
-  );
-};
-
-export const SupportTab: React.FC = () => {
-    return (
-        <div className="h-full flex flex-col bg-zen-bg">
-            {/* Frozen Header */}
-            <div className="flex-shrink-0 px-5 pt-4 pb-3 bg-zen-bg/80 backdrop-blur-md border-b border-zen-primary/10 z-20">
-                <div className="flex items-center gap-3 px-1">
-                    <div className="w-10 h-10 rounded-2xl bg-white border-2 border-zen-primary/20 flex items-center justify-center shadow-zen-sm transform -rotate-3 flex-shrink-0">
-                        <i className="fa-solid fa-shield-heart text-zen-primary text-lg"></i>
                     </div>
-                    <div>
-                        <h2 className="text-xl font-black text-zen-text leading-tight tracking-tight">冒險者緊急救助</h2>
-                        <p className="text-[10px] text-stone-400 font-bold uppercase tracking-[0.2em]">EMERGENCY ASSISTANCE</p>
+                ) : (
+                    <div className="px-2 animate-fade-in">
+                        <div className="text-xs font-bold text-stone-400 uppercase tracking-widest mb-1">Search Results</div>
+                        <div className="text-xl font-bold text-zen-text">找到了 {filteredItems.length} 個行程</div>
                     </div>
-                </div>
+                )}
             </div>
 
-            {/* Scrollable Content */}
-            <div className="flex-1 overflow-y-auto px-5 pb-32 pt-5 space-y-8 no-scrollbar animate-fade-in">
-                <div className="space-y-10">
-                    {/* Czech Republic Card */}
-                    <div className="relative group">
-                        <div className="absolute -top-3 -left-2 z-20 bg-white border border-stone-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-2 transform -rotate-2">
-                            <span className="text-sm">🇨🇿</span>
-                            <span className="text-[11px] font-black text-stone-600 uppercase tracking-widest">捷克分部</span>
+            <div className="flex-1 overflow-y-auto px-4 pt-4 pb-32 no-scrollbar">
+                {!searchTerm ? (
+                    groupedItems[selectedDate]?.map(item => (
+                        <ScheduleItemRow key={item.id} item={item} />
+                    )) || (
+                        <div className="text-center py-10 text-gray-400 opacity-60">
+                            <i className="fa-regular fa-calendar-plus text-4xl mb-2"></i>
+                            <p className="text-sm">No plans for this day yet.</p>
                         </div>
-                        <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
-                            <div className="p-6 pt-8 space-y-5">
-                                <div className="flex flex-col">
-                                    <div className="flex justify-between items-center mb-1.5">
-                                        <span className="text-[11px] font-black text-zen-primary uppercase tracking-widest flex items-center gap-1.5">
-                                            <i className="fa-solid fa-map-pin text-[10px]"></i> 公會座標 Coordinates
-                                        </span>
-                                        <a 
-                                            href="https://maps.app.goo.gl/RUG3WXz5bVJoGWHo8"
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-stone-100 text-xs font-bold text-stone-500 hover:bg-zen-primary/10 hover:text-zen-primary transition-colors border border-stone-200/60 shadow-sm"
-                                        >
-                                            <i className="fa-solid fa-diamond-turn-right"></i>
-                                            <span>導航</span>
-                                        </a>
-                                    </div>
-                                    <p className="text-[11px] text-stone-500 font-medium leading-relaxed pl-3 border-l-2 border-zen-primary/20">
-                                        Evropska 2590/33c, 160 00 Praha 6, Czech Republic
-                                    </p>
-                                </div>
-                                <div className="grid grid-cols-1 gap-4">
-                                    <div className="flex flex-col">
-                                        <span className="text-[11px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                            <i className="fa-solid fa-phone text-[10px]"></i> 傳送專線 Phone
-                                        </span>
-                                        <div className="flex flex-wrap gap-2 pl-3 border-l-2 border-zen-primary/20">
-                                            <a href="tel:+420233320606" className="text-sm font-mono font-black text-stone-600 bg-stone-100 px-2.5 py-1.5 rounded">+420 233-320-606</a>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-[11px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                            <i className="fa-solid fa-heart-pulse text-[10px]"></i> 緊急救助專線 Emergency
-                                        </span>
-                                        <div className="flex flex-wrap gap-2 pl-3 border-l-2 border-zen-danger/20">
-                                            <a href="tel:+420603166707" className="text-sm font-mono font-black text-zen-danger bg-red-50 px-2.5 py-1.5 rounded border border-red-100 shadow-sm transition-all active:scale-95">境外：+420 603-166-707</a>
-                                            <a href="tel:603166707" className="text-sm font-mono font-black text-zen-danger bg-red-50 px-2.5 py-1.5 rounded border border-red-100 shadow-sm transition-all active:scale-95">境內直撥：603-166-707</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="pt-4 border-t border-dashed border-stone-100">
-                                    <div className="flex items-center gap-2 mb-3">
-                                        <i className="fa-solid fa-hourglass-start text-xs text-stone-400"></i>
-                                        <span className="text-xs font-bold text-stone-500">領務時間：週一～週五 09:30–11:30、13:30–16:30</span>
-                                    </div>
-                                    <div className="bg-stone-50 rounded-xl p-3 border border-stone-100/50">
-                                        <div className="flex gap-2">
-                                            <i className="fa-solid fa-feather-pointed text-zen-primary mt-0.5 text-xs"></i>
-                                            <p className="text-xs text-stone-500 font-medium leading-relaxed">
-                                                這就像「大使館」一樣的台灣代表機構，可協助急難救助、護照補發、遺失證件協助等。
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-
-                    {/* Germany Card */}
-                    <div className="relative group">
-                        <div className="absolute -top-3 -left-2 z-20 bg-white border border-stone-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-2 transform -rotate-2">
-                            <span className="text-sm">🇩🇪</span>
-                            <span className="text-[11px] font-black text-stone-600 uppercase tracking-widest">德國總部</span>
-                        </div>
-                        <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
-                            <div className="p-6 pt-8 space-y-5">
-                                <div className="flex flex-col">
-                                    <div className="flex justify-between items-center mb-1.5">
-                                        <span className="text-[11px] font-black text-zen-primary uppercase tracking-widest flex items-center gap-1.5">
-                                            <i className="fa-solid fa-location-arrow text-[10px]"></i> 座標 Coordinates
-                                        </span>
-                                        <a 
-                                            href="https://maps.app.goo.gl/7XJr4SGCjofJBKmY6"
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-stone-100 text-xs font-bold text-stone-500 hover:bg-zen-primary/10 hover:text-zen-primary transition-colors border border-stone-200/60 shadow-sm"
-                                        >
-                                            <i className="fa-solid fa-diamond-turn-right"></i>
-                                            <span>導航</span>
-                                        </a>
-                                    </div>
-                                    <p className="text-[11px] text-stone-500 font-medium leading-relaxed pl-3 border-l-2 border-zen-primary/20">
-                                        Markgrafenstrasse 35, 10117 Berlin, Germany
-                                    </p>
-                                </div>
-                                <div className="grid grid-cols-1 gap-4">
-                                    <div className="flex flex-col">
-                                        <span className="text-[11px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                            <i className="fa-solid fa-phone text-[10px]"></i> 傳送專線 Phone
-                                        </span>
-                                        <div className="flex pl-3 border-l-2 border-zen-primary/20">
-                                            <a href="tel:+4930203610" className="text-sm font-mono font-black text-stone-600 bg-stone-100 px-2.5 py-1.5 rounded">+49-30-203610</a>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-[11px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                            <i className="fa-solid fa-heart-pulse text-[10px]"></i> 緊急救助專線 Emergency
-                                        </span>
-                                        <div className="flex pl-3 border-l-2 border-zen-danger/20">
-                                            <a href="tel:+491713898257" className="text-sm font-mono font-black text-zen-danger bg-red-50 px-2.5 py-1.5 rounded border border-red-100 shadow-sm transition-all active:scale-95">+49-171-3898257</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="pt-4 border-t border-dashed border-stone-100">
-                                    <div className="flex items-center gap-2 mb-3">
-                                        <i className="fa-solid fa-hourglass-start text-xs text-stone-400"></i>
-                                        <span className="text-xs font-bold text-stone-500">領務時間：週一～週五 09:00–12:30、14:00–17:00</span>
-                                    </div>
-                                    <div className="bg-stone-50 rounded-xl p-3 border border-stone-100/50">
-                                        <div className="flex gap-2">
-                                            <i className="fa-solid fa-scroll text-stone-400 mt-0.5 text-xs"></i>
-                                            <p className="text-xs text-stone-500 font-medium leading-relaxed">
-                                                如果你在德國其他城市（例如希特斯加登），可先聯絡柏林總處，他們會指引舉最近的分辦事處。
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-
-                    {/* Austria Card */}
-                    <div className="relative group">
-                        <div className="absolute -top-3 -left-2 z-20 bg-white border border-stone-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-2 transform -rotate-1">
-                            <span className="text-sm">🇦🇹</span>
-                            <span className="text-[11px] font-black text-stone-600 uppercase tracking-widest">奧地利分部</span>
-                        </div>
-                        <Card className="p-0 overflow-hidden border-2 border-stone-100/50 bg-white/80 backdrop-blur-sm">
-                            <div className="p-6 pt-8 space-y-5">
-                                <div className="flex flex-col">
-                                    <div className="flex justify-between items-center mb-1.5">
-                                        <span className="text-[11px] font-black text-zen-primary uppercase tracking-widest flex items-center gap-1.5">
-                                            <i className="fa-solid fa-anchor text-[10px]"></i> 座標 Coordinates
-                                        </span>
-                                        <a 
-                                            href="https://maps.app.goo.gl/6WjwL37Gt4DqphaN9"
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-stone-100 text-xs font-bold text-stone-500 hover:bg-zen-primary/10 hover:text-zen-primary transition-colors border border-stone-200/60 shadow-sm"
-                                        >
-                                            <i className="fa-solid fa-diamond-turn-right"></i>
-                                            <span>導航</span>
-                                        </a>
-                                    </div>
-                                    <p className="text-[11px] text-stone-500 font-medium leading-relaxed pl-3 border-l-2 border-zen-primary/20">
-                                        Wagramer Strasse 19/11. OG, A-1220 Vienna, Austria
-                                    </p>
-                                </div>
-                                <div className="grid grid-cols-1 gap-4">
-                                    <div className="flex flex-col">
-                                        <span className="text-[11px] font-black text-zen-primary uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                            <i className="fa-solid fa-phone text-[10px]"></i> 傳送專線 Phone
-                                        </span>
-                                        <div className="flex pl-3 border-l-2 border-zen-primary/20">
-                                            <a href="tel:+4312124720" className="text-sm font-mono font-black text-stone-600 bg-stone-100 px-2.5 py-1.5 rounded">+43-1-2124720</a>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-[11px] font-black text-zen-danger uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                                            <i className="fa-solid fa-heart-pulse text-[10px]"></i> 緊急救助專線 Emergency
-                                        </span>
-                                        <div className="flex flex-wrap gap-2 pl-3 border-l-2 border-zen-danger/20">
-                                            <a href="tel:+436643450455" className="text-sm font-mono font-black text-zen-danger bg-red-50 px-2.5 py-1.5 rounded border border-red-100 shadow-sm transition-all active:scale-95">+43-664-345-0455</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="pt-4 border-t border-dashed border-stone-100">
-                                    <div className="flex items-center gap-2 mb-3">
-                                        <i className="fa-solid fa-clock text-xs text-stone-400"></i>
-                                        <span className="text-xs font-bold text-stone-500">領務時間：週一 ~ 週五 09:00-17:00</span>
-                                    </div>
-                                    <div className="bg-stone-50 rounded-xl p-3 border border-stone-100/50">
-                                        <div className="flex gap-2">
-                                            <i className="fa-solid fa-shield-halved text-zen-primary mt-0.5 text-xs"></i>
-                                            <p className="text-xs text-stone-500 font-medium leading-relaxed">
-                                                協助急難救援、護照、文件公證等主要代表機構。
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-                </div>
+                    )
+                ) : (
+                    filteredItems.map(item => (
+                        <ScheduleItemRow key={item.id} item={item} showDate={true} searchTerm={searchTerm} />
+                    ))
+                )}
             </div>
         </div>
     );
 };
 
-const MOCK_BOOKINGS: Booking[] = [
-  {
-    id: 'b1',
-    type: 'flight',
-    title: 'TPE - DXB',
-    subTitle: 'EK387 - 阿聯酋航空',
-    referenceNo: 'QUEST-EK387',
-    date: '2026-02-15',
-    time: '00:20',
-    details: {
-      '飛行時間': '09 小時 55 分',
-      '抵達': '06:15'
-    },
-    status: 'confirmed'
-  },
-  {
-    id: 'b2',
-    type: 'flight',
-    title: 'DXB - PRG',
-    subTitle: 'EK139 - 阿聯酋航空',
-    referenceNo: 'QUEST-EK139',
-    date: '2026-02-15',
-    time: '08:40',
-    details: {
-      '飛行時間': '06 小時 50 分',
-      '抵達': '12:30',
-      '備註': '轉機航班'
-    },
-    status: 'confirmed'
-  },
-  {
-    id: 'b3',
-    type: 'flight',
-    title: 'VIE - DXB',
-    subTitle: 'EK126 - 阿聯酋航空',
-    referenceNo: 'QUEST-EK126',
-    date: '2026-02-23',
-    time: '21:45',
-    details: {
-      '飛行時間': '05 小時 40 分',
-      '抵達': '06:25 (+1)'
-    },
-    status: 'confirmed'
-  },
-  {
-    id: 'b4',
-    type: 'flight',
-    title: 'DXB - TPE',
-    subTitle: 'EK386 - 阿聯酋航空',
-    referenceNo: 'QUEST-EK386',
-    date: '2026-02-24',
-    time: '08:45',
-    details: {
-      '飛行時間': '07 小時 55 分',
-      '抵達': '20:40',
-      '備註': '轉機航班'
-    },
-    status: 'confirmed'
-  }
-];
-
-const CITY_NAMES: Record<string, string> = {
-    'TPE': '桃園機場 · Taipei',
-    'DXB': '杜拜 · Dubai',
-    'PRG': '布拉格 · Prague',
-    'VIE': '維也納 · Vienna'
-};
-
-const getArrivalDate = (baseDate: string, arrivalStr: string | undefined) => {
-    if (!arrivalStr) return baseDate;
-    if (arrivalStr.includes('+1')) {
-        const d = new Date(baseDate);
-        d.setDate(d.getDate() + 1);
-        return d.toISOString().split('T')[0];
-    }
-    return baseDate;
-};
-
+// --- BOOKINGS TAB ---
 export const BookingsTab: React.FC = () => {
-    const [bookings] = useState<Booking[]>(MOCK_BOOKINGS);
-
     return (
-        <div className="h-full flex flex-col bg-zen-bg">
-            {/* Frozen Header */}
-            <div className="flex-shrink-0 px-5 pt-4 pb-3 bg-zen-bg/80 backdrop-blur-md border-b border-zen-primary/10 z-20">
-                <div className="flex items-center gap-3 px-1">
-                    <div className="w-10 h-10 rounded-full bg-zen-primary/10 border border-zen-primary/30 flex items-center justify-center shadow-zen-sm flex-shrink-0">
-                        <i className="fa-solid fa-scroll text-zen-primary"></i>
-                    </div>
+        <div className="h-full overflow-y-auto px-4 pt-4 pb-32 no-scrollbar">
+             <div className="mb-8">
+                <h2 className="text-2xl font-black text-stone-800 mb-1">傳送卷軸</h2>
+                <p className="text-xs font-bold text-stone-400 uppercase tracking-widest">Confirmed Bookings</p>
+            </div>
+            
+            <Card className="border-l-4 border-l-indigo-500">
+                <div className="flex justify-between items-start mb-4">
                     <div>
-                        <h2 className="text-xl font-black text-zen-text leading-tight tracking-tight">冒險者傳送日誌</h2>
-                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em]">Teleportation Archive</p>
+                        <span className="text-[10px] font-black text-indigo-500 uppercase tracking-widest bg-indigo-50 px-2 py-0.5 rounded mb-2 inline-block">Flight</span>
+                        <h3 className="font-bold text-lg text-stone-800">阿聯酋航空 EK367</h3>
+                    </div>
+                    <div className="text-right">
+                        <span className="text-[10px] font-black text-stone-400 uppercase">Ref No.</span>
+                        <p className="font-mono font-bold text-stone-700">RLP9XT</p>
                     </div>
                 </div>
+                <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                    <div>
+                        <p className="text-xs text-stone-400 font-bold mb-1">DEPARTURE</p>
+                        <p className="font-black text-stone-700">TPE 23:45</p>
+                    </div>
+                    <div className="text-right">
+                        <p className="text-xs text-stone-400 font-bold mb-1">ARRIVAL</p>
+                        <p className="font-black text-stone-700">DXB 05:40</p>
+                    </div>
+                </div>
+                <Button variant="secondary" size="sm" className="w-full">
+                    <i className="fa-solid fa-file-pdf"></i>
+                    查看電子票券
+                </Button>
+            </Card>
+        </div>
+    );
+};
+
+// --- SUPPORT TAB ---
+export const SupportTab: React.FC = () => {
+    return (
+        <div className="h-full overflow-y-auto px-4 pt-4 pb-32 no-scrollbar">
+             <div className="mb-8">
+                <h2 className="text-2xl font-black text-stone-800 mb-1">救助信號</h2>
+                <p className="text-xs font-bold text-stone-400 uppercase tracking-widest">Emergency & Support</p>
             </div>
 
-            {/* Scrollable Content */}
-            <div className="flex-1 overflow-y-auto px-5 pb-32 pt-5 space-y-8 no-scrollbar bg-zen-bg animate-fade-in">
-                <div className="space-y-8">
-                    {bookings.map((booking) => {
-                        const isTransfer = booking.details['備註'] === '轉機航班';
-                        const accentColor = isTransfer ? 'bg-indigo-500' : 'bg-zen-primary';
-                        const originCode = booking.title.split(' - ')[0];
-                        const destCode = booking.title.split(' - ')[1];
-
-                        return (
-                            <div key={booking.id} className="relative group">
-                                <i className="fa-solid fa-dharmachakra absolute -top-1 -left-1 text-[10px] text-zen-primary/30 z-20 group-hover:rotate-180 transition-transform duration-1000"></i>
-                                <i className="fa-solid fa-dharmachakra absolute -top-1 -right-1 text-[10px] text-zen-primary/30 z-20 group-hover:rotate-180 transition-transform duration-1000"></i>
-                                
-                                <div className={`bg-white rounded-3xl shadow-zen border border-stone-100 relative overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-zen-hover`}>
-                                    <div className={`h-2 w-full ${accentColor} opacity-70`}></div>
-                                    
-                                    <div className="px-5 py-4 flex justify-between items-center bg-stone-50/40 border-b border-stone-100">
-                                        <div className="flex items-center gap-2.5">
-                                            <div className={`w-8 h-8 rounded-lg ${accentColor} flex items-center justify-center shadow-md transform -rotate-3`}>
-                                                <i className="fa-solid fa-wand-magic-sparkles text-white text-[10px]"></i>
-                                            </div>
-                                            <div className="flex flex-col">
-                                                <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest">傳送陣 ID</span>
-                                                <span className="text-xs font-black text-zen-text font-mono tracking-tight leading-none">{booking.subTitle?.split(' - ')[0]}</span>
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col items-end">
-                                            {isTransfer && (
-                                                <span className="px-2.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest border bg-indigo-50 border-indigo-100 text-indigo-400">
-                                                    LAYOVER
-                                                </span>
-                                            )}
-                                        </div>
-                                    </div>
-
-                                    <div className="p-6">
-                                        <div className="flex justify-between items-center relative">
-                                            <div className="flex flex-col z-10 w-24">
-                                                <div className="text-[8px] font-black text-zen-primary mb-1 uppercase tracking-[0.15em] opacity-80">召喚座標</div>
-                                                <div className="text-3xl font-mono font-black text-stone-700 leading-none tracking-tighter mb-1">
-                                                    {booking.time}
-                                                </div>
-                                                <div className="text-[10px] font-bold text-stone-400 font-mono tracking-tight">{booking.date}</div>
-                                                <div className="text-xl font-black text-stone-600 mt-1.5 tracking-widest leading-none">{originCode}</div>
-                                                <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-1 leading-tight uppercase">
-                                                    {CITY_NAMES[originCode]?.split(' · ')[0] || '冒險之地'}
-                                                    <br/>
-                                                    <span className="text-[8px] opacity-60 font-mono tracking-tighter">{CITY_NAMES[originCode]?.split(' · ')[1] || 'Realm'}</span>
-                                                </div>
-                                            </div>
-
-                                            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none z-0">
-                                                <div className="mb-2 flex items-center gap-1.5 px-3 py-0.5 bg-stone-50 rounded-full border border-stone-100 shadow-sm">
-                                                     <i className="fa-regular fa-hourglass-half text-[8px] text-zen-primary/70 animate-pulse"></i>
-                                                     <span className="text-[9px] font-mono font-black text-stone-500">{booking.details['飛行時間']}</span>
-                                                </div>
-                                                
-                                                <div className="relative w-32 h-10 flex items-center justify-center">
-                                                    <div className="absolute w-full h-[1px] bg-gradient-to-r from-stone-50 via-stone-200 to-stone-50"></div>
-                                                    <div className="relative w-10 h-10 rounded-full bg-white border border-stone-100 shadow-zen-sm flex items-center justify-center z-10 animate-spin-slow">
-                                                        <div className="absolute inset-0 rounded-full bg-zen-primary/5"></div>
-                                                        <i className="fa-solid fa-dharmachakra text-stone-400 text-lg"></i>
-                                                    </div>
-                                                    <i className="fa-solid fa-bolt-lightning absolute text-[9px] text-zen-primary/60 animate-bounce top-[-12px]"></i>
-                                                </div>
-                                            </div>
-
-                                            <div className="flex flex-col text-right z-10 w-24">
-                                                <div className="text-[8px] font-black text-zen-primary mb-1 uppercase tracking-[0.15em] opacity-80">降落座標</div>
-                                                <div className="text-3xl font-mono font-black text-stone-700 leading-none tracking-tighter mb-1">
-                                                    {booking.details['抵達']?.split(' ')[0] || '--:--'}
-                                                </div>
-                                                <div className="text-[10px] font-bold text-stone-400 font-mono tracking-tight uppercase">
-                                                    {getArrivalDate(booking.date, booking.details['抵達'])}
-                                                </div>
-                                                <div className="text-xl font-black text-stone-600 mt-1.5 tracking-widest leading-none">{destCode}</div>
-                                                <div className="text-[10px] font-bold text-stone-400 tracking-wide mt-1 leading-tight uppercase">
-                                                    {CITY_NAMES[destCode]?.split(' · ')[0] || '冒險之地'}
-                                                    <br/>
-                                                    <span className="text-[8px] opacity-60 font-mono tracking-tighter">{CITY_NAMES[destCode]?.split(' · ')[1] || 'Realm'}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="bg-stone-50/50 px-6 py-3.5 border-t border-dashed border-stone-100 flex justify-between items-center relative">
-                                        <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white border border-stone-100 flex items-center justify-center shadow-sm">
-                                            <i className="fa-solid fa-key text-[7px] text-stone-300"></i>
-                                        </div>
-                                        
-                                        <div className="flex flex-col">
-                                            <span className="text-[8px] text-gray-400 font-black tracking-widest uppercase mb-0.5">Hero Party</span>
-                                            <span className="text-[11px] font-black text-stone-50 flex items-center gap-1.5">
-                                                FAMILY ADVENTURERS
-                                                <i className="fa-solid fa-crown text-[8px] text-zen-primary/40"></i>
-                                            </span>
-                                        </div>
-
-                                        <div className="relative flex items-center gap-3">
-                                            <div className="flex flex-col items-end">
-                                                <span className="text-[8px] text-gray-400 font-black tracking-widest uppercase mb-0.5">Teleport Code</span>
-                                                <span className="text-[10px] font-mono font-black text-stone-600 bg-white px-1.5 py-0.5 rounded border border-stone-200 shadow-sm leading-none">
-                                                    {booking.referenceNo}
-                                                </span>
-                                            </div>
-                                            <div className="flex gap-[1.5px] opacity-20 group-hover:opacity-60 transition-opacity">
-                                                {[1, 0, 1, 1, 0, 1, 0, 1].map((v, i) => (
-                                                    <div key={i} className={`w-[1px] rounded-full bg-stone-700`} style={{ height: v ? '14px' : '8px' }}></div>
-                                                ))}
-                                            </div>
-                                        </div>
-
-                                        <div className="absolute -right-1 -bottom-1 w-14 h-14 pointer-events-none opacity-[0.05] transform -rotate-12 group-hover:scale-105 transition-transform duration-500">
-                                            <div className="w-full h-full rounded-full border-2 border-red-800 flex items-center justify-center p-0.5">
-                                                <div className="w-full h-full rounded-full border border-red-800 flex flex-col items-center justify-center leading-none">
-                                                    <span className="text-[7px] font-black text-red-800 uppercase">Quest</span>
-                                                    <span className="text-[9px] font-black text-red-800 uppercase">Passed</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })}
+            <div className="space-y-4">
+                <div className="p-4 bg-red-50 border border-red-100 rounded-2xl">
+                    <div className="flex items-center gap-3 mb-3">
+                        <div className="w-10 h-10 rounded-full bg-red-500 text-white flex items-center justify-center">
+                            <i className="fa-solid fa-phone-flip"></i>
+                        </div>
+                        <div>
+                            <h3 className="font-black text-red-900">緊急求助 (捷克/奧地利)</h3>
+                            <p className="text-[10px] font-bold text-red-400 uppercase tracking-widest">Common Emergency</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
