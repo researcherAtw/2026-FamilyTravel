@@ -185,19 +185,6 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
   // --- 2/17 (Tue) Day 3: Prague ---
   { 
       id: 'd3-1', date: '2026-02-17', time: '09:00', 
-      title: '捷克郵政總局', enTitle: 'Czech Post Office', location: '布格新城 (Nové Město)', category: '登錄地圖', categoryColor: 'green',
-      mapUrl: 'https://maps.app.goo.gl/hCSgxbBEBKxW1FXr8',
-      guideInfo: {
-          story: "建於1871-1874年，採用宏偉的新文藝復興風格. 內部有表現通訊歷史的壁畫。",
-          tip: "至今仍是正常運作的郵局，可免費進入大廳參觀。不妨在此購買郵票並寄出您的明信片體驗歷史。",
-          highlights: [
-              { id: 'h1', text: '新文藝復興', color: 'red' },
-              { id: 'h2', text: '寄明信片', color: 'green' }
-          ]
-      }
-  },
-  { 
-      id: 'd3-2', date: '2026-02-17', time: '10:30', 
       title: '捷克國家博物館', enTitle: 'National Museum', location: '瓦茨拉夫廣場 (Wenceslas Square)', category: '區域解鎖', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/RQpVaL8PULVdoEgEA',
       guideInfo: {
@@ -206,6 +193,19 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
           highlights: [
               { id: 'h1', text: '圓頂景觀', color: 'blue' },
               { id: 'h2', text: '國家認同', color: 'red' }
+          ]
+      }
+  },
+  { 
+      id: 'd3-2', date: '2026-02-17', time: '10:30', 
+      title: '捷克郵政總局', enTitle: 'Czech Post Office', location: '布格新城 (Nové Město)', category: '登錄地圖', categoryColor: 'green',
+      mapUrl: 'https://maps.app.goo.gl/hCSgxbBEBKxW1FXr8',
+      guideInfo: {
+          story: "建於1871-1874年，採用宏偉的新文藝復興風格. 內部有表現通訊歷史的壁畫。",
+          tip: "至今仍是正常運作的郵局，可免費進入大廳參觀。不妨在此購買郵票並寄出您的明信片體驗歷史。",
+          highlights: [
+              { id: 'h1', text: '新文藝復興', color: 'red' },
+              { id: 'h2', text: '寄明信片', color: 'green' }
           ]
       }
   },
@@ -489,7 +489,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/nommjbpqLek8AkKL6',
       guideInfo: {
           story: "1996年列為世界文化遺產。此處原為皇家狩獵小屋，後經瑪麗亞·特蕾莎女皇（歐洲丈母娘）改建為巴洛克式宮殿。\n\n這裡曾是6歲神童莫札特演奏之地，也是末代皇帝卡爾一世簽署放棄權力文件、終結帝國統治的歷史現場。",
-          tip: "購票：參觀宮殿內部必須購票（如 Imperial Tour 或 Grand Tour），強烈建議「提早上網預訂」。\n花園：宮殿後方的法式花園是免費開放的。\n凱旋門：務必爬上花園對面的山丘，抵達「凱旋門」，那是俯瞰全景的「最佳地點」。\n動物園：世界上現古老的動物園也位於此。",
+          tip: "購票：參觀宮殿內部必須購票（如 Imperial Tour 或 Grand Tour），強烈建議「提早上網預訂」。\n花園：宮殿後方的法式花園是免費開放的。\n凱旋門：務必爬上花園對面的山丘，抵達凱旋門，那是俯瞰全景的最佳地點。\n動物園：世界上現古老的動物園也位於此。",
           highlights: [
               { id: 'h0', text: '夏宮', color: 'blue' },
               { id: 'h3', text: '世界文化遺產', color: 'red' },
@@ -670,7 +670,7 @@ const getCategoryIcon = (item: ScheduleItem): string => {
 const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; searchTerm?: string }> = ({ item, showDate, searchTerm = '' }) => {
     // 飯店類別不顯示左側時間
     const isHotel = item.category === '飯店' || item.category === 'stay';
-    // 關鍵修正：將 isMajor 恢復原始範圍，並僅針對「帝國咖啡廳」(id: d3-cafe) 額外開啟顯示
+    // 關鍵修正：將 isMajor 恢復原始範圍，並僅針對「帝國咖啡廳」(id: d3-cafe) 額外開啟顯示，其餘景點類別不顯示時間
     const isMajor = ['transport', '集合', '起飛', '降落', '轉機', '抵達'].includes(item.category) || item.id === 'd3-cafe';
     
     const timeStr = item.displayTime || item.time;
