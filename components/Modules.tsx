@@ -224,6 +224,20 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       }
   },
   { 
+      id: 'd3-beer', date: '2026-02-17', time: '15:00', 
+      title: '皮爾森啤酒導覽', enTitle: 'Pilsner Urquell Experience', location: '28. října 377/13, 110 00 Praha 1', category: '區域解鎖', categoryColor: 'red',
+      mapUrl: 'https://maps.app.goo.gl/mr12JBJ4u27McfWh8',
+      guideInfo: {
+          story: "這是一場專為啤酒愛好者設計的沉浸式官能之旅。在這裡，你不僅能了解這款改變世界的金色拉格（Pale Lager）啤酒的起源，還能親自品嚐那苦甜平衡的完美比例。",
+          tip: "1. 1杯品鑑啤酒和2杯0.3升啤酒（僅限18歲以上參加者）\n2. 每位參與者均可獲得多國語言（含中文）耳機語音導覽\n3. 道地捷克啤酒屋體驗\n4. 360°互動遊戲區\n5. 活動時間約90分鐘",
+          highlights: [
+              { id: 'h1', text: '品鑑啤酒', color: 'orange' },
+              { id: 'h2', text: '中文導覽', color: 'blue' },
+              { id: 'h3', text: '互動體驗', color: 'green' }
+          ]
+      }
+  },
+  { 
       id: 'd3-3', date: '2026-02-17', time: '20:00', 
       title: 'Prague Marriott Hotel', enTitle: 'Accommodation', location: 'V Celnici 8, 110 00 Nové Město, Prague', category: '飯店', categoryColor: 'purple',
       mapUrl: 'https://maps.app.goo.gl/7BM4PTe8185hQjsu6',
@@ -489,7 +503,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       mapUrl: 'https://maps.app.goo.gl/nommjbpqLek8AkKL6',
       guideInfo: {
           story: "1996年列為世界文化遺產。此處原為皇家狩獵小屋，後經瑪麗亞·特蕾莎女皇（歐洲丈母娘）改建為巴洛克式宮殿。\n\n這裡曾是6歲神童莫札特演奏之地，也是末代皇帝卡爾一世簽署放棄權力文件、終結帝國統治的歷史現場。",
-          tip: "購票：參觀宮殿內部必須購票（如 Imperial Tour 或 Grand Tour），強烈建議「提早上網預訂」。\n花園：宮殿後方的法式花園是免費開放的。\n凱旋門：務必爬上花園對面的山丘，抵達「凱旋門」，那是俯瞰全景的「最佳地點」。\n動物園：世界上現古老的動物園也位於此。",
+          tip: "購票：參觀宮殿內部必須購票（如 Imperial Tour 或 Grand Tour），強烈建議「提早上網預訂」。\n花園：宮殿後方的法式花園是免費開放的。\n凱旋門：務必爬上花園對面的山丘，抵達凱旋門，那是俯瞰全景的最佳地點。\n動物園：世界上現古老的動物園也位於此。",
           highlights: [
               { id: 'h0', text: '夏宮', color: 'blue' },
               { id: 'h3', text: '世界文化遺產', color: 'red' },
@@ -637,6 +651,7 @@ const getCategoryIcon = (item: ScheduleItem): string => {
     if (title.includes('黃金小徑')) return 'fa-solid fa-person-walking';
     // 優先匹配餐廳/咖啡圖示
     if (title.includes('咖啡') || item.category === '餐廳') return 'fa-solid fa-utensils';
+    if (title.includes('啤酒')) return 'fa-solid fa-beer-mug-empty';
     if (title.includes('購物') || title.includes('Outlet')) return 'fa-solid fa-bag-shopping';
     
     if (title.includes('教堂')) return 'fa-solid fa-church';
