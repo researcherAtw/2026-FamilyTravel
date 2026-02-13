@@ -224,7 +224,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       }
   },
   { 
-      id: 'd3-beer', date: '2026-02-17', time: '15:00', 
+      id: 'd3-beer', date: '2026-02-17', time: '', 
       title: '皮爾森啤酒導覽', enTitle: 'Pilsner Urquell Experience', location: '28. října 377/13, 110 00 Praha 1', category: '區域解鎖', categoryColor: 'red',
       mapUrl: 'https://maps.app.goo.gl/mr12JBJ4u27McfWh8',
       guideInfo: {
@@ -234,6 +234,34 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
               { id: 'h1', text: '品鑑啤酒', color: 'orange' },
               { id: 'h2', text: '中文導覽', color: 'blue' },
               { id: 'h3', text: '互動體驗', color: 'green' }
+          ]
+      }
+  },
+  { 
+      id: 'd3-taverna', date: '2026-02-17', time: '19:00', 
+      title: 'U Krále Brabantského', enTitle: 'Medieval Tavern', location: 'Thunovská 198/15, 118 00 Malá Strana', category: '餐廳', categoryColor: 'orange',
+      mapUrl: 'https://maps.app.goo.gl/8y7htN4TvWC2HEXUA',
+      guideInfo: {
+          story: "這座充滿傳奇色彩的酒館自 1375 年以來持續營業，是布拉格最古老的酒館之一。傳說國王瓦茨拉夫四世常微服出巡至此，甚至連當年的煉金術士也是座上賓。",
+          tip: "體驗最正宗的「中世紀之夜」！地牢般的用餐環境完全由燭光照明，席間會有精彩的火舞表演、劍鬥與現場中世紀音樂。",
+          highlights: [
+              { id: 'h1', text: '1375年開業', color: 'purple' },
+              { id: 'h2', text: '中世紀晚宴', color: 'red' },
+              { id: 'h3', text: '燭光地牢', color: 'gray' }
+          ]
+      }
+  },
+  { 
+      id: 'd3-opera', date: '2026-02-17', time: '19:00', 
+      title: '布拉格國家歌劇院', enTitle: 'Prague State Opera', location: 'Wilsonova 4, 110 00 Praha 1', category: '區域解鎖', categoryColor: 'red',
+      mapUrl: 'https://maps.app.goo.gl/WdXETZdFv5piRsPq6',
+      guideInfo: {
+          story: "始建於 1888 年，最初作為新德意志劇院開放。這座新文藝復興風格的建築被公認為歐洲內裝最華麗、最具聲學效果的劇院之一，是布拉格音樂靈魂的寄宿之處。",
+          tip: "若有幸參與演出，請務必遵循正裝要求。即使只是路過，那雄偉的門廊與雕塑也是不可錯過的攝影點。",
+          highlights: [
+              { id: 'h1', text: '音樂殿堂', color: 'red' },
+              { id: 'h2', text: '極致華麗內裝', color: 'orange' },
+              { id: 'h3', text: '新文藝復興', color: 'blue' }
           ]
       }
   },
@@ -414,7 +442,7 @@ const MOCK_SCHEDULE: ScheduleItem[] = [
       title: '百水公寓', enTitle: 'Hundertwasser House', location: '維也納第3區 (Landstraße)', category: '登錄地圖', categoryColor: 'green',
       mapUrl: 'https://maps.app.goo.gl/dcfSuaNqNjkhTEJp6',
       guideInfo: {
-          story: "這座公寓於 1985 年完工，是由奧地利身兼藝術家與建築師雙重身分的「百水先生」(Friedensreich Hundertwasser) 所設計，堪稱維也納建築界獨樹一幟的異數。\n\n百水先生極度痛恨「直線」，甚至稱其為「邪惡的產物」；相反地，他推崇回歸自然與有機的形態。這座公寓，正是他將這些反骨理念付諸實踐的集大成之作。",
+          story: "這座公寓於 1985 年完工，是由奧地利身兼藝術家與建築師雙重身分的「百水先生」(Friedensreich Hundertwasser) 所設計，堪稱維也納建築界獨樹一幟的異數。\n\n百水先生極度痛恨「直線」，甚至稱其為「邪惡的產物」；相反地，他推崇回回歸自然與有機的形態。這座公寓，正是他將這些反骨理念付諸實踐的集大成之作。",
           tip: "內部有居民無法參觀。建議去對面的「百水藝術村」商場體驗其風格，或步行至附近的百水藝術館。",
           highlights: [
               { id: 'h1', text: '奇特建築', color: 'orange' },
@@ -652,6 +680,7 @@ const getCategoryIcon = (item: ScheduleItem): string => {
     // 優先匹配餐廳/咖啡圖示
     if (title.includes('咖啡') || item.category === '餐廳') return 'fa-solid fa-utensils';
     if (title.includes('啤酒')) return 'fa-solid fa-beer-mug-empty';
+    if (title.includes('歌劇院')) return 'fa-solid fa-masks-theater';
     if (title.includes('購物') || title.includes('Outlet')) return 'fa-solid fa-bag-shopping';
     
     if (title.includes('教堂')) return 'fa-solid fa-church';
@@ -685,18 +714,23 @@ const getCategoryIcon = (item: ScheduleItem): string => {
 const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; searchTerm?: string }> = ({ item, showDate, searchTerm = '' }) => {
     // 飯店類別不顯示左側時間
     const isHotel = item.category === '飯店' || item.category === 'stay';
-    // 關鍵修正：將 isMajor 恢復原始範圍，並僅針對「帝國咖啡廳」(id: d3-cafe) 額外開啟顯示，其餘景點類別不顯示時間
-    const isMajor = ['transport', '集合', '起飛', '降落', '轉機', '抵達'].includes(item.category) || item.id === 'd3-cafe';
+    // 關鍵修正：將 isMajor 擴大範圍，納入 19:00 的重點餐廳與歌劇院
+    const isMajor = ['transport', '集合', '起飛', '降落', '轉機', '抵達'].includes(item.category) || 
+                   ['d3-cafe', 'd3-taverna', 'd3-opera'].includes(item.id);
     
     const timeStr = item.displayTime || item.time;
-    const [mainTime, subTime] = timeStr.includes('\n') ? timeStr.split('\n') : [timeStr, null];
-    const [hour, minute] = mainTime.split(':');
+    // 只有當 timeStr 真的有值且不是空字串時才顯示
+    const hasTime = timeStr && timeStr.trim() !== '';
+    
+    const [mainTime, subTime] = hasTime && timeStr.includes('\n') ? timeStr.split('\n') : [timeStr || '', null];
+    const [hour, minute] = mainTime.includes(':') ? mainTime.split(':') : ['', ''];
+
     const iconClasses = getCategoryIcon(item);
 
     return (
         <div className="relative mb-2 flex gap-0 group">
             <div className="w-12 py-4 flex flex-col items-end justify-start flex-shrink-0 pr-2">
-                {!isHotel && isMajor ? (
+                {!isHotel && isMajor && hasTime ? (
                     <>
                         <div className="flex items-baseline justify-end gap-[1px] leading-none text-zen-text">
                             <span className="text-xl font-mono font-bold tracking-tighter text-stone-700">{hour}</span>
@@ -716,7 +750,7 @@ const ScheduleItemRow: React.FC<{ item: ScheduleItem; showDate?: boolean; search
                     className={`
                         relative z-10 flex items-center justify-center transition-all duration-300 mt-[1.4rem]
                         bg-zen-bg rounded-full border-2 
-                        ${isMajor || isHotel || ['區域解鎖', '登錄地圖'].includes(item.category)
+                        ${(isMajor && hasTime) || isHotel || ['區域解鎖', '登錄地圖'].includes(item.category)
                             ? `w-8 h-8 ${NODE_TEXT_COLORS[item.categoryColor || 'gray']} border-current shadow-sm bg-white` 
                             : `w-7 h-7 text-stone-400 border-stone-300 bg-white`
                         }
